@@ -5,27 +5,73 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    Material defaultMaterial;
-    public Material alertMaterial;
+    /// <summary>
+	/// Default enemy material
+	/// </summary>
+	[Tooltip("Default enemy material")]
+    [SerializeField] private Material defaultMaterial;
 
-    public bool _soundHeard = false;
-    public Transform[] _route;
-    public int _destination;
-    public NavMeshAgent _agent;
-    public Transform _player;
+    /// <summary>
+	/// Alternative material for enemy when investigating
+	/// </summary>
+	[Tooltip("Alternative material for enemy when investigating")]
+    [SerializeField] private Material alertMaterial;
 
-    private Vector3 _soundLocation;
+    /// <summary>
+	/// Boolean to indicate if the enemy has heard an alarming sound
+	/// </summary>
+	[Tooltip("Boolean to indicate if the enemy has heard an alarming sound")]
+    [SerializeField] private bool _soundHeard = false;
 
+    /// <summary>
+	/// Array to store the route of the enemy
+	/// </summary>
+	[Tooltip("Array to store the route of the enemy")]
+    [SerializeField] private Transform[] _route;
+
+    /// <summary>
+	/// Number value to indicate the current destination from the route list
+	/// </summary>
+	[Tooltip("Number value to indicate the current destination index from the route list")]
+    [SerializeField] private int _destination;
+
+    /// <summary>
+	/// Unity navmesh agent component of the enemy
+	/// </summary>
+	[Tooltip("Unity navmesh agent component of the enemy")]
+    [SerializeField] private NavMeshAgent _agent;
+
+    /// <summary>
+    /// Player object
+    /// </summary>
+    [Tooltip("Player object")]
+    [SerializeField] private Transform _player;
+
+    /// <summary>
+	/// Location of heard sound
+	/// </summary>
+	[Tooltip("Location of heard sound")]
+    [SerializeField] private Vector3 _soundLocation;
+
+    // Define possible enemy behaviour states
     public enum State
     {
         StayStill,
         Wander,
         Investigate,
+        LookAround,
         AttackPlayer,
     }
 
-    public State state;
+    /// <summary>
+	/// Current enemy behaviour state
+	/// </summary>
+	[Tooltip("Current enemy behaviour state")]
+    [SerializeField] private State state;
 
+    // Behaviour states
+
+    // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
         Debug.Log("Stay Still: Enter");
@@ -43,6 +89,7 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
+    // State where the enemy follows a predetermined route and listens to the environment
     IEnumerator WanderState()
     {
         Debug.Log("Wander: Enter");
@@ -81,6 +128,7 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
+    // State where the enemy has heard an anomylous sound and is investigating the location from where the sound came from
     IEnumerator InvestigateState()
     {
         Debug.Log("Investigate: Enter");
@@ -92,7 +140,13 @@ public class Enemy : MonoBehaviour
             if (_agent.remainingDistance < 3)
             {
                 Debug.Log("Close enough");
-                state = State.Wander;
+                state = State.LookAround;
+            }
+
+            if (_soundHeard)
+            {
+                _soundHeard = false;
+                _agent.destination = _soundLocation;
             }
 
             if (Vector3.Distance(transform.position, _player.position) < 5)
@@ -100,12 +154,48 @@ public class Enemy : MonoBehaviour
                 state = State.AttackPlayer;
             }
 
+
             yield return 0;
         }
         Debug.Log("Investigate: Exit");
         NextState();
     }
 
+    IEnumerator LookAroundState()
+    {
+        Debug.Log("Looking Around: Enter");
+        double timer = 0;
+        _agent.isStopped = true;
+        while (state == State.LookAround)
+        {
+
+            if (_soundHeard)
+            {
+                state = State.Investigate;
+            }
+
+            if (Vector3.Distance(transform.position, _player.position) < 5)
+            {
+                state = State.AttackPlayer;
+            }
+
+            if (timer >= 5)
+            {
+                state = State.Wander;
+            }
+            else
+            {
+                timer += Time.deltaTime;
+            }
+
+            yield return 0;
+        }
+        Debug.Log("Looking Around: Exit");
+        _agent.isStopped = false;
+        NextState();
+    }
+
+    // State where the enemy has found the player and is following them
     IEnumerator AttackPlayerState()
     {
         Debug.Log("Attack Player: Enter");
@@ -119,7 +209,7 @@ public class Enemy : MonoBehaviour
                 _agent.destination = _player.position;
             }
 
-            if (Vector3.Distance(transform.position, _player.position) < 2)
+            if (Vector3.Distance(transform.position, _player.position) < 1)
             {
                 // Make player die here
             }
@@ -137,11 +227,13 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
+    // Set the first behaviour state when the game starts
     void Start()
     {
         NextState();
     }
 
+    // Method to change the behaviour state
     void NextState()
     {
         string methodName = state.ToString() + "State";
@@ -152,6 +244,7 @@ public class Enemy : MonoBehaviour
         StartCoroutine((IEnumerator)info.Invoke(this, null));
     }
 
+    // When a sound is heard 
     public void alert(Vector3 source)
     {
         GetComponent<MeshRenderer>().material = alertMaterial;
@@ -159,6 +252,7 @@ public class Enemy : MonoBehaviour
         _soundLocation = source;
     }
 
+    // If enemy comes in contact with the player, the player is killed
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
