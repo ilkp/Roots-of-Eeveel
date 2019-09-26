@@ -151,4 +151,9 @@ public class PlayerMovement : MonoBehaviour
 		// Move player accrding to the inputs
 		playerRB.MovePosition(transform.position + (Vector3.Normalize(transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")) * speed * Time.deltaTime));
 	}
+
+    public void Die()
+    {
+        GameManager.Instance.SetGameOver();
+    }
 }

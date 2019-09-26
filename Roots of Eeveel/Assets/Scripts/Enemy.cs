@@ -139,4 +139,12 @@ public class Enemy : MonoBehaviour
         _soundHeard = true;
         _soundLocation = source;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            collision.collider.GetComponent<PlayerMovement>().Die();
+        }
+    }
 }
