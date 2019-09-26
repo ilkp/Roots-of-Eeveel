@@ -61,6 +61,7 @@ public class Enemy : MonoBehaviour
                     _destination++;
                 }
 
+                Debug.Log("Destination Reached");
                 _agent.destination = _route[_destination].position;
             }
 
@@ -86,7 +87,7 @@ public class Enemy : MonoBehaviour
         _agent.destination = _soundLocation;
         while (state == State.Investigate)
         {
-            if (_agent.remainingDistance < 2)
+            if (_agent.remainingDistance < 5)
             {
                 Debug.Log("Close enough");
                 state = State.Wander;
