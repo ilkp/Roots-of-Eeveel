@@ -40,11 +40,12 @@ public class StateMachine : MonoBehaviour
     IEnumerator WanderState()
     {
         Debug.Log("Walk: Enter");
+        agent.destination = _route[_destination].position;
         while (state == State.Wander)
         {
             // Change destination if at current destination
 
-            if (transform.position == _route[_destination].position)
+            if (agent.remainingDistance < 1)
             {
                 if (_destination == _route.Length - 1)
                 {
@@ -55,7 +56,7 @@ public class StateMachine : MonoBehaviour
                     _destination++;
                 }
 
-                agent.SetDestination(_route[_destination].position);
+                agent.destination = _route[_destination].position;
             }
             
             // Head to destination
