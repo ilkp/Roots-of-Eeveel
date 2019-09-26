@@ -30,6 +30,11 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 	[Tooltip("Angle that the door closes to")]
 	[SerializeField] private float closedAngle = 0;
 	/// <summary>
+	/// Angle that the door opens to when puzzle is solved
+	/// </summary>
+	[Tooltip("Angle that the door opens to when puzzle is solved")]
+	[SerializeField] private float solveAngle = 10;
+	/// <summary>
 	/// Angle that the door opens to
 	/// </summary>
 	[Tooltip("Angle that the door opens to")]
@@ -39,6 +44,8 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 	/// </summary>
 	[Tooltip("doors opening speed in degrees per second")]
 	[SerializeField] private float openingSpeed = 90;
+
+	private bool isSolved = false;
 
 	private void Start()
 	{
@@ -71,9 +78,19 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 		// Flip triggering interactables state
 		interactables[interactable] = !interactables[interactable];
 		// Check if we are open
-		if (CheckAllTriggers())
+		if (!isSolved && CheckAllTriggers())
 		{
-			Debug.Log("AllTriggers Triggered!");
+			isSolved = true;
+			isOpen = false;
+			StopAllCoroutines();
+			StartCoroutine("LerpRotation", solveAngle);
+		}
+		else if(isSolved && !CheckAllTriggers())
+		{
+			isSolved = false;
+			isOpen = true;
+			StopAllCoroutines();
+			StartCoroutine("LerpRotation", closedAngle);
 		}
 	}
 

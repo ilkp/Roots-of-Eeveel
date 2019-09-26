@@ -11,18 +11,30 @@ public class PlayerMovement : MonoBehaviour
 	/// </summary>
 	[Tooltip("The key to be used for interaction")]
 	[SerializeField] private KeyCode interaction;
-	
+
 	/// <summary>
 	/// Parent object of the camera
 	/// </summary>
 	[Tooltip("Parent object of the camera")]
 	[SerializeField] private Transform head;
-	
+
 	/// <summary>
 	/// Image to be drawn as reticle
 	/// </summary>
 	[Tooltip("Image to be drawn as reticle")]
 	[SerializeField] private Image reticule;
+
+	/// <summary>
+	/// Color of the reticle when not on interactable object
+	/// </summary>
+	[Tooltip("Color of the reticle when not on interactable object")]
+	[SerializeField] private Color colorReticleInactive = Color.white;
+
+	/// <summary>
+	/// Color of the reticle when on interactable object
+	/// </summary>
+	[Tooltip("Color of the reticle when on interactable object")]
+	[SerializeField] private Color colorReticleActive = Color.red;
 
 	private Rigidbody playerRB;
 	/// <summary>
@@ -65,7 +77,7 @@ public class PlayerMovement : MonoBehaviour
 
 
 	// Start is called before the first frame update
-    void Start()
+	void Start()
 	{
 		// Get players rigidbody
 		playerRB = GetComponent<Rigidbody>();
@@ -77,15 +89,15 @@ public class PlayerMovement : MonoBehaviour
 		cam = Camera.main;
 	}
 
-    // Update is called once per frame
-    void Update()
-    {
+	// Update is called once per frame
+	void Update()
+	{
 		#region Movement
 		// Viewpoint rotation
 
 		// Calculate horizontal rotation
 		rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
-		
+
 		// Calculate vertical rotation
 		rotationY += Input.GetAxis("Mouse Y") * sensitivity;
 		rotationY = Mathf.Clamp(rotationY, minY, maxY);
@@ -110,36 +122,25 @@ public class PlayerMovement : MonoBehaviour
 			interactable = null;
 		}
 
-		// Check if there is interactable object under the reticle
-		if (Physics.Raycast(cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit hit) && hit.collider.CompareTag("Interactable"))
+		// Check if object is visible to the character and close enough
+		if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
 		{
-			// Check if object is visible to the character and close enough
-			if (Physics.Raycast(head.transform.position, hit.point - head.transform.position, out hit, grabDistance))
-			{
-				// Set reticule color to red
-				reticule.color = Color.red;
+			// Set reticule color to red
+			reticule.color = colorReticleActive;
 
-				// Check if player pressed the interaction button
-				if (Input.GetKeyDown(interaction))
-				{
-					// Store hit object
-					interactable = hit.transform.gameObject;
-					// Call 'Interact' on the target
-					interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
-					// Set reticule color to blue
-					reticule.color = Color.blue;
-				}
-			}
-			else
+			// Check if player pressed the interaction button
+			if (Input.GetKeyDown(interaction))
 			{
-				// Set reticule color to yellow
-				reticule.color = Color.yellow;
+				// Store hit object
+				interactable = hit.transform.gameObject;
+				// Call 'Interact' on the target
+				interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
 			}
 		}
 		else
 		{
 			// Set reticule color to white
-			reticule.color = Color.white;
+			reticule.color = colorReticleInactive;
 		}
 		#endregion
 
