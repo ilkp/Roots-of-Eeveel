@@ -67,14 +67,19 @@ public class PlayerMovement : MonoBehaviour
 	[Tooltip("Minimum angle that player may look up")]
 	[SerializeField] private float minY;
 	/// <summary>
-	/// How far the plaeyr is able to interact with objects
+	/// How far the player is able to interact with objects
 	/// </summary>
 	[Tooltip("How far the player is able to interact with objects")]
 	[SerializeField] private float grabDistance;
+    /// <summary>
+    /// Player sneak speed modifier
+    /// </summary>
+    [Tooltip("Player sneak speed modifier")]
+    [SerializeField] private float sneakSpeedModifier;
 
-	private float rotationX;
+    private float rotationX;
 	private float rotationY;
-
+    private bool sneaking;
 
 	// Start is called before the first frame update
 	void Start()
@@ -106,6 +111,10 @@ public class PlayerMovement : MonoBehaviour
 		transform.localEulerAngles = new Vector3(0, rotationX, transform.rotation.eulerAngles.z);
 		// Rotate only the camera in vertical rotation (so that the character model doesn't tilt)
 		head.transform.localEulerAngles = (new Vector3(-rotationY, head.transform.localEulerAngles.y, 0));
+
+        // Check sneaking condition
+        sneaking = Input.GetKey(KeyCode.LeftShift);
+
 		#endregion
 
 		#region Interaction
@@ -148,8 +157,10 @@ public class PlayerMovement : MonoBehaviour
 
 	private void FixedUpdate()
 	{
-		// Move player accrding to the inputs
-		playerRB.MovePosition(transform.position + (Vector3.Normalize(transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")) * speed * Time.deltaTime));
+        // Move player accrding to the inputs
+        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * Time.deltaTime;
+
+        playerRB.MovePosition(transform.position + (Vector3.Normalize(transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")) * speedModifier));
 	}
 
     public void Die()
