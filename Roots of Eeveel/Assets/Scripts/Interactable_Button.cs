@@ -18,7 +18,7 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 	/// Whether the button should act like a button or switch/lever
 	/// </summary>
 	[Tooltip("Where the button should act like a button or switch/lever")]
-	[SerializeField] private readonly bool isToggle = false;
+	[SerializeField] private bool isToggle = false;
 
 	/// <summary>
 	/// Whether the button is currently active or not
