@@ -226,8 +226,8 @@ GameObject:
   - component: {fileID: 301671673}
   - component: {fileID: 301671672}
   - component: {fileID: 301671671}
-  - component: {fileID: 301671670}
   - component: {fileID: 301671669}
+  - component: {fileID: 301671670}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -266,17 +266,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 301671668}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a66bc2f4d8a48547b8471608fb32fe0, type: 3}
+  m_Script: {fileID: 11500000, guid: 33fbad3cc583bc245979c306d74ea059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  alertMaterial: {fileID: 0}
   _route:
   - {fileID: 1087663477}
   - {fileID: 556003938}
   - {fileID: 1078823818}
   - {fileID: 1059166153}
   _destination: 0
-  agent: {fileID: 301671669}
-  state: 1
+  agent: {fileID: 0}
+  state: 0
 --- !u!54 &301671671
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1684,6 +1685,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   alertMaterial: {fileID: 2100000, guid: aa0d1aa552d258242a527463c3c43ec1, type: 2}
+  _route: []
+  _destination: 0
+  agent: {fileID: 0}
+  state: 0
 --- !u!1 &1408926959
 GameObject:
   m_ObjectHideFlags: 0
