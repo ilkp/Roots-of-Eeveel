@@ -76,10 +76,17 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     [Tooltip("Player sneak speed modifier")]
     [SerializeField] private float sneakSpeedModifier;
+    /// <summary>
+    /// Player run speed modifier
+    /// </summary>
+    [Tooltip("Player run speed modifier")]
+    [SerializeField] private float runSpeedModifier;
 
     private float rotationX;
 	private float rotationY;
     private bool sneaking;
+    private bool running;
+
 
 	// Start is called before the first frame update
 	void Start()
@@ -113,16 +120,17 @@ public class PlayerMovement : MonoBehaviour
 		head.transform.localEulerAngles = (new Vector3(-rotationY, head.transform.localEulerAngles.y, 0));
 
         // Check sneaking condition
-        sneaking = Input.GetKey(KeyCode.LeftShift);
+        sneaking = Input.GetKey(KeyCode.LeftControl);
+        // Check sneaking condition
+        running = Input.GetKey(KeyCode.LeftShift) && !sneaking;
+        #endregion
 
-		#endregion
+        #region Interaction
+        // Camera raycast
 
-		#region Interaction
-		// Camera raycast
-
-		// Gives objects a chance to reset stuff if needed
-		// Checks if left mouse button is released
-		if (interactable && Input.GetKeyUp(interaction))
+        // Gives objects a chance to reset stuff if needed
+        // Checks if left mouse button is released
+        if (interactable && Input.GetKeyUp(interaction))
 		{
 			// Tells interactable object to run funtion 'Reset'
 			interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
@@ -158,7 +166,7 @@ public class PlayerMovement : MonoBehaviour
 	private void FixedUpdate()
 	{
         // Move player accrding to the inputs
-        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * Time.deltaTime;
+        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f)* Time.deltaTime;
 
         playerRB.MovePosition(transform.position + (Vector3.Normalize(transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")) * speedModifier));
 	}
