@@ -24,7 +24,7 @@ public class SoundManager : MonoBehaviour
         {
             if ((enemy.transform.position - source).magnitude < 10.0f)
             {
-                enemy.alert();
+                enemy.alert(source);
             }
         }
 	}

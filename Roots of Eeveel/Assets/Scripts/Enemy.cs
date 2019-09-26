@@ -8,10 +8,12 @@ public class Enemy : MonoBehaviour
     Material defaultMaterial;
     public Material alertMaterial;
 
-    public bool SoundHeard { get; set; }
+    public bool _soundHeard = false;
     public Transform[] _route;
     public int _destination;
-    public NavMeshAgent agent;
+    public NavMeshAgent _agent;
+
+    private Vector3 _soundLocation;
 
     public enum State
     {
@@ -25,30 +27,30 @@ public class Enemy : MonoBehaviour
 
     IEnumerator StayStillState()
     {
-        Debug.Log("Crawl: Enter");
+        Debug.Log("Stay Still: Enter");
         while (state == State.StayStill)
         {
             // Change state to Investigate if sound is heard
-            if (SoundHeard)
+            if (_soundHeard)
             {
                 state = State.Investigate;
             }
 
             yield return 0;
         }
-        Debug.Log("Crawl: Exit");
+        Debug.Log("Stay Still: Exit");
         NextState();
     }
 
     IEnumerator WanderState()
     {
-        Debug.Log("Walk: Enter");
-        agent.destination = _route[_destination].position;
+        Debug.Log("Wander: Enter");
+        _agent.destination = _route[_destination].position;
         while (state == State.Wander)
         {
             // Change destination if at current destination
 
-            if (agent.remainingDistance < 1)
+            if (_agent.remainingDistance < 1)
             {
                 if (_destination == _route.Length - 1)
                 {
@@ -59,40 +61,41 @@ public class Enemy : MonoBehaviour
                     _destination++;
                 }
 
-                agent.destination = _route[_destination].position;
+                _agent.destination = _route[_destination].position;
             }
 
             // Head to destination
 
             // Change state to Investigate if sound is heard
 
-            if (SoundHeard)
+            if (_soundHeard)
             {
                 state = State.Investigate;
             }
 
             yield return 0;
         }
-        Debug.Log("Walk: Exit");
+        Debug.Log("Wander: Exit");
         NextState();
     }
 
     IEnumerator InvestigateState()
     {
-        Debug.Log("Die: Enter");
+        Debug.Log("Investigate: Enter");
+        _soundHeard = false;
+        _agent.destination = _soundLocation;
         while (state == State.Investigate)
         {
-            // Move to sound location
-
-            // Change state to wander if can't "see" player
-
-            // Change state to attack player if can "see" player
-
-            // 
+            if (_agent.remainingDistance < 2)
+            {
+                Debug.Log("Close enough");
+                state = State.Wander;
+            }
 
             yield return 0;
         }
-        Debug.Log("Die: Exit");
+        Debug.Log("Investigate: Exit");
+        NextState();
     }
 
     IEnumerator AttackPlayerState()
@@ -111,6 +114,7 @@ public class Enemy : MonoBehaviour
             yield return 0;
         }
         Debug.Log("Attack Player: Exit");
+        NextState();
     }
 
     void Start()
@@ -128,8 +132,10 @@ public class Enemy : MonoBehaviour
         StartCoroutine((IEnumerator)info.Invoke(this, null));
     }
 
-    public void alert()
+    public void alert(Vector3 source)
     {
         GetComponent<MeshRenderer>().material = alertMaterial;
+        _soundHeard = true;
+        _soundLocation = source;
     }
 }
