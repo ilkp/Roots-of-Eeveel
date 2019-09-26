@@ -131,8 +131,6 @@ public class Enemy : MonoBehaviour
                 state = State.Wander;
             }
 
-            // Change state to wander if player is killed.
-
             yield return 0;
         }
         Debug.Log("Attack Player: Exit");
