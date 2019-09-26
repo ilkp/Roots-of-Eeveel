@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -480,6 +480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fbad3cc583bc245979c306d74ea059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 0}
   alertMaterial: {fileID: 0}
   _soundHeard: 0
   _route:
@@ -489,6 +490,7 @@ MonoBehaviour:
   - {fileID: 1059166153}
   _destination: 0
   _agent: {fileID: 301671669}
+  _player: {fileID: 1801856500}
   state: 1
 --- !u!54 &301671671
 Rigidbody:
@@ -1941,11 +1943,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fbad3cc583bc245979c306d74ea059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultMaterial: {fileID: 0}
   alertMaterial: {fileID: 2100000, guid: aa0d1aa552d258242a527463c3c43ec1, type: 2}
   _soundHeard: 0
   _route: []
   _destination: 0
   _agent: {fileID: 0}
+  _player: {fileID: 0}
   state: 0
 --- !u!1 &1408926959
 GameObject:
@@ -2323,6 +2327,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &1801856500 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9050823437087878784, guid: 115c353f9cff57a41a9eff91e91c4aab,
+    type: 3}
+  m_PrefabInstance: {fileID: 9050823436367266803}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1827546785
 GameObject:
   m_ObjectHideFlags: 0
