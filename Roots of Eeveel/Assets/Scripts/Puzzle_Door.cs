@@ -117,7 +117,7 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 	public void Interact()
 	{
 		//OnInteract(this);
-		Debug.Log("Door interacted with");
+		//Debug.Log("Door interacted with");
 
 		// Allow interaction only if all triggers are open
 		if (CheckAllTriggers())
@@ -142,7 +142,7 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 	/// <returns></returns>
 	IEnumerator LerpRotation(float targetAngle)
 	{
-		Debug.Log("Door Courutine started: targetAngle = " + targetAngle);
+		//Debug.Log("Door Courutine started: targetAngle = " + targetAngle);
 
 		// Increase the angle
 		if (targetAngle - transform.parent.localEulerAngles.y > 0)
@@ -166,7 +166,7 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 				// checks if the distance to corrects rotation has increased
 				float prevDelta = delta;
 
-				Debug.Log("Angle:" + transform.parent.localEulerAngles.y);
+				//Debug.Log("Angle:" + transform.parent.localEulerAngles.y);
 				transform.parent.localEulerAngles -= new Vector3(0, openingSpeed * Time.deltaTime, 0);
 
 				delta = transform.parent.localEulerAngles.y - targetAngle;

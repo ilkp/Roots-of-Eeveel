@@ -245,6 +245,8 @@ MonoBehaviour:
   colorReticleActive: {r: 1, g: 0, b: 0, a: 1}
   sensitivity: 1
   speed: 5
-  maxY: 45
-  minY: -90
+  maxY: 80
+  minY: -80
   grabDistance: 10
+  sneakSpeedModifier: 0.5
+  runSpeedModifier: 2
