@@ -59,6 +59,7 @@ public class Enemy : MonoBehaviour
         StayStill,
         Wander,
         Investigate,
+        LookAround,
         AttackPlayer,
     }
 
@@ -139,17 +140,58 @@ public class Enemy : MonoBehaviour
             if (_agent.remainingDistance < 3)
             {
                 Debug.Log("Close enough");
-                state = State.Wander;
+                state = State.LookAround;
             }
 
-            if (Vector3.Distance(transform.position, _player.position) < 10)
+            if (_soundHeard)
+            {
+                _soundHeard = false;
+                _agent.destination = _soundLocation;
+            }
+
+            if (Vector3.Distance(transform.position, _player.position) < 5)
             {
                 state = State.AttackPlayer;
             }
 
+
             yield return 0;
         }
         Debug.Log("Investigate: Exit");
+        NextState();
+    }
+
+    IEnumerator LookAroundState()
+    {
+        Debug.Log("Looking Around: Enter");
+        double timer = 0;
+        _agent.isStopped = true;
+        while (state == State.LookAround)
+        {
+
+            if (_soundHeard)
+            {
+                state = State.Investigate;
+            }
+
+            if (Vector3.Distance(transform.position, _player.position) < 5)
+            {
+                state = State.AttackPlayer;
+            }
+
+            if (timer >= 5)
+            {
+                state = State.Wander;
+            }
+            else
+            {
+                timer += Time.deltaTime;
+            }
+
+            yield return 0;
+        }
+        Debug.Log("Looking Around: Exit");
+        _agent.isStopped = false;
         NextState();
     }
 
