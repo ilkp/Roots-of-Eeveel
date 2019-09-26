@@ -5,7 +5,7 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 	private static SoundManager Instance;
-	private List<Enemy> enemies;
+	public List<Enemy> enemies;
 
 	void Awake()
 	{
@@ -20,6 +20,13 @@ public class SoundManager : MonoBehaviour
 
 	public static void makeSound(Vector3 source, float amplitude)
 	{
-
+        foreach (Enemy enemy in Instance.enemies)
+        {
+            if ((enemy.transform.position - source).magnitude < 10.0f)
+            {
+                enemy.alert();
+            }
+        }
 	}
+
 }
