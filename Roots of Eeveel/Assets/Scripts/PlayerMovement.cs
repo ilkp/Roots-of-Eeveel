@@ -6,19 +6,60 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+	/// <summary>
+	/// The key to be used for interaction
+	/// </summary>
+	[Tooltip("The key to be used for interaction")]
 	[SerializeField] private KeyCode interaction;
-
-	[SerializeField] private Rigidbody playerRB;
+	
+	/// <summary>
+	/// Parent object of the camera
+	/// </summary>
+	[Tooltip("Parent object of the camera")]
 	[SerializeField] private Transform head;
+	
+	/// <summary>
+	/// Image to be drawn as reticle
+	/// </summary>
+	[Tooltip("Image to be drawn as reticle")]
 	[SerializeField] private Image reticule;
-	private GameObject interactable;
-	private Camera camera;
 
+	private Rigidbody playerRB;
+	/// <summary>
+	/// The interactable object that the player is currently interacting with
+	/// </summary>
+	private GameObject interactable;
+	/// <summary>
+	/// The main camera
+	/// </summary>
+	private Camera cam;
+
+	/// <summary>
+	/// Float that determins how sensitive the camera movement is
+	/// </summary>
+	[Tooltip("Float that determins how sensitive the camera movement is")]
 	[SerializeField] private float sensitivity;
+	/// <summary>
+	/// The movement speed of the player
+	/// </summary>
+	[Tooltip("The movement speed of the player")]
 	[SerializeField] private float speed;
+	/// <summary>
+	/// Maximum angle that player may look up
+	/// </summary>
+	[Tooltip("Maximum angle that player may look up")]
 	[SerializeField] private float maxY;
+	/// <summary>
+	/// Minimum angle that player may look up
+	/// </summary>
+	[Tooltip("Minimum angle that player may look up")]
 	[SerializeField] private float minY;
+	/// <summary>
+	/// How far the plaeyr is able to interact with objects
+	/// </summary>
+	[Tooltip("How far the player is able to interact with objects")]
 	[SerializeField] private float grabDistance;
+
 	private float rotationX;
 	private float rotationY;
 
@@ -26,17 +67,20 @@ public class PlayerMovement : MonoBehaviour
 	// Start is called before the first frame update
     void Start()
 	{
+		// Get players rigidbody
+		playerRB = GetComponent<Rigidbody>();
 		// Set cursor invisible
 		Cursor.visible = false;
 		// Set cursor locked to the center of the game window
 		Cursor.lockState = CursorLockMode.Locked;
 
-		camera = Camera.main;
+		cam = Camera.main;
 	}
 
     // Update is called once per frame
     void Update()
     {
+		#region Movement
 		// Viewpoint rotation
 
 		// Calculate horizontal rotation
@@ -50,9 +94,9 @@ public class PlayerMovement : MonoBehaviour
 		transform.localEulerAngles = new Vector3(0, rotationX, transform.rotation.eulerAngles.z);
 		// Rotate only the camera in vertical rotation (so that the character model doesn't tilt)
 		head.transform.localEulerAngles = (new Vector3(-rotationY, head.transform.localEulerAngles.y, 0));
+		#endregion
 
-
-
+		#region Interaction
 		// Camera raycast
 
 		// Gives objects a chance to reset stuff if needed
@@ -60,14 +104,14 @@ public class PlayerMovement : MonoBehaviour
 		if (interactable && Input.GetKeyUp(interaction))
 		{
 			// Tells interactable object to run funtion 'Reset'
-			//interactable.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
-			
+			interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
+
 			// Clear any previous hit objects
 			interactable = null;
 		}
 
 		// Check if there is interactable object under the reticle
-		if (Physics.Raycast(camera.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit hit) && hit.collider.CompareTag("Interactable"))
+		if (Physics.Raycast(cam.ScreenPointToRay(new Vector3(Screen.width / 2, Screen.height / 2, 0)), out RaycastHit hit) && hit.collider.CompareTag("Interactable"))
 		{
 			// Check if object is visible to the character and close enough
 			if (Physics.Raycast(head.transform.position, hit.point - head.transform.position, out hit, grabDistance))
@@ -80,6 +124,8 @@ public class PlayerMovement : MonoBehaviour
 				{
 					// Store hit object
 					interactable = hit.transform.gameObject;
+					// Call 'Interact' on the target
+					interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
 					// Set reticule color to blue
 					reticule.color = Color.blue;
 				}
@@ -95,12 +141,13 @@ public class PlayerMovement : MonoBehaviour
 			// Set reticule color to white
 			reticule.color = Color.white;
 		}
-
+		#endregion
 
 	}
 
 	private void FixedUpdate()
 	{
+		// Move player accrding to the inputs
 		playerRB.MovePosition(transform.position + (Vector3.Normalize(transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")) * speed * Time.deltaTime));
 	}
 }
