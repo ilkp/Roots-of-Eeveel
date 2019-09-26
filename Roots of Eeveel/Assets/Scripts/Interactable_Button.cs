@@ -17,7 +17,7 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 	/// <summary>
 	/// Whether the button should act like a button or switch/lever
 	/// </summary>
-	[Tooltip("Where the button should act like a button or switch/lever")]
+	[Tooltip("Where the button should act like a button(False) or switch/lever(True)")]
 	[SerializeField] private bool isToggle = false;
 
 	/// <summary>
@@ -65,10 +65,6 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 
 	public void StopInteraction()
 	{
-		// Return to inactivecolor when the button is released, only if in toggle mode
-		if (!isToggle)
-		{
-			gameObject.GetComponent<Renderer>().material.color = Color.white;
-		}
+
 	}
 }
