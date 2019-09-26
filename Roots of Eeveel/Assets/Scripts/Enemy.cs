@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    Material defaultMaterial;
+    public Material alertMaterial;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -14,5 +17,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void alert()
+    {
+        GetComponent<MeshRenderer>().material = alertMaterial;
     }
 }
