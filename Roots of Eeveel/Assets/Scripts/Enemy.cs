@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     public Transform[] _route;
     public int _destination;
     public NavMeshAgent _agent;
+    public Transform _player;
 
     private Vector3 _soundLocation;
 
@@ -87,10 +88,16 @@ public class Enemy : MonoBehaviour
         _agent.destination = _soundLocation;
         while (state == State.Investigate)
         {
-            if (_agent.remainingDistance < 5)
+            
+            if (_agent.remainingDistance < 3)
             {
                 Debug.Log("Close enough");
                 state = State.Wander;
+            }
+
+            if (Vector3.Distance(transform.position, _player.position) < 5)
+            {
+                state = State.AttackPlayer;
             }
 
             yield return 0;
@@ -102,13 +109,27 @@ public class Enemy : MonoBehaviour
     IEnumerator AttackPlayerState()
     {
         Debug.Log("Attack Player: Enter");
+        RaycastHit hit;
         while (state == State.AttackPlayer)
         {
             // Use unity pathfinder to follow player and attack if close enough
+            Physics.Raycast(transform.position, Vector3.Normalize(_player.position - transform.position), out hit);
+            if (hit.collider.CompareTag("Player"))
+            {
+                _agent.destination = _player.position;
+            }
 
-            // Follow the player's last known location if player can't be seen. Possibly can be combined with just following the player
+            if (Vector3.Distance(transform.position, _player.position) < 2)
+            {
+                // Make player die here
+            }
 
             // Change state to investigate if at player's last known location and player can't be seen.
+
+            if (_agent.remainingDistance < 2)
+            {
+                state = State.Wander;
+            }
 
             // Change state to wander if player is killed.
 
