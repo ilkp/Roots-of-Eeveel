@@ -86,6 +86,10 @@ public class PlayerMovement : MonoBehaviour
 	private float rotationY;
     private bool sneaking;
     private bool running;
+    private float footstepSoundTimer = 0.0f;
+    private const float footStepMaxTime = 0.5f;
+
+    [SerializeField] private AudioSource footStepSource;
 
 
 	// Start is called before the first frame update
@@ -123,6 +127,14 @@ public class PlayerMovement : MonoBehaviour
         sneaking = Input.GetKey(KeyCode.LeftControl);
         // Check sneaking condition
         running = Input.GetKey(KeyCode.LeftShift) && !sneaking;
+
+        if (footstepSoundTimer > footStepMaxTime)
+        {
+            footStepSource.pitch = Random.Range(0.8f, 1.2f);
+            footStepSource.Play();
+            footstepSoundTimer = 0.0f;
+            SoundManager.makeSound(gameObject.transform.position, 1.0f);
+        }
         #endregion
 
         #region Interaction
@@ -167,12 +179,21 @@ public class PlayerMovement : MonoBehaviour
 	{
         // Move player accrding to the inputs
         float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f)* Time.deltaTime;
-
-        playerRB.MovePosition(transform.position + (Vector3.Normalize(transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal")) * speedModifier));
+        Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
+        playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speedModifier));
+        if (direction.magnitude > 0)
+        {
+            footstepSoundTimer += Time.fixedDeltaTime;
+        }
 	}
 
     public void Die()
     {
         GameManager.Instance.SetGameOver();
+    }
+
+    public void playFootstep()
+    {
+        footStepSource.Play();
     }
 }
