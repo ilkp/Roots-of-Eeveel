@@ -90,6 +90,7 @@ public class PlayerMovement : MonoBehaviour
     private const float footStepMaxTime = 0.5f;
 
     [SerializeField] private AudioSource footStepSource;
+    [SerializeField] private List<AudioClip> footstepSounds;
 
 
 	// Start is called before the first frame update
@@ -130,7 +131,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (footstepSoundTimer > footStepMaxTime)
         {
-            footStepSource.pitch = 0.4f; //Random.Range(0.4f, 0.8f)
+            footStepSource.clip = footstepSounds[Random.Range(0, 3)];
+            footStepSource.pitch = Random.Range(0.6f, 1.0f);
             footStepSource.Play();
             footstepSoundTimer = 0.0f;
             SoundManager.makeSound(gameObject.transform.position, 1.0f);
@@ -183,7 +185,7 @@ public class PlayerMovement : MonoBehaviour
         playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speedModifier));
         if (direction.magnitude > 0)
         {
-            footstepSoundTimer += Time.fixedDeltaTime;
+            footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
         }
 	}
 
