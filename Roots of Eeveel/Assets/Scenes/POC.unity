@@ -119,7 +119,7 @@ NavMeshSettings:
     accuratePlacement: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 7af636ba4aa2b4b4f85a8759bbc76007, type: 2}
 --- !u!1 &183965816
 GameObject:
   m_ObjectHideFlags: 0
@@ -346,6 +346,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: room2_v001
       objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: deeb74daeed4a9744825ac13c5d222f2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: -7696212817133076804, guid: deeb74daeed4a9744825ac13c5d222f2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: deeb74daeed4a9744825ac13c5d222f2,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -405,6 +415,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_CastShadows
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4095136289404526687, guid: deeb74daeed4a9744825ac13c5d222f2,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -7354350064641888982, guid: deeb74daeed4a9744825ac13c5d222f2,
         type: 3}
@@ -1338,6 +1353,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 9050823437087878812, guid: 115c353f9cff57a41a9eff91e91c4aab,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9050823437087878784, guid: 115c353f9cff57a41a9eff91e91c4aab,
         type: 3}
