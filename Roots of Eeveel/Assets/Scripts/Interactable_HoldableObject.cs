@@ -11,7 +11,8 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	private GameObject player;
 	private Transform head;
 	private Rigidbody rb;
-	private float pullForce = 10;
+	[SerializeField] private float pullForce = 10;
+	[SerializeField] private float throwForce = 10;
 	//private Vector3 velocity;
 	//private Vector3 lastFramePosition;
 	private Vector3 destination;
@@ -41,6 +42,13 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	{
 		while (true)
 		{
+			if (Input.GetKeyDown(KeyCode.Mouse1))
+			{
+				rb.AddForce(head.forward * throwForce, ForceMode.Impulse);
+
+				break;
+			}
+			
 			//velocity = (transform.position - lastFramePosition) / (Time.deltaTime * 2);
 			//lastFramePosition = transform.position;
 
