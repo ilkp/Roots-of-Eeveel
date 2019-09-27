@@ -130,7 +130,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (footstepSoundTimer > footStepMaxTime)
         {
-            footStepSource.pitch = Random.Range(0.8f, 1.2f);
+            footStepSource.pitch = 0.4f; //Random.Range(0.4f, 0.8f)
             footStepSource.Play();
             footstepSoundTimer = 0.0f;
             SoundManager.makeSound(gameObject.transform.position, 1.0f);

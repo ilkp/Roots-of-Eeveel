@@ -24,6 +24,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _soundHeard = false;
 
     /// <summary>
+	/// Boolean to indicate if the enemy has heard a player unique sound
+	/// </summary>
+	[Tooltip("Boolean to indicate if the enemy has heard a player unique sound")]
+    [SerializeField] private bool _playerSoundHeard = false;
+
+    /// <summary>
 	/// Array to store the route of the enemy
 	/// </summary>
 	[Tooltip("Array to store the route of the enemy")]
@@ -149,7 +155,7 @@ public class Enemy : MonoBehaviour
                 _agent.destination = _soundLocation;
             }
 
-            if (Vector3.Distance(transform.position, _player.position) < 5)
+            if (_playerSoundHeard)
             {
                 state = State.AttackPlayer;
             }
@@ -174,7 +180,7 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-            if (Vector3.Distance(transform.position, _player.position) < 5)
+            if (_playerSoundHeard)
             {
                 state = State.AttackPlayer;
             }
@@ -199,14 +205,19 @@ public class Enemy : MonoBehaviour
     IEnumerator AttackPlayerState()
     {
         Debug.Log("Attack Player: Enter");
-        RaycastHit hit;
+        //RaycastHit hit;
         while (state == State.AttackPlayer)
         {
             // Use unity pathfinder to follow player and attack if close enough
-            Physics.Raycast(transform.position, Vector3.Normalize(_player.position - transform.position), out hit);
-            if (hit.collider.CompareTag("Player"))
+            //Physics.Raycast(transform.position, Vector3.Normalize(_player.position - transform.position), out hit);
+            //if (hit.collider.CompareTag("Player"))
+            //{
+            //    _agent.destination = _player.position;
+            //}
+
+            if (_soundHeard)
             {
-                _agent.destination = _player.position;
+                _agent.destination = _soundLocation;
             }
 
             if (Vector3.Distance(transform.position, _player.position) < 1)
@@ -248,6 +259,7 @@ public class Enemy : MonoBehaviour
     public void alert(Vector3 source)
     {
         GetComponent<MeshRenderer>().material = alertMaterial;
+
         _soundHeard = true;
         _soundLocation = source;
     }
