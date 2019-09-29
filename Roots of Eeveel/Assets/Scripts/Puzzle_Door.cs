@@ -28,17 +28,44 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 	/// Angle that the door closes to
 	/// </summary>
 	[Tooltip("Angle that the door closes to")]
+	[ContextMenuItem("Current Angle", "SetClosedAngle")]
 	[SerializeField] private float closedAngle = 0;
+
+	private void SetClosedAngle()
+	{
+		closedAngle = transform.localEulerAngles.y;
+		if (closedAngle > 180f)
+			closedAngle -= 360f;
+	}
+
 	/// <summary>
 	/// Angle that the door opens to when puzzle is solved
 	/// </summary>
 	[Tooltip("Angle that the door opens to when puzzle is solved")]
-	[SerializeField] private float solveAngle = 10;
+	[ContextMenuItem("Current Angle", "SetSolvedAngle")]
+	[SerializeField] private float solvedAngle = 10;
+
+	private void SetSolvedAngle()
+	{
+		solvedAngle = transform.localEulerAngles.y;
+		if (solvedAngle > 180f)
+			solvedAngle -= 360f;
+	}
+
 	/// <summary>
 	/// Angle that the door opens to
 	/// </summary>
 	[Tooltip("Angle that the door opens to")]
+	[ContextMenuItem("Current Angle", "SetOpenAngle")]
 	[SerializeField] private float openAngle = 90;
+
+	private void SetOpenAngle()
+	{
+		openAngle = transform.localEulerAngles.y;
+		if (openAngle > 180f)
+			openAngle -= 360f;
+	}
+
 	/// <summary>
 	/// How fast the door should open
 	/// </summary>
@@ -83,7 +110,7 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 			isSolved = true;
 			isOpen = false;
 			StopAllCoroutines();
-			StartCoroutine("LerpRotation", solveAngle);
+			StartCoroutine("LerpRotation", solvedAngle);
 		}
 		else if(isSolved && !CheckAllTriggers())
 		{
@@ -142,49 +169,34 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 	/// <returns></returns>
 	IEnumerator LerpRotation(float targetAngle)
 	{
-		//Debug.Log("Door Courutine started: targetAngle = " + targetAngle);
 
-		// Increase the angle
-		if (targetAngle - transform.parent.localEulerAngles.y > 0)
+		float startAngle = transform.localEulerAngles.y;
+
+		if (startAngle > 180)
+			startAngle -= 360;
+
+		float angleDifference = targetAngle - startAngle;
+
+		int increase = (angleDifference < 0)? 1 : -1;
+
+		Debug.Log("Angle Difference: " + angleDifference + ", target angle: " + targetAngle + ", start angle: " + startAngle);
+
+		while (angleDifference != 0)
 		{
-			while (transform.parent.localEulerAngles.y < targetAngle)
+			angleDifference += openingSpeed * Time.deltaTime * increase;
+
+			if ((increase > 0 && angleDifference > 0) || (increase < 0 && angleDifference < 0))
 			{
-				transform.parent.localEulerAngles += new Vector3(0, openingSpeed * Time.deltaTime, 0);
-
-				yield return null;
+				angleDifference = 0;
 			}
+
+			transform.localEulerAngles = new Vector3(transform.eulerAngles.x, targetAngle - angleDifference, transform.eulerAngles.z);
+
+			yield return null;
 		}
-		// Decrease the angle
-		else
-		{
-			// More complex to prevent infinite over rotation
-			// because localEulerAngles go from 0 to 360 looping
-			// so if you are reduced below 0, you start from 360 again.
-			float delta = Mathf.Infinity;
-			while (transform.parent.localEulerAngles.y > targetAngle)
-			{
-				// checks if the distance to corrects rotation has increased
-				float prevDelta = delta;
-
-				//Debug.Log("Angle:" + transform.parent.localEulerAngles.y);
-				transform.parent.localEulerAngles -= new Vector3(0, openingSpeed * Time.deltaTime, 0);
-
-				delta = transform.parent.localEulerAngles.y - targetAngle;
-
-				// ...In which case we are done
-				if (delta > prevDelta)
-				{
-					break;
-				}
-
-				yield return null;
-			}
-		}
-
-
 
 		// Make the rotation presice, for a good measure and OCD :)
-		transform.parent.localEulerAngles = new Vector3(0, targetAngle, 0);
+		transform.localEulerAngles = new Vector3(transform.localEulerAngles.x, targetAngle, transform.localEulerAngles.z);
 	}
 
 }
