@@ -24,32 +24,34 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 	/// Whether the button is currently active or not
 	/// </summary>
 	private bool isActive = false;
+	private Animator animator;
 
 	private void Awake()
 	{
 		// Makes sure that the object is tagged as 'interactable', so that the player may interact with it correctly
 		gameObject.tag = "Interactable";
+
+		animator = GetComponent<Animator>();
+		if (animator == null)
+		{
+			animator = GetComponentInChildren<Animator>();
+		}
+
+		animator.SetBool("IsPressed", isActive);
+		animator.SetBool("IsToggle", isToggle);
 	}
 
 	public void Interact()
 	{
 		if (isToggle)
 		{
-			// Send activation event
-			OnInteract(this);
-
-			// Toggle material color to match isActive state
-			if (isActive)
-			{
-				gameObject.GetComponent<Renderer>().material.color = Color.white;
-			}
-			else
-			{
-				gameObject.GetComponent<Renderer>().material.color = Color.red;
-			}
-
 			// Toggle isActive
 			isActive = !isActive;
+			// Toggle animator state to match isActive state
+			animator.SetBool("IsPressed", isActive);
+
+			StartCoroutine(DelayedOnInteract(0.25f));
+
 		}
 		else
 		{
@@ -57,10 +59,20 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 			if (!isActive)
 			{
 				isActive = true;
-				OnInteract(this);
-				gameObject.GetComponent<Renderer>().material.color = Color.red;
+				// Toggle animator state to match isActive state
+				animator.SetBool("IsPressed", isActive);
+
+				StartCoroutine(DelayedOnInteract(0.25f));
+
 			}
 		}
+	}
+
+	private IEnumerator DelayedOnInteract(float delay)
+	{
+		yield return new WaitForSeconds(delay);
+
+		OnInteract(this);
 	}
 
 	public void StopInteraction()
