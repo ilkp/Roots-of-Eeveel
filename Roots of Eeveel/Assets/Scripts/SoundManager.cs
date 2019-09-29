@@ -1,11 +1,11 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
 	public static SoundManager Instance { get; private set; }
-	public List<Enemy> enemies;
+	[SerializeField] private List<Enemy> enemies;
 
 	void Awake()
 	{
@@ -17,6 +17,14 @@ public class SoundManager : MonoBehaviour
 		DontDestroyOnLoad(gameObject);
 	}
 
+	private void Start()
+	{
+		enemies.Clear();
+		foreach(GameObject enemyObject in GameObject.FindGameObjectsWithTag("Enemy"))
+		{
+			enemies.Add(enemyObject.GetComponent<Enemy>());
+		}
+	}
 
 	public static void makeSound(Vector3 source, float amplitude)
 	{

@@ -1,22 +1,9 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    /// <summary>
-	/// Default enemy material
-	/// </summary>
-	[Tooltip("Default enemy material")]
-    [SerializeField] private Material defaultMaterial;
-
-    /// <summary>
-	/// Alternative material for enemy when investigating
-	/// </summary>
-	[Tooltip("Alternative material for enemy when investigating")]
-    [SerializeField] private Material alertMaterial;
-
     /// <summary>
 	/// Boolean to indicate if the enemy has heard an alarming sound
 	/// </summary>
@@ -258,8 +245,6 @@ public class Enemy : MonoBehaviour
     // When a sound is heard 
     public void alert(Vector3 source)
     {
-        GetComponent<MeshRenderer>().material = alertMaterial;
-
         _soundHeard = true;
         _soundLocation = source;
     }

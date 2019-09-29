@@ -379,3 +379,7 @@ MonoBehaviour:
   sneakSpeedModifier: 0.5
   runSpeedModifier: 2
   footStepSource: {fileID: 1073785422}
+  footstepSounds:
+  - {fileID: 8300000, guid: aa5ec129caf315f439c47d71a0773445, type: 3}
+  - {fileID: 8300000, guid: 41410db8043725a47ab2fdfe784f6c09, type: 3}
+  - {fileID: 8300000, guid: c7de495dd0c02bd48b4c8f57cef92981, type: 3}
