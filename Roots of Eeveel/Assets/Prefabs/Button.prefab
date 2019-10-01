@@ -142,6 +142,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 444aa0a412553504ab45fc51e6e7fa29, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buttonPressSound: event:/Interactions/Rock
   isToggle: 0
 --- !u!1 &2044936679914585509
 GameObject:

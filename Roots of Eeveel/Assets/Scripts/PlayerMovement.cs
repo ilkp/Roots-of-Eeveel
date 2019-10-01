@@ -6,6 +6,11 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
+	// The audio instance that playes the actual sounds
+	private List<FMOD.Studio.EventInstance> walkInstances = new List<FMOD.Studio.EventInstance>();
+	// The audio to be played
+	[FMODUnity.EventRef] [SerializeField] private List<string> walkSounds;
+
 	/// <summary>
 	/// The key to be used for interaction
 	/// </summary>
@@ -89,13 +94,15 @@ public class PlayerMovement : MonoBehaviour
     private float footstepSoundTimer = 0.0f;
     private const float footStepMaxTime = 0.5f;
 
-    [SerializeField] private AudioSource footStepSource;
-    [SerializeField] private List<AudioClip> footstepSounds;
-
 
 	// Start is called before the first frame update
 	void Start()
 	{
+		// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
+		for(int i = 0; i < walkSounds.Count; ++i)
+		{
+			walkInstances.Add(FMODUnity.RuntimeManager.CreateInstance(walkSounds[i]));
+		}
 		// Get players rigidbody
 		playerRB = GetComponent<Rigidbody>();
 		// Set cursor invisible
@@ -131,10 +138,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (footstepSoundTimer > footStepMaxTime)
         {
-            footStepSource.clip = footstepSounds[Random.Range(0, footstepSounds.Count)];
-            footStepSource.pitch = Random.Range(0.6f, 1.0f);
-            footStepSource.Play();
-            footstepSoundTimer = 0.0f;
+			int index = Random.Range(0, walkInstances.Count);
+			
+			// Set the audio to be played from objects location, with RBs data, for some added effects?
+			walkInstances[index].set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, playerRB));
+			walkInstances[index].start();
+
+			footstepSoundTimer = 0.0f;
             SoundManager.makeSound(gameObject.transform.position, 1.0f);
         }
         #endregion
@@ -183,19 +193,26 @@ public class PlayerMovement : MonoBehaviour
         float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f)* Time.deltaTime;
         Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speedModifier));
-        if (direction.magnitude > 0)
-        {
-            footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
-        }
+		if (direction.magnitude > 0)
+		{
+			footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
+		}
+		else
+		{
+			foreach (var instance in walkInstances)
+			{
+				instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			}
+		}
 	}
 
     public void Die()
     {
         GameManager.Instance.SetGameOver();
     }
-
+	/*
     public void playFootstep()
     {
         footStepSource.Play();
-    }
+    }*/
 }

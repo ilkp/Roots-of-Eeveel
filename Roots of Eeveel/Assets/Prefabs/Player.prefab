@@ -366,6 +366,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bb7a6856158e141973decb444c16a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sounds:
+  - 
+  - 
+  - 
   interaction: 323
   head: {fileID: 9050823436124745448}
   reticule: {fileID: 0}

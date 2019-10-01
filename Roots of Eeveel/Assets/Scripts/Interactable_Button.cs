@@ -9,6 +9,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Interactable_Button : MonoBehaviour, IInteractable
 {
+	// The audio instance that playes the actual sounds
+	private FMOD.Studio.EventInstance soundInstance;
+	// The audio to be played
+	[FMODUnity.EventRef] [SerializeField] private string buttonPressSound;
+
 	/// <summary>
 	/// Delivers the activation info to subscribed classees
 	/// </summary>
@@ -28,6 +33,11 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 
 	private void Awake()
 	{
+		// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
+		soundInstance = FMODUnity.RuntimeManager.CreateInstance(buttonPressSound);
+		// Set the audio to be played from objects location, with RBs data, for some added effects?
+		soundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
 		// Makes sure that the object is tagged as 'interactable', so that the player may interact with it correctly
 		gameObject.tag = "Interactable";
 
@@ -45,6 +55,8 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 	{
 		if (isToggle)
 		{
+			// Play The Fucking Sound Already!
+			soundInstance.start();
 			// Toggle isActive
 			isActive = !isActive;
 			// Toggle animator state to match isActive state
@@ -58,6 +70,8 @@ public class Interactable_Button : MonoBehaviour, IInteractable
 			// Runs only ones
 			if (!isActive)
 			{
+				// Play The Fucking Sound Already!
+				soundInstance.start();
 				isActive = true;
 				// Toggle animator state to match isActive state
 				animator.SetBool("IsPressed", isActive);

@@ -6,6 +6,11 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Puzzle_Door : MonoBehaviour, IInteractable
 {
+	// The audio instance that playes the actual sounds
+	private FMOD.Studio.EventInstance puzzleCompleteSoundInstance;
+	// The audio to be played
+	[FMODUnity.EventRef] [SerializeField] private string puzzleCompleteSound;
+
 	/// <summary>
 	/// Yes, doors may be used as triggers...
 	/// </summary>
@@ -76,6 +81,11 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 
 	private void Start()
 	{
+		// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
+		puzzleCompleteSoundInstance = FMODUnity.RuntimeManager.CreateInstance(puzzleCompleteSound);
+		// Set the audio to be played from objects location, with RBs data, for some added effects?
+		puzzleCompleteSoundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
 		// Makes sure that the tag is correct
 		gameObject.tag = "Interactable";
 
@@ -107,6 +117,9 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 		// Check if we are open
 		if (!isSolved && CheckAllTriggers())
 		{
+			// Play The Fucking Sound Already!
+			puzzleCompleteSoundInstance.start();
+
 			isSolved = true;
 			isOpen = false;
 			StopAllCoroutines();
