@@ -9,6 +9,19 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Interactable_Button : MonoBehaviour, IInteractable
 {
+	[SerializeField] private string toolTip = "Press LeftMouseButton to activate the button";
+	public string ToolTip
+	{
+		get
+		{
+			return toolTip;
+		}
+		set
+		{
+			toolTip = value;
+		}
+	}
+
 	// The audio instance that playes the actual sounds
 	private FMOD.Studio.EventInstance soundInstance;
 	// The audio to be played

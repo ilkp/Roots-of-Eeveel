@@ -6,6 +6,19 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 {
+	[SerializeField] private string toolTip = "Hold down leftMouseButton to hold the object in hand.\nRightMouseButton to throw the object.";
+	public string ToolTip
+	{
+		get
+		{
+			return toolTip;
+		}
+		set
+		{
+			toolTip = value;
+		}
+	}
+
 	public event Action<IInteractable> OnInteract;
 
 	private GameObject player;
@@ -17,7 +30,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	//private Vector3 lastFramePosition;
 	private Vector3 destination;
 
-	private void Start()
+	private void Awake()
 	{
 		player = FindObjectOfType<PlayerMovement>().gameObject;
 		head = player.transform.GetChild(0).transform;

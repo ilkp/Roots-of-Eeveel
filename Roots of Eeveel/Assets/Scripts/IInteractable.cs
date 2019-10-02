@@ -9,6 +9,14 @@ using UnityEngine;
 public interface IInteractable
 {
 	/// <summary>
+	/// ToolTip is shown on the screen when player is near the object and Should describe how the objects is used.
+	/// </summary>
+	string ToolTip
+	{
+		get; set;
+	}
+	
+	/// <summary>
 	/// Takes care of delivering interaction info to other classees
 	/// </summary>
 	event Action<IInteractable> OnInteract;
