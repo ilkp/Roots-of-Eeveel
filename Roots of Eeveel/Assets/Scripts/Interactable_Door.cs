@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
@@ -8,6 +7,19 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 {
     public event Action<IInteractable> OnInteract;
     private Rigidbody rb;
+
+    private string toolTip = "Hold down leftMouseButton to interact.";
+    public string ToolTip
+    {
+        get
+        {
+            return toolTip;
+        }
+        set
+        {
+            toolTip = value;
+        }
+    }
 
     private void Start()
     {
