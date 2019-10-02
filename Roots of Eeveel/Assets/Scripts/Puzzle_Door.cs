@@ -6,6 +6,20 @@ using UnityEngine;
 [RequireComponent(typeof(Collider))]
 public class Puzzle_Door : MonoBehaviour, IInteractable
 {
+	[SerializeField] private string toolTip = "Click The door with mouse to open/close it";
+	public string ToolTip
+	{
+		get
+		{
+			return toolTip;
+		}
+		set
+		{
+			toolTip = value;
+		}
+	}
+
+
 	// The audio instance that playes the actual sounds
 	private FMOD.Studio.EventInstance puzzleCompleteSoundInstance;
 	// The audio to be played
