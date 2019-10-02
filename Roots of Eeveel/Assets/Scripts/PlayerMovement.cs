@@ -89,6 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
     private float rotationX;
 	private float rotationY;
+    public bool allowRotation = true;
     private bool sneaking;
     private bool running;
     private float footstepSoundTimer = 0.0f;
@@ -111,25 +112,29 @@ public class PlayerMovement : MonoBehaviour
 		Cursor.lockState = CursorLockMode.Locked;
 
 		cam = Camera.main;
+        allowRotation = true;
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-		#region Movement
-		// Viewpoint rotation
+        #region Movement
+        // Viewpoint rotation
 
-		// Calculate horizontal rotation
-		rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
+        if (allowRotation)
+        {
+            // Calculate horizontal rotation
+            rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
 
-		// Calculate vertical rotation
-		rotationY += Input.GetAxis("Mouse Y") * sensitivity;
-		rotationY = Mathf.Clamp(rotationY, minY, maxY);
+            // Calculate vertical rotation
+            rotationY += Input.GetAxis("Mouse Y") * sensitivity;
+            rotationY = Mathf.Clamp(rotationY, minY, maxY);
 
-		// Rotate character for the horizontal rotation (camera is following the character)
-		transform.localEulerAngles = new Vector3(0, rotationX, transform.rotation.eulerAngles.z);
-		// Rotate only the camera in vertical rotation (so that the character model doesn't tilt)
-		head.transform.localEulerAngles = (new Vector3(-rotationY, head.transform.localEulerAngles.y, 0));
+            // Rotate character for the horizontal rotation (camera is following the character)
+            transform.localEulerAngles = new Vector3(0, rotationX, transform.rotation.eulerAngles.z);
+            // Rotate only the camera in vertical rotation (so that the character model doesn't tilt)
+            head.transform.localEulerAngles = (new Vector3(-rotationY, head.transform.localEulerAngles.y, 0));
+        }
 
         // Check sneaking condition
         sneaking = Input.GetKey(KeyCode.LeftControl);

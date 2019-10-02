@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
-        Debug.Log("Stay Still: Enter");
+        //Debug.Log("Stay Still: Enter");
         while (state == State.StayStill)
         {
             // Change state to Investigate if sound is heard
@@ -78,14 +78,14 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         }
-        Debug.Log("Stay Still: Exit");
+        //Debug.Log("Stay Still: Exit");
         NextState();
     }
 
     // State where the enemy follows a predetermined route and listens to the environment
     IEnumerator WanderState()
     {
-        Debug.Log("Wander: Enter");
+        //Debug.Log("Wander: Enter");
         _agent.destination = _route[_destination].position;
         while (state == State.Wander)
         {
@@ -117,14 +117,14 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         }
-        Debug.Log("Wander: Exit");
+        //Debug.Log("Wander: Exit");
         NextState();
     }
 
     // State where the enemy has heard an anomylous sound and is investigating the location from where the sound came from
     IEnumerator InvestigateState()
     {
-        Debug.Log("Investigate: Enter");
+        //Debug.Log("Investigate: Enter");
         _soundHeard = false;
         _agent.destination = _soundLocation;
         while (state == State.Investigate)
@@ -132,7 +132,7 @@ public class Enemy : MonoBehaviour
             
             if (_agent.remainingDistance < 3)
             {
-                Debug.Log("Close enough");
+                //Debug.Log("Close enough");
                 state = State.LookAround;
             }
 
@@ -150,13 +150,13 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         }
-        Debug.Log("Investigate: Exit");
+        //Debug.Log("Investigate: Exit");
         NextState();
     }
 
     IEnumerator LookAroundState()
     {
-        Debug.Log("Looking Around: Enter");
+        //Debug.Log("Looking Around: Enter");
         double timer = 0;
         _agent.isStopped = true;
         while (state == State.LookAround)
@@ -183,7 +183,7 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         }
-        Debug.Log("Looking Around: Exit");
+        //Debug.Log("Looking Around: Exit");
         _agent.isStopped = false;
         NextState();
     }
@@ -191,7 +191,7 @@ public class Enemy : MonoBehaviour
     // State where the enemy has found the player and is following them
     IEnumerator AttackPlayerState()
     {
-        Debug.Log("Attack Player: Enter");
+        //Debug.Log("Attack Player: Enter");
         //RaycastHit hit;
         while (state == State.AttackPlayer)
         {
@@ -221,7 +221,7 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         }
-        Debug.Log("Attack Player: Exit");
+        //Debug.Log("Attack Player: Exit");
         NextState();
     }
 
