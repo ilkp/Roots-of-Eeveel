@@ -46,6 +46,32 @@ public class Enemy : MonoBehaviour
 	[Tooltip("Location of heard sound")]
     [SerializeField] private Vector3 _soundLocation;
 
+    // Disturbance mechanic stuff
+
+    /// <summary>
+    /// The level of disturbance for the enemy
+    /// </summary>
+    [Tooltip("The level of disturbance for the enemy")]
+    [SerializeField] private double _disturbance;
+
+    /// <summary>
+    /// The minimum allowed level of disturbance for this enemy. This is used to initialize the current value.
+    /// </summary>
+    [Tooltip("The minimum allowed level of disturbance for this enemy. This is used to initialize the current value.")]
+    [SerializeField] private double _minDisturbance;
+
+    /// <summary>
+    /// The maximum allowed level of disturbance for the enemy. Might be a bit pointless to have as a separate variable
+    /// </summary>
+    [Tooltip("The maximum allowed level of disturbance for the enemy. Might be a bit pointless to have as a separate variable")]
+    [SerializeField] private double _maxDisturbance;
+
+    /// <summary>
+    /// The De-Disturbance Rate. How many seconds it takes for the disturbance meter to drop down by one unit
+    /// </summary>
+    [Tooltip("The De-Disturbance Rate. How many seconds it takes for the disturbance meter to drop down by one unit")]
+    [SerializeField] private double _ddr;
+
     // Define possible enemy behaviour states
     public enum State
     {
@@ -68,11 +94,13 @@ public class Enemy : MonoBehaviour
     IEnumerator StayStillState()
     {
         //Debug.Log("Stay Still: Enter");
+        _agent.destination = _route[0].position;
         while (state == State.StayStill)
         {
             // Change state to Investigate if sound is heard
             if (_soundHeard)
             {
+                _soundHeard = false;
                 state = State.Investigate;
             }
 
@@ -93,7 +121,7 @@ public class Enemy : MonoBehaviour
 
             if (_agent.remainingDistance < 1)
             {
-                if (_destination == _route.Length - 1)
+                if (_destination >= _disturbance || _destination >= _route.Length - 1)
                 {
                     _destination = 0;
                 }
@@ -102,7 +130,7 @@ public class Enemy : MonoBehaviour
                     _destination++;
                 }
 
-                Debug.Log("Destination Reached");
+                //Debug.Log("Destination Reached");
                 _agent.destination = _route[_destination].position;
             }
 
@@ -112,7 +140,16 @@ public class Enemy : MonoBehaviour
 
             if (_soundHeard)
             {
+                _soundHeard = false;
                 state = State.Investigate;
+            }
+
+            _disturbance -= Time.deltaTime / _ddr;
+
+            if (_disturbance <= 0)
+            {
+                _disturbance = 0;
+                state = State.StayStill;
             }
 
             yield return 0;
@@ -125,11 +162,10 @@ public class Enemy : MonoBehaviour
     IEnumerator InvestigateState()
     {
         //Debug.Log("Investigate: Enter");
-        _soundHeard = false;
         _agent.destination = _soundLocation;
         while (state == State.Investigate)
         {
-            
+
             if (_agent.remainingDistance < 3)
             {
                 //Debug.Log("Close enough");
@@ -154,6 +190,7 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
+    // State where the enemy stays still for a while and "looks around them"
     IEnumerator LookAroundState()
     {
         //Debug.Log("Looking Around: Enter");
@@ -164,6 +201,7 @@ public class Enemy : MonoBehaviour
 
             if (_soundHeard)
             {
+                _soundHeard = false;
                 state = State.Investigate;
             }
 
@@ -204,6 +242,7 @@ public class Enemy : MonoBehaviour
 
             if (_soundHeard)
             {
+                _soundHeard = false;
                 _agent.destination = _soundLocation;
             }
 
@@ -247,6 +286,15 @@ public class Enemy : MonoBehaviour
     {
         _soundHeard = true;
         _soundLocation = source;
+
+        if (_disturbance + 1 > _maxDisturbance)
+        {
+            _disturbance = _maxDisturbance;
+        }
+        else
+        {
+            _disturbance++;
+        }
     }
 
     // If enemy comes in contact with the player, the player is killed
