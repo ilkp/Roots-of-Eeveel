@@ -94,7 +94,6 @@ public class Enemy : MonoBehaviour
     IEnumerator StayStillState()
     {
         //Debug.Log("Stay Still: Enter");
-        _agent.destination = _route[0].position;
         while (state == State.StayStill)
         {
             // Change state to Investigate if sound is heard
@@ -149,6 +148,7 @@ public class Enemy : MonoBehaviour
             if (_disturbance <= 0)
             {
                 _disturbance = 0;
+                _agent.destination = _route[0].position;
                 state = State.StayStill;
             }
 
