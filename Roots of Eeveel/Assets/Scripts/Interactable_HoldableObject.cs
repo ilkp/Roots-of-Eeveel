@@ -42,7 +42,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	{
 		rb.useGravity = false;
 		//lastFramePosition = transform.position;
-		StartCoroutine("Hold");
+		StartCoroutine(Hold());
 	}
 
 	public void StopInteraction()
@@ -85,7 +85,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 					break;
 				}
 			}
-			destination = head.position + head.forward * 2;
+			destination = head.position + head.forward * 3;
 
 			rb.velocity = ((destination - transform.position) * pullForce);
 			rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;

@@ -206,7 +206,7 @@ public class Puzzle_Door : MonoBehaviour, IInteractable
 
 		int increase = (angleDifference < 0)? 1 : -1;
 
-		Debug.Log("Angle Difference: " + angleDifference + ", target angle: " + targetAngle + ", start angle: " + startAngle);
+		//Debug.Log("Angle Difference: " + angleDifference + ", target angle: " + targetAngle + ", start angle: " + startAngle);
 
 		while (angleDifference != 0)
 		{

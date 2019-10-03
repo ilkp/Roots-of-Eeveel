@@ -29,6 +29,14 @@ public class ToolTip : MonoBehaviour
 		Vector3 headForward = head.transform.forward.normalized;
 		Vector3 headPosition = head.transform.position;
 
+		for (int i = interactables.Count - 1; i >= 0; --i)
+		{
+			if (interactables[i] == null || !interactables[i].CompareTag("Interactable"))
+			{
+				interactables.RemoveAt(i);
+			}
+		}
+
 		if (target != null)
 		{
 			float distanceToTarget = Vector3.Distance(headPosition, target.transform.position);
@@ -55,6 +63,11 @@ public class ToolTip : MonoBehaviour
 
 		foreach (GameObject go in interactables)
 		{
+			if (go == null)
+			{
+				// Fix later, what happens when objects is deleted?
+				continue;
+			}
 			float distance = Vector3.Distance(headPosition, go.transform.position);
 			float dot = Vector3.Dot (headForward, (go.transform.position - headPosition).normalized);
 			float minDot = (dotAngle > 180)? -(dotAngle - 180) : 180 - dotAngle;
@@ -68,6 +81,8 @@ public class ToolTip : MonoBehaviour
 				target = go;
 			}
 		}
+
+
 
 		if (target != null)
 		{
