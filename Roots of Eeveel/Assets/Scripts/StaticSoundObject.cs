@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-[RequireComponent(typeof(Collider), typeof(Rigidbody))]
+[RequireComponent(typeof(Collider))]
 public class StaticSoundObject : MonoBehaviour
 {
 	// The audio instance that playes the actual sounds

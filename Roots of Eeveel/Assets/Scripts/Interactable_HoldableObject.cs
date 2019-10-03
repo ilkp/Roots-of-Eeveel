@@ -58,6 +58,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 			if (Input.GetKeyDown(KeyCode.Mouse1))
 			{
 				rb.AddForce(head.forward * throwForce, ForceMode.Impulse);
+				rb.useGravity = true;
 
 				break;
 			}

@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8360518351790344197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.bank
+  SubDir: 
+  lastModified: 637054634678966453
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 62848
+  Exists: 1
 --- !u!114 &-7779048171120111341
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -101,12 +121,12 @@ MonoBehaviour:
   Path: event:/Player/Character Footsteps
   guid: 82700bd01951d444a028755d146302f6
   Banks:
-  - {fileID: 3300770270300327759}
+  - {fileID: -8360518351790344197}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1759093084069112989}
+  - {fileID: 3804880001562398679}
   MinDistance: 1
   MaxDistance: 20
   Length: 1700
@@ -165,7 +185,7 @@ MonoBehaviour:
   Path: event:/Interactions/Rock
   guid: 0e919a18180c3a4084b4df9d0ad8f953
   Banks:
-  - {fileID: 3300770270300327759}
+  - {fileID: -8360518351790344197}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -226,8 +246,8 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: -7779048171120111341}
-  - {fileID: 3300770270300327759}
+  - {fileID: 4641261954169846825}
+  - {fileID: -8360518351790344197}
   EditorEvents:
   - {fileID: -1462878921575590235}
   - {fileID: 4612909985150768088}
@@ -235,10 +255,10 @@ MonoBehaviour:
   - {fileID: 2059528454232419426}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 3300770270300327759}
+  - {fileID: -8360518351790344197}
   StringsBanks:
-  - {fileID: -7779048171120111341}
-  stringsBankWriteTime: 637056041001318438
+  - {fileID: 4641261954169846825}
+  stringsBankWriteTime: 637054634679295572
   cacheVersion: 3
 --- !u!114 &825813632680629858
 MonoBehaviour:
@@ -295,7 +315,7 @@ MonoBehaviour:
   Path: event:/UI/Puzzle Lock Que
   guid: cb8f51a73ebdf040a55236a369e6ee58
   Banks:
-  - {fileID: 3300770270300327759}
+  - {fileID: -8360518351790344197}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -342,6 +362,23 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 62848
+  Exists: 1
+--- !u!114 &3804880001562398679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Character Footsteps/Crouch
+  m_EditorClassIdentifier: 
+  Name: Crouch
+  Min: 0
+  Max: 1
+  Default: 0
   Exists: 1
 --- !u!114 &3907903950609067546
 MonoBehaviour:
@@ -445,7 +482,7 @@ MonoBehaviour:
   Path: event:/Interactions/Plank
   guid: 29f272a962957241880cc4bbd3d14603
   Banks:
-  - {fileID: 3300770270300327759}
+  - {fileID: -8360518351790344197}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -453,6 +490,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 501
+--- !u!114 &4641261954169846825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
+  SubDir: 
+  lastModified: 637054634679295572
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 956
+  Exists: 1
 --- !u!114 &4868281694240476869
 MonoBehaviour:
   m_ObjectHideFlags: 0
