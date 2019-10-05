@@ -13,6 +13,10 @@
 # Never ignore Asset meta data
 !/Roots of Eeveel/[Aa]ssets/**/*.meta
 
+# Test scene for local use
+/Roots of Eeveel/Assets/Scenes/TestScene.unity
+/Roots of Eeveel/Assets/Scenes/TestScene.unity.meta
+
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /Roots of Eeveel/[Aa]ssets/AssetStoreTools*
 

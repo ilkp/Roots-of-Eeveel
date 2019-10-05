@@ -1,14 +1,24 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(HingeJoint))]
 public class Interactable_Door : MonoBehaviour, IInteractable
 {
     public event Action<IInteractable> OnInteract;
     private Rigidbody rb;
 
-    private string toolTip = "Hold down leftMouseButton to interact.";
+	// The audio instance that playes the actual sounds and sound to be played
+	private FMOD.Studio.EventInstance puzzleCompleteSoundInstance;
+	[FMODUnity.EventRef] [SerializeField] private string puzzleCompleteSound;
+
+	// Gameobjects that hold the triggers and dictionary that holds their completion state
+	[SerializeField] private List<GameObject> triggers;
+	private Dictionary<IInteractable, bool> triggerState = new Dictionary<IInteractable, bool>();
+	
+	private string toolTip = "Hold down leftMouseButton to interact.";
     public string ToolTip
     {
         get
@@ -25,30 +35,85 @@ public class Interactable_Door : MonoBehaviour, IInteractable
     {
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "Interactable";
-    }
+		JointLimits limits = GetComponent<HingeJoint>().limits;
+		limits.min = 0.0f;
+		limits.max = triggers.Count > 0 ? 0.0f : 90.0f; // set locked/unlocked based on if the door has triggers
+		GetComponent<HingeJoint>().limits = limits;
 
-    public void Interact()
+		// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
+		puzzleCompleteSoundInstance = FMODUnity.RuntimeManager.CreateInstance(puzzleCompleteSound);
+		// Set the audio to be played from objects location, with RBs data, for some added effects?
+		puzzleCompleteSoundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
+		// List all triggers to dictionary, and makes sure they are valid
+		foreach (GameObject trigger in triggers)
+		{
+			IInteractable interactable = trigger.GetComponent<IInteractable>();
+			if (interactable != null)
+			{
+				triggerState.Add(interactable, false);
+				interactable.OnInteract += this.trigger;
+			}
+			else
+			{
+				throw new Exception("Trigger missing 'IInteractable', like Interactable_Button-script");
+			}
+		}
+	}
+
+	private void trigger(IInteractable interactable)
+	{
+		// Flip triggering interactables state
+		triggerState[interactable] = !triggerState[interactable];
+		// Check if we are open. Release door hinge if we are.
+		if (CheckAllTriggers())
+		{
+			JointLimits limits = GetComponent<HingeJoint>().limits;
+			limits.min = 0.0f;
+			limits.max = 90.0f;
+			GetComponent<HingeJoint>().limits = limits;
+		}
+	}
+
+	private bool CheckAllTriggers()
+	{
+		foreach (var pair in triggerState)
+		{
+			if (!pair.Value)
+			{
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void Interact()
     {
         StartCoroutine(Hold());
     }
 
     public void StopInteraction()
     {
-        StopAllCoroutines();
-        GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowRotation = true;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowRotation = true;
+		StopAllCoroutines();
     }
 
-    IEnumerator Hold()
+    private IEnumerator Hold()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowRotation = false;
-        float doorPlayerAngle = Vector3.Angle(transform.right, GameObject.FindGameObjectWithTag("Player").transform.forward);
-        float  mousey;
-        while(Input.GetButton("Fire1"))
+        float doorPlayerAngleForward = Vector3.Angle(transform.right, GameObject.FindGameObjectWithTag("Player").transform.forward);
+		float doorPlayerAngleSideways = Vector3.Angle(transform.forward, GameObject.FindGameObjectWithTag("Player").transform.forward);
+		float mousey;
+		float mousex;
+		float mouseModifier;
+        while(Input.GetButton("Fire1") && Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
         {
             mousey = Input.GetAxis("Mouse Y");
-
-            rb.AddForce(transform.right * (doorPlayerAngle < 90 ? 1.0f : -1.0f) * mousey * 10);
+			mousex = Input.GetAxis("Mouse X");
+			mouseModifier = mousey * (doorPlayerAngleForward < 90 ? 1.0f : -1.0f) + mousex * (doorPlayerAngleSideways < 90 ? 1.0f : -1.0f);
+			rb.AddForce(transform.right * mouseModifier * 10);
             yield return null;
         }
-    }
+		StopInteraction();
+	}
 }

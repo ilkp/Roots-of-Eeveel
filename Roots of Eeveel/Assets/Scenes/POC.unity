@@ -1552,6 +1552,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room2
       objectReference: {fileID: 0}
+    - target: {fileID: 6574400770404018569, guid: 255ca160123451c4bbf8a0db0b7095bc,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6574400770404018569, guid: 255ca160123451c4bbf8a0db0b7095bc,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1458813302993537655, guid: 255ca160123451c4bbf8a0db0b7095bc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1713,16 +1723,6 @@ PrefabInstance:
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 2765058795232315950, guid: 255ca160123451c4bbf8a0db0b7095bc,
-        type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6574400770404018569, guid: 255ca160123451c4bbf8a0db0b7095bc,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6574400770404018569, guid: 255ca160123451c4bbf8a0db0b7095bc,
         type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
@@ -2967,6 +2967,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: Room1
       objectReference: {fileID: 0}
+    - target: {fileID: 7549383518322780163, guid: 036f07ffd7eb97844b8950b1d3af3f4f,
+        type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7549383518322780163, guid: 036f07ffd7eb97844b8950b1d3af3f4f,
+        type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4109517192481682339, guid: 036f07ffd7eb97844b8950b1d3af3f4f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3021,16 +3031,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549383518322780163, guid: 036f07ffd7eb97844b8950b1d3af3f4f,
-        type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7549383518322780163, guid: 036f07ffd7eb97844b8950b1d3af3f4f,
-        type: 3}
-      propertyPath: m_NavMeshLayer
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4758447982702901448, guid: 036f07ffd7eb97844b8950b1d3af3f4f,
         type: 3}
@@ -4565,6 +4565,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UiHolder
       objectReference: {fileID: 0}
+    - target: {fileID: 1689156073, guid: a375f11a814dda347bba28c4da540d44, type: 3}
+      propertyPath: m_FontData.m_HorizontalOverflow
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8683706218838954269, guid: a375f11a814dda347bba28c4da540d44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4619,10 +4623,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1689156073, guid: a375f11a814dda347bba28c4da540d44, type: 3}
-      propertyPath: m_FontData.m_HorizontalOverflow
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a375f11a814dda347bba28c4da540d44, type: 3}
@@ -5222,7 +5222,7 @@ PrefabInstance:
     - target: {fileID: 1335948257138575560, guid: 8df09cd9932f83d4e95f24dbbb3569ad,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 2.45
+      value: -22.91
       objectReference: {fileID: 0}
     - target: {fileID: 1335948257138575560, guid: 8df09cd9932f83d4e95f24dbbb3569ad,
         type: 3}
@@ -5232,7 +5232,7 @@ PrefabInstance:
     - target: {fileID: 1335948257138575560, guid: 8df09cd9932f83d4e95f24dbbb3569ad,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -3.82
+      value: -8.58
       objectReference: {fileID: 0}
     - target: {fileID: 1335948257138575560, guid: 8df09cd9932f83d4e95f24dbbb3569ad,
         type: 3}
@@ -5279,5 +5279,20 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Interactable
       objectReference: {fileID: 0}
+    - target: {fileID: 1335948258331867309, guid: 8df09cd9932f83d4e95f24dbbb3569ad,
+        type: 3}
+      propertyPath: triggers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335948258331867309, guid: 8df09cd9932f83d4e95f24dbbb3569ad,
+        type: 3}
+      propertyPath: puzzleCompleteSound
+      value: event:/UI/Puzzle Lock Que
+      objectReference: {fileID: 0}
+    - target: {fileID: 1335948258331867309, guid: 8df09cd9932f83d4e95f24dbbb3569ad,
+        type: 3}
+      propertyPath: triggers.Array.data[0]
+      value: 
+      objectReference: {fileID: 931947170}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8df09cd9932f83d4e95f24dbbb3569ad, type: 3}
