@@ -72,6 +72,18 @@ public class Enemy : MonoBehaviour
     [Tooltip("The De-Disturbance Rate. How many seconds it takes for the disturbance meter to drop down by one unit")]
     [SerializeField] private double _ddr;
 
+    /// <summary>
+    /// Minimum movement speed of the enemy
+    /// </summary>
+    [Tooltip("Minimum movement speed of the enemy")]
+    [SerializeField] private double _moveSpeedMin;
+
+    /// <summary>
+    /// Maximum movement speed of the enemy
+    /// </summary>
+    [Tooltip("Maximum movement speed of the enemy")]
+    [SerializeField] private double _moveSpeedMax;
+
     // Define possible enemy behaviour states
     public enum State
     {
@@ -143,11 +155,8 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-            _disturbance -= Time.deltaTime / _ddr;
-
-            if (_disturbance <= 0)
+            if (_disturbance < 1)
             {
-                _disturbance = 0;
                 _agent.destination = _route[0].position;
                 state = State.StayStill;
             }
@@ -264,10 +273,20 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
+
     // Set the first behaviour state when the game starts
     void Start()
     {
         NextState();
+    }
+    void Update()
+    {
+        if (_disturbance > _minDisturbance)
+        {
+            _disturbance -= Time.deltaTime / _ddr;
+            _agent.speed = (float)(_moveSpeedMin + ((_moveSpeedMax - _moveSpeedMin) * ((_disturbance - _minDisturbance) / (_maxDisturbance - _minDisturbance))));
+
+        }
     }
 
     // Method to change the behaviour state
