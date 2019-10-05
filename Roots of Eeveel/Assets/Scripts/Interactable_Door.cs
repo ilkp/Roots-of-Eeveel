@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(HingeJoint))]
+[RequireComponent(typeof(ConfigurableJoint))]
 public class Interactable_Door : MonoBehaviour, IInteractable
 {
     public event Action<IInteractable> OnInteract;
@@ -35,10 +35,19 @@ public class Interactable_Door : MonoBehaviour, IInteractable
     {
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "Interactable";
-		JointLimits limits = GetComponent<HingeJoint>().limits;
-		limits.min = 0.0f;
-		limits.max = triggers.Count > 0 ? 0.0f : 90.0f; // set locked/unlocked based on if the door has triggers
-		GetComponent<HingeJoint>().limits = limits;
+		ConfigurableJoint joint = GetComponent<ConfigurableJoint>();
+		SoftJointLimit limitLow = joint.lowAngularXLimit;
+		SoftJointLimit limitHigh = joint.highAngularXLimit;
+		limitLow.limit = -90.0f;
+		limitHigh.limit = 0.0f;
+		joint.lowAngularXLimit = limitLow;
+		joint.highAngularXLimit = limitHigh;
+		joint.xMotion = ConfigurableJointMotion.Locked;
+		joint.yMotion = ConfigurableJointMotion.Locked;
+		joint.zMotion = ConfigurableJointMotion.Locked;
+		joint.angularXMotion = triggers.Count > 0 ? ConfigurableJointMotion.Locked : ConfigurableJointMotion.Limited;
+		joint.angularYMotion = ConfigurableJointMotion.Locked;
+		joint.angularZMotion = ConfigurableJointMotion.Locked;
 
 		// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
 		puzzleCompleteSoundInstance = FMODUnity.RuntimeManager.CreateInstance(puzzleCompleteSound);
@@ -68,10 +77,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 		// Check if we are open. Release door hinge if we are.
 		if (CheckAllTriggers())
 		{
-			JointLimits limits = GetComponent<HingeJoint>().limits;
-			limits.min = 0.0f;
-			limits.max = 90.0f;
-			GetComponent<HingeJoint>().limits = limits;
+			GetComponent<ConfigurableJoint>().angularXMotion = ConfigurableJointMotion.Limited;
 		}
 	}
 
