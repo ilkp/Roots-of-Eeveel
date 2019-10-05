@@ -77,6 +77,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 		// Check if we are open. Release door hinge if we are.
 		if (CheckAllTriggers())
 		{
+			puzzleCompleteSoundInstance.start();
 			GetComponent<ConfigurableJoint>().angularXMotion = ConfigurableJointMotion.Limited;
 		}
 	}
