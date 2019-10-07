@@ -52,25 +52,25 @@ public class Enemy : MonoBehaviour
     /// The level of disturbance for the enemy
     /// </summary>
     [Tooltip("The level of disturbance for the enemy")]
-    [SerializeField] private double _disturbance;
+    [SerializeField] public double _alertness;
 
     /// <summary>
     /// The minimum allowed level of disturbance for this enemy. This is used to initialize the current value.
     /// </summary>
     [Tooltip("The minimum allowed level of disturbance for this enemy. This is used to initialize the current value.")]
-    [SerializeField] private double _minDisturbance;
+    [SerializeField] private double _minAlertness;
 
     /// <summary>
     /// The maximum allowed level of disturbance for the enemy. Might be a bit pointless to have as a separate variable
     /// </summary>
     [Tooltip("The maximum allowed level of disturbance for the enemy. Might be a bit pointless to have as a separate variable")]
-    [SerializeField] private double _maxDisturbance;
+    [SerializeField] private double _maxAlertness;
 
     /// <summary>
-    /// The De-Disturbance Rate. How many seconds it takes for the disturbance meter to drop down by one unit
+    /// Determines how many seconds it takes for the alertness meter to drop down by one unit
     /// </summary>
-    [Tooltip("The De-Disturbance Rate. How many seconds it takes for the disturbance meter to drop down by one unit")]
-    [SerializeField] private double _ddr;
+    [Tooltip("Determines how many seconds it takes for the alertness meter to drop down by one unit")]
+    [SerializeField] private double _alertnessFadeRate;
 
     /// <summary>
     /// Minimum movement speed of the enemy
@@ -132,7 +132,7 @@ public class Enemy : MonoBehaviour
 
             if (_agent.remainingDistance < 1)
             {
-                if (_destination >= _disturbance || _destination >= _route.Length - 1)
+                if (_destination >= _alertness || _destination >= _route.Length - 1)
                 {
                     _destination = 0;
                 }
@@ -155,7 +155,7 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-            if (_disturbance < 1)
+            if (_alertness <= 0)
             {
                 _agent.destination = _route[0].position;
                 state = State.StayStill;
@@ -281,10 +281,10 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-        if (_disturbance > _minDisturbance)
+        if (_alertness > _minAlertness)
         {
-            _disturbance -= Time.deltaTime / _ddr;
-            _agent.speed = (float)(_moveSpeedMin + ((_moveSpeedMax - _moveSpeedMin) * ((_disturbance - _minDisturbance) / (_maxDisturbance - _minDisturbance))));
+            _alertness -= Time.deltaTime / _alertnessFadeRate;
+            _agent.speed = (float)(_moveSpeedMin + ((_moveSpeedMax - _moveSpeedMin) * ((_alertness - _minAlertness) / (_maxAlertness - _minAlertness))));
 
         }
     }
@@ -306,13 +306,9 @@ public class Enemy : MonoBehaviour
         _soundHeard = true;
         _soundLocation = source;
 
-        if (_disturbance + 1 > _maxDisturbance)
+        if (_alertness > _maxAlertness)
         {
-            _disturbance = _maxDisturbance;
-        }
-        else
-        {
-            _disturbance++;
+            _alertness = _maxAlertness;
         }
     }
 

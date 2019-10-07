@@ -150,7 +150,7 @@ public class PlayerMovement : MonoBehaviour
 			walkInstances[index].start();
 
 			footstepSoundTimer = 0.0f;
-            SoundManager.makeSound(gameObject.transform.position, 1.0f);
+            SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f);
         }
         #endregion
 
