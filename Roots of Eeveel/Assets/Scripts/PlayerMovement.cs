@@ -147,6 +147,7 @@ public class PlayerMovement : MonoBehaviour
 			
 			// Set the audio to be played from objects location, with RBs data, for some added effects?
 			walkInstances[index].set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, playerRB));
+			walkInstances[index].setVolume(running ? 0.8f : (sneaking ? 0.4f : 0.6f));
 			walkInstances[index].start();
 
 			footstepSoundTimer = 0.0f;
