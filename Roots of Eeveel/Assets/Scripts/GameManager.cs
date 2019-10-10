@@ -10,7 +10,17 @@ public class GameManager : MonoBehaviour
     public Canvas endingScreen;
     public Button resetButton;
 
-    private void Awake()
+	private void OnEnable()
+	{
+		SceneManager.sceneLoaded += OnLevelFinishedLoaded;
+	}
+
+	private void OnDisable()
+	{
+		SceneManager.sceneLoaded -= OnLevelFinishedLoaded;
+	}
+
+	private void Awake()
     {
         Time.timeScale = 1;
         if (Instance != null)
@@ -21,7 +31,24 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
     }
 
-    public void SetGameOver()
+	
+	private void OnLevelFinishedLoaded(Scene scene, LoadSceneMode loadMode)
+	{
+		switch (scene.buildIndex)
+		{
+			case 0:
+				StartCoroutine(LoadSceneAsync(1));
+				break;
+			case 1:
+				//GameObject.FindGameObjectWithTag("s").GetComponent<Button>().onClick.
+				break;
+			default:
+				break;
+
+		}
+	}
+
+	public void SetGameOver()
     {
         endingScreen.gameObject.SetActive(true);
         Time.timeScale = 0;
@@ -47,4 +74,18 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+	public void LoadScene(int scene)
+	{
+		StartCoroutine(LoadSceneAsync(scene));
+	}
+
+	private IEnumerator LoadSceneAsync(int scene)
+	{
+		AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+		while (!operation.isDone)
+		{
+			yield return null;
+		}
+	}
 }
