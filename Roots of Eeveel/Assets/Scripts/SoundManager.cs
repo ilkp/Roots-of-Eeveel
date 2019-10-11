@@ -19,11 +19,16 @@ public class SoundManager : MonoBehaviour
 
 	private void Start()
 	{
-		/*enemies.Clear();
-		foreach(GameObject enemyObject in GameObject.FindGameObjectsWithTag("Enemy"))
+
+	}
+
+	public void LoadEnemies()
+	{
+		enemies.Clear();
+		foreach (GameObject enemyObject in GameObject.FindGameObjectsWithTag("Enemy"))
 		{
 			enemies.Add(enemyObject.GetComponent<Enemy>());
-		}*/
+		}
 	}
 
 	public static void makeSound(Vector3 source, float amplitude)

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public Canvas endingScreen;
     public Button resetButton;
+	public bool Paused = true;
 
 	private void OnEnable()
 	{
@@ -39,11 +40,14 @@ public class GameManager : MonoBehaviour
 		switch (scene.buildIndex)
 		{
 			case 0:
-				StartCoroutine(LoadSceneAsync(scene.buildIndex + 1));
+				StartCoroutine(LoadSceneAsync(1));
 				break;
 			case 1:
+				ButtonLinker.Instance.gameObject.SetActive(true);
+				ButtonLinker.Instance.ToMain();
 				break;
 			case 2:
+				SoundManager.Instance.LoadEnemies();
 				break;
 			default:
 				break;
@@ -68,14 +72,7 @@ public class GameManager : MonoBehaviour
         }
 
         yield return new WaitForSecondsRealtime(2);
-        resetButton.gameObject.SetActive(true);
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.None;
-    }
-
-    public void ResetGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		LoadScene(1);
     }
 
 	public void LoadScene(int scene)
