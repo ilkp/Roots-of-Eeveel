@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(this);
-    }
+	}
 
 	
 	private void OnLevelFinishedLoaded(Scene scene, LoadSceneMode loadMode)
@@ -40,7 +42,8 @@ public class GameManager : MonoBehaviour
 				StartCoroutine(LoadSceneAsync(1));
 				break;
 			case 1:
-				//GameObject.FindGameObjectWithTag("s").GetComponent<Button>().onClick.
+				break;
+			case 2:
 				break;
 			default:
 				break;
@@ -87,5 +90,40 @@ public class GameManager : MonoBehaviour
 		{
 			yield return null;
 		}
+	}
+
+	private GameSettingsWrapper loadGameSettings(string fileName)
+	{
+		string path = Path.Combine(Application.dataPath, fileName);
+		Debug.Log(path);
+		string file;
+		GameSettingsWrapper wrapper;
+		try
+		{
+			file = File.ReadAllText(path);
+		}
+		catch (FileNotFoundException)
+		{
+			throw new FileNotFoundException("Game settings file not found");
+		}
+
+		try
+		{
+			wrapper = JsonUtility.FromJson<GameSettingsWrapper>(file);
+		}
+		catch (ArgumentException)
+		{
+			throw new ArgumentException("Game settings file invalid");
+		}
+		return wrapper;
+	}
+
+	private void saveGameSettings(string fileName)
+	{
+		string path = Path.Combine(Application.dataPath, fileName);
+		GameSettingsWrapper wrapper = new GameSettingsWrapper();
+		wrapper.brightness = 1.0f;
+		string file = JsonUtility.ToJson(wrapper);
+		File.WriteAllText(path, file);
 	}
 }
