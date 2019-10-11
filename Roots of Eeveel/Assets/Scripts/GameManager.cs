@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 		switch (scene.buildIndex)
 		{
 			case 0:
-				StartCoroutine(LoadSceneAsync(1));
+				StartCoroutine(LoadSceneAsync(scene.buildIndex + 1));
 				break;
 			case 1:
 				break;
@@ -125,5 +125,14 @@ public class GameManager : MonoBehaviour
 		wrapper.brightness = 1.0f;
 		string file = JsonUtility.ToJson(wrapper);
 		File.WriteAllText(path, file);
+	}
+
+	public void QuitGame()
+	{
+		#if UNITY_EDITOR
+			UnityEditor.EditorApplication.isPlaying = false;
+		#else
+			Application.Quit();
+		#endif
 	}
 }
