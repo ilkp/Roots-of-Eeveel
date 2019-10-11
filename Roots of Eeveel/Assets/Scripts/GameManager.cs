@@ -9,7 +9,7 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public Canvas endingScreen;
+    public GameObject endingScreen;
     public Button resetButton;
 	public bool Paused = true;
 
@@ -34,20 +34,22 @@ public class GameManager : MonoBehaviour
         DontDestroyOnLoad(this);
 	}
 
-	
 	private void OnLevelFinishedLoaded(Scene scene, LoadSceneMode loadMode)
 	{
 		switch (scene.buildIndex)
 		{
-			case 0:
+			case 0: // startup scene
 				StartCoroutine(LoadSceneAsync(1));
 				break;
-			case 1:
+			case 1: // main menu scene
 				ButtonLinker.Instance.gameObject.SetActive(true);
 				ButtonLinker.Instance.ToMain();
 				break;
-			case 2:
+			case 2: // game scene
 				SoundManager.Instance.LoadEnemies();
+				ButtonLinker.Instance.ToGame();
+				endingScreen = GameObject.FindGameObjectWithTag("GameOverScreen");
+				endingScreen.gameObject.SetActive(false);
 				break;
 			default:
 				break;
@@ -60,7 +62,8 @@ public class GameManager : MonoBehaviour
         endingScreen.gameObject.SetActive(true);
         Time.timeScale = 0;
         StartCoroutine(GameOverFadeIn());
-    }
+		LoadScene(1);
+	}
 
     private IEnumerator GameOverFadeIn()
     {
@@ -70,9 +73,7 @@ public class GameManager : MonoBehaviour
             gameOverGroup.alpha += 0.01f;
             yield return 0;
         }
-
         yield return new WaitForSecondsRealtime(2);
-		LoadScene(1);
     }
 
 	public void LoadScene(int scene)

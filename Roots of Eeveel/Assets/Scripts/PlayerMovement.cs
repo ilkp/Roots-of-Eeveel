@@ -220,7 +220,11 @@ public class PlayerMovement : MonoBehaviour
     public void Die()
     {
         GameManager.Instance.SetGameOver();
-    }
+		foreach (var instance in walkInstances)
+		{
+			instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		}
+	}
 	/*
     public void playFootstep()
     {

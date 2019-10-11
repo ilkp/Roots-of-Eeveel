@@ -8,7 +8,7 @@ public class Winning : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    public Canvas endScreen;
+    public GameObject endScreen;
     public Button button;
     public void OnTriggerEnter(Collider other)
     {

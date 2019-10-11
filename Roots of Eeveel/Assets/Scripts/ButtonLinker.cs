@@ -68,6 +68,7 @@ public class ButtonLinker : MonoBehaviour
 	{
 		ToMenu();
 		Background.SetActive(true);
+		inMainMenu = true;
 	}
 
 	public void ToMenu()
