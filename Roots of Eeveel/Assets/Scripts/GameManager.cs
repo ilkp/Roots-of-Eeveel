@@ -1,7 +1,5 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System;
@@ -9,8 +7,8 @@ using System;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    public GameObject endingScreen;
-    public Button resetButton;
+    public GameObject endingScreenWin;
+	public GameObject endingScreenLose;
 	public bool Paused = true;
 
 	private void OnEnable()
@@ -48,8 +46,10 @@ public class GameManager : MonoBehaviour
 			case 2: // game scene
 				SoundManager.Instance.LoadEnemies();
 				ButtonLinker.Instance.ToGame();
-				endingScreen = GameObject.FindGameObjectWithTag("GameOverScreen");
-				endingScreen.gameObject.SetActive(false);
+				endingScreenWin = GameObject.FindGameObjectWithTag("GameOverWin");
+				endingScreenWin.gameObject.SetActive(false);
+				endingScreenLose = GameObject.FindGameObjectWithTag("GameOverLose");
+				endingScreenLose.gameObject.SetActive(false);
 				break;
 			default:
 				break;
@@ -57,24 +57,24 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void SetGameOver()
+	public void SetGameOver(bool winStatus)
     {
-        endingScreen.gameObject.SetActive(true);
+		GameObject gameOverGroup = winStatus ? endingScreenWin : endingScreenLose;
+		gameOverGroup.SetActive(true);
         Time.timeScale = 0;
-        StartCoroutine(GameOverFadeIn());
-		LoadScene(1);
+        StartCoroutine(GameOverFadeIn(gameOverGroup.GetComponent<CanvasGroup>()));
 	}
 
-    private IEnumerator GameOverFadeIn()
+    private IEnumerator GameOverFadeIn(CanvasGroup gameOverGroup)
     {
-        CanvasGroup gameOverGroup = endingScreen.GetComponent<CanvasGroup>();
         while (gameOverGroup.alpha < 1f)
         {
             gameOverGroup.alpha += 0.01f;
             yield return 0;
         }
         yield return new WaitForSecondsRealtime(2);
-    }
+		LoadScene(1);
+	}
 
 	public void LoadScene(int scene)
 	{

@@ -5411,15 +5411,35 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResetGame
       objectReference: {fileID: 0}
+    - target: {fileID: 106512112795141263, guid: a375f11a814dda347bba28c4da540d44,
+        type: 3}
+      propertyPath: m_Name
+      value: GameOverWin
+      objectReference: {fileID: 0}
+    - target: {fileID: 106512112795141263, guid: a375f11a814dda347bba28c4da540d44,
+        type: 3}
+      propertyPath: m_TagString
+      value: GameOverWin
+      objectReference: {fileID: 0}
+    - target: {fileID: 106512112795141263, guid: a375f11a814dda347bba28c4da540d44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8683706217873305164, guid: a375f11a814dda347bba28c4da540d44,
         type: 3}
       propertyPath: m_TagString
-      value: GameOverScreen
+      value: GameOverLose
       objectReference: {fileID: 0}
     - target: {fileID: 8683706217873305164, guid: a375f11a814dda347bba28c4da540d44,
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8683706217873305164, guid: a375f11a814dda347bba28c4da540d44,
+        type: 3}
+      propertyPath: m_Name
+      value: GameOverLose
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a375f11a814dda347bba28c4da540d44, type: 3}
