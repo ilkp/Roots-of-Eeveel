@@ -7,6 +7,8 @@ TagManager:
   - Interactable
   - Enemy
   - Lock
+  - GameOverLose
+  - GameOverWin
   layers:
   - Default
   - TransparentFX
