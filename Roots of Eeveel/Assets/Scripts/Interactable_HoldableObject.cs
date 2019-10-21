@@ -53,8 +53,15 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 
 	IEnumerator Hold()
 	{
+		float holdDistance = Vector3.Distance(head.transform.position, transform.position);
+		Vector3 offSet = transform.position - (head.position + head.forward * holdDistance);
+
+
 		while (true)
 		{
+			float zoom = Input.GetAxis("Mouse ScrollWheel");
+			holdDistance = Mathf.Clamp(holdDistance + zoom, 1.5f, 4);
+
 			if (Input.GetKeyDown(KeyCode.Mouse1))
 			{
 				rb.AddForce(head.forward * throwForce, ForceMode.Impulse);
@@ -85,7 +92,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 					break;
 				}
 			}
-			destination = head.position + head.forward * 3;
+			destination = head.position + offSet + head.forward * holdDistance;
 
 			rb.velocity = ((destination - transform.position) * pullForce);
 			rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;
