@@ -84,6 +84,12 @@ public class Enemy : MonoBehaviour
     [Tooltip("Maximum movement speed of the enemy")]
     [SerializeField] private double _moveSpeedMax;
 
+    /// <summary>
+    /// Animation Controller
+    /// </summary>
+    [Tooltip("Animation controller of the enemy")]
+    [SerializeField] private Animator _anim;
+
     // Define possible enemy behaviour states
     public enum State
     {
@@ -105,6 +111,7 @@ public class Enemy : MonoBehaviour
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
+        _agent.isStopped = true;
         //Debug.Log("Stay Still: Enter");
         while (state == State.StayStill)
         {
@@ -118,6 +125,7 @@ public class Enemy : MonoBehaviour
             yield return 0;
         }
         //Debug.Log("Stay Still: Exit");
+        _agent.isStopped = false;
         NextState();
     }
 
@@ -286,6 +294,14 @@ public class Enemy : MonoBehaviour
             _alertness -= Time.deltaTime / _alertnessFadeRate;
             _agent.speed = (float)(_moveSpeedMin + ((_moveSpeedMax - _moveSpeedMin) * ((_alertness - _minAlertness) / (_maxAlertness - _minAlertness))));
 
+        }
+        if (!_agent.isStopped && !_anim.GetBool("moving"))
+        {
+            _anim.SetBool("moving", true);
+        }
+        else if (_agent.isStopped && _anim.GetBool("moving"))
+        {
+            _anim.SetBool("moving", false);
         }
     }
 

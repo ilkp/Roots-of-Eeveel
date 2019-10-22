@@ -118,10 +118,10 @@ public class PlayerMovement : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (GameManager.Instance.Paused)
-		{
-			return;
-		}
+        if (GameManager.Instance.Paused)
+        {
+            return;
+        }
 
         #region Movement
         // Viewpoint rotation
@@ -164,23 +164,22 @@ public class PlayerMovement : MonoBehaviour
 
         // Interactable item highlight
         // Works, disabled to conserve power until the highlight shader is added/made
-        if (false) {
-            float radius = 2f;
-            float viewlength = 1f;
-            // Change interactable objects to have a specific layer or check for the interactable script
-            int bitmap = 1 << 8;
-            foreach (Collider collider in Physics.OverlapSphere(cam.transform.position + cam.transform.forward * radius, radius, bitmap))
-            {
-                if (Vector3.Dot(cam.transform.forward, collider.transform.forward) < viewlength)
-                {
-                    // Highlight object
-                }
-                else
-                {
-                    // Don't highlight
-                }
-            }
-        }
+        
+        //float radius = 2f;
+        //float viewlength = 1f;
+        //// Change interactable objects to have a specific layer or check for the interactable script
+        //int bitmap = 1 << 8;
+        //foreach (Collider collider in Physics.OverlapSphere(cam.transform.position + cam.transform.forward * radius, radius, bitmap))
+        //{
+        //    if (Vector3.Dot(cam.transform.forward, collider.transform.forward) < viewlength)
+        //    {
+        //        // Highlight object
+        //    }
+        //    else
+        //    {
+        //        // Don't highlight
+        //    }
+        //}
 
         // Camera raycast
 
