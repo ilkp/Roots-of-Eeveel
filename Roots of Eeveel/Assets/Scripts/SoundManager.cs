@@ -39,7 +39,7 @@ public class SoundManager : MonoBehaviour
             double distance = Vector3.Distance(source, enemy.transform.position);
             double oomph = Mathf.Clamp(amplitude / 600, 0f, 1f) / (distance / 40f);
             double valppaus = enemyAI._alertness <= 0 ? 1 : Mathf.Clamp(1 / (float)enemyAI._alertness, 0f, 1f);
-            Debug.Log("Oomph: " + oomph + "\nValppaus: " + valppaus + "\nDistance to enemy: " + distance + "\nAmplitude: " + amplitude);
+            //Debug.Log("Oomph: " + oomph + "\nValppaus: " + valppaus + "\nDistance to enemy: " + distance + "\nAmplitude: " + amplitude);
 
             if ((valppaus / 2) < oomph)
             {
