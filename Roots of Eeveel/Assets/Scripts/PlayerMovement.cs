@@ -197,8 +197,9 @@ public class PlayerMovement : MonoBehaviour
 		// Check if object is visible to the character and close enough
 		if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
 		{
-			// Enable reticule
-			reticule.gameObject.SetActive(true);
+            // Enable reticule
+            GetComponent<ToolTip>().showPopup(true);
+            reticule.gameObject.SetActive(true);
 
 			// Check if player pressed the interaction button
 			if (Input.GetKeyDown(interaction))
@@ -212,6 +213,7 @@ public class PlayerMovement : MonoBehaviour
 		else
 		{
 			// Disable reticule
+            GetComponent<ToolTip>().showPopup(false);
 			reticule.gameObject.SetActive(false);
 		}
 		#endregion
