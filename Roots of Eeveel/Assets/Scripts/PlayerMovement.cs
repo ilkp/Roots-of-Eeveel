@@ -161,6 +161,27 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region Interaction
+
+        // Interactable item highlight
+        // Works, disabled to conserve power until the highlight shader is added/made
+        if (false) {
+            float radius = 2f;
+            float viewlength = 1f;
+            // Change interactable objects to have a specific layer or check for the interactable script
+            int bitmap = 1 << 8;
+            foreach (Collider collider in Physics.OverlapSphere(cam.transform.position + cam.transform.forward * radius, radius, bitmap))
+            {
+                if (Vector3.Dot(cam.transform.forward, collider.transform.forward) < viewlength)
+                {
+                    // Highlight object
+                }
+                else
+                {
+                    // Don't highlight
+                }
+            }
+        }
+
         // Camera raycast
 
         // Gives objects a chance to reset stuff if needed
@@ -177,8 +198,8 @@ public class PlayerMovement : MonoBehaviour
 		// Check if object is visible to the character and close enough
 		if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
 		{
-			// Set reticule color to red
-			reticule.color = colorReticleActive;
+			// Enable reticule
+			reticule.gameObject.SetActive(true);
 
 			// Check if player pressed the interaction button
 			if (Input.GetKeyDown(interaction))
@@ -191,8 +212,8 @@ public class PlayerMovement : MonoBehaviour
 		}
 		else
 		{
-			// Set reticule color to white
-			reticule.color = colorReticleInactive;
+			// Disable reticule
+			reticule.gameObject.SetActive(false);
 		}
 		#endregion
 
