@@ -6,10 +6,10 @@ public class ButtonLinker : MonoBehaviour
 	private bool inMainMenu = true;
 	private bool active = true;
 	public static ButtonLinker Instance;
-	[SerializeField] private GameObject mainMenuCanvas;
-	[SerializeField] private GameObject optionsCanvas;
-	[SerializeField] private GameObject creditsCanvas;
-	[SerializeField] private GameObject Background;
+	[SerializeField] private GameObject mainMenuGroup;
+	[SerializeField] private GameObject optionsGroup;
+	[SerializeField] private GameObject creditsGroup;
+	[SerializeField] private GameObject backgroud;
 
 
 	private void Awake()
@@ -42,7 +42,7 @@ public class ButtonLinker : MonoBehaviour
 	public void NewGame()
 	{
 		GameManager.Instance.LoadScene(2);
-		Background.SetActive(false);
+		backgroud.SetActive(false);
 		inMainMenu = false;
 		active = false;
 		ToGame();
@@ -59,15 +59,15 @@ public class ButtonLinker : MonoBehaviour
 		Cursor.visible = false;
 		Time.timeScale = 1.0f;
 		GameManager.Instance.Paused = false;
-		mainMenuCanvas.SetActive(false);
-		optionsCanvas.SetActive(false);
-		creditsCanvas.SetActive(false);
+		mainMenuGroup.SetActive(false);
+		optionsGroup.SetActive(false);
+		creditsGroup.SetActive(false);
 	}
 
 	public void ToMain()
 	{
 		ToMenu();
-		Background.SetActive(true);
+		backgroud.SetActive(true);
 		inMainMenu = true;
 	}
 
@@ -77,22 +77,27 @@ public class ButtonLinker : MonoBehaviour
 		Cursor.visible = true;
 		Time.timeScale = 0.0f;
 		GameManager.Instance.Paused = true;
-		mainMenuCanvas.SetActive(true);
-		optionsCanvas.SetActive(false);
-		creditsCanvas.SetActive(false);
+		mainMenuGroup.SetActive(true);
+		optionsGroup.SetActive(false);
+		creditsGroup.SetActive(false);
 	}
 
 	public void ToOptions()
 	{
-		mainMenuCanvas.SetActive(false);
-		optionsCanvas.SetActive(true);
-		creditsCanvas.SetActive(false);
+		mainMenuGroup.SetActive(false);
+		optionsGroup.SetActive(true);
+		creditsGroup.SetActive(false);
 	}
 
 	public void ToCredits()
 	{
-		mainMenuCanvas.SetActive(false);
-		optionsCanvas.SetActive(false);
-		creditsCanvas.SetActive(true);
+		mainMenuGroup.SetActive(false);
+		optionsGroup.SetActive(false);
+		creditsGroup.SetActive(true);
+	}
+
+	public void saveSettings()
+	{
+		//GameManager.Instance.saveGameSettings(Resolution resolution, float brightness, float volume);
 	}
 }
