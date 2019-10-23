@@ -277,7 +277,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSounds:
-  - event:/Player/Character Footsteps
+  - event:/Player/Player Footsteps
   interaction: 323
   head: {fileID: 9050823436124745448}
   reticule: {fileID: 0}
@@ -319,6 +319,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toolTip: {fileID: 0}
-  popupDistance: 2
-  dotAngle: 360
-  head: {fileID: 9050823436124745449}
