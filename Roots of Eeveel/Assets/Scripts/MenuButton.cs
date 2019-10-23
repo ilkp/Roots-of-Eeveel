@@ -19,6 +19,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
+		StartCoroutine(FindObjectOfType<GameManager>().audioSettings.PlayUIButton());
 		GetComponentInChildren<TMP_Text>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.8f);
 	}
 

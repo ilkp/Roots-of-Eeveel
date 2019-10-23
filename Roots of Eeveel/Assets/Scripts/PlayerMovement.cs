@@ -6,10 +6,7 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-	// The audio instance that playes the actual sounds
-	private List<FMOD.Studio.EventInstance> walkInstances = new List<FMOD.Studio.EventInstance>();
-	// The audio to be played
-	[FMODUnity.EventRef] [SerializeField] private List<string> walkSounds;
+	[SerializeField] private AudioSettings audioSettings;
 
 	/// <summary>
 	/// The key to be used for interaction
@@ -99,11 +96,6 @@ public class PlayerMovement : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
-		// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
-		for(int i = 0; i < walkSounds.Count; ++i)
-		{
-			walkInstances.Add(FMODUnity.RuntimeManager.CreateInstance(walkSounds[i]));
-		}
 		// Get players rigidbody
 		playerRB = GetComponent<Rigidbody>();
 		// Set cursor invisible
@@ -148,12 +140,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (footstepSoundTimer > footStepMaxTime)
         {
-			int index = Random.Range(0, walkInstances.Count);
-			
-			// Set the audio to be played from objects location, with RBs data, for some added effects?
-			walkInstances[index].set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, playerRB));
-			walkInstances[index].setVolume(running ? 0.8f : (sneaking ? 0.4f : 0.6f));
-			walkInstances[index].start();
+			audioSettings.PlayPlayerFootStep(transform);
 
 			footstepSoundTimer = 0.0f;
             SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f);
@@ -230,31 +217,13 @@ public class PlayerMovement : MonoBehaviour
 		{
 			footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
 		}
-		else
-		{
-			foreach (var instance in walkInstances)
-			{
-				instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-			}
-		}
 	}
 
     public void Die()
     {
-		foreach (var instance in walkInstances)
-		{
-			instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-		}
 		GameManager.Instance.SetGameOver(false);
 	}
 
-	private void OnDestroy()
-	{
-		foreach (var instance in walkInstances)
-		{
-			instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-		}
-	}
 	/*
     public void playFootstep()
     {

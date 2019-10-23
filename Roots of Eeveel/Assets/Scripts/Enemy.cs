@@ -4,7 +4,9 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-    /// <summary>
+	[SerializeField] private AudioSettings audioSettings;
+
+	/// <summary>
 	/// Boolean to indicate if the enemy has heard an alarming sound
 	/// </summary>
 	[Tooltip("Boolean to indicate if the enemy has heard an alarming sound")]
@@ -111,7 +113,9 @@ public class Enemy : MonoBehaviour
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
-        _agent.isStopped = true;
+		audioSettings.PlayEnemyIdle(gameObject);
+
+		_agent.isStopped = true;
         //Debug.Log("Stay Still: Enter");
         while (state == State.StayStill)
         {
@@ -132,7 +136,8 @@ public class Enemy : MonoBehaviour
     // State where the enemy follows a predetermined route and listens to the environment
     IEnumerator WanderState()
     {
-        //Debug.Log("Wander: Enter");
+		audioSettings.PlayEnemyFootStep(gameObject);
+		//Debug.Log("Wander: Enter");
         _agent.destination = _route[_destination].position;
         while (state == State.Wander)
         {
@@ -178,7 +183,8 @@ public class Enemy : MonoBehaviour
     // State where the enemy has heard an anomylous sound and is investigating the location from where the sound came from
     IEnumerator InvestigateState()
     {
-        //Debug.Log("Investigate: Enter");
+		audioSettings.PlayEnemyFootStep(gameObject);
+		//Debug.Log("Investigate: Enter");
         _agent.destination = _soundLocation;
         while (state == State.Investigate)
         {
@@ -210,7 +216,8 @@ public class Enemy : MonoBehaviour
     // State where the enemy stays still for a while and "looks around them"
     IEnumerator LookAroundState()
     {
-        //Debug.Log("Looking Around: Enter");
+		audioSettings.PlayEnemyIdle(gameObject);
+		//Debug.Log("Looking Around: Enter");
         double timer = 0;
         _agent.isStopped = true;
         while (state == State.LookAround)
@@ -308,7 +315,8 @@ public class Enemy : MonoBehaviour
     // Method to change the behaviour state
     void NextState()
     {
-        string methodName = state.ToString() + "State";
+		audioSettings.StopEnemySound(gameObject);
+		string methodName = state.ToString() + "State";
         System.Reflection.MethodInfo info =
             GetType().GetMethod(methodName,
                                 System.Reflection.BindingFlags.NonPublic |

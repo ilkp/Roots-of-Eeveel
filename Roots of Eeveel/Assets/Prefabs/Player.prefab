@@ -203,7 +203,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9050823437087878812}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -276,8 +276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84bb7a6856158e141973decb444c16a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  walkSounds:
-  - event:/Player/Player Footsteps
+  audioSettings: {fileID: 11400000, guid: 577839f6d6b6c5b4c978bef572259566, type: 2}
   interaction: 323
   head: {fileID: 9050823436124745448}
   reticule: {fileID: 0}

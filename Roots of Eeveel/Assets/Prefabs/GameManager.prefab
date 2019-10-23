@@ -43,8 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48a4bb48f5694c4aa8cca041758ba00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  menuMusic: event:/Music/RoE_theme_demo
-  musicFadeTime: 10
+  audioSettings: {fileID: 11400000, guid: 577839f6d6b6c5b4c978bef572259566, type: 2}
   endingScreenWin: {fileID: 0}
   endingScreenLose: {fileID: 0}
   Paused: 1

@@ -1650,6 +1650,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33fbad3cc583bc245979c306d74ea059, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioSettings: {fileID: 11400000, guid: 577839f6d6b6c5b4c978bef572259566, type: 2}
   _soundHeard: 0
   _playerSoundHeard: 0
   _route: []

@@ -6,12 +6,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-	// The audio instance that playes the actual sounds
-	private FMOD.Studio.EventInstance audioInstance = new FMOD.Studio.EventInstance();
-	// The audio to be played
-	[FMODUnity.EventRef] [SerializeField] private string menuMusic;
-	// Fade time of the menu music
-	[SerializeField] private float musicFadeTime = 5f;
+	public AudioSettings audioSettings;
 
     public static GameManager Instance { get; private set; }
 	public GameSettingsWrapper gameSettings { get; private set; }
@@ -21,7 +16,6 @@ public class GameManager : MonoBehaviour
 
 	private void OnEnable()
 	{
-		audioInstance = FMODUnity.RuntimeManager.CreateInstance(menuMusic);
 		SceneManager.sceneLoaded += OnLevelFinishedLoaded;
 	}
 
@@ -47,17 +41,17 @@ public class GameManager : MonoBehaviour
 		switch (scene.buildIndex)
 		{
 			case 0: // startup scene
-				audioInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+				audioSettings.StopMenuMusic();
 				StartCoroutine(LoadSceneAsync(1));
 				break;
 			case 1: // main menu scene
-				audioInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+				audioSettings.StopMenuMusic();
+				audioSettings.PlayMenuMusic();
 				ButtonLinker.Instance.gameObject.SetActive(true);
 				ButtonLinker.Instance.ToMain();
-				audioInstance.start(); // Start playing the menu tune
 				break;
 			case 2: // game scene
-				StartCoroutine(FadeMusic(musicFadeTime));
+				StartCoroutine(audioSettings.FadeMenuMusic());
 				SoundManager.Instance.LoadEnemies();
 				ButtonLinker.Instance.ToGame();
 				endingScreenWin = GameObject.FindGameObjectWithTag("GameOverWin");
@@ -69,22 +63,6 @@ public class GameManager : MonoBehaviour
 				break;
 
 		}
-	}
-
-	private IEnumerator FadeMusic(float fadeTime)
-	{
-		float counter = 0f;
-		audioInstance.getVolume(out float startVolume);
-
-		while (counter < fadeTime)
-		{
-			counter += Time.deltaTime;
-			audioInstance.setVolume(Mathf.Lerp(startVolume, 0f, (counter / fadeTime)));
-
-			yield return null;
-		}
-
-		audioInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 	}
 
 	public void SetGameOver(bool winStatus)

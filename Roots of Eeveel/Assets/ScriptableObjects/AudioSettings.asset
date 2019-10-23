@@ -12,5 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2415da343554647beba80ad47c6778, type: 3}
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
-  menuMusic: 
-  menuMusicFadeTime: 5
+  atmosphereMusic: event:/Atmosphere/Room tone
+  enemyFootStep: event:/Enemy/Enemy footsteps
+  enemyIdle: event:/Enemy/Idle or agitated
+  wrongKey: event:/Interactions/Doors & Locks/Wrong key
+  menuMusic: event:/Music/RoE_theme_demo
+  menuMusicFadeTime: 10
+  playerFootStep: event:/Player/Player Footsteps
+  button: event:/UI/Button
