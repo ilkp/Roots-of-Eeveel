@@ -43,4 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b48a4bb48f5694c4aa8cca041758ba00, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameOverScreen: {fileID: 0}
+  menuMusic: event:/Music/RoE_theme_demo
+  musicFadeTime: 10
+  endingScreenWin: {fileID: 0}
+  endingScreenLose: {fileID: 0}
+  Paused: 1
