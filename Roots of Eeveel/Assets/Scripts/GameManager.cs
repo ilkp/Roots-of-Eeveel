@@ -47,6 +47,7 @@ public class GameManager : MonoBehaviour
 			case 1: // main menu scene
 				audioSettings.StopMenuMusic();
 				audioSettings.PlayMenuMusic();
+				saveGameSettings(Screen.currentResolution, FullScreenMode.ExclusiveFullScreen, 0.1f, 0.3f, 0.3f);
 				ButtonLinker.Instance.gameObject.SetActive(true);
 				ButtonLinker.Instance.ToMain();
 				break;
@@ -98,7 +99,7 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private GameSettingsWrapper loadGameSettings()
+	private void loadGameSettings()
 	{
 		Debug.Log("testiii");
 		string path = Path.Combine(Application.dataPath, "settings.txt");
@@ -108,31 +109,23 @@ public class GameManager : MonoBehaviour
 		{
 			file = File.ReadAllText(path);
 			file = "";
-			wrapper = JsonUtility.FromJson<GameSettingsWrapper>(file);
+			wrapper = JsonUtility.FromJson<GameSettingsWrapper>(file); // wrapper will be null if json can't be deserialized
 		}
 		catch(FileNotFoundException)
 		{
-			wrapper = new GameSettingsWrapper();
-			wrapper.setValues(Screen.width, Screen.height, (int)FullScreenMode.ExclusiveFullScreen, 0.5f, 0.3f, 0.3f);
+			wrapper = null;
 		}
 		if (wrapper == null)
 		{
 			wrapper = new GameSettingsWrapper();
 			wrapper.setValues(Screen.width, Screen.height, (int)FullScreenMode.ExclusiveFullScreen, 0.5f, 0.3f, 0.3f);
 		}
-		Debug.Log(wrapper.Brightness);
-		//catch (FileNotFoundException)
-		//{
-		//	throw new FileNotFoundException("Game settings file not found");
-		//}
-
-
-		return wrapper;
+		gameSettings = wrapper;
 	}
 
 	public void saveGameSettings(Resolution resolution, FullScreenMode fullscreenMode, float brightness, float musicVolume, float soundsVolume)
 	{
-		string path = Path.Combine(Application.dataPath, "settings");
+		string path = Path.Combine(Application.dataPath, "settings.txt");
 		GameSettingsWrapper wrapper = new GameSettingsWrapper();
 		wrapper.setValues(resolution.width, resolution.height, (int)fullscreenMode, brightness, musicVolume, soundsVolume);
 		string file = JsonUtility.ToJson(wrapper);
