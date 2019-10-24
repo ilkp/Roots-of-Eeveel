@@ -814,8 +814,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4992223940687599179}
   - component: {fileID: 3129649179509213633}
-  - component: {fileID: 3949090485475558239}
-  - component: {fileID: 3949090485475558238}
   m_Layer: 0
   m_Name: Beta_Surface
   m_TagString: Untagged
@@ -939,36 +937,6 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.015102148, y: -0.13572505, z: 0.08083172}
     m_Extent: {x: 0.3427789, y: 0.88451874, z: 0.2453319}
   m_DirtyAABB: 0
---- !u!54 &3949090485475558239
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2521734369554964833}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 126
-  m_CollisionDetection: 0
---- !u!136 &3949090485475558238
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2521734369554964833}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.37752727
-  m_Height: 1.8033379
-  m_Direction: 1
-  m_Center: {x: -0.005892319, y: 0.8745487, z: 0.08735148}
 --- !u!1 &2708967974552974714
 GameObject:
   m_ObjectHideFlags: 0
@@ -1573,6 +1541,8 @@ GameObject:
   - component: {fileID: 2106923560235054611}
   - component: {fileID: 3949090485301931266}
   - component: {fileID: 3949090485301931292}
+  - component: {fileID: 197528582845806978}
+  - component: {fileID: 197528582845806977}
   m_Layer: 0
   m_Name: EnemyWithArmsAndStuff
   m_TagString: Enemy
@@ -1653,7 +1623,9 @@ MonoBehaviour:
   audioSettings: {fileID: 11400000, guid: 577839f6d6b6c5b4c978bef572259566, type: 2}
   _soundHeard: 0
   _playerSoundHeard: 0
-  _route: []
+  _route:
+  - {fileID: 0}
+  - {fileID: 0}
   _destination: 0
   _agent: {fileID: 3949090485301931266}
   _player: {fileID: 0}
@@ -1666,6 +1638,36 @@ MonoBehaviour:
   _moveSpeedMax: 3
   _anim: {fileID: 2106923560235054611}
   state: 0
+--- !u!136 &197528582845806978
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038421642019367290}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.37752727
+  m_Height: 1.8033379
+  m_Direction: 1
+  m_Center: {x: -0.005892319, y: 0.8745487, z: 0.08735148}
+--- !u!54 &197528582845806977
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5038421642019367290}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &5095528486517590499
 GameObject:
   m_ObjectHideFlags: 0

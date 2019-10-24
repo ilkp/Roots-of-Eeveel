@@ -84,6 +84,34 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Player run speed modifier")]
     [SerializeField] private float runSpeedModifier;
 
+    /// <summary>
+    /// UI container for health image
+    /// </summary>
+    [Tooltip("UI container for health image")]
+    [SerializeField] private Image hpIndicator;
+
+    /// <summary>
+    /// HP Indicator images
+    /// </summary>
+    [Tooltip("Container for HP Indicator images")]
+    [SerializeField] private Sprite[] hpIndicators;
+
+    enum HealthState
+    {
+        Healthy,
+        Low,
+        Lower,
+        Lowest,
+    }
+
+    /// <summary>
+    /// Heath stage
+    /// </summary>
+    [Tooltip("Health State")]
+    [SerializeField] private HealthState hp;
+
+    
+
     private float rotationX;
 	private float rotationY;
     public bool allowRotation = true;
@@ -105,7 +133,10 @@ public class PlayerMovement : MonoBehaviour
 
 		cam = Camera.main;
         allowRotation = true;
-	}
+
+        hp = HealthState.Healthy;
+        hpIndicator.sprite = hpIndicators[(int)hp];
+    }
 
 	// Update is called once per frame
 	void Update()
@@ -143,7 +174,7 @@ public class PlayerMovement : MonoBehaviour
 			audioSettings.PlayPlayerFootStep(transform);
 
 			footstepSoundTimer = 0.0f;
-            SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f);
+            SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f, true);
         }
         #endregion
 
@@ -221,8 +252,22 @@ public class PlayerMovement : MonoBehaviour
 
     public void Die()
     {
-		GameManager.Instance.SetGameOver(false);
+		//GameManager.Instance.SetGameOver(false);
+        Debug.Log("You Died");
 	}
+
+    public void GetHurt()
+    {
+        if (hp < HealthState.Lowest)
+        {
+            hp++;
+            hpIndicator.sprite = hpIndicators[(int)hp];
+        }
+        else
+        {
+            Die();
+        }
+    }
 
 	/*
     public void playFootstep()

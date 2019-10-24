@@ -20,7 +20,7 @@ public class DynamicSoundObject : MonoBehaviour
 	private void OnCollisionEnter(Collision collision)
     {
         Vector3 collisionForce = collision.impulse / Time.fixedDeltaTime;
-        SoundManager.makeSound(transform.position, collisionForce.magnitude);
+        SoundManager.makeSound(transform.position, collisionForce.magnitude, false);
 
 		// Set the audio to be played from objects location, with RBs data, for some added effects?
 		soundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject, rb));

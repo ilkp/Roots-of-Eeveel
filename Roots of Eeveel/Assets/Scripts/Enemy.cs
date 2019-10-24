@@ -257,12 +257,6 @@ public class Enemy : MonoBehaviour
         //RaycastHit hit;
         while (state == State.AttackPlayer)
         {
-            // Use unity pathfinder to follow player and attack if close enough
-            //Physics.Raycast(transform.position, Vector3.Normalize(_player.position - transform.position), out hit);
-            //if (hit.collider.CompareTag("Player"))
-            //{
-            //    _agent.destination = _player.position;
-            //}
 
             if (_soundHeard)
             {
@@ -270,16 +264,11 @@ public class Enemy : MonoBehaviour
                 _agent.destination = _soundLocation;
             }
 
-            if (Vector3.Distance(transform.position, _player.position) < 1)
-            {
-                // Make player die here
-            }
-
             // Change state to investigate if at player's last known location and player can't be seen.
 
-            if (_agent.remainingDistance < 2)
+            if (_agent.remainingDistance < 1)
             {
-                state = State.Wander;
+                state = State.LookAround;
             }
 
             yield return 0;
@@ -325,10 +314,11 @@ public class Enemy : MonoBehaviour
     }
 
     // When a sound is heard 
-    public void alert(Vector3 source)
+    public void alert(Vector3 source, bool isPlayer)
     {
         _soundHeard = true;
         _soundLocation = source;
+        _playerSoundHeard = isPlayer;
 
         if (_alertness > _maxAlertness)
         {
@@ -339,9 +329,9 @@ public class Enemy : MonoBehaviour
     // If enemy comes in contact with the player, the player is killed
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Player") && state == State.AttackPlayer)
         {
-            collision.collider.GetComponent<PlayerMovement>().Die();
+            collision.collider.GetComponent<PlayerMovement>().GetHurt();
         }
     }
 }

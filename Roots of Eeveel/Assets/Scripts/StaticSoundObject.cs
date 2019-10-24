@@ -22,7 +22,7 @@ public class StaticSoundObject : MonoBehaviour
 	{
 		if (other.CompareTag("Player"))
 		{
-			SoundManager.makeSound(transform.position, 100);
+			SoundManager.makeSound(transform.position, 100, false);
 			// Play The Fucking Sound Already!
 			soundInstance.start();
 		}

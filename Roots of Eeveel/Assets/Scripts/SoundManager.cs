@@ -31,7 +31,7 @@ public class SoundManager : MonoBehaviour
 		}
 	}
 
-	public static void makeSound(Vector3 source, float amplitude)
+	public static void makeSound(Vector3 source, float amplitude, bool isPlayer)
 	{
         foreach (Enemy enemy in Instance.enemies)
         {
@@ -48,7 +48,7 @@ public class SoundManager : MonoBehaviour
             
             if (valppaus < oomph)
             {
-                enemy.alert(source);
+                enemy.alert(source, isPlayer);
             }
         }
 	}
