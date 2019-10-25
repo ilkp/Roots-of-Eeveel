@@ -1,1 +1,1 @@
-{"ResolutionX":2560,"ResolutionY":1440,"FullscreenMode":0,"Brightness":0.10000000149011612,"MusicVolume":0.30000001192092898,"SoundsVolume":0.30000001192092898}
+{"ResolutionX":1920,"ResolutionY":1080,"FullscreenMode":0,"Brightness":0.10000000149011612,"MusicVolume":0.30000001192092898,"SoundsVolume":0.30000001192092898}
