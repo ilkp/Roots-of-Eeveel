@@ -47,7 +47,6 @@ public class GameManager : MonoBehaviour
 			case 1: // main menu scene
 				audioSettings.StopMenuMusic();
 				audioSettings.PlayMenuMusic();
-				saveGameSettings(Screen.currentResolution, FullScreenMode.ExclusiveFullScreen, 0.1f, 0.3f, 0.3f);
 				ButtonLinker.Instance.gameObject.SetActive(true);
 				ButtonLinker.Instance.ToMain();
 				break;
@@ -101,7 +100,6 @@ public class GameManager : MonoBehaviour
 
 	private void loadGameSettings()
 	{
-		Debug.Log("testiii");
 		string path = Path.Combine(Application.dataPath, "settings.txt");
 		string file;
 		GameSettingsWrapper wrapper;
@@ -130,6 +128,13 @@ public class GameManager : MonoBehaviour
 		wrapper.setValues(resolution.width, resolution.height, (int)fullscreenMode, brightness, musicVolume, soundsVolume);
 		string file = JsonUtility.ToJson(wrapper);
 		File.WriteAllText(path, file);
+		gameSettings = wrapper;
+	}
+
+	public void applyGameSettings()
+	{
+		RenderSettings.ambientLight = new Color(gameSettings.Brightness, gameSettings.Brightness, gameSettings.Brightness, 1.0f);
+		Screen.SetResolution(gameSettings.ResolutionX, gameSettings.ResolutionY, (FullScreenMode)gameSettings.FullscreenMode);
 	}
 
 	public void QuitGame()
