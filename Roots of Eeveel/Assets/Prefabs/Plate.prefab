@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4921540708423945731}
   - component: {fileID: 4678637486285108412}
   - component: {fileID: 319153081179875535}
+  - component: {fileID: 4185996187291792830}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Untagged
@@ -128,3 +129,16 @@ MonoBehaviour:
     RightMouseButton to throw the object.'
   pullForce: 10
   throwForce: 10
+--- !u!114 &4185996187291792830
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4663185785372231806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce0480e77ffc24449bd8bdff377a594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundType: 1

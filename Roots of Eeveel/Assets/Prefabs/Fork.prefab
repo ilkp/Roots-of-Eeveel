@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3407218477382629073}
   - component: {fileID: 3282911863977214600}
   - component: {fileID: 4286562469694048343}
+  - component: {fileID: -6326379762330981336}
   m_Layer: 0
   m_Name: Fork
   m_TagString: Untagged
@@ -127,3 +128,16 @@ MonoBehaviour:
     RightMouseButton to throw the object.'
   pullForce: 10
   throwForce: 10
+--- !u!114 &-6326379762330981336
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1668011552956868482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce0480e77ffc24449bd8bdff377a594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundType: 0
