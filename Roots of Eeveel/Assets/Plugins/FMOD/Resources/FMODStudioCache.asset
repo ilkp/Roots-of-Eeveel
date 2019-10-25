@@ -20,6 +20,23 @@ MonoBehaviour:
   - Name: 
     Value: 62848
   Exists: 0
+--- !u!114 &-8905791662604794636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Heartbeat/HP
+  m_EditorClassIdentifier: 
+  Name: HP
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
 --- !u!114 &-8613480654417963300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,6 +200,29 @@ MonoBehaviour:
   - Name: 
     Value: 62848
   Exists: 1
+--- !u!114 &-7057304994324973544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactions/Doors & Locks/Lock3
+  m_EditorClassIdentifier: 
+  Path: event:/Interactions/Doors & Locks/Lock3
+  guid: 2e144c08e5633b47ae26080d3182802a
+  Banks:
+  - {fileID: 1523606942639045844}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 600
 --- !u!114 &-6725898118255570035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,13 +281,13 @@ MonoBehaviour:
   - {fileID: 1523606942639045844}
   IsStream: 0
   Is3D: 1
-  IsOneShot: 0
+  IsOneShot: 1
   Parameters:
-  - {fileID: -1707612764525582020}
-  - {fileID: 5136288885678141313}
+  - {fileID: 332218634602068311}
+  - {fileID: 7280981945469511297}
   MinDistance: 1
   MaxDistance: 20
-  Length: 1911
+  Length: 1365
 --- !u!114 &-4625032603180293112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,6 +331,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 501
+--- !u!114 &-4032754614408385309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactions/Doors & Locks/Lock2
+  m_EditorClassIdentifier: 
+  Path: event:/Interactions/Doors & Locks/Lock2
+  guid: dd264e36766f5042bb3cdf60a7297785
+  Banks:
+  - {fileID: 1523606942639045844}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 270
 --- !u!114 &-3997069211921555013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +496,30 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 1
+--- !u!114 &-2462156269585991245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Atmosphere/Raising tension
+  m_EditorClassIdentifier: 
+  Path: event:/Atmosphere/Raising tension
+  guid: 6f8983d9466e7c41a1fc9b817dcc3129
+  Banks:
+  - {fileID: 1523606942639045844}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 7917851135180796620}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 58018
 --- !u!114 &-1759093084069112989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +594,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -2794343061205952559}
+  - {fileID: 1949057896764505240}
   MinDistance: 1
   MaxDistance: 20
   Length: 26377
@@ -575,10 +662,10 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3651975135803668390}
+  - {fileID: 2924241951775803242}
   MinDistance: 1
   MaxDistance: 20
-  Length: 58816
+  Length: 26616
 --- !u!114 &-599805500537161929
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +754,7 @@ MonoBehaviour:
   - {fileID: 1523606942639045844}
   StringsBanks:
   - {fileID: 6789792000447618091}
-  stringsBankWriteTime: 637074280018347778
+  stringsBankWriteTime: 637076062390183872
   cacheVersion: 3
 --- !u!114 &36383913248451605
 MonoBehaviour:
@@ -684,6 +771,23 @@ MonoBehaviour:
   Name: Crouch
   Min: 0
   Max: 1
+  Default: 0
+  Exists: 1
+--- !u!114 &332218634602068311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Player Footsteps/Player Run
+  m_EditorClassIdentifier: 
+  Name: Player Run
+  Min: 0
+  Max: 2
   Default: 0
   Exists: 1
 --- !u!114 &825813632680629858
@@ -737,11 +841,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.bank
   SubDir: 
-  lastModified: 637074279938286377
+  lastModified: 637076062283537488
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 2174688
+    Value: 3265536
   Exists: 1
 --- !u!114 &1629829798430619047
 MonoBehaviour:
@@ -786,6 +890,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 117398
+--- !u!114 &1949057896764505240
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Idle or agitated/Enemy agitation
+  m_EditorClassIdentifier: 
+  Name: Enemy agitation
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &2059528454232419426
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -869,7 +990,24 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 1680
+  Length: 1660
+--- !u!114 &2924241951775803242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Enemy footsteps/Enemy Run
+  m_EditorClassIdentifier: 
+  Name: Enemy Run
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &3300770270300327759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -910,6 +1048,53 @@ MonoBehaviour:
   - Name: 
     Value: 62848
   Exists: 1
+--- !u!114 &3737160043551866947
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactions/Throwables/Metal
+  m_EditorClassIdentifier: 
+  Path: event:/Interactions/Throwables/Metal
+  guid: edf3ba5ad929b14f82f5066d6d734905
+  Banks:
+  - {fileID: 1523606942639045844}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
+--- !u!114 &3790731230979905888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Player/Heartbeat
+  m_EditorClassIdentifier: 
+  Path: event:/Player/Heartbeat
+  guid: 2ce94c0de1ff0249b742dba572d7b8d4
+  Banks:
+  - {fileID: 1523606942639045844}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters:
+  - {fileID: -8905791662604794636}
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 34500
 --- !u!114 &3804880001562398679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1207,11 +1392,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
   SubDir: 
-  lastModified: 637074280018347778
+  lastModified: 637076062390183872
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 1442
+    Value: 1852
   Exists: 1
 --- !u!114 &7219545832603910016
 MonoBehaviour:
@@ -1259,6 +1444,86 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1421
+--- !u!114 &7280981945469511297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Player Footsteps/Player Crouch
+  m_EditorClassIdentifier: 
+  Name: Player Crouch
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &7855709699206886623
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactions/Throwables/Wood
+  m_EditorClassIdentifier: 
+  Path: event:/Interactions/Throwables/Wood
+  guid: 0e919a18180c3a4084b4df9d0ad8f953
+  Banks:
+  - {fileID: 1523606942639045844}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 760
+--- !u!114 &7917851135180796620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Raising tension/Progress
+  m_EditorClassIdentifier: 
+  Name: Progress
+  Min: 0
+  Max: 3
+  Default: 0
+  Exists: 1
+--- !u!114 &8144450030348450642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/Interactions/Doors & Locks/Lock1
+  m_EditorClassIdentifier: 
+  Path: event:/Interactions/Doors & Locks/Lock1
+  guid: 03645f9971509e499e888cc3c9e9d01d
+  Banks:
+  - {fileID: 1523606942639045844}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 625
 --- !u!114 &8367397246435500722
 MonoBehaviour:
   m_ObjectHideFlags: 0
