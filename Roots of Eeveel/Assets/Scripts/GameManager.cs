@@ -116,7 +116,7 @@ public class GameManager : MonoBehaviour
 		if (wrapper == null)
 		{
 			wrapper = new GameSettingsWrapper();
-			wrapper.setValues(Screen.width, Screen.height, (int)FullScreenMode.ExclusiveFullScreen, 0.5f, 0.3f, 0.3f);
+			wrapper.setValues(Screen.width, Screen.height, Screen.currentResolution.refreshRate, (int)FullScreenMode.ExclusiveFullScreen, 0.5f, 0.3f, 0.3f);
 		}
 		gameSettings = wrapper;
 	}
@@ -125,7 +125,7 @@ public class GameManager : MonoBehaviour
 	{
 		string path = Path.Combine(Application.dataPath, "settings.txt");
 		GameSettingsWrapper wrapper = new GameSettingsWrapper();
-		wrapper.setValues(resolution.width, resolution.height, (int)fullscreenMode, brightness, musicVolume, soundsVolume);
+		wrapper.setValues(resolution.width, resolution.height, resolution.refreshRate, (int)fullscreenMode, brightness, musicVolume, soundsVolume);
 		string file = JsonUtility.ToJson(wrapper);
 		File.WriteAllText(path, file);
 		gameSettings = wrapper;
@@ -134,7 +134,7 @@ public class GameManager : MonoBehaviour
 	public void applyGameSettings()
 	{
 		RenderSettings.ambientLight = new Color(gameSettings.Brightness, gameSettings.Brightness, gameSettings.Brightness, 1.0f);
-		Screen.SetResolution(gameSettings.ResolutionX, gameSettings.ResolutionY, (FullScreenMode)gameSettings.FullscreenMode);
+		Screen.SetResolution(gameSettings.ResolutionX, gameSettings.ResolutionY, (FullScreenMode)gameSettings.FullscreenMode, gameSettings.RefreshRate);
 	}
 
 	public void QuitGame()

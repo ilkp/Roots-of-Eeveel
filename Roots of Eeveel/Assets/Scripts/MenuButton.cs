@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using TMPro;
 
-public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
 	private void Awake()
 	{
@@ -24,6 +24,11 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
+	{
+		GetComponentInChildren<TMP_Text>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.0f);
+	}
+
+	public void OnPointerClick(PointerEventData eventData)
 	{
 		GetComponentInChildren<TMP_Text>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.0f);
 	}

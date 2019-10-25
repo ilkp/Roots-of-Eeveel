@@ -1,20 +1,23 @@
 ﻿
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class ButtonLinker : MonoBehaviour
 {
 	private bool inMainMenu = true;
-	private bool active = true;
+	private bool active = true; // just for internal check if we are in menu or not
 	public static ButtonLinker Instance;
 	[SerializeField] private GameObject mainMenuGroup;
 	[SerializeField] private GameObject optionsGroup;
 	[SerializeField] private GameObject creditsGroup;
 	[SerializeField] private GameObject backgroud;
 
+	[SerializeField] private TMP_Dropdown resolutionDropDown;
 	[SerializeField] private Slider brightnessSlider;
 	[SerializeField] private Slider musicVolumeSlider;
 	[SerializeField] private Slider soundVolumeSlider;
+	
 
 	private void Awake()
 	{
@@ -65,7 +68,7 @@ public class ButtonLinker : MonoBehaviour
 		GameManager.Instance.Paused = false;
 		mainMenuGroup.SetActive(false);
 		optionsGroup.SetActive(false);
-		creditsGroup.SetActive(false);
+		//creditsGroup.SetActive(false);
 	}
 
 	public void ToMain()
@@ -83,7 +86,7 @@ public class ButtonLinker : MonoBehaviour
 		GameManager.Instance.Paused = true;
 		mainMenuGroup.SetActive(true);
 		optionsGroup.SetActive(false);
-		creditsGroup.SetActive(false);
+		//creditsGroup.SetActive(false);
 	}
 
 	public void ToOptions()
@@ -103,7 +106,7 @@ public class ButtonLinker : MonoBehaviour
 	public void saveSettings()
 	{
 		GameManager.Instance.saveGameSettings(
-			Screen.currentResolution,
+			Screen.resolutions[resolutionDropDown.value],
 			Screen.fullScreenMode,
 			brightnessSlider.value,
 			musicVolumeSlider.value,
