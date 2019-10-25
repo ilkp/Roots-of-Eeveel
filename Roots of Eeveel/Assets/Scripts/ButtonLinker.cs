@@ -1,5 +1,6 @@
 ﻿
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ButtonLinker : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class ButtonLinker : MonoBehaviour
 	[SerializeField] private GameObject creditsGroup;
 	[SerializeField] private GameObject backgroud;
 
+	[SerializeField] private Slider brightnessSlider;
+	[SerializeField] private Slider musicVolumeSlider;
+	[SerializeField] private Slider soundVolumeSlider;
 
 	private void Awake()
 	{
@@ -98,6 +102,12 @@ public class ButtonLinker : MonoBehaviour
 
 	public void saveSettings()
 	{
-		//GameManager.Instance.saveGameSettings(Resolution resolution, float brightness, float volume);
+		GameManager.Instance.saveGameSettings(
+			Screen.currentResolution,
+			Screen.fullScreenMode,
+			brightnessSlider.value,
+			musicVolumeSlider.value,
+			soundVolumeSlider.value);
+		GameManager.Instance.applyGameSettings();
 	}
 }
