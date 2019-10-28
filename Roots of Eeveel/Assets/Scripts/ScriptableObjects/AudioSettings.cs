@@ -5,6 +5,9 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AudioSettings", menuName = "AudioSettings")]
 public class AudioSettings : ScriptableObject
 {
+	public float musicVolume;
+	public float soundsVolume;
+
 	#region Atmosphere
 	[Header("Atmosphere", order = 0)] //----------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string roomTone;
@@ -12,6 +15,7 @@ public class AudioSettings : ScriptableObject
 	[FMODUnity.EventRef] [SerializeField] private string tensionMusic;
 	[SerializeField] private string tensionParameterName;
 	private FMOD.Studio.EventInstance tensionInstance;
+
 
 	public void PlayRoomTone()
 	{

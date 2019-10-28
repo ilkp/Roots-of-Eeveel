@@ -42,6 +42,8 @@ public class GameManager : MonoBehaviour
 		{
 			case 0: // startup scene
 				audioSettings.StopMenuMusic();
+				loadGameSettings();
+				applyGameSettings();
 				StartCoroutine(LoadSceneAsync(1));
 				break;
 			case 1: // main menu scene
@@ -106,11 +108,15 @@ public class GameManager : MonoBehaviour
 		try
 		{
 			file = File.ReadAllText(path);
-			file = "";
 			wrapper = JsonUtility.FromJson<GameSettingsWrapper>(file); // wrapper will be null if json can't be deserialized
+			if (wrapper == null)
+			{
+				Debug.LogWarning("Failed to deserialize settings file");
+			}
 		}
 		catch(FileNotFoundException)
 		{
+			Debug.LogWarning("Game settings file not found");
 			wrapper = null;
 		}
 		if (wrapper == null)
@@ -135,6 +141,8 @@ public class GameManager : MonoBehaviour
 	{
 		RenderSettings.ambientLight = new Color(gameSettings.Brightness, gameSettings.Brightness, gameSettings.Brightness, 1.0f);
 		Screen.SetResolution(gameSettings.ResolutionX, gameSettings.ResolutionY, (FullScreenMode)gameSettings.FullscreenMode, gameSettings.RefreshRate);
+		audioSettings.musicVolume = gameSettings.MusicVolume;
+		audioSettings.soundsVolume = gameSettings.SoundsVolume;
 	}
 
 	public void QuitGame()
