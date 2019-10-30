@@ -84,10 +84,10 @@ MonoBehaviour:
   categories: []
   uiBounds:
     serializedVersion: 2
-    x: 516
+    x: 259
     y: -272
-    width: 563
-    height: 2522
+    width: 820
+    height: 2524
 --- !u!114 &114350483966674976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,6 +175,57 @@ MonoBehaviour:
         m_SerializableType: UnityEngine.Texture2D, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
       m_SerializableObject: '{"obj":{"fileID":10300,"guid":"0000000000000000f000000000000000","type":0}}'
+    min: -Infinity
+    max: Infinity
+    descendantCount: 0
+  - name: New Transform
+    path: 
+    tooltip: 
+    sheetType: 
+    realType: Transform
+    defaultValue:
+      m_Type:
+        m_SerializableType: 
+      m_SerializableObject: 
+    min: -Infinity
+    max: Infinity
+    descendantCount: 3
+  - name: position
+    path: New Transform_position
+    tooltip: The transform position.
+    sheetType: m_Vector3f
+    realType: Vector3
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"x":0.0,"y":0.0,"z":0.0}'
+    min: -Infinity
+    max: Infinity
+    descendantCount: 0
+  - name: angles
+    path: New Transform_angles
+    tooltip: The euler angles of the transform.
+    sheetType: m_Vector3f
+    realType: Vector3
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"x":0.0,"y":0.0,"z":0.0}'
+    min: -Infinity
+    max: Infinity
+    descendantCount: 0
+  - name: scale
+    path: New Transform_scale
+    tooltip: The scale of the transform along each axis.
+    sheetType: m_Vector3f
+    realType: Vector3
+    defaultValue:
+      m_Type:
+        m_SerializableType: UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+      m_SerializableObject: '{"x":1.0,"y":1.0,"z":1.0}'
     min: -Infinity
     max: Infinity
     descendantCount: 0
@@ -1796,7 +1847,7 @@ MonoBehaviour:
   - {fileID: 8926484042661614649}
   - {fileID: 8926484042661614653}
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 1
+  m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_MasterSlot: {fileID: 8926484042661614644}
   m_MasterData:
@@ -3174,7 +3225,7 @@ MonoBehaviour:
       inputSlot: {fileID: 8926484042661614718}
     - outputSlot: {fileID: 8926484042661614738}
       inputSlot: {fileID: 8926484042661614728}
-    position: {x: 516, y: 120}
+    position: {x: 259, y: 535}
     expandedSlots: []
     expanded: 0
 --- !u!114 &8926484042661614738
@@ -3513,7 +3564,7 @@ MonoBehaviour:
   m_Parent: {fileID: 114350483966674976}
   m_Children: []
   m_UIPosition: {x: 0, y: 0}
-  m_UICollapsed: 0
+  m_UICollapsed: 1
   m_UISuperCollapsed: 0
   m_InputSlots: []
   m_OutputSlots:
