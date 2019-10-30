@@ -17,6 +17,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 	private PlayerMovement pm;
 	private Vector3 destination;
 
+	[SerializeField] private string lockIdentifier;
 	[SerializeField] private float throwForce = 10;
 	[SerializeField] private float pullForce = 10;
 	[SerializeField] private float minHoldDistance = 1.5f;
@@ -120,22 +121,35 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.CompareTag("Lock"))
+		if (collision.gameObject.tag == lockIdentifier)
 		{
-			Lock targetLock = collision.gameObject.GetComponent<Lock>();
-
-			if (targetLock.key == gameObject)
+			PuzzleLock targetLock = collision.gameObject.GetComponent<PuzzleLock>();
+			if (targetLock.Solved)
 			{
-				collision.gameObject.GetComponent<Lock>().Open();
-				StartCoroutine(LerpToPlace(targetLock.keyPos, targetLock.keyRot));
-				pm.allowRotation = true;
-				gameObject.tag = "Untagged";
-				StopCoroutine("Hold");
+				return;
 			}
+
+			StartCoroutine(LerpToPlace(targetLock.keyPosition.position, targetLock.keyPosition.rotation.eulerAngles, targetLock));
+			pm.allowRotation = true;
+			gameObject.tag = "Untagged";
+			StopCoroutine("Hold");
 		}
 	}
 
-	IEnumerator LerpToPlace(Vector3 targetPos, Vector3 targetRot)
+	public void OnPuzzleUnsolved(object sender, System.EventArgs args)
+	{
+		rb.isKinematic = false;
+		rb.AddForce(Vector3.forward * 5.0f, ForceMode.Impulse);
+		StartCoroutine(reTag());
+	}
+
+	private IEnumerator reTag()
+	{
+		yield return new WaitForSeconds(3);
+		gameObject.tag = "Interactable";
+	}
+
+	IEnumerator LerpToPlace(Vector3 targetPos, Vector3 targetRot, PuzzleLock targetLock)
 	{
 		rb.isKinematic = true;
 		float time = 0;
@@ -152,6 +166,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 
 			yield return null;
 		}
-
+		targetLock.Solve(this);
+		targetLock.door.checkLocks();
 	}
 }
