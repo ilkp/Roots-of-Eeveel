@@ -60,6 +60,18 @@ public class ButtonLinker : MonoBehaviour
 		GameManager.Instance.QuitGame();
 	}
 
+	public void Back()
+	{
+		if (inMainMenu)
+		{
+			ToMain();
+		}
+		else
+		{
+			ToMenu();
+		}
+	}
+
 	public void ToGame()
 	{
 		Cursor.lockState = CursorLockMode.Locked;

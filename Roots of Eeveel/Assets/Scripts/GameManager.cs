@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System;
+using UnityEngine.Rendering;
+using UnityEngine.Experimental.Rendering.HDPipeline;
 
 public class GameManager : MonoBehaviour
 {
@@ -42,6 +44,8 @@ public class GameManager : MonoBehaviour
 		{
 			case 0: // startup scene
 				audioSettings.StopMenuMusic();
+				loadGameSettings();
+				applyGameSettings();
 				StartCoroutine(LoadSceneAsync(1));
 				break;
 			case 1: // main menu scene
@@ -51,6 +55,7 @@ public class GameManager : MonoBehaviour
 				ButtonLinker.Instance.ToMain();
 				break;
 			case 2: // game scene
+				applyBrightness();
 				StartCoroutine(audioSettings.FadeMenuMusic());
 				SoundManager.Instance.LoadEnemies();
 				ButtonLinker.Instance.ToGame();
@@ -106,11 +111,15 @@ public class GameManager : MonoBehaviour
 		try
 		{
 			file = File.ReadAllText(path);
-			file = "";
 			wrapper = JsonUtility.FromJson<GameSettingsWrapper>(file); // wrapper will be null if json can't be deserialized
+			if (wrapper == null)
+			{
+				Debug.LogWarning("Failed to deserialize settings file");
+			}
 		}
 		catch(FileNotFoundException)
 		{
+			Debug.LogWarning("Game settings file not found");
 			wrapper = null;
 		}
 		if (wrapper == null)
@@ -135,6 +144,20 @@ public class GameManager : MonoBehaviour
 	{
 		RenderSettings.ambientLight = new Color(gameSettings.Brightness, gameSettings.Brightness, gameSettings.Brightness, 1.0f);
 		Screen.SetResolution(gameSettings.ResolutionX, gameSettings.ResolutionY, (FullScreenMode)gameSettings.FullscreenMode, gameSettings.RefreshRate);
+		audioSettings.musicVolume = gameSettings.MusicVolume;
+		audioSettings.soundsVolume = gameSettings.SoundsVolume;
+		if (SceneManager.GetActiveScene().buildIndex == 2)
+		{
+			applyBrightness();
+		}
+	}
+
+	public void applyBrightness()
+	{
+		Volume renderSettings = GameObject.FindObjectOfType<Volume>();
+		IndirectLightingController ilc;
+		renderSettings.profile.TryGet<IndirectLightingController>(out ilc);
+		ilc.indirectDiffuseIntensity.value = gameSettings.Brightness;
 	}
 
 	public void QuitGame()

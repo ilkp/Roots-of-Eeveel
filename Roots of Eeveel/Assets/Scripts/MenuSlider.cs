@@ -13,8 +13,6 @@ public class MenuSlider : MonoBehaviour
 	{
 		slider = GetComponentInChildren<Slider>();
 		inputField = GetComponentInChildren<TMP_InputField>();
-		slider.minValue = 0.0f;
-		slider.maxValue = 1.0f;
 		inputField.text = slider.value.ToString();
 		inputFieldPrevValue = slider.value.ToString();
 	}
