@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.IO;
 using System;
+using UnityEngine.Rendering;
+using UnityEngine.Experimental.Rendering.HDPipeline;
 
 public class GameManager : MonoBehaviour
 {
@@ -53,6 +55,7 @@ public class GameManager : MonoBehaviour
 				ButtonLinker.Instance.ToMain();
 				break;
 			case 2: // game scene
+				applyBrightness();
 				StartCoroutine(audioSettings.FadeMenuMusic());
 				SoundManager.Instance.LoadEnemies();
 				ButtonLinker.Instance.ToGame();
@@ -143,6 +146,18 @@ public class GameManager : MonoBehaviour
 		Screen.SetResolution(gameSettings.ResolutionX, gameSettings.ResolutionY, (FullScreenMode)gameSettings.FullscreenMode, gameSettings.RefreshRate);
 		audioSettings.musicVolume = gameSettings.MusicVolume;
 		audioSettings.soundsVolume = gameSettings.SoundsVolume;
+		if (SceneManager.GetActiveScene().buildIndex == 2)
+		{
+			applyBrightness();
+		}
+	}
+
+	public void applyBrightness()
+	{
+		Volume renderSettings = GameObject.FindObjectOfType<Volume>();
+		IndirectLightingController ilc;
+		renderSettings.profile.TryGet<IndirectLightingController>(out ilc);
+		ilc.indirectDiffuseIntensity.value = gameSettings.Brightness;
 	}
 
 	public void QuitGame()
