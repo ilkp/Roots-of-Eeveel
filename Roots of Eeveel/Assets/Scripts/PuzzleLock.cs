@@ -13,8 +13,8 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 	public Transform keyPosition;
 	private Interactable_Key _keySubscriber;
 
-	public event PuzzleSolvedEventHandler PuzzleSolved;
-	public event PuzzleUnsolvedEventHandler PuzzleUnsolved;
+	public event ConditionMetEventHandler ConditionMet;
+	public event ConditionUnmetEventHandler ConditionUnmet;
 
 	private void Awake()
 	{
@@ -22,35 +22,37 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 		gameObject.tag = identifier;
 	}
 
-	public void OnPuzzleSolved()
+	public void OnConditionMet()
 	{
-		if (PuzzleSolved != null)
+		if (ConditionMet != null)
 		{
-			PuzzleSolved(this, EventArgs.Empty);
+			ConditionMet(this, EventArgs.Empty);
 		}
 	}
 
-	public void OnPuzzleUnsolved()
+	public void OnConditionUnmet()
 	{
-		if (PuzzleUnsolved != null)
+		if (ConditionUnmet != null)
 		{
-			PuzzleUnsolved(this, EventArgs.Empty);
+			ConditionUnmet(this, EventArgs.Empty);
 		}
 	}
 
 	public void Solve(Interactable_Key keySubscriber)
 	{
+		Debug.Log("lock solved");
 		Solved = true;
 		_keySubscriber = keySubscriber;
-		PuzzleUnsolved += keySubscriber.OnPuzzleUnsolved;
-		OnPuzzleSolved();
+		ConditionUnmet += keySubscriber.OnConditionUnmet;
+		OnConditionMet();
 	}
 
 	public void Unsolve()
 	{
+		Debug.Log("Lock unsolved");
 		Solved = false;
-		OnPuzzleUnsolved();
-		PuzzleUnsolved -= _keySubscriber.OnPuzzleUnsolved;
+		OnConditionUnmet();
+		ConditionUnmet -= _keySubscriber.OnConditionUnmet;
 		_keySubscriber = null;
 	}
 }

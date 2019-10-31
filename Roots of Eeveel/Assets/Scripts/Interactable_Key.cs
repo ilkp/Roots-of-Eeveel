@@ -136,9 +136,10 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 		}
 	}
 
-	public void OnPuzzleUnsolved(object sender, System.EventArgs args)
+	public void OnConditionUnmet(object sender, System.EventArgs args)
 	{
 		rb.isKinematic = false;
+		transform.Translate(new Vector3(2.0f, 0, 0));
 		rb.AddForce(Vector3.forward * 5.0f, ForceMode.Impulse);
 		StartCoroutine(reTag());
 	}

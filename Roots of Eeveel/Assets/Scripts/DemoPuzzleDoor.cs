@@ -1,6 +1,13 @@
 ﻿
 using UnityEngine;
 
+/* Create a door with this component
+ * Create a number of locks with the PuzzleLock component
+ * Make sure the door and locks have the same puzzle identifier
+ * Make sure the door knows all of the locks. Locks have to be in the wanted solving order.
+ * Create keys with the Interactable_Key component
+ */
+
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(ConfigurableJoint))]
 [RequireComponent(typeof(Interactable_Door))]
@@ -47,7 +54,10 @@ public class DemoPuzzleDoor : MonoBehaviour
 		{
 			foreach (PuzzleLock pLock in locks)
 			{
-				pLock.Unsolve();
+				if (pLock.Solved)
+				{
+					pLock.Unsolve();
+				}
 			}
 		}
 		else if (puzzleCompleted)
