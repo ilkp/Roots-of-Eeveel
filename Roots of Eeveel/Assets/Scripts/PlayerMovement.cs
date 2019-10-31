@@ -184,20 +184,25 @@ public class PlayerMovement : MonoBehaviour
         // Works, disabled to conserve power until the highlight shader is added/made
 
         //float radius = 2f;
-        //float viewlength = 1f;
-        //// Change interactable objects to have a specific layer or check for the interactable script
+        float viewlength = 1f;
+        // Change interactable objects to have a specific layer or check for the interactable script
         //int bitmap = 1 << 8;
         //foreach (Collider collider in Physics.OverlapSphere(cam.transform.position + cam.transform.forward * radius, radius, bitmap))
-        //{
-        //    if (Vector3.Dot(cam.transform.forward, collider.transform.forward) < viewlength)
-        //    {
-        //        // Highlight object
-        //    }
-        //    else
-        //    {
-        //        // Don't highlight
-        //    }
-        //}
+        GameObject[] highlightables = GameObject.FindGameObjectsWithTag("Interactable");
+        foreach (GameObject highlightable in highlightables)
+        {
+            if (highlightable.name == "HighlightTest")
+            {
+                if (Vector3.Dot(cam.transform.forward, highlightable.transform.position - cam.transform.position) < viewlength)
+                {
+                    // Highlight object
+                }
+                else
+                {
+                    // Don't highlight
+                }
+            }
+        }
 
         // Camera raycast
 
@@ -209,7 +214,7 @@ public class PlayerMovement : MonoBehaviour
             interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
 
             // Clear any previous hit objects
-            interactable = null;
+            //interactable = null;
         }
 
         // Check if object is visible to the character and close enough
@@ -233,6 +238,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+            // Reset whatever is being done
+            if (interactable)
+            {
+                interactable.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
+                interactable = null;
+            }
             // Disable reticule
             GetComponent<ToolTip>().showPopup(false);
             reticule.enabled = false;

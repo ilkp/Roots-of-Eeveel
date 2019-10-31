@@ -43,9 +43,13 @@ public class Interactable_Readable : MonoBehaviour, IInteractable
     public void Interact()
     {
         // Show papyrus
-        //Time.timeScale = 0;
-        papyrus.enabled = true;
-        reticule.enabled = false;
+        papyrus.enabled = !papyrus.enabled;
+        //reticule.enabled = !reticule.enabled;
+    }
+
+    public void Reset()
+    {
+        papyrus.enabled = false;
     }
 
     /// <summary>
@@ -53,9 +57,6 @@ public class Interactable_Readable : MonoBehaviour, IInteractable
     /// </summary>
     public void StopInteraction()
     {
-        // Disable papyrus
-        papyrus.enabled = false;
-        reticule.enabled = true;
-        //Time.timeScale = 1;
+        // Do nothing
     }
 }
