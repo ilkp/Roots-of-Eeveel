@@ -216,8 +216,11 @@ public class PlayerMovement : MonoBehaviour
         if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
         {
             // Enable reticule
-            GetComponent<ToolTip>().showPopup(true);
-            reticule.gameObject.SetActive(true);
+            if (!Input.GetKey(interaction))
+            {
+                GetComponent<ToolTip>().showPopup(true);
+                reticule.enabled = true;
+            }
 
             // Check if player pressed the interaction button
             if (Input.GetKeyDown(interaction))
@@ -232,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
         {
             // Disable reticule
             GetComponent<ToolTip>().showPopup(false);
-            reticule.gameObject.SetActive(false);
+            reticule.enabled = false;
         }
         #endregion
 
