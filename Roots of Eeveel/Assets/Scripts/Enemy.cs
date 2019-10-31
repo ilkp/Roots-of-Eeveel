@@ -4,12 +4,12 @@ using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
-	[SerializeField] private AudioSettings audioSettings;
+    [SerializeField] private AudioSettings audioSettings;
 
-	/// <summary>
-	/// Boolean to indicate if the enemy has heard an alarming sound
-	/// </summary>
-	[Tooltip("Boolean to indicate if the enemy has heard an alarming sound")]
+    /// <summary>
+    /// Boolean to indicate if the enemy has heard an alarming sound
+    /// </summary>
+    [Tooltip("Boolean to indicate if the enemy has heard an alarming sound")]
     [SerializeField] private bool _soundHeard = false;
 
     /// <summary>
@@ -48,49 +48,23 @@ public class Enemy : MonoBehaviour
 	[Tooltip("Location of heard sound")]
     [SerializeField] private Vector3 _soundLocation;
 
-    // Disturbance mechanic stuff
-
-    /// <summary>
-    /// The level of disturbance for the enemy
-    /// </summary>
-    [Tooltip("The level of disturbance for the enemy")]
-    [SerializeField] public double _alertness;
-
-    /// <summary>
-    /// The minimum allowed level of disturbance for this enemy. This is used to initialize the current value.
-    /// </summary>
-    [Tooltip("The minimum allowed level of disturbance for this enemy. This is used to initialize the current value.")]
-    [SerializeField] private double _minAlertness;
-
-    /// <summary>
-    /// The maximum allowed level of disturbance for the enemy. Might be a bit pointless to have as a separate variable
-    /// </summary>
-    [Tooltip("The maximum allowed level of disturbance for the enemy. Might be a bit pointless to have as a separate variable")]
-    [SerializeField] private double _maxAlertness;
-
-    /// <summary>
-    /// Determines how many seconds it takes for the alertness meter to drop down by one unit
-    /// </summary>
-    [Tooltip("Determines how many seconds it takes for the alertness meter to drop down by one unit")]
-    [SerializeField] private double _alertnessFadeRate;
-
     /// <summary>
     /// Minimum movement speed of the enemy
     /// </summary>
     [Tooltip("Minimum movement speed of the enemy")]
-    [SerializeField] private double _moveSpeedMin;
-
-    /// <summary>
-    /// Maximum movement speed of the enemy
-    /// </summary>
-    [Tooltip("Maximum movement speed of the enemy")]
-    [SerializeField] private double _moveSpeedMax;
+    [SerializeField] private float[] _moveSpeeds;
 
     /// <summary>
     /// Animation Controller
     /// </summary>
     [Tooltip("Animation controller of the enemy")]
     [SerializeField] private Animator _anim;
+
+    /// <summary>
+    /// A boolean to check if the enemy can lunge again yet.
+    /// </summary>
+    [Tooltip("A boolean to check if the enemy can lunge again yet.")]
+    [SerializeField] private bool _canLunge;
 
     // Define possible enemy behaviour states
     public enum State
@@ -106,17 +80,16 @@ public class Enemy : MonoBehaviour
 	/// Current enemy behaviour state
 	/// </summary>
 	[Tooltip("Current enemy behaviour state")]
-    [SerializeField] private State state;
+    [SerializeField] public State state;
 
     // Behaviour states
 
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
-		audioSettings.PlayEnemyIdle(gameObject);
-
-		_agent.isStopped = true;
-        //Debug.Log("Stay Still: Enter");
+        audioSettings.PlayEnemyIdle(gameObject);
+        _anim.SetBool("moving", false);
+        //float waitTime = 0;
         while (state == State.StayStill)
         {
             // Change state to Investigate if sound is heard
@@ -126,18 +99,25 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
+            // if (waitTime <= 0)
+            // {
+            //     state = State.Investigate;
+            // }
+            // else
+            // {
+            //     waitTime -= Time.deltaTime;
+            // }
+
             yield return 0;
         }
-        //Debug.Log("Stay Still: Exit");
-        _agent.isStopped = false;
         NextState();
     }
 
     // State where the enemy follows a predetermined route and listens to the environment
     IEnumerator WanderState()
     {
-		audioSettings.PlayEnemyFootStep(gameObject);
-		//Debug.Log("Wander: Enter");
+        audioSettings.PlayEnemyFootStep(gameObject);
+        _anim.SetBool("moving", true);
         _agent.destination = _route[_destination].position;
         while (state == State.Wander)
         {
@@ -145,7 +125,7 @@ public class Enemy : MonoBehaviour
 
             if (_agent.remainingDistance < 1)
             {
-                if (_destination >= _alertness || _destination >= _route.Length - 1)
+                if (_destination >= _route.Length - 1)
                 {
                     _destination = 0;
                 }
@@ -154,44 +134,41 @@ public class Enemy : MonoBehaviour
                     _destination++;
                 }
 
-                //Debug.Log("Destination Reached");
                 _agent.destination = _route[_destination].position;
             }
 
             // Head to destination
 
-            // Change state to Investigate if sound is heard
-
+            // Change state to Investigate if a sound is heard
             if (_soundHeard)
             {
                 _soundHeard = false;
                 state = State.Investigate;
             }
 
-            if (_alertness <= 0)
-            {
-                _agent.destination = _route[0].position;
-                state = State.StayStill;
-            }
+            // When in light, stop for a moment
+            // if (_route.Length <= 0)
+            // {
+            //     _agent.destination = _route[0].position;
+            //     state = State.StayStill;
+            // }
 
             yield return 0;
         }
-        //Debug.Log("Wander: Exit");
         NextState();
     }
 
     // State where the enemy has heard an anomylous sound and is investigating the location from where the sound came from
     IEnumerator InvestigateState()
     {
-		audioSettings.PlayEnemyFootStep(gameObject);
-		//Debug.Log("Investigate: Enter");
+        audioSettings.PlayEnemyFootStep(gameObject);
         _agent.destination = _soundLocation;
+        _anim.SetBool("moving", true);
         while (state == State.Investigate)
         {
 
             if (_agent.remainingDistance < 3)
             {
-                //Debug.Log("Close enough");
                 state = State.LookAround;
             }
 
@@ -209,29 +186,29 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         }
-        //Debug.Log("Investigate: Exit");
         NextState();
     }
 
     // State where the enemy stays still for a while and "looks around them"
     IEnumerator LookAroundState()
     {
-		audioSettings.PlayEnemyIdle(gameObject);
-		//Debug.Log("Looking Around: Enter");
+        audioSettings.PlayEnemyIdle(gameObject);
         double timer = 0;
-        _agent.isStopped = true;
+        _anim.SetBool("moving", false);
         while (state == State.LookAround)
         {
 
             if (_soundHeard)
             {
                 _soundHeard = false;
-                state = State.Investigate;
-            }
-
-            if (_playerSoundHeard)
-            {
-                state = State.AttackPlayer;
+                if (_playerSoundHeard)
+                {
+                    state = State.AttackPlayer;
+                }
+                else
+                {
+                    state = State.Investigate;
+                }
             }
 
             if (timer >= 5)
@@ -245,35 +222,52 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         }
-        //Debug.Log("Looking Around: Exit");
-        _agent.isStopped = false;
         NextState();
     }
 
     // State where the enemy has found the player and is following them
     IEnumerator AttackPlayerState()
     {
-        //Debug.Log("Attack Player: Enter");
-        //RaycastHit hit;
+        _anim.SetBool("moving", true);
+        _playerSoundHeard = false;
+        _canLunge = true;
         while (state == State.AttackPlayer)
         {
 
-            if (_soundHeard)
+            if (_soundHeard && _playerSoundHeard)
             {
                 _soundHeard = false;
                 _agent.destination = _soundLocation;
             }
 
+            // Apparently something something new attacks or something
+
+            // if (_agent.remainingDistance < 5 && _canLunge)
+            // {
+            //     Debug.Log("Boop");
+            //     _canLunge = false;
+            //     // Stop the enemy for a moment to wind up the lunge
+            //     _agent.speed = 0;
+            //     // Set lunge animation active here
+            //     // Wait for however long the lunge animation winds up
+            //     yield return new WaitForSeconds(.5f);
+            //     //Set speed to something that feels good
+            //     _agent.speed = _moveSpeeds[(int)state];
+            //     Debug.Log("Gasp");
+            //     yield return new WaitWhile(() => _agent.remainingDistance > .5);
+            //     Debug.Log("Bonk");
+            // }
+            // else 
+
             // Change state to investigate if at player's last known location and player can't be seen.
 
-            if (_agent.remainingDistance < 1)
+            if (_agent.remainingDistance < .5)
             {
                 state = State.LookAround;
             }
 
             yield return 0;
         }
-        //Debug.Log("Attack Player: Exit");
         NextState();
     }
 
@@ -283,29 +277,13 @@ public class Enemy : MonoBehaviour
     {
         NextState();
     }
-    void Update()
-    {
-        if (_alertness > _minAlertness)
-        {
-            _alertness -= Time.deltaTime / _alertnessFadeRate;
-            _agent.speed = (float)(_moveSpeedMin + ((_moveSpeedMax - _moveSpeedMin) * ((_alertness - _minAlertness) / (_maxAlertness - _minAlertness))));
-
-        }
-        if (!_agent.isStopped && !_anim.GetBool("moving"))
-        {
-            _anim.SetBool("moving", true);
-        }
-        else if (_agent.isStopped && _anim.GetBool("moving"))
-        {
-            _anim.SetBool("moving", false);
-        }
-    }
 
     // Method to change the behaviour state
     void NextState()
     {
-		audioSettings.StopEnemySound(gameObject);
-		string methodName = state.ToString() + "State";
+        _agent.speed = _moveSpeeds[(int)state];
+        audioSettings.StopEnemySound(gameObject);
+        string methodName = state.ToString() + "State";
         System.Reflection.MethodInfo info =
             GetType().GetMethod(methodName,
                                 System.Reflection.BindingFlags.NonPublic |
@@ -313,20 +291,15 @@ public class Enemy : MonoBehaviour
         StartCoroutine((IEnumerator)info.Invoke(this, null));
     }
 
-    // When a sound is heard 
+    // Set appropriate booleans to whatever when a sound is heard
     public void alert(Vector3 source, bool isPlayer)
     {
         _soundHeard = true;
         _soundLocation = source;
         _playerSoundHeard = isPlayer;
-
-        if (_alertness > _maxAlertness)
-        {
-            _alertness = _maxAlertness;
-        }
     }
 
-    // If enemy comes in contact with the player, the player is killed
+    // The player is hurt if an enemy comes in contact with the player
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player") && state == State.AttackPlayer)

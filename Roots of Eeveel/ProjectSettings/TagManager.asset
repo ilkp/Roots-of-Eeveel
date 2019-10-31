@@ -9,6 +9,7 @@ TagManager:
   - Lock
   - GameOverLose
   - GameOverWin
+  - DemoPuzzle
   layers:
   - Default
   - TransparentFX

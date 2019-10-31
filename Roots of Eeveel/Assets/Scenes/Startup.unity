@@ -392,6 +392,36 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
+        type: 3}
+      propertyPath: enemyHearingRanges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
+        type: 3}
+      propertyPath: enemyHearingRanges.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
+        type: 3}
+      propertyPath: enemyHearingRanges.Array.data[1]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
+        type: 3}
+      propertyPath: enemyHearingRanges.Array.data[2]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
+        type: 3}
+      propertyPath: enemyHearingRanges.Array.data[3]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
+        type: 3}
+      propertyPath: enemyHearingRanges.Array.data[4]
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5bb517020a74d734986ce4c886a364db, type: 3}
 --- !u!1 &1370726171

@@ -9,14 +9,6 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 {
     public event Action<IInteractable> OnInteract;
     private Rigidbody rb;
-
-	// The audio instance that playes the actual sounds and sound to be played
-	private FMOD.Studio.EventInstance puzzleCompleteSoundInstance;
-	[FMODUnity.EventRef] [SerializeField] private string puzzleCompleteSound;
-
-	// Gameobjects that hold the triggers and dictionary that holds their completion state
-	[SerializeField] private List<GameObject> triggers;
-	private Dictionary<IInteractable, bool> triggerState = new Dictionary<IInteractable, bool>();
 	
 	private string toolTip = "Hold down leftMouseButton to interact.";
     public string ToolTip
@@ -31,10 +23,8 @@ public class Interactable_Door : MonoBehaviour, IInteractable
         }
     }
 
-    private void Start()
-    {
-        rb = GetComponent<Rigidbody>();
-        gameObject.tag = "Interactable";
+	private void Awake()
+	{
 		ConfigurableJoint joint = GetComponent<ConfigurableJoint>();
 		SoftJointLimit limitLow = joint.lowAngularXLimit;
 		SoftJointLimit limitHigh = joint.highAngularXLimit;
@@ -45,53 +35,15 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 		joint.xMotion = ConfigurableJointMotion.Locked;
 		joint.yMotion = ConfigurableJointMotion.Locked;
 		joint.zMotion = ConfigurableJointMotion.Locked;
-		joint.angularXMotion = triggers.Count > 0 ? ConfigurableJointMotion.Locked : ConfigurableJointMotion.Limited;
+		joint.angularXMotion = ConfigurableJointMotion.Limited;
 		joint.angularYMotion = ConfigurableJointMotion.Locked;
 		joint.angularZMotion = ConfigurableJointMotion.Locked;
-
-		// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
-		puzzleCompleteSoundInstance = FMODUnity.RuntimeManager.CreateInstance(puzzleCompleteSound);
-		// Set the audio to be played from objects location, with RBs data, for some added effects?
-		puzzleCompleteSoundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
-
-		// List all triggers to dictionary, and makes sure they are valid
-		foreach (GameObject trigger in triggers)
-		{
-			IInteractable interactable = trigger.GetComponent<IInteractable>();
-			if (interactable != null)
-			{
-				triggerState.Add(interactable, false);
-				interactable.OnInteract += this.trigger;
-			}
-			else
-			{
-				throw new Exception("Trigger missing 'IInteractable', like Interactable_Button-script");
-			}
-		}
 	}
 
-	private void trigger(IInteractable interactable)
-	{
-		// Flip triggering interactables state
-		triggerState[interactable] = !triggerState[interactable];
-		// Check if we are open. Release door hinge if we are.
-		if (CheckAllTriggers())
-		{
-			puzzleCompleteSoundInstance.start();
-			GetComponent<ConfigurableJoint>().angularXMotion = ConfigurableJointMotion.Limited;
-		}
-	}
-
-	private bool CheckAllTriggers()
-	{
-		foreach (var pair in triggerState)
-		{
-			if (!pair.Value)
-			{
-				return false;
-			}
-		}
-		return true;
+	private void Start()
+    {
+        rb = GetComponent<Rigidbody>();
+        gameObject.tag = "Interactable";
 	}
 
 	public void Interact()

@@ -1630,13 +1630,14 @@ MonoBehaviour:
   _agent: {fileID: 3949090485301931266}
   _player: {fileID: 0}
   _soundLocation: {x: 0, y: 0, z: 0}
-  _alertness: 0
-  _minAlertness: 0
-  _maxAlertness: 7
-  _alertnessFadeRate: 10
-  _moveSpeedMin: 2
-  _moveSpeedMax: 3
+  _moveSpeeds:
+  - 0
+  - 1
+  - 1.5
+  - 0
+  - 2
   _anim: {fileID: 2106923560235054611}
+  _canLunge: 0
   state: 0
 --- !u!136 &197528582845806978
 CapsuleCollider:
@@ -1664,9 +1665,9 @@ Rigidbody:
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &5095528486517590499
 GameObject:
