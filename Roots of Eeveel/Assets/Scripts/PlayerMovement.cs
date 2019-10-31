@@ -6,73 +6,73 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody))]
 public class PlayerMovement : MonoBehaviour
 {
-	[SerializeField] private AudioSettings audioSettings;
+    [SerializeField] private AudioSettings audioSettings;
 
-	/// <summary>
-	/// The key to be used for interaction
-	/// </summary>
-	[Tooltip("The key to be used for interaction")]
-	[SerializeField] private KeyCode interaction;
+    /// <summary>
+    /// The key to be used for interaction
+    /// </summary>
+    [Tooltip("The key to be used for interaction")]
+    [SerializeField] private KeyCode interaction;
 
-	/// <summary>
-	/// Parent object of the camera
-	/// </summary>
-	[Tooltip("Parent object of the camera")]
-	[SerializeField] private Transform head;
+    /// <summary>
+    /// Parent object of the camera
+    /// </summary>
+    [Tooltip("Parent object of the camera")]
+    [SerializeField] private Transform head;
 
-	/// <summary>
-	/// Image to be drawn as reticle
-	/// </summary>
-	[Tooltip("Image to be drawn as reticle")]
-	[SerializeField] private Image reticule;
+    /// <summary>
+    /// Image to be drawn as reticle
+    /// </summary>
+    [Tooltip("Image to be drawn as reticle")]
+    [SerializeField] private Image reticule;
 
-	/// <summary>
-	/// Color of the reticle when not on interactable object
-	/// </summary>
-	[Tooltip("Color of the reticle when not on interactable object")]
-	[SerializeField] private Color colorReticleInactive = Color.white;
+    /// <summary>
+    /// Color of the reticle when not on interactable object
+    /// </summary>
+    [Tooltip("Color of the reticle when not on interactable object")]
+    [SerializeField] private Color colorReticleInactive = Color.white;
 
-	/// <summary>
-	/// Color of the reticle when on interactable object
-	/// </summary>
-	[Tooltip("Color of the reticle when on interactable object")]
-	[SerializeField] private Color colorReticleActive = Color.red;
+    /// <summary>
+    /// Color of the reticle when on interactable object
+    /// </summary>
+    [Tooltip("Color of the reticle when on interactable object")]
+    [SerializeField] private Color colorReticleActive = Color.red;
 
-	private Rigidbody playerRB;
-	/// <summary>
-	/// The interactable object that the player is currently interacting with
-	/// </summary>
-	private GameObject interactable;
-	/// <summary>
-	/// The main camera
-	/// </summary>
-	private Camera cam;
+    private Rigidbody playerRB;
+    /// <summary>
+    /// The interactable object that the player is currently interacting with
+    /// </summary>
+    private GameObject interactable;
+    /// <summary>
+    /// The main camera
+    /// </summary>
+    private Camera cam;
 
-	/// <summary>
-	/// Float that determins how sensitive the camera movement is
-	/// </summary>
-	[Tooltip("Float that determins how sensitive the camera movement is")]
-	[SerializeField] private float sensitivity;
-	/// <summary>
-	/// The movement speed of the player
-	/// </summary>
-	[Tooltip("The movement speed of the player")]
-	[SerializeField] private float speed;
-	/// <summary>
-	/// Maximum angle that player may look up
-	/// </summary>
-	[Tooltip("Maximum angle that player may look up")]
-	[SerializeField] private float maxY;
-	/// <summary>
-	/// Minimum angle that player may look up
-	/// </summary>
-	[Tooltip("Minimum angle that player may look up")]
-	[SerializeField] private float minY;
-	/// <summary>
-	/// How far the player is able to interact with objects
-	/// </summary>
-	[Tooltip("How far the player is able to interact with objects")]
-	[SerializeField] private float grabDistance;
+    /// <summary>
+    /// Float that determins how sensitive the camera movement is
+    /// </summary>
+    [Tooltip("Float that determins how sensitive the camera movement is")]
+    [SerializeField] private float sensitivity;
+    /// <summary>
+    /// The movement speed of the player
+    /// </summary>
+    [Tooltip("The movement speed of the player")]
+    [SerializeField] private float speed;
+    /// <summary>
+    /// Maximum angle that player may look up
+    /// </summary>
+    [Tooltip("Maximum angle that player may look up")]
+    [SerializeField] private float maxY;
+    /// <summary>
+    /// Minimum angle that player may look up
+    /// </summary>
+    [Tooltip("Minimum angle that player may look up")]
+    [SerializeField] private float minY;
+    /// <summary>
+    /// How far the player is able to interact with objects
+    /// </summary>
+    [Tooltip("How far the player is able to interact with objects")]
+    [SerializeField] private float grabDistance;
     /// <summary>
     /// Player sneak speed modifier
     /// </summary>
@@ -110,10 +110,10 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Health State")]
     [SerializeField] private HealthState hp;
 
-    
+
 
     private float rotationX;
-	private float rotationY;
+    private float rotationY;
     public bool allowRotation = true;
     private bool sneaking;
     private bool running;
@@ -121,26 +121,26 @@ public class PlayerMovement : MonoBehaviour
     private const float footStepMaxTime = 0.5f;
 
 
-	// Start is called before the first frame update
-	void Start()
-	{
-		// Get players rigidbody
-		playerRB = GetComponent<Rigidbody>();
-		// Set cursor invisible
-		Cursor.visible = false;
-		// Set cursor locked to the center of the game window
-		Cursor.lockState = CursorLockMode.Locked;
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Get players rigidbody
+        playerRB = GetComponent<Rigidbody>();
+        // Set cursor invisible
+        Cursor.visible = false;
+        // Set cursor locked to the center of the game window
+        Cursor.lockState = CursorLockMode.Locked;
 
-		cam = Camera.main;
+        cam = Camera.main;
         allowRotation = true;
 
         hp = HealthState.Healthy;
         hpIndicator.sprite = hpIndicators[(int)hp];
     }
 
-	// Update is called once per frame
-	void Update()
-	{
+    // Update is called once per frame
+    void Update()
+    {
         if (GameManager.Instance.Paused)
         {
             return;
@@ -171,9 +171,9 @@ public class PlayerMovement : MonoBehaviour
 
         if (footstepSoundTimer > footStepMaxTime)
         {
-			audioSettings.PlayPlayerFootStep(transform);
+            audioSettings.PlayPlayerFootStep(transform);
 
-			footstepSoundTimer = 0.0f;
+            footstepSoundTimer = 0.0f;
             SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f, true);
         }
         #endregion
@@ -182,7 +182,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Interactable item highlight
         // Works, disabled to conserve power until the highlight shader is added/made
-        
+
         //float radius = 2f;
         //float viewlength = 1f;
         //// Change interactable objects to have a specific layer or check for the interactable script
@@ -204,57 +204,56 @@ public class PlayerMovement : MonoBehaviour
         // Gives objects a chance to reset stuff if needed
         // Checks if left mouse button is released
         if (interactable && Input.GetKeyUp(interaction))
-		{
-			// Tells interactable object to run funtion 'Reset'
-			interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
+        {
+            // Tells interactable object to run funtion 'Reset'
+            interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
 
-			// Clear any previous hit objects
-			interactable = null;
-		}
+            // Clear any previous hit objects
+            interactable = null;
+        }
 
-		// Check if object is visible to the character and close enough
-		if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
-		{
+        // Check if object is visible to the character and close enough
+        if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
+        {
             // Enable reticule
             GetComponent<ToolTip>().showPopup(true);
             reticule.gameObject.SetActive(true);
 
-			// Check if player pressed the interaction button
-			if (Input.GetKeyDown(interaction))
-			{
-				// Store hit object
-				interactable = hit.transform.gameObject;
-				// Call 'Interact' on the target
-				interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
-			}
-		}
-		else
-		{
-			// Disable reticule
+            // Check if player pressed the interaction button
+            if (Input.GetKeyDown(interaction))
+            {
+                // Store hit object
+                interactable = hit.transform.gameObject;
+                // Call 'Interact' on the target
+                interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
+            }
+        }
+        else
+        {
+            // Disable reticule
             GetComponent<ToolTip>().showPopup(false);
-			reticule.gameObject.SetActive(false);
-		}
-		#endregion
+            reticule.gameObject.SetActive(false);
+        }
+        #endregion
 
-	}
+    }
 
-	private void FixedUpdate()
-	{
+    private void FixedUpdate()
+    {
         // Move player accrding to the inputs
-        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f)* Time.deltaTime;
+        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * Time.deltaTime;
         Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speedModifier));
-		if (direction.magnitude > 0)
-		{
-			footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
-		}
-	}
+        if (direction.magnitude > 0)
+        {
+            footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
+        }
+    }
 
     public void Die()
     {
-		//GameManager.Instance.SetGameOver(false);
-        Debug.Log("You Died");
-	}
+        GameManager.Instance.SetGameOver(false);
+    }
 
     public void GetHurt()
     {
@@ -269,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-	/*
+    /*
     public void playFootstep()
     {
         footStepSource.Play();
