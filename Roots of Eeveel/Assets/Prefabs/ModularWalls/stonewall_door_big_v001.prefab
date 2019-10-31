@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 7098385791516710807}
   - component: {fileID: 8341087441409734327}
   - component: {fileID: 5448844727997509272}
+  - component: {fileID: 2113680297366353895}
   m_Layer: 0
   m_Name: stonewall_door_big1
   m_TagString: Untagged
@@ -268,3 +269,17 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &2113680297366353895
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5336095816135595661}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: -560654003700001214, guid: 816df10c74103c841b65f7c5df68f510, type: 3}
