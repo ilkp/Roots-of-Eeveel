@@ -15,6 +15,12 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private KeyCode interaction;
 
     /// <summary>
+    /// The key to be used for secondary interaction
+    /// </summary>
+    [Tooltip("The key to be used for secondary interaction")]
+    [SerializeField] private KeyCode secondaryInteraction;
+
+    /// <summary>
     /// Parent object of the camera
     /// </summary>
     [Tooltip("Parent object of the camera")]
@@ -217,15 +223,18 @@ public class PlayerMovement : MonoBehaviour
             //interactable = null;
         }
 
+        // Secondary interact for secondary needs
+        if (interactable && Input.GetKeyDown(secondaryInteraction))
+        {
+            interactable.SendMessage("SecondInteract", SendMessageOptions.DontRequireReceiver);
+        }
+
         // Check if object is visible to the character and close enough
         if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
         {
             // Enable reticule
-            if (!Input.GetKey(interaction))
-            {
-                GetComponent<ToolTip>().showPopup(true);
-                reticule.enabled = true;
-            }
+            GetComponent<ToolTip>().showPopup(true);
+            reticule.enabled = true;
 
             // Check if player pressed the interaction button
             if (Input.GetKeyDown(interaction))

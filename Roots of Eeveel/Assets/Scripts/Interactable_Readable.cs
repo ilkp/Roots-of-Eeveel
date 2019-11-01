@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,6 +17,8 @@ public class Interactable_Readable : MonoBehaviour, IInteractable
     [SerializeField] private Image reticule;
 
     [SerializeField] private string toolTip = "Take a closer look";
+    [SerializeField] private Camera playerCam;
+    [SerializeField] private bool isZoomed;
 
     /// <summary>
     /// ToolTip is shown on the screen when player is near the object and Should describe how the objects is used.
@@ -44,12 +47,33 @@ public class Interactable_Readable : MonoBehaviour, IInteractable
     {
         // Show papyrus
         papyrus.enabled = !papyrus.enabled;
-        //reticule.enabled = !reticule.enabled;
+        reticule.enabled = !reticule.enabled;
+        if (!papyrus.enabled && isZoomed)
+        {
+            SecondInteract();
+        }
     }
 
+    public void SecondInteract()
+    {
+        if (papyrus.enabled || isZoomed)
+        {
+            isZoomed = !isZoomed;
+            StopAllCoroutines();
+            StartCoroutine(Zoom());
+        }
+    }
+
+    /// <summary>
+    /// Is run when player looks away from the object
+    /// </summary>
     public void Reset()
     {
         papyrus.enabled = false;
+        if (isZoomed)
+        {
+            SecondInteract();
+        }
     }
 
     /// <summary>
@@ -58,5 +82,15 @@ public class Interactable_Readable : MonoBehaviour, IInteractable
     public void StopInteraction()
     {
         // Do nothing
+    }
+
+    IEnumerator Zoom()
+    {
+        float fov = (isZoomed ? 40f : 60f);
+        while (playerCam.fieldOfView < fov || playerCam.fieldOfView > fov)
+        {
+            playerCam.fieldOfView = Mathf.Lerp(playerCam.fieldOfView, fov, 0.2f);
+            yield return 0;
+        }
     }
 }
