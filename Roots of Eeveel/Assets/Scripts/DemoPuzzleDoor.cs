@@ -34,7 +34,6 @@ public class DemoPuzzleDoor : MonoBehaviour
 		puzzleCompleteSoundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
 		joints = GetComponentsInChildren<ConfigurableJoint>();
-		Debug.Log(joints.Length);
 
 		joints[0].angularYMotion = ConfigurableJointMotion.Locked;
 		joints[1].angularYMotion = ConfigurableJointMotion.Locked;
@@ -78,9 +77,7 @@ public class DemoPuzzleDoor : MonoBehaviour
 	private void unlock()
 	{
 		puzzleCompleteSoundInstance.start();
-		foreach (ConfigurableJoint joint in joints)
-		{
-			joint.GetComponent<ConfigurableJoint>().angularYMotion = ConfigurableJointMotion.Limited;
-		}
+		joints[0].angularYMotion = ConfigurableJointMotion.Limited;
+		joints[1].angularYMotion = ConfigurableJointMotion.Limited;
 	}
 }
