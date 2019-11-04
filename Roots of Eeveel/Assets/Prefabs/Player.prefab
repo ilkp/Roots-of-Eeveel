@@ -471,6 +471,7 @@ MonoBehaviour:
   runSpeedModifier: 2
   hpIndicator: {fileID: 0}
   hpIndicators: []
+  hpRegen: 7
   hp: 0
   allowRotation: 1
 --- !u!114 &5857073752943768172

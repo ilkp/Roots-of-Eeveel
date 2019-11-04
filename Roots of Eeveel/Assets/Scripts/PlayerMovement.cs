@@ -102,6 +102,13 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Container for HP Indicator images")]
     [SerializeField] private Sprite[] hpIndicators;
 
+    /// <summary>
+    /// HP regeneration time
+    /// </summary>
+    [Tooltip("HP regeneration time")]
+    [SerializeField] private float hpRegen;
+    private float regenCounter;
+
     enum HealthState
     {
         Healthy,
@@ -271,6 +278,22 @@ public class PlayerMovement : MonoBehaviour
         {
             footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
         }
+        if (hp > HealthState.Healthy)
+        {
+            if (regenCounter <= 0)
+            {
+                hp--;
+                hpIndicator.sprite = hpIndicators[(int)hp];
+                if (hp > HealthState.Healthy)
+                {
+                    regenCounter = hpRegen;
+                }
+            }
+            else
+            {
+                regenCounter -= Time.fixedDeltaTime;
+            }
+        }
     }
 
     public void Die()
@@ -284,6 +307,7 @@ public class PlayerMovement : MonoBehaviour
         {
             hp++;
             hpIndicator.sprite = hpIndicators[(int)hp];
+            regenCounter = hpRegen;
         }
         else
         {
