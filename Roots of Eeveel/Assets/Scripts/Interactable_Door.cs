@@ -64,7 +64,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
         {
             mousey = Input.GetAxis("Mouse Y");
 			mouseModifier = mousey * (doorPlayerAngleForward < 90 ? 1.0f : -1.0f);
-			rb.AddForce(transform.right * mouseModifier * 10);
+			rb.AddForce(transform.forward * mouseModifier * 10);
             yield return null;
         }
 		StopInteraction();

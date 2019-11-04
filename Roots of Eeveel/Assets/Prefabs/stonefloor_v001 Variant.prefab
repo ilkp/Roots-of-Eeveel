@@ -23,7 +23,17 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_Name
-      value: stonefloor_v001
+      value: stonefloor_v001 Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: -927199367670048503, guid: ccead80ac66dd9b419315913cb79fd65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7702350176519828891, guid: ccead80ac66dd9b419315913cb79fd65,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}

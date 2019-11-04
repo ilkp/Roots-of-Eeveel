@@ -19,10 +19,6 @@ public class DemoPuzzleDoor : MonoBehaviour
 
 	private void Start()
 	{
-		foreach (ConfigurableJoint join in GetComponentsInChildren<ConfigurableJoint>())
-		{
-			join.angularXMotion = ConfigurableJointMotion.Locked;
-		}
 		foreach (PuzzleLock pLock in locks)
 		{
 			pLock.door = this;
@@ -34,11 +30,11 @@ public class DemoPuzzleDoor : MonoBehaviour
 		puzzleCompleteSoundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
 
 		joints = GetComponentsInChildren<ConfigurableJoint>();
-
-		joints[0].angularYMotion = ConfigurableJointMotion.Locked;
-		joints[1].angularYMotion = ConfigurableJointMotion.Locked;
-		joints[0].anchor = new Vector3(0, 0.2f, -0.4f);
-		joints[1].anchor = new Vector3(0, 0.2f, -0.4f);
+		foreach (ConfigurableJoint joint in joints)
+		{
+			joints[0].angularYMotion = ConfigurableJointMotion.Locked;
+			joints[0].anchor = new Vector3(0, 0.2f, -0.4f);
+		}
 	}
 
 	public void checkLocks()
@@ -77,7 +73,9 @@ public class DemoPuzzleDoor : MonoBehaviour
 	private void unlock()
 	{
 		puzzleCompleteSoundInstance.start();
-		joints[0].angularYMotion = ConfigurableJointMotion.Limited;
-		joints[1].angularYMotion = ConfigurableJointMotion.Limited;
+		foreach (ConfigurableJoint joint in joints)
+		{
+			joint.angularYMotion = ConfigurableJointMotion.Limited;
+		}
 	}
 }
