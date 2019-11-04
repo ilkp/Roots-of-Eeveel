@@ -26,17 +26,14 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 	private void Awake()
 	{
 		ConfigurableJoint joint = GetComponent<ConfigurableJoint>();
-		SoftJointLimit limitLow = joint.lowAngularXLimit;
-		SoftJointLimit limitHigh = joint.highAngularXLimit;
-		limitLow.limit = -90.0f;
-		limitHigh.limit = 0.0f;
-		joint.lowAngularXLimit = limitLow;
-		joint.highAngularXLimit = limitHigh;
+		SoftJointLimit limit = joint.angularYLimit;
+		limit.limit = 90.0f;
+		joint.angularYLimit = limit;
 		joint.xMotion = ConfigurableJointMotion.Locked;
 		joint.yMotion = ConfigurableJointMotion.Locked;
 		joint.zMotion = ConfigurableJointMotion.Locked;
-		joint.angularXMotion = ConfigurableJointMotion.Limited;
-		joint.angularYMotion = ConfigurableJointMotion.Locked;
+		joint.angularXMotion = ConfigurableJointMotion.Locked;
+		joint.angularYMotion = ConfigurableJointMotion.Limited;
 		joint.angularZMotion = ConfigurableJointMotion.Locked;
 	}
 

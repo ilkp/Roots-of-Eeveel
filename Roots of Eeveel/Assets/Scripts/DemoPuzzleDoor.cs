@@ -8,9 +8,6 @@ using UnityEngine;
  * Create keys with the Interactable_Key component
  */
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(ConfigurableJoint))]
-[RequireComponent(typeof(Interactable_Door))]
 public class DemoPuzzleDoor : MonoBehaviour
 {
 	// The audio instance that playes the actual sounds and sound to be played
@@ -18,10 +15,14 @@ public class DemoPuzzleDoor : MonoBehaviour
 	[FMODUnity.EventRef] [SerializeField] private string puzzleCompleteSound;
 
 	[SerializeField] private PuzzleLock[] locks;
+	private ConfigurableJoint[] joints;
 
 	private void Start()
 	{
-		GetComponent<ConfigurableJoint>().angularXMotion = ConfigurableJointMotion.Locked;
+		foreach (ConfigurableJoint join in GetComponentsInChildren<ConfigurableJoint>())
+		{
+			join.angularXMotion = ConfigurableJointMotion.Locked;
+		}
 		foreach (PuzzleLock pLock in locks)
 		{
 			pLock.door = this;
@@ -31,6 +32,14 @@ public class DemoPuzzleDoor : MonoBehaviour
 		puzzleCompleteSoundInstance = FMODUnity.RuntimeManager.CreateInstance(puzzleCompleteSound);
 		// Set the audio to be played from objects location, with RBs data, for some added effects?
 		puzzleCompleteSoundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+
+		joints = GetComponentsInChildren<ConfigurableJoint>();
+		Debug.Log(joints.Length);
+
+		joints[0].angularYMotion = ConfigurableJointMotion.Locked;
+		joints[1].angularYMotion = ConfigurableJointMotion.Locked;
+		joints[0].anchor = new Vector3(0, 0.2f, -0.4f);
+		joints[1].anchor = new Vector3(0, 0.2f, -0.4f);
 	}
 
 	public void checkLocks()
@@ -69,6 +78,9 @@ public class DemoPuzzleDoor : MonoBehaviour
 	private void unlock()
 	{
 		puzzleCompleteSoundInstance.start();
-		GetComponent<ConfigurableJoint>().angularXMotion = ConfigurableJointMotion.Limited;
+		foreach (ConfigurableJoint joint in joints)
+		{
+			joint.GetComponent<ConfigurableJoint>().angularYMotion = ConfigurableJointMotion.Limited;
+		}
 	}
 }
