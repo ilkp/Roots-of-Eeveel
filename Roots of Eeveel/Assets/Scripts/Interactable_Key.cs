@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class Interactable_Key : MonoBehaviour, IInteractable
@@ -139,14 +139,16 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 	public void OnConditionUnmet(object sender, System.EventArgs args)
 	{
 		rb.isKinematic = false;
-		transform.Translate(new Vector3(2.0f, 0, 0));
-		rb.AddForce(Vector3.forward * 5.0f, ForceMode.Impulse);
+		rb.useGravity = true;
+		transform.Translate(new Vector3(0, 0, -1.0f));
+		rb.AddForce(-Vector3.forward * Random.Range(1, 5), ForceMode.Impulse);
+		rb.AddTorque(new Vector3(Random.Range(0, 2), Random.Range(0, 2), Random.Range(0, 2)), ForceMode.Impulse);
 		StartCoroutine(reTag());
 	}
 
 	private IEnumerator reTag()
 	{
-		yield return new WaitForSeconds(3);
+		yield return new WaitForSeconds(2);
 		gameObject.tag = "Interactable";
 	}
 

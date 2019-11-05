@@ -311,6 +311,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ResolutionDropdown
       objectReference: {fileID: 0}
+    - target: {fileID: 7115232048183652120, guid: 98ef479d439265f41b573f6e88b3ce1c,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: Back
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 98ef479d439265f41b573f6e88b3ce1c, type: 3}
 --- !u!114 &744210909 stripped
