@@ -26,6 +26,8 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 	private void Awake()
 	{
 		ConfigurableJoint joint = GetComponent<ConfigurableJoint>();
+		gameObject.layer = LayerMask.NameToLayer("Door");
+		joint.connectedBody.gameObject.layer = LayerMask.NameToLayer("Wall");
 		SoftJointLimit limit = joint.angularYLimit;
 		limit.limit = 90.0f;
 		joint.angularYLimit = limit;

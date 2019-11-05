@@ -32,8 +32,8 @@ public class DemoPuzzleDoor : MonoBehaviour
 		joints = GetComponentsInChildren<ConfigurableJoint>();
 		foreach (ConfigurableJoint joint in joints)
 		{
-			joints[0].angularYMotion = ConfigurableJointMotion.Locked;
-			joints[0].anchor = new Vector3(0, 0.2f, -0.4f);
+			joint.angularYMotion = ConfigurableJointMotion.Locked;
+			joint.anchor = new Vector3(0, 0.2f, -0.4f);
 		}
 	}
 
