@@ -33,7 +33,7 @@ public class DemoPuzzleDoor : MonoBehaviour
 		foreach (ConfigurableJoint joint in joints)
 		{
 			joint.angularYMotion = ConfigurableJointMotion.Locked;
-			joint.anchor = new Vector3(0, 0.2f, -0.4f);
+			joint.anchor = new Vector3(0, -0.5f, 0);
 		}
 	}
 
