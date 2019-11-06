@@ -41,6 +41,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 	private void Start()
     {
         rb = GetComponent<Rigidbody>();
+		rb.mass = 10.0f;
         gameObject.tag = "Interactable";
 	}
 
