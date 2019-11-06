@@ -34,7 +34,7 @@ Material:
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _EmissionCol: 0.05
+    - _EmissionCol: 0.1
     - _OnOff: 0
     - _ReceivesSSR: 1
     - _RenderQueueType: 1
@@ -60,7 +60,7 @@ Material:
     - _ZTestTransparent: 4
     - _ZWrite: 1
     m_Colors:
-    - Color_3436F6AA: {r: 0.57547164, g: 0.54755837, b: 0.37188497, a: 0}
+    - Color_3436F6AA: {r: 0.6509434, g: 0.60588986, b: 0.31626025, a: 0}
     - Color_C3A2C222: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
