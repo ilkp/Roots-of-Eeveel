@@ -206,7 +206,8 @@ public class PlayerMovement : MonoBehaviour
         {
             if (highlightable.name == "HighlightTest")
             {
-                if (Vector3.Dot(cam.transform.forward, highlightable.transform.position - cam.transform.position) < viewlength)
+                float dot = Vector3.Dot(cam.transform.forward, highlightable.transform.position - cam.transform.position);
+                if (dot < viewlength && dot >= 0)
                 {
                     // Highlight object
                 }
