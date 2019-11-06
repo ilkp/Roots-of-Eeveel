@@ -24,21 +24,17 @@ Material:
     serializedVersion: 3
     m_TexEnvs: []
     m_Floats:
-    - Vector1_545179F: 0
-    - Vector1_646B0ED8: 0
-    - Vector1_9F273B66: 0
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
     - _AlphaSrcBlend: 1
-    - _BaseCol: 2
     - _BlendMode: 0
     - _CullMode: 2
     - _CullModeForward: 2
     - _DoubleSidedEnable: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _EmissionCol: 0.2
+    - _EmissionCol: 0.05
     - _OnOff: 0
     - _ReceivesSSR: 1
     - _RenderQueueType: 1
