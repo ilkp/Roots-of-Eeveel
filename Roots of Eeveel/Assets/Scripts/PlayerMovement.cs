@@ -109,7 +109,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float hpRegen;
     private float regenCounter;
 
-    enum HealthState
+	private GameObject[] highlightables;
+	[SerializeField] private float viewlength = 3f;
+
+	enum HealthState
     {
         Healthy,
         Low,
@@ -149,7 +152,8 @@ public class PlayerMovement : MonoBehaviour
 
         hp = HealthState.Healthy;
         hpIndicator.sprite = hpIndicators[(int)hp];
-    }
+		highlightables = GameObject.FindGameObjectsWithTag("Interactable");
+	}
 
     // Update is called once per frame
     void Update()
@@ -197,25 +201,24 @@ public class PlayerMovement : MonoBehaviour
         // Works, disabled to conserve power until the highlight shader is added/made
 
         //float radius = 2f;
-        float viewlength = 1f;
+        
         // Change interactable objects to have a specific layer or check for the interactable script
         //int bitmap = 1 << 8;
         //foreach (Collider collider in Physics.OverlapSphere(cam.transform.position + cam.transform.forward * radius, radius, bitmap))
-        GameObject[] highlightables = GameObject.FindGameObjectsWithTag("Interactable");
+        
         foreach (GameObject highlightable in highlightables)
         {
-            if (highlightable.name == "HighlightTest")
+            float dot = Vector3.Dot(cam.transform.forward, highlightable.transform.position - cam.transform.position);
+            if (dot < viewlength && dot >= 0)
             {
-                float dot = Vector3.Dot(cam.transform.forward, highlightable.transform.position - cam.transform.position);
-                if (dot < viewlength && dot >= 0)
-                {
-                    // Highlight object
-                }
-                else
-                {
-                    // Don't highlight
-                }
+				// Highlight object
+				highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 1);
             }
+            else
+            {
+				// Don't highlight
+				highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 0);
+			}
         }
 
         // Camera raycast
