@@ -6,6 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(ConfigurableJoint))]
 public class Interactable_Door : MonoBehaviour, IInteractable
 {
+	[SerializeField] private int doorType; // 0 = small door, 1 = big door left, 2 = big door right
     public event Action<IInteractable> OnInteract;
     private Rigidbody rb;
 	
@@ -24,32 +25,15 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 
 	private void Awake()
 	{
-		ConfigurableJoint joint = GetComponent<ConfigurableJoint>();
-		gameObject.layer = LayerMask.NameToLayer("Door");
-		joint.connectedBody.gameObject.layer = LayerMask.NameToLayer("Wall");
-		joint.axis = new Vector3(0, 1, 0);
-		SoftJointLimit limitHigh = joint.lowAngularXLimit;
-		SoftJointLimit limitLow = joint.highAngularXLimit;
-		limitHigh.limit = 90;
-		limitLow.limit = 0;
-		joint.highAngularXLimit = limitHigh;
-		joint.lowAngularXLimit = limitLow;
-
-		//limit.limit = 90.0f;
-		//joint.angularYLimit = limit;
-		joint.xMotion = ConfigurableJointMotion.Locked;
-		joint.yMotion = ConfigurableJointMotion.Locked;
-		joint.zMotion = ConfigurableJointMotion.Locked;
-		joint.angularXMotion = ConfigurableJointMotion.Limited;
-		joint.angularYMotion = ConfigurableJointMotion.Locked;
-		joint.angularZMotion = ConfigurableJointMotion.Locked;
+		hingeSettings();
 	}
 
 	private void Start()
     {
         rb = GetComponent<Rigidbody>();
 		rb.mass = 10.0f;
-        gameObject.tag = "Interactable";
+		rb.drag = 2f;
+		gameObject.tag = "Interactable";
 	}
 
 	public void Interact()
@@ -77,5 +61,43 @@ public class Interactable_Door : MonoBehaviour, IInteractable
             yield return null;
         }
 		StopInteraction();
+	}
+
+	private void hingeSettings()
+	{
+		ConfigurableJoint joint = GetComponent<ConfigurableJoint>();
+		gameObject.layer = LayerMask.NameToLayer("Door");
+		joint.connectedBody.gameObject.layer = LayerMask.NameToLayer("Wall");
+
+		joint.axis = new Vector3(0, 1, 0);
+		SoftJointLimit limitHigh = joint.lowAngularXLimit;
+		SoftJointLimit limitLow = joint.highAngularXLimit;
+		switch (doorType)
+		{
+			case 0:
+				limitHigh.limit = 90;
+				limitLow.limit = 0;
+				break;
+			case 1:
+				limitHigh.limit = 90;
+				limitLow.limit = 0;
+				break;
+			case 2:
+				limitHigh.limit = 0;
+				limitLow.limit = -90;
+				break;
+			default:
+				break;
+		}
+
+		joint.highAngularXLimit = limitHigh;
+		joint.lowAngularXLimit = limitLow;
+
+		joint.xMotion = ConfigurableJointMotion.Locked;
+		joint.yMotion = ConfigurableJointMotion.Locked;
+		joint.zMotion = ConfigurableJointMotion.Locked;
+		joint.angularXMotion = ConfigurableJointMotion.Limited;
+		joint.angularYMotion = ConfigurableJointMotion.Locked;
+		joint.angularZMotion = ConfigurableJointMotion.Locked;
 	}
 }

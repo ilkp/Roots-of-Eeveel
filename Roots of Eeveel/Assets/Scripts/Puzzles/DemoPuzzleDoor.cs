@@ -76,6 +76,7 @@ public class DemoPuzzleDoor : MonoBehaviour
 		foreach (ConfigurableJoint joint in joints)
 		{
 			joint.angularXMotion = ConfigurableJointMotion.Limited;
+			joint.gameObject.GetComponent<Rigidbody>().AddForce(joint.gameObject.transform.forward * 2f, ForceMode.Impulse);
 		}
 	}
 }
