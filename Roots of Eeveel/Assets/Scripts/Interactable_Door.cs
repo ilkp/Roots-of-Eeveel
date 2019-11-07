@@ -27,14 +27,21 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 		ConfigurableJoint joint = GetComponent<ConfigurableJoint>();
 		gameObject.layer = LayerMask.NameToLayer("Door");
 		joint.connectedBody.gameObject.layer = LayerMask.NameToLayer("Wall");
-		SoftJointLimit limit = joint.angularYLimit;
-		limit.limit = 90.0f;
-		joint.angularYLimit = limit;
+		joint.axis = new Vector3(0, 1, 0);
+		SoftJointLimit limitHigh = joint.lowAngularXLimit;
+		SoftJointLimit limitLow = joint.highAngularXLimit;
+		limitHigh.limit = 90;
+		limitLow.limit = 0;
+		joint.highAngularXLimit = limitHigh;
+		joint.lowAngularXLimit = limitLow;
+
+		//limit.limit = 90.0f;
+		//joint.angularYLimit = limit;
 		joint.xMotion = ConfigurableJointMotion.Locked;
 		joint.yMotion = ConfigurableJointMotion.Locked;
 		joint.zMotion = ConfigurableJointMotion.Locked;
-		joint.angularXMotion = ConfigurableJointMotion.Locked;
-		joint.angularYMotion = ConfigurableJointMotion.Limited;
+		joint.angularXMotion = ConfigurableJointMotion.Limited;
+		joint.angularYMotion = ConfigurableJointMotion.Locked;
 		joint.angularZMotion = ConfigurableJointMotion.Locked;
 	}
 
@@ -59,7 +66,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
     private IEnumerator Hold()
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowRotation = false;
-        float doorPlayerAngleForward = Vector3.Angle(transform.right, GameObject.FindGameObjectWithTag("Player").transform.forward);
+        float doorPlayerAngleForward = Vector3.Angle(transform.forward, GameObject.FindGameObjectWithTag("Player").transform.forward);
 		float mousey;
 		float mouseModifier;
         while(Input.GetButton("Fire1") && Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)

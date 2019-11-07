@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(Collider), typeof(Rigidbody))]
 public class Interactable_Key : MonoBehaviour, IInteractable
@@ -136,13 +135,14 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 		}
 	}
 
+	// Lock is "unsolved" meaning the locks were solved out of order.
 	public void OnConditionUnmet(object sender, System.EventArgs args)
 	{
 		rb.isKinematic = false;
 		rb.useGravity = true;
 		transform.Translate(new Vector3(0, 0, -1.0f));
-		rb.AddForce(-Vector3.forward * Random.Range(1, 5), ForceMode.Impulse);
-		rb.AddTorque(new Vector3(Random.Range(0, 2), Random.Range(0, 2), Random.Range(0, 2)), ForceMode.Impulse);
+		rb.AddForce(-transform.forward * UnityEngine.Random.Range(1, 5), ForceMode.Impulse);
+		rb.AddTorque(new Vector3(UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0, 2)), ForceMode.Impulse);
 		StartCoroutine(reTag());
 	}
 
