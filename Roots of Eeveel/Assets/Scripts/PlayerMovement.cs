@@ -89,6 +89,12 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     [Tooltip("Player run speed modifier")]
     [SerializeField] private float runSpeedModifier;
+    /// <summary>
+    /// Player speed modifier when holding an object
+    /// </summary>
+    [Tooltip("Player speed modifier when holding an object")]
+    [SerializeField] private float holdSpeedModifier;
+    private bool holdingItem;
 
     /// <summary>
     /// UI container for health image
@@ -109,10 +115,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float hpRegen;
     private float regenCounter;
 
-	private GameObject[] highlightables;
-	[SerializeField] private float viewlength = 3f;
+    private GameObject[] highlightables;
+    [SerializeField] private float viewlength = 3f;
 
-	enum HealthState
+    enum HealthState
     {
         Healthy,
         Low,
@@ -140,6 +146,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        holdingItem = false;
         // Get players rigidbody
         playerRB = GetComponent<Rigidbody>();
         // Set cursor invisible
@@ -152,8 +159,8 @@ public class PlayerMovement : MonoBehaviour
 
         hp = HealthState.Healthy;
         hpIndicator.sprite = hpIndicators[(int)hp];
-		highlightables = GameObject.FindGameObjectsWithTag("Interactable");
-	}
+        highlightables = GameObject.FindGameObjectsWithTag("Interactable");
+    }
 
     // Update is called once per frame
     void Update()
@@ -198,27 +205,19 @@ public class PlayerMovement : MonoBehaviour
         #region Interaction
 
         // Interactable item highlight
-        // Works, disabled to conserve power until the highlight shader is added/made
-
-        //float radius = 2f;
-        
-        // Change interactable objects to have a specific layer or check for the interactable script
-        //int bitmap = 1 << 8;
-        //foreach (Collider collider in Physics.OverlapSphere(cam.transform.position + cam.transform.forward * radius, radius, bitmap))
-        
         foreach (GameObject highlightable in highlightables)
         {
             float dot = Vector3.Dot(cam.transform.forward, highlightable.transform.position - cam.transform.position);
             if (dot < viewlength && dot >= 0)
             {
-				// Highlight object
-				highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 1);
+                // Highlight object
+                highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 1);
             }
             else
             {
-				// Don't highlight
-				highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 0);
-			}
+                // Don't highlight
+                highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 0);
+            }
         }
 
         // Camera raycast
@@ -254,6 +253,7 @@ public class PlayerMovement : MonoBehaviour
                 interactable = hit.transform.gameObject;
                 // Call 'Interact' on the target
                 interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
+                holdingItem = true;
             }
         }
         else
@@ -262,6 +262,7 @@ public class PlayerMovement : MonoBehaviour
             if (interactable)
             {
                 interactable.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
+                holdingItem = false;
                 interactable = null;
             }
             // Disable reticule
@@ -275,7 +276,7 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Move player accrding to the inputs
-        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * Time.deltaTime;
+        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
         Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
         playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speedModifier));
         if (direction.magnitude > 0)

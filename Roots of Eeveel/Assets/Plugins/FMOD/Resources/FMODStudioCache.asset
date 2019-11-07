@@ -54,6 +54,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 0
+--- !u!114 &-8363918781320385420
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Enemy footsteps/Enemy Run
+  m_EditorClassIdentifier: 
+  Name: Enemy Run
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &-8360518351790344197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -263,6 +280,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 600
+--- !u!114 &-6981388748578781746
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Heartbeat/HP
+  m_EditorClassIdentifier: 
+  Name: HP
+  Min: 0
+  Max: 10
+  Default: 0
+  Exists: 1
 --- !u!114 &-6725898118255570035
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,6 +439,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1365
+--- !u!114 &-4982746370721348422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Idle or agitated/Enemy agitation
+  m_EditorClassIdentifier: 
+  Name: Enemy agitation
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &-4780054779321432435
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -420,6 +471,23 @@ MonoBehaviour:
   Name: Enemy Run
   Min: 0
   Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &-4659211210824796468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Raising tension/Progress
+  m_EditorClassIdentifier: 
+  Name: Progress
+  Min: 0
+  Max: 3
   Default: 0
   Exists: 1
 --- !u!114 &-4625032603180293112
@@ -839,7 +907,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:/DEV/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.bank
   SubDir: 
-  lastModified: 637082472115899215
+  lastModified: 637076099249030734
   LoadResult: 0
   FileSizes:
   - Name: 
@@ -1008,7 +1076,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1349675409355114606}
+  - {fileID: -8363918781320385420}
   MinDistance: 1
   MaxDistance: 20
   Length: 26616
@@ -1107,7 +1175,7 @@ MonoBehaviour:
   - {fileID: -1716144162909042831}
   StringsBanks:
   - {fileID: 9056247167823454134}
-  stringsBankWriteTime: 637082472115909214
+  stringsBankWriteTime: 637076099249050684
   cacheVersion: 3
 --- !u!114 &36383913248451605
 MonoBehaviour:
@@ -1186,7 +1254,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -6642464661307974469}
+  - {fileID: -4982746370721348422}
   MinDistance: 1
   MaxDistance: 20
   Length: 26377
@@ -1209,6 +1277,23 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 956
+  Exists: 1
+--- !u!114 &991549970719590340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Player Footsteps/Player Crouch
+  m_EditorClassIdentifier: 
+  Name: Player Crouch
+  Min: 0
+  Max: 2
+  Default: 0
   Exists: 1
 --- !u!114 &1449610640618833020
 MonoBehaviour:
@@ -1502,7 +1587,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -3992926558508158514}
+  - {fileID: -6981388748578781746}
   MinDistance: 1
   MaxDistance: 20
   Length: 34500
@@ -1630,7 +1715,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -1062542307439706052}
+  - {fileID: -4659211210824796468}
   MinDistance: 0
   MaxDistance: 0
   Length: 58018
@@ -1828,6 +1913,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 336
+--- !u!114 &4917099768432491353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/Player Footsteps/Player Run
+  m_EditorClassIdentifier: 
+  Name: Player Run
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &5055468871812421216
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1926,8 +2028,8 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 9019507095702862327}
-  - {fileID: 2837552386378596017}
+  - {fileID: 4917099768432491353}
+  - {fileID: 991549970719590340}
   MinDistance: 1
   MaxDistance: 20
   Length: 1365
@@ -2348,7 +2450,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: C:/DEV/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
   SubDir: 
-  lastModified: 637082472115909214
+  lastModified: 637076099249050684
   LoadResult: 0
   FileSizes:
   - Name: 

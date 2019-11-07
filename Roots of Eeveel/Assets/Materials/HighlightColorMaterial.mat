@@ -8,13 +8,13 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: HighlightColorMaterial
-  m_Shader: {fileID: -6465566751694194690, guid: df4e208eb485c524696a66683bdf1d30,
+  m_Shader: {fileID: -6465566751694194690, guid: b75537f61cb5fe448b65ea640496412c,
     type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -22,8 +22,13 @@ Material:
   - MOTIONVECTORS
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - Texture2D_2DEC1A11:
+        m_Texture: {fileID: 2800000, guid: aa82778aad3fa1a489ffdbe22289bbdf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_4B369207: 0.26
     - _AlphaCutoff: 0.5
     - _AlphaCutoffEnable: 0
     - _AlphaDstBlend: 0
@@ -62,5 +67,6 @@ Material:
     m_Colors:
     - Color_3436F6AA: {r: 0.6509434, g: 0.60588986, b: 0.31626025, a: 0}
     - Color_C3A2C222: {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 0}
+    - Color_D123F087: {r: 0.3015753, g: 0.31132078, b: 0.20412071, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
