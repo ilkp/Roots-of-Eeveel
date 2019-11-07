@@ -123,7 +123,7 @@ public class Enemy : MonoBehaviour
         {
             // Change destination if at current destination
 
-            if (_agent.remainingDistance < 1)
+            if (_agent.remainingDistance < _agent.stoppingDistance)
             {
                 if (_destination >= _route.Length - 1)
                 {
@@ -167,7 +167,7 @@ public class Enemy : MonoBehaviour
         while (state == State.Investigate)
         {
 
-            if (_agent.remainingDistance < 3)
+            if (_agent.remainingDistance < _agent.stoppingDistance)
             {
                 state = State.LookAround;
             }
@@ -261,7 +261,7 @@ public class Enemy : MonoBehaviour
 
             // Change state to investigate if at player's last known location and player can't be seen.
 
-            if (_agent.remainingDistance < .5)
+            if (_agent.remainingDistance < _agent.stoppingDistance)
             {
                 state = State.LookAround;
             }
