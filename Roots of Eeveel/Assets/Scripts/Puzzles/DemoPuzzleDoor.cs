@@ -32,7 +32,7 @@ public class DemoPuzzleDoor : MonoBehaviour
 		joints = GetComponentsInChildren<ConfigurableJoint>();
 		foreach (ConfigurableJoint joint in joints)
 		{
-			joint.angularYMotion = ConfigurableJointMotion.Locked;
+			joint.angularXMotion = ConfigurableJointMotion.Locked;
 			joint.anchor = new Vector3(0, -0.5f, 0);
 		}
 	}
@@ -75,7 +75,7 @@ public class DemoPuzzleDoor : MonoBehaviour
 		puzzleCompleteSoundInstance.start();
 		foreach (ConfigurableJoint joint in joints)
 		{
-			joint.angularYMotion = ConfigurableJointMotion.Limited;
+			joint.angularXMotion = ConfigurableJointMotion.Limited;
 		}
 	}
 }
