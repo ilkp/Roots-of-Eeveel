@@ -40,7 +40,6 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 
 	public void Solve(Interactable_Key keySubscriber)
 	{
-		Debug.Log("lock solved");
 		Solved = true;
 		_keySubscriber = keySubscriber;
 		ConditionUnmet += keySubscriber.OnConditionUnmet;
@@ -49,7 +48,6 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 
 	public void Unsolve()
 	{
-		Debug.Log("Lock unsolved");
 		Solved = false;
 		OnConditionUnmet();
 		ConditionUnmet -= _keySubscriber.OnConditionUnmet;
