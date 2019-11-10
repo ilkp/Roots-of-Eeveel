@@ -118,6 +118,8 @@ public class PlayerMovement : MonoBehaviour
     private GameObject[] highlightables;
     [SerializeField] private float viewlength = 3f;
 
+	private Collider lastHit = null; // for turning off the highlight from GameObject that is no longer in focus
+
     enum HealthState
     {
         Healthy,
@@ -204,24 +206,6 @@ public class PlayerMovement : MonoBehaviour
 
         #region Interaction
 
-        // Interactable item highlight
-        foreach (GameObject highlightable in highlightables)
-        {
-            float dot = Vector3.Dot(cam.transform.forward, highlightable.transform.position - cam.transform.position);
-            if (dot < viewlength && dot >= 0)
-            {
-                // Highlight object
-                highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 1);
-            }
-            else
-            {
-                // Don't highlight
-                highlightable.GetComponent<Renderer>().material.SetFloat("_OnOff", 0);
-            }
-        }
-
-        // Camera raycast
-
         // Gives objects a chance to reset stuff if needed
         // Checks if left mouse button is released
         if (interactable && Input.GetKeyUp(interaction))
@@ -239,12 +223,18 @@ public class PlayerMovement : MonoBehaviour
             interactable.SendMessage("SecondInteract", SendMessageOptions.DontRequireReceiver);
         }
 
-        // Check if object is visible to the character and close enough
+		// Check if object is visible to the character and close enough
         if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
         {
-            // Enable reticule
-            GetComponent<ToolTip>().showPopup(true);
-            reticule.enabled = true;
+			// Highlight the object
+			if (lastHit != null && lastHit != hit.collider)
+			{
+				lastHit.GetComponent<Renderer>().material.SetFloat("_OnOff", 0f);
+			}
+			hit.collider.GetComponent<Renderer>().material.SetFloat("_OnOff", 1f);
+			lastHit = hit.collider;
+
+			GetComponent<ToolTip>().showPopup(true);
 
             // Check if player pressed the interaction button
             if (Input.GetKeyDown(interaction))
@@ -258,6 +248,13 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
+			// Remove highlight from last object
+			if (lastHit)
+			{
+				lastHit.GetComponent<Renderer>().material.SetFloat("_OnOff", 0f);
+				lastHit = null;
+			}
+
             // Reset whatever is being done
             if (interactable)
             {
@@ -267,7 +264,6 @@ public class PlayerMovement : MonoBehaviour
             }
             // Disable reticule
             GetComponent<ToolTip>().showPopup(false);
-            reticule.enabled = false;
         }
         #endregion
 
