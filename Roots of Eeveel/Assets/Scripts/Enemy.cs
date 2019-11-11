@@ -64,7 +64,7 @@ public class Enemy : MonoBehaviour
     /// A boolean to check if the enemy can lunge again yet.
     /// </summary>
     [Tooltip("A boolean to check if the enemy can lunge again yet.")]
-    [SerializeField] private bool _canLunge;
+    [SerializeField] private bool _attacking;
 
     // Define possible enemy behaviour states
     public enum State
@@ -230,7 +230,6 @@ public class Enemy : MonoBehaviour
     {
         _anim.SetBool("moving", true);
         _playerSoundHeard = false;
-        _canLunge = true;
         while (state == State.AttackPlayer)
         {
 
@@ -242,22 +241,26 @@ public class Enemy : MonoBehaviour
 
             // Apparently something something new attacks or something
 
-            // if (_agent.remainingDistance < 5 && _canLunge)
-            // {
-            //     Debug.Log("Boop");
-            //     _canLunge = false;
-            //     // Stop the enemy for a moment to wind up the lunge
-            //     _agent.speed = 0;
-            //     // Set lunge animation active here
-            //     // Wait for however long the lunge animation winds up
-            //     yield return new WaitForSeconds(.5f);
-            //     //Set speed to something that feels good
-            //     _agent.speed = _moveSpeeds[(int)state];
-            //     Debug.Log("Gasp");
-            //     yield return new WaitWhile(() => _agent.remainingDistance > .5);
-            //     Debug.Log("Bonk");
-            // }
-            // else 
+            if (_agent.remainingDistance < _agent.stoppingDistance && !_attacking)
+            {
+                // Stop movement
+                // Attack animation
+                _attacking = true;
+                // Check in OnTrigger if hit
+            }
+
+            if (false) // animation has ended and _attacking == true
+            {
+                if (false) // player was hit and player still should be in range
+                {
+                    // hit again maybe the other animation here
+                }
+                else
+                {
+                    // resume moving
+                    _attacking = false;
+                }
+            }
 
             // Change state to investigate if at player's last known location and player can't be seen.
 
