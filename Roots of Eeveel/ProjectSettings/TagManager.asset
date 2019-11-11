@@ -10,6 +10,8 @@ TagManager:
   - GameOverLose
   - GameOverWin
   - DemoPuzzle
+  - UIReadableImage
+  - UIReadableText
   layers:
   - Default
   - TransparentFX

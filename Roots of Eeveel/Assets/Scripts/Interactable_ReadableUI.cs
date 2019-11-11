@@ -1,32 +1,56 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 {
 	[SerializeField] private ReadableData data;
-	[SerializeField] private UnityEngine.UI.Image uiImage;
-	[SerializeField] private TMP_Text uiText;
+	private Image uiImage;
+	private TMP_Text uiText;
 	private float imageHeight = 800f;
+	private float maxViewDist = 1f;
 
 	public string ToolTip { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
 	public event Action<IInteractable> OnInteract;
 
+	private void Start()
+	{
+		gameObject.tag = "Interactable";
+		uiImage = GameObject.FindGameObjectWithTag("UIReadableImage").GetComponent<Image>();
+		uiText = GameObject.FindGameObjectWithTag("UIReadableText").GetComponent<TMP_Text>();
+	}
+
 	public void Interact()
 	{
-		uiText.gameObject.SetActive(true);
+		uiImage.GetComponent<Image>().enabled = true;
+		uiText.GetComponent<TMP_Text>().enabled = true;
 		float widthMultiplier = imageHeight / data.UISprite.rect.height;
 		uiText.rectTransform.anchorMin = new Vector2(data.TAnchorMinX, data.TAnchorMinY);
 		uiText.rectTransform.anchorMax = new Vector2(data.TAnchorMaxX, data.TAnchorMaxY);
 		uiImage.rectTransform.sizeDelta = new Vector2(data.UISprite.rect.width * widthMultiplier, imageHeight);
 		uiImage.sprite = data.UISprite;
 		uiText.text = data.UIText;
+
+		StartCoroutine(hold());
 	}
 
 	public void StopInteraction()
 	{
-		Debug.Log("stop intercation");
-		uiText.gameObject.SetActive(false);
+		Debug.Log("stop");
+		uiImage.GetComponent<Image>().enabled = false;
+		uiText.GetComponent<TMP_Text>().enabled = false;
+	}
+
+	private IEnumerator hold()
+	{
+		yield return new WaitForEndOfFrame();
+		Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
+		while ((transform.position - playerPos).magnitude < maxViewDist && !Input.GetButtonDown("Fire1"))
+		{
+			yield return null;
+		}
 	}
 }

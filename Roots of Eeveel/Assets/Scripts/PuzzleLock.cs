@@ -19,7 +19,6 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 	private void Awake()
 	{
 		Solved = false;
-		gameObject.tag = "Lock";
 	}
 
 	public void OnConditionMet()

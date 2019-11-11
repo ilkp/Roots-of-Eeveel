@@ -120,7 +120,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 
 	private void OnCollisionEnter(Collision collision)
 	{
-		if (collision.gameObject.tag == "Lock" && collision.gameObject.GetComponent<PuzzleLock>().Identifier == lockIdentifier)
+		if (collision.collider.GetComponent<PuzzleLock>() != null && collision.gameObject.GetComponent<PuzzleLock>().Identifier == lockIdentifier)
 		{
 			PuzzleLock targetLock = collision.gameObject.GetComponent<PuzzleLock>();
 			if (targetLock.Solved)
