@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     private GameObject[] highlightables;
     [SerializeField] private float viewlength = 3f;
 
-	private Collider lastHit = null; // for turning off the highlight from GameObject that is no longer in focus
+    private Collider lastHit = null; // for turning off the highlight from GameObject that is no longer in focus
 
     enum HealthState
     {
@@ -223,18 +223,18 @@ public class PlayerMovement : MonoBehaviour
             interactable.SendMessage("SecondInteract", SendMessageOptions.DontRequireReceiver);
         }
 
-		// Check if object is visible to the character and close enough
+        // Check if object is visible to the character and close enough
         if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
         {
-			// Highlight the object
-			if (lastHit != null && lastHit != hit.collider)
-			{
-				lastHit.GetComponent<Renderer>().material.SetFloat("_OnOff", 0f);
-			}
-			hit.collider.GetComponent<Renderer>().material.SetFloat("_OnOff", 1f);
-			lastHit = hit.collider;
+            // Highlight the object
+            if (lastHit != null && lastHit != hit.collider)
+            {
+                lastHit.GetComponent<Renderer>().material.SetFloat("_OnOff", 0f);
+            }
+            hit.collider.GetComponent<Renderer>().material.SetFloat("_OnOff", 1f);
+            lastHit = hit.collider;
 
-			GetComponent<ToolTip>().showPopup(true);
+            GetComponent<ToolTip>().showPopup(true);
 
             // Check if player pressed the interaction button
             if (Input.GetKeyDown(interaction))
@@ -248,15 +248,15 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-			// Remove highlight from last object
-			if (lastHit)
-			{
-				lastHit.GetComponent<Renderer>().material.SetFloat("_OnOff", 0f);
-				lastHit = null;
-			}
+            // Remove highlight from last object
+            if (lastHit)
+            {
+                lastHit.GetComponent<Renderer>().material.SetFloat("_OnOff", 0f);
+                lastHit = null;
+            }
 
             // Reset whatever is being done
-            if (interactable)
+            if (interactable && !Input.GetKey(interaction))
             {
                 interactable.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 holdingItem = false;
