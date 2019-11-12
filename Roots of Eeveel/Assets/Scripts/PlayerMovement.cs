@@ -144,6 +144,10 @@ public class PlayerMovement : MonoBehaviour
     private float footstepSoundTimer = 0.0f;
     private const float footStepMaxTime = 0.5f;
 
+	public float getGrabDistance()
+	{
+		return grabDistance;
+	}
 
     // Start is called before the first frame update
     void Start()

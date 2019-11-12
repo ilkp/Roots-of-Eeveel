@@ -10,7 +10,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 	private Image uiImage;
 	private TextMeshProUGUI uiText;
 	private float imageHeight = 800f;
-	private float maxViewDist = 1f;
+	private float maxViewDist;
 
 	public string ToolTip { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
@@ -21,10 +21,15 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 		gameObject.tag = "Interactable";
 		uiImage = GameObject.FindGameObjectWithTag("UIReadableImage").GetComponent<Image>();
 		uiText = GameObject.FindGameObjectWithTag("UIReadableText").GetComponent<TextMeshProUGUI>();
+		maxViewDist = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().getGrabDistance();
 	}
 
 	public void Interact()
 	{
+		if (uiImage.enabled || uiText.enabled)
+		{
+			return;
+		}
 		uiImage.enabled = true;
 		uiText.enabled = true;
 		float widthMultiplier = imageHeight / data.UISprite.rect.height;
@@ -42,17 +47,25 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 
 	public void StopInteraction()
 	{
-		uiImage.GetComponent<Image>().enabled = false;
-		uiText.GetComponent<TMP_Text>().enabled = false;
+
 	}
 
 	private IEnumerator hold()
 	{
 		yield return new WaitForEndOfFrame();
-		Vector3 playerPos = GameObject.FindGameObjectWithTag("Player").transform.position;
-		while ((transform.position - playerPos).magnitude < maxViewDist && !Input.GetButtonDown("Fire1"))
+		Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+		while ((transform.position - player.position).magnitude < maxViewDist)
 		{
-			yield return null;
+			if (Input.GetButtonDown("Fire1"))
+			{
+				break;
+			}
+			else
+			{
+				yield return null;
+			}
 		}
+		uiImage.enabled = false;
+		uiText.enabled = false;
 	}
 }

@@ -51,12 +51,13 @@ public class Interactable_Door : MonoBehaviour, IInteractable
     {
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowRotation = false;
         float doorPlayerAngleForward = Vector3.Angle(transform.forward, GameObject.FindGameObjectWithTag("Player").transform.forward);
-		float mousey;
+		float mousey, mousex;
 		float mouseModifier;
         while(Input.GetButton("Fire1") && Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
         {
             mousey = Input.GetAxis("Mouse Y");
-			mouseModifier = mousey * (doorPlayerAngleForward < 90 ? 1.0f : -1.0f);
+			mousex = Input.GetAxis("Mouse X");
+			mouseModifier = mousex + mousey * (doorPlayerAngleForward < 90 ? 1.0f : -1.0f);
 			rb.AddForce(transform.forward * mouseModifier * 10);
             yield return null;
         }
