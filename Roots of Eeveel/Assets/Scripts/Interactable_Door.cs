@@ -6,7 +6,7 @@ using UnityEngine;
 [RequireComponent(typeof(ConfigurableJoint))]
 public class Interactable_Door : MonoBehaviour, IInteractable
 {
-	[SerializeField] private int doorType; // 0 = small door, 1 = big door left, 2 = big door right
+	public int doorType; // 0 = small door, 1 = big door left, 2 = big door right
     public event Action<IInteractable> OnInteract;
     private Rigidbody rb;
 	

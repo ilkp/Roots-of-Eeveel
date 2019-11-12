@@ -10,6 +10,7 @@ using UnityEngine;
 
 public class DemoPuzzleDoor : MonoBehaviour
 {
+	private float doorOpeningForce = 7f;
 	// The audio instance that playes the actual sounds and sound to be played
 	private FMOD.Studio.EventInstance puzzleCompleteSoundInstance;
 	[FMODUnity.EventRef] [SerializeField] private string puzzleCompleteSound;
@@ -76,7 +77,10 @@ public class DemoPuzzleDoor : MonoBehaviour
 		foreach (ConfigurableJoint joint in joints)
 		{
 			joint.angularXMotion = ConfigurableJointMotion.Limited;
-			joint.gameObject.GetComponent<Rigidbody>().AddForce(joint.gameObject.transform.forward * 2f, ForceMode.Impulse);
+			if (joint.GetComponent<Interactable_Door>().doorType < 2)
+			{
+				joint.gameObject.GetComponent<Rigidbody>().AddForce(joint.gameObject.transform.forward * doorOpeningForce, ForceMode.Impulse);
+			}
 		}
 	}
 }
