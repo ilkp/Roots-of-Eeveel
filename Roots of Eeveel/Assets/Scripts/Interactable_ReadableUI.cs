@@ -6,9 +6,9 @@ using System.Collections;
 
 public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 {
-	[SerializeField] private ReadableData data;
+	public ReadableData data;
 	private Image uiImage;
-	private TMP_Text uiText;
+	private TextMeshProUGUI uiText;
 	private float imageHeight = 800f;
 	private float maxViewDist = 1f;
 
@@ -20,16 +20,19 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 	{
 		gameObject.tag = "Interactable";
 		uiImage = GameObject.FindGameObjectWithTag("UIReadableImage").GetComponent<Image>();
-		uiText = GameObject.FindGameObjectWithTag("UIReadableText").GetComponent<TMP_Text>();
+		uiText = GameObject.FindGameObjectWithTag("UIReadableText").GetComponent<TextMeshProUGUI>();
 	}
 
 	public void Interact()
 	{
-		uiImage.GetComponent<Image>().enabled = true;
-		uiText.GetComponent<TMP_Text>().enabled = true;
+		uiImage.enabled = true;
+		uiText.enabled = true;
 		float widthMultiplier = imageHeight / data.UISprite.rect.height;
 		uiText.rectTransform.anchorMin = new Vector2(data.TAnchorMinX, data.TAnchorMinY);
 		uiText.rectTransform.anchorMax = new Vector2(data.TAnchorMaxX, data.TAnchorMaxY);
+		uiText.font = data.font;
+		uiText.fontSize = data.fontSize;
+		uiText.color = new Color(data.fontColor.r, data.fontColor.g, data.fontColor.b);
 		uiImage.rectTransform.sizeDelta = new Vector2(data.UISprite.rect.width * widthMultiplier, imageHeight);
 		uiImage.sprite = data.UISprite;
 		uiText.text = data.UIText;
@@ -39,7 +42,6 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 
 	public void StopInteraction()
 	{
-		Debug.Log("stop");
 		uiImage.GetComponent<Image>().enabled = false;
 		uiText.GetComponent<TMP_Text>().enabled = false;
 	}

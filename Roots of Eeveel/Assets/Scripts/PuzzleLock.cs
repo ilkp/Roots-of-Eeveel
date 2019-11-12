@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 {
+	[SerializeField] private ReadableData unsolvedData;
+	[SerializeField] private ReadableData solvedData;
 	[SerializeField] private string identifier;
 	public DemoPuzzleDoor door;
 
@@ -42,6 +44,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 		Solved = true;
 		_keySubscriber = keySubscriber;
 		ConditionUnmet += keySubscriber.OnConditionUnmet;
+		GetComponent<Interactable_ReadableUI>().data = solvedData;
 		OnConditionMet();
 	}
 
@@ -50,6 +53,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 		Solved = false;
 		OnConditionUnmet();
 		ConditionUnmet -= _keySubscriber.OnConditionUnmet;
+		GetComponent<Interactable_ReadableUI>().data = unsolvedData;
 		_keySubscriber = null;
 	}
 }
