@@ -7,7 +7,7 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
 	private void Awake()
 	{
-		TMP_Text text = GetComponentInChildren<TMP_Text>();
+		TextMeshProUGUI text = GetComponentInChildren<TextMeshProUGUI>();
 		Material mat = text.fontMaterial;
 		mat.EnableKeyword("GLOW_ON");
 		mat.SetColor(ShaderUtilities.ID_GlowColor, Color.green);
@@ -20,16 +20,16 @@ public class MenuButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		StartCoroutine(FindObjectOfType<GameManager>().audioSettings.PlayUIButton());
-		GetComponentInChildren<TMP_Text>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.8f);
+		GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.8f);
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
 	{
-		GetComponentInChildren<TMP_Text>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.0f);
+		GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.0f);
 	}
 
 	public void OnPointerClick(PointerEventData eventData)
 	{
-		GetComponentInChildren<TMP_Text>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.0f);
+		GetComponentInChildren<TextMeshProUGUI>().fontSharedMaterial.SetFloat(ShaderUtilities.ID_GlowPower, 0.0f);
 	}
 }
