@@ -52,7 +52,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 
 	private IEnumerator hold()
 	{
-		yield return new WaitForEndOfFrame();
+		yield return new WaitForSeconds(0.25f);
 		Transform player = GameObject.FindGameObjectWithTag("Player").transform;
 		while ((transform.position - player.position).magnitude < maxViewDist)
 		{
