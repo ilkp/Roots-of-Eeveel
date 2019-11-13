@@ -90,12 +90,21 @@ public class AudioSettings : ScriptableObject
 	[Header("Interactables", order = 2)] //-------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string metalSound;
 	[FMODUnity.EventRef] [SerializeField] private string woodSound;
+	[FMODUnity.EventRef] [SerializeField] private string ceramicSound;
+	[FMODUnity.EventRef] [SerializeField] private string glassSound;
 
-	public IEnumerator PlayThrowableWood(GameObject go, Rigidbody rb)
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayThrowableWood(GameObject go, Rigidbody rb, float amplitude)
 	{
-		Debug.Log("PlayThrowableWood");
+		//Debug.Log("PlayThrowableWood");
 		FMOD.Studio.EventInstance woodInstance = FMODUnity.RuntimeManager.CreateInstance(woodSound);
 		woodInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
+		woodInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
 		woodInstance.start();
 
 		while (true)
@@ -112,10 +121,17 @@ public class AudioSettings : ScriptableObject
 		}
 	}
 
-	public IEnumerator PlayThrowableMetal(GameObject go, Rigidbody rb)
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayThrowableMetal(GameObject go, Rigidbody rb, float amplitude)
 	{
 		FMOD.Studio.EventInstance metalInstance = FMODUnity.RuntimeManager.CreateInstance(metalSound);
 		metalInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
+		metalInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
 		metalInstance.start();
 
 		while (true)
@@ -125,6 +141,62 @@ public class AudioSettings : ScriptableObject
 			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 			{
 				metalInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayThrowableCeramic(GameObject go, Rigidbody rb, float amplitude)
+	{
+		//Debug.Log("PlayThrowableWood");
+		FMOD.Studio.EventInstance ceramicInstance = FMODUnity.RuntimeManager.CreateInstance(ceramicSound);
+		ceramicInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
+		ceramicInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
+		ceramicInstance.start();
+
+		while (true)
+		{
+			ceramicInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				ceramicInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayThrowableGlass(GameObject go, Rigidbody rb, float amplitude)
+	{
+		//Debug.Log("PlayThrowableWood");
+		FMOD.Studio.EventInstance glassInstance = FMODUnity.RuntimeManager.CreateInstance(glassSound);
+		glassInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
+		glassInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
+		glassInstance.start();
+
+		while (true)
+		{
+			glassInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				glassInstance.release();
 				break;
 			}
 
@@ -155,6 +227,10 @@ public class AudioSettings : ScriptableObject
 		musicInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 	}
 
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <returns></returns>
 	public IEnumerator FadeMenuMusic()
 	{
 		float counter = 0f;
@@ -178,18 +254,94 @@ public class AudioSettings : ScriptableObject
 	#region Player
 	[Header("Player", order = 4)] //--------------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string playerFootStep;
-	private FMOD.Studio.EventInstance playerFootstepInstance;
+	[FMODUnity.EventRef] [SerializeField] private string playerTakeDamageLow;
+	[FMODUnity.EventRef] [SerializeField] private string playerTakeDamageHigh;
+	[FMODUnity.EventRef] [SerializeField] private string playerHPHeartbeatSlow;
+	[FMODUnity.EventRef] [SerializeField] private string playerHPHeartbeatFast;
+	[FMODUnity.EventRef] [SerializeField] private string playerHPRoots;
+	private FMOD.Studio.EventInstance playerFootStepInstance;
+	private FMOD.Studio.EventInstance playerDamageLowInstance;
+	private FMOD.Studio.EventInstance playerDamageHighInstance;
+	private FMOD.Studio.EventInstance playerHPHeartbeatFastInstance;
+	private FMOD.Studio.EventInstance playerHPHeartbeatSlowInstance;
+	private FMOD.Studio.EventInstance playerHPRootsInstance;
 
-	public void PlayPlayerFootStep(Transform transform)
+	//public void PlayPlayerFootStep(Transform transform, bool isRun, bool isSneak)
+	public void PlayPlayerFootStep(bool isRun, bool isSneak)
 	{
-		if (!playerFootstepInstance.isValid())
+		if (!playerFootStepInstance.isValid())
 		{
-
-			playerFootstepInstance = FMODUnity.RuntimeManager.CreateInstance(playerFootStep);
+			playerFootStepInstance = FMODUnity.RuntimeManager.CreateInstance(playerFootStep);
 		}
 
-		playerFootstepInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
-		playerFootstepInstance.start();
+		playerFootStepInstance.setParameterByName("player_sneak", (isSneak ? 1 : 0));
+		playerFootStepInstance.setParameterByName("player_run", (isRun ? 1 : 0));
+
+		//playerFootStepInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(transform));
+		playerFootStepInstance.start();
+	}
+
+	public void PlayPlayerDamageLow()
+	{
+		if (!playerDamageLowInstance.isValid())
+		{
+			playerDamageLowInstance = FMODUnity.RuntimeManager.CreateInstance(playerTakeDamageLow);
+		}
+
+		playerDamageLowInstance.start();
+	}
+
+	public void PlayPlayerDamageHigh()
+	{
+		if (!playerDamageHighInstance.isValid())
+		{
+			playerDamageHighInstance = FMODUnity.RuntimeManager.CreateInstance(playerTakeDamageHigh);
+		}
+
+		playerDamageHighInstance.start();
+	}
+
+	public void PlayPlayerHPRoots()
+	{
+		Debug.Log("PlayerHPRoots");	
+		if (!playerHPRootsInstance.isValid())
+		{
+			playerHPRootsInstance = FMODUnity.RuntimeManager.CreateInstance(playerHPRoots);
+		}
+
+		playerHPRootsInstance.start();
+	}
+
+	public void PlayPlayerHPHeartbeatSlow()
+	{
+		Debug.Log("PlayerHPHeartbeatSlow");
+		if (!playerHPHeartbeatSlowInstance.isValid())
+		{
+			playerHPHeartbeatSlowInstance = FMODUnity.RuntimeManager.CreateInstance(playerHPHeartbeatSlow);
+		}
+
+		playerHPHeartbeatSlowInstance.start();
+	}
+
+	public void PlayPlayerHPHeartbeatFast()
+	{
+		Debug.Log("PlayerHPHeartbeatFast");
+		if (!playerHPHeartbeatFastInstance.isValid())
+		{
+			playerHPHeartbeatFastInstance = FMODUnity.RuntimeManager.CreateInstance(playerHPHeartbeatFast);
+		}
+
+		playerHPHeartbeatFastInstance.start();
+	}
+
+	public void StopPlayerHPHeartbeatFast()
+	{
+		playerHPHeartbeatFastInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+	}
+
+	public void StopPlayerHPHeartbeatSlow()
+	{
+		playerHPHeartbeatSlowInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 	}
 
 	#endregion
@@ -197,7 +349,12 @@ public class AudioSettings : ScriptableObject
 	#region UI
 	[Header("UI", order = 5)] //------------------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string button;
+	[FMODUnity.EventRef] [SerializeField] private string startButton;
 
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <returns></returns>
 	public IEnumerator PlayUIButton()
 	{
 		FMOD.Studio.EventInstance buttonInstance = FMODUnity.RuntimeManager.CreateInstance(button);
@@ -216,6 +373,13 @@ public class AudioSettings : ScriptableObject
 
 			yield return null;
 		}
+	}
+
+	public void PlayUIStartGameButton()
+	{
+		FMOD.Studio.EventInstance startButtonInstance = FMODUnity.RuntimeManager.CreateInstance(startButton);
+
+		startButtonInstance.start();
 	}
 
 	#endregion

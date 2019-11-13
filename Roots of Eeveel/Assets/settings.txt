@@ -1,1 +1,1 @@
-{"ResolutionX":320,"ResolutionY":200,"RefreshRate":60,"FullscreenMode":3,"Brightness":0.0,"MusicVolume":0.0,"SoundsVolume":0.0}
+{"ResolutionX":320,"ResolutionY":200,"RefreshRate":60,"FullscreenMode":3,"Brightness":100.0,"MusicVolume":0.0,"SoundsVolume":0.0}

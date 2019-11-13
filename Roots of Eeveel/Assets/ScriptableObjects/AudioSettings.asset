@@ -12,14 +12,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2415da343554647beba80ad47c6778, type: 3}
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
-  roomTone: event:/Atmosphere/Room tone
-  tensionMusic: event:/Atmosphere/Raising tension
+  musicVolume: 0
+  soundsVolume: 0
+  roomTone: event:/AT/Roomtones/at_room_tone_hallway
+  tensionMusic: event:/AT/Roomtones/at_room_tone_hallway
   tensionParameterName: progress
-  enemyFootStep: event:/Enemy/Enemy footsteps
-  enemyIdle: event:/Enemy/Idle or agitated
-  metalSound: event:/Interactions/Throwables/Metal
-  woodSound: event:/Interactions/Throwables/Wood
-  menuMusic: event:/Music/RoE_theme_demo
+  enemyFootStep: event:/SX/Npc/Monster/sx_npc_monster_attack_lunge
+  enemyIdle: event:/SX/Npc/Monster/sx_npc_monster_attack_slash
+  metalSound: event:/SX/Int/Clutter/sx_int_throw_metal
+  woodSound: event:/SX/Int/Clutter/sx_int_throw_wood
+  ceramicSound: event:/SX/Int/Clutter/sx_int_throw_ceramic
+  glassSound: event:/SX/Int/Clutter/sx_int_throw_glass
+  menuMusic: event:/MU/Menu/mu_main_menu
   menuMusicFadeTime: 10
-  playerFootStep: event:/Player/Player Footsteps
-  button: event:/UI/Button
+  playerFootStep: event:/SX/Player/sx_player_movement_rock
+  playerTakeDamageLow: event:/SX/Player/sx_player_take_damage_low
+  playerTakeDamageHigh: event:/SX/Player/sx_player_take_damage_high
+  playerHPHeartbeatSlow: event:/SX/UI/sx_ui_player_hp_heartbeat_1
+  playerHPHeartbeatFast: event:/SX/UI/sx_ui_player_hp_heartbeat_2
+  playerHPRoots: event:/SX/UI/sx_ui_player_hp_roots
+  button: event:/SX/UI/sx_ui_button_hover-over
+  startButton: event:/SX/UI/sx_ui_start_game

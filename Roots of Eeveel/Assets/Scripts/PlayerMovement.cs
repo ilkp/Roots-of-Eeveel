@@ -201,7 +201,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (footstepSoundTimer > footStepMaxTime)
         {
-            audioSettings.PlayPlayerFootStep(transform);
+            audioSettings.PlayPlayerFootStep(running, sneaking);
 
             footstepSoundTimer = 0.0f;
             SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f, true);
@@ -313,7 +313,29 @@ public class PlayerMovement : MonoBehaviour
             hp++;
             hpIndicator.sprite = hpIndicators[(int)hp];
             regenCounter = hpRegen;
-        }
+			//sound things
+			if (Random.value < 0.5f)
+			{
+				//Debug.Log("player damage low");			
+				audioSettings.PlayPlayerDamageLow();
+			}
+			else
+			{
+				//Debug.Log("player damage high");
+				audioSettings.PlayPlayerDamageHigh();
+			}
+
+			audioSettings.StopPlayerHPHeartbeatFast();
+			audioSettings.StopPlayerHPHeartbeatSlow();
+
+			if (hp == HealthState.Low)
+				audioSettings.PlayPlayerHPHeartbeatSlow();
+			if (hp == HealthState.Lower)
+				audioSettings.PlayPlayerHPHeartbeatFast();
+			if (hp == HealthState.Lowest)
+				audioSettings.PlayPlayerHPRoots();
+
+		}
         else
         {
             Die();
