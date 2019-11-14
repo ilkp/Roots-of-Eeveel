@@ -23,6 +23,10 @@ MonoBehaviour:
   woodSound: event:/SX/Int/Clutter/sx_int_throw_wood
   ceramicSound: event:/SX/Int/Clutter/sx_int_throw_ceramic
   glassSound: event:/SX/Int/Clutter/sx_int_throw_glass
+  keyPickupSound: event:/SX/Int/Key/sx_int_key_pickup
+  keyThrowSound: event:/SX/Int/Key/sx_int_key_throw
+  keyInsertSound: event:/SX/Int/Key/sx_int_key_unlock
+  keyWrongLockSound: event:/SX/Int/Key/sx_int_key_wrong
   menuMusic: event:/MU/Menu/mu_main_menu
   menuMusicFadeTime: 10
   playerFootStep: event:/SX/Player/sx_player_movement_rock

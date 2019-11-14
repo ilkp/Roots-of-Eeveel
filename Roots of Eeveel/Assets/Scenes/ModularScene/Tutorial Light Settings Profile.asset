@@ -1,28 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-1571873285304792511
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: da5ab44aadfb1804db5fd470983ac1b8, type: 3}
-  m_Name: LiftGammaGain
-  m_EditorClassIdentifier: 
-  active: 0
-  m_AdvancedMode: 0
-  lift:
-    m_OverrideState: 0
-    m_Value: {x: 0.9947625, y: 0.9895265, z: 1, w: 0.04048583}
-  gamma:
-    m_OverrideState: 1
-    m_Value: {x: 0.9941445, y: 1, z: 0.9974074, w: 0.31231925}
-  gain:
-    m_OverrideState: 1
-    m_Value: {x: 0.96857285, y: 1, z: 0.9522171, w: 0.98322713}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: 5765597546447927708}
-  - {fileID: -1571873285304792511}
   - {fileID: 2321302508105735258}
+  - {fileID: 7346264606559194279}
 --- !u!114 &2321302508105735258
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -127,10 +104,48 @@ MonoBehaviour:
   m_AdvancedMode: 0
   skyType:
     m_OverrideState: 1
-    m_Value: 0
+    m_Value: 1
   skyAmbientMode:
     m_OverrideState: 0
     m_Value: 0
   fogType:
     m_OverrideState: 0
     m_Value: 3
+--- !u!114 &7346264606559194279
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8bcdf71d7fafa419fca1ed162f5fc9, type: 3}
+  m_Name: ColorAdjustments
+  m_EditorClassIdentifier: 
+  active: 1
+  m_AdvancedMode: 0
+  postExposure:
+    m_OverrideState: 0
+    m_Value: -1.8
+  contrast:
+    m_OverrideState: 0
+    m_Value: 56
+    min: -100
+    max: 100
+  colorFilter:
+    m_OverrideState: 1
+    m_Value: {r: 1, g: 0.83137256, b: 0.8, a: 1}
+    hdr: 1
+    showAlpha: 0
+    showEyeDropper: 1
+  hueShift:
+    m_OverrideState: 0
+    m_Value: 147
+    min: -180
+    max: 180
+  saturation:
+    m_OverrideState: 1
+    m_Value: 11
+    min: -100
+    max: 100

@@ -2,7 +2,7 @@
 
 public enum SoundType
 {
-Metal, Wood, Glass, Ceramic
+Metal, Wood, Glass, Ceramic, Key
 }
 
 [RequireComponent(typeof(Rigidbody))]
@@ -36,6 +36,9 @@ public class DynamicSoundObject : MonoBehaviour
 				break;
 			case SoundType.Ceramic:
 				StartCoroutine(audioSettings.PlayThrowableCeramic(gameObject, rb, collisionForce.magnitude));
+				break;
+			case SoundType.Key:
+				StartCoroutine(audioSettings.PlayThrowableKey(gameObject, rb, collisionForce.magnitude));
 				break;
 			default:
 				Debug.Log("SoundType not found: " + soundType);

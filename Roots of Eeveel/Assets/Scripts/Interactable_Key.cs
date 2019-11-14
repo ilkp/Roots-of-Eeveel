@@ -10,6 +10,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 		free, inLock
 	}
 
+	private AudioSettings audioSettings;
 	private State state = State.free;
 	private Rigidbody rb;
 	private Transform head;
@@ -42,6 +43,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 		rb = GetComponent<Rigidbody>();
 		pm = FindObjectOfType<PlayerMovement>();
 		head = pm.transform.GetChild(0).transform;
+		audioSettings = FindObjectOfType<GameManager>().audioSettings;
 	}
 
 	public void Interact()
@@ -49,6 +51,8 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 		if (state == State.free)
 		{
 			rb.useGravity = false;
+
+			audioSettings.PlayKeyPickup();
 
 			StopAllCoroutines();
 			StartCoroutine("Hold");
@@ -132,6 +136,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 			pm.allowRotation = true;
 			gameObject.tag = "Untagged";
 			StopCoroutine("Hold");
+			audioSettings.PlayKeyInsert(gameObject);
 		}
 	}
 

@@ -92,6 +92,59 @@ public class AudioSettings : ScriptableObject
 	[FMODUnity.EventRef] [SerializeField] private string woodSound;
 	[FMODUnity.EventRef] [SerializeField] private string ceramicSound;
 	[FMODUnity.EventRef] [SerializeField] private string glassSound;
+	[FMODUnity.EventRef] [SerializeField] private string keyPickupSound;
+	[FMODUnity.EventRef] [SerializeField] private string keyThrowSound;
+	[FMODUnity.EventRef] [SerializeField] private string keyInsertSound;
+	[FMODUnity.EventRef] [SerializeField] private string keyWrongLockSound;
+	private FMOD.Studio.EventInstance keyPickupInstance;
+	private FMOD.Studio.EventInstance keyInsertInstance;
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayWrongKey(GameObject go)
+	{
+		FMOD.Studio.EventInstance wrongInstance = FMODUnity.RuntimeManager.CreateInstance(keyWrongLockSound);
+		wrongInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
+		wrongInstance.start();
+
+		while (true)
+		{
+			wrongInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				wrongInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	public void PlayKeyPickup()
+	{
+		if (!keyPickupInstance.isValid())
+		{
+			keyPickupInstance = FMODUnity.RuntimeManager.CreateInstance(keyPickupSound);
+		}
+
+		keyPickupInstance.start();
+	}
+
+	public void PlayKeyInsert(GameObject go)
+	{
+		if (!keyInsertInstance.isValid())
+		{
+			keyInsertInstance = FMODUnity.RuntimeManager.CreateInstance(keyInsertSound);
+		}
+
+		keyInsertInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
+		keyInsertInstance.start();
+	}
 
 	/// <summary>
 	/// This is Coroutine
@@ -114,6 +167,34 @@ public class AudioSettings : ScriptableObject
 			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 			{
 				woodInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayThrowableKey(GameObject go, Rigidbody rb, float amplitude)
+	{
+		//Debug.Log("PlayThrowableWood");
+		FMOD.Studio.EventInstance keyThrowInstance = FMODUnity.RuntimeManager.CreateInstance(keyThrowSound);
+		keyThrowInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
+		keyThrowInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
+		keyThrowInstance.start();
+
+		while (true)
+		{
+			keyThrowInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				keyThrowInstance.release();
 				break;
 			}
 

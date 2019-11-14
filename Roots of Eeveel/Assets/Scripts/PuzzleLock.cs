@@ -7,6 +7,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 	[SerializeField] private ReadableLock readableData;
 	[SerializeField] private string identifier;
 	public DemoPuzzleDoor door;
+	private AudioSettings audioSettings;
 
 	public string Identifier { get { return identifier; } set { identifier = value; } }
 	public bool Solved { get; set; }
@@ -20,6 +21,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 	private void Awake()
 	{
 		Solved = false;
+		audioSettings = FindObjectOfType<GameManager>().audioSettings;
 	}
 
 	private void Start()
@@ -49,6 +51,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 		if (ConditionUnmet != null)
 		{
 			ConditionUnmet(this, EventArgs.Empty);
+			audioSettings.PlayWrongKey(gameObject);
 		}
 	}
 
