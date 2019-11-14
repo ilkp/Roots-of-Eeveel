@@ -9,12 +9,22 @@ public class TutorialManager : MonoBehaviour
 	[SerializeField] private TextMeshProUGUI tutorialText;
 	[SerializeField] private Image tutorialImage;
 
+	[SerializeField] private Sprite wasdSprite;
+
 	private List<ITutorial> tutorials;
 	private ITutorial activeTutorial;
 
+	public void ResetTutorials()
+	{
+		foreach (ITutorial t in tutorials)
+		{
+			t.Completed = false;
+		}
+	}
+
 	private void Start()
 	{
-		tutorials = new List<ITutorial>() { new TutorialMovement() };
+		tutorials = new List<ITutorial>() { new TutorialMovement(wasdSprite) };
 	}
 
 	// Update is called once per frame
@@ -24,7 +34,9 @@ public class TutorialManager : MonoBehaviour
 		{
 			if (activeTutorial.CheckCompletion())
 			{
-				tutorials.Remove(activeTutorial);
+				activeTutorial.Completed = true;
+				tutorialText.enabled = false;
+				tutorialImage.enabled = false;
 				activeTutorial = null;
 			}
 		}
@@ -32,9 +44,11 @@ public class TutorialManager : MonoBehaviour
 		{
 			foreach (ITutorial tutorial in tutorials)
 			{
-				if (tutorial.CheckActivation())
+				if (!tutorial.Completed && tutorial.CheckActivation())
 				{
 					activeTutorial = tutorial;
+					tutorialText.enabled = true;
+					tutorialImage.enabled = true;
 					tutorialText.text = tutorial.HintText;
 					tutorialImage.sprite = tutorial.HintSprite;
 					break;
