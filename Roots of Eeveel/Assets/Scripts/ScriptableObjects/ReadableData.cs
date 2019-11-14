@@ -2,7 +2,7 @@
 using UnityEngine;
 using TMPro;
 
-[CreateAssetMenu(fileName = "New Readable", menuName = "Readables")]
+[CreateAssetMenu(menuName = "Readables/Readable Base")]
 public class ReadableData : ScriptableObject
 {
 	public TMP_FontAsset font;
@@ -15,3 +15,4 @@ public class ReadableData : ScriptableObject
 	public float TAnchorMinY;
 	public float TAnchorMaxY;
 }
+
