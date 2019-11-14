@@ -6,7 +6,17 @@ using System.Collections;
 
 public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 {
-	public ReadableData data;
+	public TMP_FontAsset Font;
+	public int FontSize;
+	public Color FontColor;
+	public Sprite UISprite;
+	public string Text;
+	public float TAnchorMinX;
+	public float TAnchorMaxX;
+	public float TAnchorMinY;
+	public float TAnchorMaxY;
+
+
 	private Image uiImage;
 	private TextMeshProUGUI uiText;
 	private float imageHeight = 800f;
@@ -32,15 +42,15 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 		}
 		uiImage.enabled = true;
 		uiText.enabled = true;
-		float widthMultiplier = imageHeight / data.UISprite.rect.height;
-		uiText.rectTransform.anchorMin = new Vector2(data.TAnchorMinX, data.TAnchorMinY);
-		uiText.rectTransform.anchorMax = new Vector2(data.TAnchorMaxX, data.TAnchorMaxY);
-		uiText.font = data.font;
-		uiText.fontSize = data.fontSize;
-		uiText.color = new Color(data.fontColor.r, data.fontColor.g, data.fontColor.b);
-		uiImage.rectTransform.sizeDelta = new Vector2(data.UISprite.rect.width * widthMultiplier, imageHeight);
-		uiImage.sprite = data.UISprite;
-		uiText.text = data.UIText;
+		float widthMultiplier = imageHeight / UISprite.rect.height;
+		uiText.rectTransform.anchorMin = new Vector2(TAnchorMinX, TAnchorMinY);
+		uiText.rectTransform.anchorMax = new Vector2(TAnchorMaxX, TAnchorMaxY);
+		uiText.font = Font;
+		uiText.fontSize = FontSize;
+		uiText.color = FontColor;
+		uiImage.rectTransform.sizeDelta = new Vector2(UISprite.rect.width * widthMultiplier, imageHeight);
+		uiImage.sprite = UISprite;
+		uiText.text = Text;
 
 		StartCoroutine(hold());
 	}
