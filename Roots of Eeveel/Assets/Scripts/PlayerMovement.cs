@@ -276,12 +276,12 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Move player accrding to the inputs
-        float speedModifier = speed * (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
+        float speedModifier = (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
         Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
-        playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speedModifier));
+        playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speed * speedModifier));
         if (direction.magnitude > 0)
         {
-            footstepSoundTimer += Time.fixedDeltaTime * (running ? 1.5f : 1.0f) * (sneaking ? 0.7f : 1.0f);
+            footstepSoundTimer += speedModifier;
         }
         if (hp > HealthState.Healthy)
         {
