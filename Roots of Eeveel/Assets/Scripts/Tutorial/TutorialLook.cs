@@ -8,13 +8,20 @@ public class TutorialLook : ITutorial
     public bool Active { get; set; } = false;
     public Sprite HintSprite { get; set; }
     public bool Completed { get; set; }
+    public TutorialManager Manager { get; set; }
+
+    public TutorialLook(TutorialManager manager)
+    {
+        Manager = manager;
+    }
 
     public bool CheckCompletion()
     {
-        if (Completed)
+        if (Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
         {
-
+            Manager.tutorials[(int)TutorialIndices.Movement].Active = true;
+            return true;
         }
-        return Completed;
+        return false;
     }
 }

@@ -8,6 +8,12 @@ public class TutorialSneak : ITutorial
     public bool Active { get; set; } = false;
     public Sprite HintSprite { get; set; }
     public bool Completed { get; set; }
+    public TutorialManager Manager { get; set; }
+
+    public TutorialSneak(TutorialManager manager)
+    {
+        Manager = manager;
+    }
 
     public bool CheckCompletion()
     {

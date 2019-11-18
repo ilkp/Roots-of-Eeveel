@@ -8,10 +8,11 @@ public class TutorialMovement : ITutorial
     public bool Active { get; set; } = false;
     public Sprite HintSprite { get; set; }
     public bool Completed { get; set; } = false;
+    public TutorialManager Manager { get; set; }
 
-    public TutorialMovement(Sprite sprite)
+    public TutorialMovement(TutorialManager manager)
     {
-        HintSprite = sprite;
+        Manager = manager;
     }
 
     public bool CheckCompletion()

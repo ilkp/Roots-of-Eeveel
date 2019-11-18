@@ -8,5 +8,6 @@ public interface ITutorial
     Sprite HintSprite { get; set; }
     bool Active { get; set; }
     bool Completed { get; set; }
+    TutorialManager Manager { get; set; }
     bool CheckCompletion();
 }

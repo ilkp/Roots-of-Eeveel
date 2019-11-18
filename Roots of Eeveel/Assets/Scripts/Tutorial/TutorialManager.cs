@@ -24,11 +24,11 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-		tutorials = new ITutorial[(int)TutorialIndices.Sneak + 1];
-		tutorials[(int)TutorialIndices.Look] = new TutorialLook();
-		tutorials[(int)TutorialIndices.Movement] = new TutorialMovement(wasdSprite);
-		tutorials[(int)TutorialIndices.Pickup] = new TutorialPickup();
-		tutorials[(int)TutorialIndices.Sneak] = new TutorialSneak();
+        tutorials = new ITutorial[(int)TutorialIndices.Sneak + 1];
+        tutorials[(int)TutorialIndices.Look] = new TutorialLook(this);
+        tutorials[(int)TutorialIndices.Movement] = new TutorialMovement(this);
+        tutorials[(int)TutorialIndices.Pickup] = new TutorialPickup(this);
+        tutorials[(int)TutorialIndices.Sneak] = new TutorialSneak(this);
     }
 
     // Update is called once per frame
@@ -48,7 +48,7 @@ public class TutorialManager : MonoBehaviour
         {
             foreach (ITutorial tutorial in tutorials)
             {
-                if (!tutorial.Completed && tutorial.CheckActivation())
+                if (!tutorial.Completed && tutorial.Active)
                 {
                     activeTutorial = tutorial;
                     tutorialText.enabled = true;
