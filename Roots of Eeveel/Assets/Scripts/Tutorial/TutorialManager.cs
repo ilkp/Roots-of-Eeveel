@@ -11,7 +11,6 @@ public class TutorialManager : MonoBehaviour
 
     [SerializeField] private Sprite wasdSprite;
 
-    [SerializeField]
     public ITutorial[] tutorials;
     private ITutorial activeTutorial;
 
@@ -25,7 +24,11 @@ public class TutorialManager : MonoBehaviour
 
     private void Start()
     {
-        //tutorials = new ITutorial[(int)TutorialIndices.Sneak + 1];
+		tutorials = new ITutorial[(int)TutorialIndices.Sneak + 1];
+		tutorials[(int)TutorialIndices.Look] = new TutorialLook();
+		tutorials[(int)TutorialIndices.Movement] = new TutorialMovement(wasdSprite);
+		tutorials[(int)TutorialIndices.Pickup] = new TutorialPickup();
+		tutorials[(int)TutorialIndices.Sneak] = new TutorialSneak();
     }
 
     // Update is called once per frame
@@ -64,6 +67,5 @@ public enum TutorialIndices
     Look,
     Movement,
     Pickup,
-    Door,
     Sneak,
 }
