@@ -13,12 +13,14 @@ public class TutorialMovement : ITutorial
     public TutorialMovement(TutorialManager manager)
     {
         Manager = manager;
+        HintSprite = Manager.sprites[(int)TutorialIndices.Movement];
     }
 
     public bool CheckCompletion()
     {
         if (Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") != 0)
         {
+            Manager.tutorials[(int)TutorialIndices.Pickup].Active = true;
             return true;
         }
         return false;

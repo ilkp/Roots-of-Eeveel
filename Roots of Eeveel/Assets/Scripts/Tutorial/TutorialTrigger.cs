@@ -6,7 +6,7 @@ public class TutorialTrigger : MonoBehaviour
 {
 
     [SerializeField]
-    private TutorialIndices tutorialIndex;
+    private TutorialIndices tutorialIndex = TutorialIndices.Sneak;
     [SerializeField]
     private TutorialManager tutorialManager;
 
@@ -15,7 +15,6 @@ public class TutorialTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             tutorialManager.tutorials[(int)tutorialIndex].Active = true;
-            Destroy(gameObject);
         }
     }
 }

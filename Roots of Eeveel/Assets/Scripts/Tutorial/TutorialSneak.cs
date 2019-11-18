@@ -13,10 +13,15 @@ public class TutorialSneak : ITutorial
     public TutorialSneak(TutorialManager manager)
     {
         Manager = manager;
+        HintSprite = Manager.sprites[(int)TutorialIndices.Sneak];
     }
 
     public bool CheckCompletion()
     {
-        throw new System.NotImplementedException();
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            return true;
+        }
+        return false;
     }
 }

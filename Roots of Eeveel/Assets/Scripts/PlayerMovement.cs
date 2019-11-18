@@ -48,7 +48,8 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// The interactable object that the player is currently interacting with
     /// </summary>
-    private GameObject interactable;
+    [HideInInspector]
+    public GameObject interactable;
     /// <summary>
     /// The main camera
     /// </summary>

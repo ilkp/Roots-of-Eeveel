@@ -9,7 +9,7 @@ public class TutorialManager : MonoBehaviour
     [SerializeField] private TextMeshProUGUI tutorialText;
     [SerializeField] private Image tutorialImage;
 
-    [SerializeField] private Sprite wasdSprite;
+    [SerializeField] public Sprite[] sprites;
 
     public ITutorial[] tutorials;
     private ITutorial activeTutorial;

@@ -9,14 +9,24 @@ public class TutorialPickup : ITutorial
     public Sprite HintSprite { get; set; }
     public bool Completed { get; set; }
     public TutorialManager Manager { get; set; }
+    private PlayerMovement player;
 
     public TutorialPickup(TutorialManager manager)
     {
         Manager = manager;
+        HintSprite = Manager.sprites[(int)TutorialIndices.Pickup];
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
     }
 
     public bool CheckCompletion()
     {
-        throw new System.NotImplementedException();
+        if (player.interactable)
+        {
+            if (player.interactable.name == "Key")
+            {
+                return true;
+            }
+        }
+        return false;
     }
 }
