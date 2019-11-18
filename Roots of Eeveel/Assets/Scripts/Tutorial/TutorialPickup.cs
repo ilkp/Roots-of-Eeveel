@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TutorialPickup : ITutorial
 {
-    public string HintText => throw new System.NotImplementedException();
+    public string HintText => "Pickup";
     public bool Active { get; set; } = false;
     public Sprite HintSprite { get; set; }
     public bool Completed { get; set; }

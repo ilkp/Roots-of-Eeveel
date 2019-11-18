@@ -9,13 +9,12 @@ public class TutorialTrigger : MonoBehaviour
     private TutorialIndices tutorialIndex;
     [SerializeField]
     private TutorialManager tutorialManager;
-    private TutorialSneak sneek;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            ((TutorialSneak)tutorialManager.tutorials[(int)tutorialIndex]).trigger = true;
+            tutorialManager.tutorials[(int)tutorialIndex].Active = true;
             Destroy(gameObject);
         }
     }
