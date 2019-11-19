@@ -5,6 +5,7 @@ using System.IO;
 using System;
 using UnityEngine.Rendering;
 using UnityEngine.Experimental.Rendering.HDPipeline;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -15,6 +16,9 @@ public class GameManager : MonoBehaviour
     public GameObject endingScreenWin;
 	public GameObject endingScreenLose;
 	public bool Paused = true;
+
+	[SerializeField] private Image loadingScreenBackground;
+	[SerializeField] private Image loadingScreenLogo;
 
 	private void OnEnable()
 	{
@@ -96,11 +100,15 @@ public class GameManager : MonoBehaviour
 
 	private IEnumerator LoadSceneAsync(int scene)
 	{
+		loadingScreenBackground.enabled = true;
+		loadingScreenLogo.enabled = true;
 		AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 		while (!operation.isDone)
 		{
 			yield return null;
 		}
+		loadingScreenBackground.enabled = false;
+		loadingScreenLogo.enabled = false;
 	}
 
 	private void loadGameSettings()

@@ -13,6 +13,8 @@ public class TutorialManager : MonoBehaviour
 
     public ITutorial[] tutorials;
     private ITutorial activeTutorial;
+	private const float fadeOutMax = 0.5f;
+	private bool fading = false;
 
     public void ResetTutorials()
     {
@@ -34,15 +36,18 @@ public class TutorialManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+		if (fading)
+		{
+			return;
+		}
+
         if (activeTutorial != null)
         {
             if (activeTutorial.CheckCompletion())
             {
-                activeTutorial.Completed = true;
-                tutorialText.enabled = false;
-                tutorialImage.enabled = false;
-                activeTutorial = null;
-            }
+				fading = true;
+				Coroutine fade = StartCoroutine(fadeOut());
+			}
         }
         else
         {
@@ -53,13 +58,36 @@ public class TutorialManager : MonoBehaviour
                     activeTutorial = tutorial;
                     tutorialText.enabled = true;
                     tutorialImage.enabled = true;
-                    tutorialText.text = tutorial.HintText;
+					tutorialImage.color = new Color(1, 1, 1, 1);
+					tutorialText.faceColor = new Color(1, 1, 1, 1);
+					tutorialText.text = tutorial.HintText;
                     tutorialImage.sprite = tutorial.HintSprite;
                     break;
                 }
             }
         }
     }
+
+	private IEnumerator fadeOut()
+	{
+		Color c = tutorialImage.color;
+		float timer = 0;
+		float a;
+		while (timer < fadeOutMax)
+		{
+			a = Mathf.Max(1f - timer / fadeOutMax, 0);
+			tutorialImage.color = new Color(c.r, c.g, c.b, a);
+			tutorialText.faceColor = new Color(c.r, c.g, c.b, a);
+			timer += Time.deltaTime;
+			yield return null;
+		}
+		yield return new WaitForSeconds(0.5f);
+		activeTutorial.Completed = true;
+		tutorialText.enabled = false;
+		tutorialImage.enabled = false;
+		activeTutorial = null;
+		fading = false;
+	}
 }
 
 public enum TutorialIndices
