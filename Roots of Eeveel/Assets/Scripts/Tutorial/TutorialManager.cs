@@ -75,12 +75,14 @@ public class TutorialManager : MonoBehaviour
 		float a;
 		while (timer < fadeOutMax)
 		{
-			a = Mathf.Max(1f - timer / fadeOutMax, 0);
+			a = 1f - timer / fadeOutMax;
 			tutorialImage.color = new Color(c.r, c.g, c.b, a);
 			tutorialText.faceColor = new Color(c.r, c.g, c.b, a);
 			timer += Time.deltaTime;
 			yield return null;
 		}
+		tutorialImage.color = new Color(c.r, c.g, c.b, 0);
+		tutorialText.faceColor = new Color(c.r, c.g, c.b, 0);
 		yield return new WaitForSeconds(0.5f);
 		activeTutorial.Completed = true;
 		tutorialText.enabled = false;
