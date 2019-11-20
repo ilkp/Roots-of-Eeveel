@@ -146,6 +146,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 		rb.isKinematic = false;
 		rb.useGravity = true;
 		transform.Translate(new Vector3(0, 0, -1.0f));
+		StartCoroutine(audioSettings.PlayWrongKey(gameObject));
 		rb.AddForce(-transform.forward * UnityEngine.Random.Range(1, 5), ForceMode.Impulse);
 		rb.AddTorque(new Vector3(UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0, 2), UnityEngine.Random.Range(0, 2)), ForceMode.Impulse);
 		StartCoroutine(reTag());

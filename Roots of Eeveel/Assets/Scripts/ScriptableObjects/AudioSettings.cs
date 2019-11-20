@@ -337,14 +337,12 @@ public class AudioSettings : ScriptableObject
 	[FMODUnity.EventRef] [SerializeField] private string playerFootStep;
 	[FMODUnity.EventRef] [SerializeField] private string playerTakeDamageLow;
 	[FMODUnity.EventRef] [SerializeField] private string playerTakeDamageHigh;
-	[FMODUnity.EventRef] [SerializeField] private string playerHPHeartbeatSlow;
-	[FMODUnity.EventRef] [SerializeField] private string playerHPHeartbeatFast;
+	[FMODUnity.EventRef] [SerializeField] private string playerHPHeartbeat;
 	[FMODUnity.EventRef] [SerializeField] private string playerHPRoots;
 	private FMOD.Studio.EventInstance playerFootStepInstance;
 	private FMOD.Studio.EventInstance playerDamageLowInstance;
 	private FMOD.Studio.EventInstance playerDamageHighInstance;
-	private FMOD.Studio.EventInstance playerHPHeartbeatFastInstance;
-	private FMOD.Studio.EventInstance playerHPHeartbeatSlowInstance;
+	private FMOD.Studio.EventInstance playerHPHeartbeatInstance;
 	private FMOD.Studio.EventInstance playerHPRootsInstance;
 
 	//public void PlayPlayerFootStep(Transform transform, bool isRun, bool isSneak)
@@ -384,7 +382,7 @@ public class AudioSettings : ScriptableObject
 
 	public void PlayPlayerHPRoots()
 	{
-		Debug.Log("PlayerHPRoots");	
+		//Debug.Log("PlayerHPRoots");	
 		if (!playerHPRootsInstance.isValid())
 		{
 			playerHPRootsInstance = FMODUnity.RuntimeManager.CreateInstance(playerHPRoots);
@@ -393,36 +391,26 @@ public class AudioSettings : ScriptableObject
 		playerHPRootsInstance.start();
 	}
 
-	public void PlayPlayerHPHeartbeatSlow()
+	/// <summary>
+	/// Hp 0-100
+	/// </summary>
+	/// <param name="hp"></param>
+	public void PlayPlayerHPHeartbeat(float hp)
 	{
-		Debug.Log("PlayerHPHeartbeatSlow");
-		if (!playerHPHeartbeatSlowInstance.isValid())
+		Debug.Log("PlayerHPHeartbeat Start");
+		if (!playerHPHeartbeatInstance.isValid())
 		{
-			playerHPHeartbeatSlowInstance = FMODUnity.RuntimeManager.CreateInstance(playerHPHeartbeatSlow);
+			playerHPHeartbeatInstance = FMODUnity.RuntimeManager.CreateInstance(playerHPHeartbeat);
 		}
 
-		playerHPHeartbeatSlowInstance.start();
+		playerHPHeartbeatInstance.setParameterByName("Player HP", hp);
+		playerHPHeartbeatInstance.start();
 	}
 
-	public void PlayPlayerHPHeartbeatFast()
+	public void StopPlayerHPHeartbeat()
 	{
-		Debug.Log("PlayerHPHeartbeatFast");
-		if (!playerHPHeartbeatFastInstance.isValid())
-		{
-			playerHPHeartbeatFastInstance = FMODUnity.RuntimeManager.CreateInstance(playerHPHeartbeatFast);
-		}
-
-		playerHPHeartbeatFastInstance.start();
-	}
-
-	public void StopPlayerHPHeartbeatFast()
-	{
-		playerHPHeartbeatFastInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
-	}
-
-	public void StopPlayerHPHeartbeatSlow()
-	{
-		playerHPHeartbeatSlowInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		Debug.Log("PlayerHPHeartbeat Stop");
+		playerHPHeartbeatInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 	}
 
 	#endregion
