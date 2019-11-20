@@ -211,7 +211,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -7948637312895563261}
+  - {fileID: 6442600630504425681}
   MinDistance: 1
   MaxDistance: 20
   Length: 1194
@@ -318,7 +318,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 2620672278640802086}
+  - {fileID: -7518366803047506542}
   MinDistance: 1
   MaxDistance: 20
   Length: 340
@@ -361,6 +361,23 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 62848
+  Exists: 1
+--- !u!114 &-7518366803047506542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_key_throw/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
   Exists: 1
 --- !u!114 &-7340181880030283479
 MonoBehaviour:
@@ -421,11 +438,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
   SubDir: 
-  lastModified: 637091667080000000
+  lastModified: 637097882187246575
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 3366
+    Value: 3410
   Exists: 1
 --- !u!114 &-7203921636136533158
 MonoBehaviour:
@@ -743,7 +760,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 8348986010422520138}
+  - {fileID: 2755648028243019646}
   MinDistance: 1
   MaxDistance: 20
   Length: 496
@@ -980,11 +997,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.bank
   SubDir: 
-  lastModified: 637091667260000000
+  lastModified: 637097881987548850
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 22000704
+    Value: 22032064
   Exists: 1
 --- !u!114 &-4322147084426227178
 MonoBehaviour:
@@ -1239,6 +1256,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 270
+--- !u!114 &-3546636648708894963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_sneak
+  m_EditorClassIdentifier: 
+  Name: player_sneak
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &-3404865436575906368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1764,6 +1798,30 @@ MonoBehaviour:
   Max: 3
   Default: 0
   Exists: 1
+--- !u!114 &-953812284698060337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SX/UI/sx_ui_player_hp_heartbeat
+  m_EditorClassIdentifier: 
+  Path: event:/SX/UI/sx_ui_player_hp_heartbeat
+  guid: 475a45b67d949e42846d5164769448ac
+  Banks:
+  - {fileID: -4374497327378484140}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters:
+  - {fileID: 5297019844306797921}
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 11370
 --- !u!114 &-870832705553639906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1949,7 +2007,6 @@ MonoBehaviour:
   - {fileID: -3855558965175520644}
   - {fileID: 1275574275519211612}
   - {fileID: -9050127004266003630}
-  - {fileID: -3192250137971648624}
   - {fileID: 1758468783107459998}
   - {fileID: 4257741014206855325}
   - {fileID: 6133158035115095408}
@@ -1980,7 +2037,6 @@ MonoBehaviour:
   - {fileID: 7312152653874309025}
   - {fileID: -1182099812999054783}
   - {fileID: 2708866478971875676}
-  - {fileID: 3964330216742877353}
   - {fileID: 2668747195187201865}
   - {fileID: 3595480800586021600}
   - {fileID: 5369731517530552290}
@@ -1989,14 +2045,14 @@ MonoBehaviour:
   - {fileID: -6776767422071021229}
   - {fileID: 5811345940604612459}
   - {fileID: 3704146424548380874}
-  EditorParameters:
-  - {fileID: -5721038073811506449}
-  - {fileID: 6809502147230658413}
+  - {fileID: -953812284698060337}
+  - {fileID: 823548790549296365}
+  EditorParameters: []
   MasterBanks:
   - {fileID: -4374497327378484140}
   StringsBanks:
   - {fileID: -7221852184136887563}
-  stringsBankWriteTime: 637091667080000000
+  stringsBankWriteTime: 637097882187246575
   cacheVersion: 3
 --- !u!114 &36383913248451605
 MonoBehaviour:
@@ -2078,6 +2134,23 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 1
+--- !u!114 &462467135445891372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_wood/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &660686402294185167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2129,6 +2202,29 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 26377
+--- !u!114 &823548790549296365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SX/Int/Door/sx_door_interact_main
+  m_EditorClassIdentifier: 
+  Path: event:/SX/Int/Door/sx_door_interact_main
+  guid: e9097317c836ba43bd3f05f05d9675ca
+  Banks:
+  - {fileID: -4374497327378484140}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 1000
 --- !u!114 &825813632680629858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2561,6 +2657,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 900
+--- !u!114 &2755648028243019646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_ceramic/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &2793670632227134344
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3105,10 +3218,12 @@ MonoBehaviour:
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
-  Parameters: []
+  Parameters:
+  - {fileID: 8801075654582232413}
+  - {fileID: -3546636648708894963}
   MinDistance: 0
   MaxDistance: 0
-  Length: 1000
+  Length: 545
 --- !u!114 &4313605637834066124
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3129,7 +3244,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 8912946888568723721}
+  - {fileID: 462467135445891372}
   MinDistance: 1
   MaxDistance: 20
   Length: 888
@@ -3277,7 +3392,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters: []
-  MinDistance: 1
+  MinDistance: 0
   MaxDistance: 20
   Length: 957
 --- !u!114 &4917099768432491353
@@ -3331,6 +3446,23 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 1
+--- !u!114 &5297019844306797921
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_ui_player_hp_heartbeat/Player HP
+  m_EditorClassIdentifier: 
+  Name: Player HP
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 1
 --- !u!114 &5369731517530552290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3373,6 +3505,23 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 3265536
+  Exists: 1
+--- !u!114 &5487789464259578225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_glass/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
   Exists: 1
 --- !u!114 &5519722436824290259
 MonoBehaviour:
@@ -3619,6 +3768,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &6442600630504425681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_metal/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &6534394549065117082
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3639,7 +3805,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -720580753188607906}
+  - {fileID: 5487789464259578225}
   MinDistance: 1
   MaxDistance: 20
   Length: 800
@@ -4087,6 +4253,23 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 62848
+  Exists: 1
+--- !u!114 &8801075654582232413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_run
+  m_EditorClassIdentifier: 
+  Name: player_run
+  Min: 0
+  Max: 2
+  Default: 0
   Exists: 1
 --- !u!114 &8845735838435968615
 MonoBehaviour:
