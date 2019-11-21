@@ -17,7 +17,7 @@ MonoBehaviour:
   roomTone: event:/AT/Roomtones/at_room_tone_hallway
   tensionMusic: event:/AT/Roomtones/at_room_tone_hallway
   tensionParameterName: progress
-  enemyFootStep: event:/SX/Npc/Monster/sx_npc_monster_attack_lunge
+  enemyFootStep: event:/SX/Player/sx_player_movement_rock
   enemyIdle: event:/SX/Npc/Monster/sx_npc_monster_attack_slash
   metalSound: event:/SX/Int/Clutter/sx_int_throw_metal
   woodSound: event:/SX/Int/Clutter/sx_int_throw_wood
@@ -32,8 +32,7 @@ MonoBehaviour:
   playerFootStep: event:/SX/Player/sx_player_movement_rock
   playerTakeDamageLow: event:/SX/Player/sx_player_take_damage_low
   playerTakeDamageHigh: event:/SX/Player/sx_player_take_damage_high
-  playerHPHeartbeatSlow: event:/SX/UI/sx_ui_player_hp_heartbeat_1
-  playerHPHeartbeatFast: event:/SX/UI/sx_ui_player_hp_heartbeat_2
+  playerHPHeartbeat: event:/SX/UI/sx_ui_player_hp_heartbeat
   playerHPRoots: event:/SX/UI/sx_ui_player_hp_roots
   button: event:/SX/UI/sx_ui_button_hover-over
   startButton: event:/SX/UI/sx_ui_start_game

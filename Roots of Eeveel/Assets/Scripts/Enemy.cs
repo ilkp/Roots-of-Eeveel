@@ -65,6 +65,7 @@ public class Enemy : MonoBehaviour
     /// </summary>
     [Tooltip("A boolean to check if the enemy can lunge again yet.")]
     [SerializeField] private bool _attacking;
+    public bool _playerHit;
 
     // Define possible enemy behaviour states
     public enum State
@@ -239,25 +240,30 @@ public class Enemy : MonoBehaviour
                 _agent.destination = _soundLocation;
             }
 
-            // Apparently something something new attacks or something
-
             if (_agent.remainingDistance < _agent.stoppingDistance && !_attacking)
             {
-                // Stop movement
-                // Attack animation
+                // Stop movement if needed
+
+                // Enable Attacking
+                _anim.SetBool("attacking", true);
                 _attacking = true;
-                // Check in OnTrigger if hit
+                // Check in OnTrigger if hit (This is now in a separate script)
             }
 
-            if (false) // animation has ended and _attacking == true
+            if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f && _attacking) // animation has ended and _attacking == true
             {
-                if (false) // player was hit and player still should be in range
+                if (_agent.remainingDistance < _agent.stoppingDistance && _playerHit) // player was hit and player still should be in range
                 {
+                    _anim.SetBool("attackingAgain", true);
                     // hit again maybe the other animation here
                 }
                 else
                 {
-                    // resume moving
+                    // resume moving if needed
+
+                    // Disable Attacking
+                    _anim.SetBool("attacking", false);
+                    _anim.SetBool("attackingAgain", false);
                     _attacking = false;
                 }
             }

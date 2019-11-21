@@ -11,24 +11,21 @@ using UnityEngine;
 public class DemoPuzzleDoor : MonoBehaviour
 {
 	private float doorOpeningForce = 7f;
-	// The audio instance that playes the actual sounds and sound to be played
-	private FMOD.Studio.EventInstance puzzleCompleteSoundInstance;
-	[FMODUnity.EventRef] [SerializeField] private string puzzleCompleteSound;
+
+	FMODUnity.StudioEventEmitter studioEventEmitter;
 
 	[SerializeField] private PuzzleLock[] locks;
 	private ConfigurableJoint[] joints;
 
 	private void Start()
 	{
+		studioEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
+
 		foreach (PuzzleLock pLock in locks)
 		{
 			pLock.door = this;
 		}
-
-		//// Create the instance with given audiofile. only one instance, so only one sound at a time, if need for multiple, make more instances.
-		puzzleCompleteSoundInstance = FMODUnity.RuntimeManager.CreateInstance(puzzleCompleteSound);
-		//// Set the audio to be played from objects location, with RBs data, for some added effects?
-		puzzleCompleteSoundInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(gameObject));
+		
 
 		joints = GetComponentsInChildren<ConfigurableJoint>();
 		foreach (ConfigurableJoint joint in joints)
@@ -73,7 +70,7 @@ public class DemoPuzzleDoor : MonoBehaviour
 
 	private void unlock()
 	{
-		puzzleCompleteSoundInstance.start();
+		studioEventEmitter.Play();
 		foreach (ConfigurableJoint joint in joints)
 		{
 			joint.angularXMotion = ConfigurableJointMotion.Limited;

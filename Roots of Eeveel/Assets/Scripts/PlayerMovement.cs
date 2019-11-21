@@ -290,10 +290,11 @@ public class PlayerMovement : MonoBehaviour
             {
                 hp--;
                 hpIndicator.sprite = hpIndicators[(int)hp];
-                if (hp > HealthState.Healthy)
+				UpdateHealthAudio();
+				if (hp > HealthState.Healthy)
                 {
                     regenCounter = hpRegen;
-                }
+				}
             }
             else
             {
@@ -316,25 +317,15 @@ public class PlayerMovement : MonoBehaviour
             regenCounter = hpRegen;
 			//sound things
 			if (Random.value < 0.5f)
-			{
-				//Debug.Log("player damage low");			
+			{		
 				audioSettings.PlayPlayerDamageLow();
 			}
 			else
 			{
-				//Debug.Log("player damage high");
 				audioSettings.PlayPlayerDamageHigh();
 			}
 
-			audioSettings.StopPlayerHPHeartbeatFast();
-			audioSettings.StopPlayerHPHeartbeatSlow();
-
-			if (hp == HealthState.Low)
-				audioSettings.PlayPlayerHPHeartbeatSlow();
-			if (hp == HealthState.Lower)
-				audioSettings.PlayPlayerHPHeartbeatFast();
-			if (hp == HealthState.Lowest)
-				audioSettings.PlayPlayerHPRoots();
+			UpdateHealthAudio();
 
 		}
         else
@@ -342,6 +333,30 @@ public class PlayerMovement : MonoBehaviour
             Die();
         }
     }
+
+	private void UpdateHealthAudio()
+	{
+		audioSettings.PlayPlayerHPRoots();
+
+		switch (hp)
+		{
+			case HealthState.Healthy:
+				audioSettings.StopPlayerHPHeartbeat();
+				break;
+			case HealthState.Low:
+				audioSettings.PlayPlayerHPHeartbeat(75f);
+				break;
+			case HealthState.Lower:
+				audioSettings.PlayPlayerHPHeartbeat(50f);
+				break;
+			case HealthState.Lowest:
+				audioSettings.PlayPlayerHPHeartbeat(25f);
+				break;
+			default:
+				Debug.Log("UpdateHealtAudio - HP out of bounds!");
+				break;
+		}
+	}
 
     /*
     public void playFootstep()
