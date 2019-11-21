@@ -121,6 +121,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Collider lastHit = null; // for turning off the highlight from GameObject that is no longer in focus
 
+	private Vector3 cameraSneakDisplacement = new Vector3(0, -0.2f, 0);
+
     enum HealthState
     {
         Healthy,
@@ -199,6 +201,15 @@ public class PlayerMovement : MonoBehaviour
         sneaking = Input.GetKey(KeyCode.LeftControl);
         // Check sneaking condition
         running = Input.GetKey(KeyCode.LeftShift) && !sneaking;
+
+		if (sneaking)
+		{
+			cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position + cameraSneakDisplacement, 0.3f);
+		}
+		else
+		{
+			cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position, 0.3f);
+		}
 
         if (footstepSoundTimer > footStepMaxTime)
         {
