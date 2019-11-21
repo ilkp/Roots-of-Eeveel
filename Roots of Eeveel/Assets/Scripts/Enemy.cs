@@ -61,21 +61,27 @@ public class Enemy : MonoBehaviour
     [SerializeField] private Animator _anim;
 
     /// <summary>
+    /// Attack Collider
+    /// </summary>
+    [Tooltip("Attack Collider")]
+    [SerializeField] private BoxCollider _hand;
+
+    /// <summary>
     /// A boolean to check if the enemy can lunge again yet.
     /// </summary>
     [Tooltip("A boolean to check if the enemy can lunge again yet.")]
     [SerializeField] private bool _attacking;
     public bool _playerHit;
 
-	/// <summary>
-	/// Aggro number effects the movement speed and hearing sensitivity of the enemy.
-	/// </summary>
-	private int _aggro = 0;
+    /// <summary>
+    /// Aggro number effects the movement speed and hearing sensitivity of the enemy.
+    /// </summary>
+    private int _aggro = 0;
 
     // Define possible enemy behaviour states
     public enum State
     {
-		Dormant,
+        Dormant,
         StayStill,
         Patrol,
         Investigate,
@@ -91,22 +97,22 @@ public class Enemy : MonoBehaviour
 
     // Behaviour states
 
-	// Start state where the enemy is not yet active. Waits for the first lock to be solved.
-	IEnumerator DormantState()
-	{
-		while (state == State.Dormant)
-		{
-			state = State.Patrol;
-			yield return 0;
-		}
-		NextState();
-	}
+    // Start state where the enemy is not yet active. Waits for the first lock to be solved.
+    IEnumerator DormantState()
+    {
+        while (state == State.Dormant)
+        {
+            state = State.Patrol;
+            yield return 0;
+        }
+        NextState();
+    }
 
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
         audioSettings.PlayEnemyIdle(gameObject);
-        _anim.SetBool("moving", false);
+        _anim.SetFloat("forward", _agent.speed);
         float waitTime = 5f;
         while (state == State.StayStill)
         {
@@ -117,14 +123,14 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-			// Tick timer and go to patrol if it expires
-			waitTime -= Time.deltaTime;
-			if (waitTime <= 0)
-			{
-				state = State.Patrol;
-			}
+            // Tick timer and go to patrol if it expires
+            waitTime -= Time.deltaTime;
+            if (waitTime <= 0)
+            {
+                state = State.Patrol;
+            }
 
-			yield return 0;
+            yield return 0;
         }
         NextState();
     }
@@ -133,7 +139,7 @@ public class Enemy : MonoBehaviour
     IEnumerator PatrolState()
     {
         audioSettings.PlayEnemyFootStep(gameObject);
-        _anim.SetBool("moving", true);
+        _anim.SetFloat("forward", _agent.speed);
         _agent.destination = _route[_destination].position;
         while (state == State.Patrol)
         {
@@ -178,7 +184,7 @@ public class Enemy : MonoBehaviour
     {
         audioSettings.PlayEnemyFootStep(gameObject);
         _agent.destination = _soundLocation;
-        _anim.SetBool("moving", true);
+        _anim.SetFloat("forward", _agent.speed);
         while (state == State.Investigate)
         {
 
@@ -191,7 +197,7 @@ public class Enemy : MonoBehaviour
             {
                 _soundHeard = false;
                 _agent.destination = _soundLocation;
-				state = State.Investigate;
+                state = State.Investigate;
             }
 
             if (_playerSoundHeard)
@@ -205,44 +211,48 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
-	// State where the enemy has heard the player
-	IEnumerator ChaseState()
-	{
-		_anim.SetBool("moving", true);
-		_playerSoundHeard = false;
-		_agent.destination = _soundLocation;
-		while (state == State.Chase)
-		{
-			if (_playerSoundHeard)
-			{
-				_agent.destination = _soundLocation;
-			}
+    // State where the enemy has heard the player
+    IEnumerator ChaseState()
+    {
+        _anim.SetFloat("forward", _agent.speed);
+        _playerSoundHeard = false;
+        _agent.destination = _soundLocation;
+        while (state == State.Chase)
+        {
+            if (_playerSoundHeard)
+            {
+                _agent.destination = _soundLocation;
+            }
 
-			if (_agent.remainingDistance < _agent.stoppingDistance)
-			{
-				state = State.AttackPlayer;
-			}
+            if (_agent.remainingDistance < _agent.stoppingDistance)
+            {
+                state = State.AttackPlayer;
+            }
 
-			yield return 0;
-		}
-		NextState();
-	}
+            yield return 0;
+        }
+        NextState();
+    }
 
     // State where the enemy has found the player and is following them
     IEnumerator AttackPlayerState()
     {
-        _anim.SetBool("moving", false);
-		_anim.SetBool("attacking", true);
+        _anim.SetFloat("forward", _agent.speed);
+        _anim.SetBool("attacking", true);
+        _hand.enabled = true;
         _playerSoundHeard = false;
-		_soundHeard = false;
+        _soundHeard = false;
         while (state == State.AttackPlayer)
         {
-            if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f) // animation has ended
+            if ((_anim.GetCurrentAnimatorStateInfo(0).IsName("attack_slash_001") ||
+                _anim.GetCurrentAnimatorStateInfo(0).IsName("attack_slash_002") ||
+                _anim.GetCurrentAnimatorStateInfo(0).IsName("attack_slash_003")) &&
+                _anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
             {
-                if (_playerHit) // player was hit and player still should be in range
+                if (_playerHit && _agent.remainingDistance <= _agent.stoppingDistance) // player was hit and player still should be in range
                 {
+                    _playerHit = false;
                     _anim.SetBool("attackingAgain", true);
-                    // hit again maybe the other animation here
                 }
                 else
                 {
@@ -251,8 +261,8 @@ public class Enemy : MonoBehaviour
                     // Disable Attacking
                     _anim.SetBool("attacking", false);
                     _anim.SetBool("attackingAgain", false);
-                    _attacking = false;
-					state = State.Investigate;
+                    _hand.enabled = false;
+                    state = State.Investigate;
                 }
             }
 
