@@ -67,14 +67,20 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _attacking;
     public bool _playerHit;
 
+	/// <summary>
+	/// Aggro number effects the movement speed and hearing sensitivity of the enemy.
+	/// </summary>
+	private int _aggro = 0;
+
     // Define possible enemy behaviour states
     public enum State
     {
+		Dormant,
         StayStill,
-        Wander,
+        Patrol,
         Investigate,
-        LookAround,
-        AttackPlayer,
+        Chase,
+        AttackPlayer
     }
 
     /// <summary>
@@ -85,12 +91,23 @@ public class Enemy : MonoBehaviour
 
     // Behaviour states
 
+	// Start state where the enemy is not yet active. Waits for the first lock to be solved.
+	IEnumerator DormantState()
+	{
+		while (state == State.Dormant)
+		{
+			state = State.Patrol;
+			yield return 0;
+		}
+		NextState();
+	}
+
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
         audioSettings.PlayEnemyIdle(gameObject);
         _anim.SetBool("moving", false);
-        //float waitTime = 0;
+        float waitTime = 5f;
         while (state == State.StayStill)
         {
             // Change state to Investigate if sound is heard
@@ -100,30 +117,27 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-            // if (waitTime <= 0)
-            // {
-            //     state = State.Investigate;
-            // }
-            // else
-            // {
-            //     waitTime -= Time.deltaTime;
-            // }
+			// Tick timer and go to patrol if it expires
+			waitTime -= Time.deltaTime;
+			if (waitTime <= 0)
+			{
+				state = State.Patrol;
+			}
 
-            yield return 0;
+			yield return 0;
         }
         NextState();
     }
 
     // State where the enemy follows a predetermined route and listens to the environment
-    IEnumerator WanderState()
+    IEnumerator PatrolState()
     {
         audioSettings.PlayEnemyFootStep(gameObject);
         _anim.SetBool("moving", true);
         _agent.destination = _route[_destination].position;
-        while (state == State.Wander)
+        while (state == State.Patrol)
         {
             // Change destination if at current destination
-
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
                 if (_destination >= _route.Length - 1)
@@ -170,18 +184,19 @@ public class Enemy : MonoBehaviour
 
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
-                state = State.LookAround;
+                state = State.StayStill;
             }
 
             if (_soundHeard)
             {
                 _soundHeard = false;
                 _agent.destination = _soundLocation;
+				state = State.Investigate;
             }
 
             if (_playerSoundHeard)
             {
-                state = State.AttackPlayer;
+                state = State.Chase;
             }
 
 
@@ -190,69 +205,41 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
-    // State where the enemy stays still for a while and "looks around them"
-    IEnumerator LookAroundState()
-    {
-        audioSettings.PlayEnemyIdle(gameObject);
-        double timer = 0;
-        _anim.SetBool("moving", false);
-        while (state == State.LookAround)
-        {
+	// State where the enemy has heard the player
+	IEnumerator ChaseState()
+	{
+		_anim.SetBool("moving", true);
+		_playerSoundHeard = false;
+		_agent.destination = _soundLocation;
+		while (state == State.Chase)
+		{
+			if (_playerSoundHeard)
+			{
+				_agent.destination = _soundLocation;
+			}
 
-            if (_soundHeard)
-            {
-                _soundHeard = false;
-                if (_playerSoundHeard)
-                {
-                    state = State.AttackPlayer;
-                }
-                else
-                {
-                    state = State.Investigate;
-                }
-            }
+			if (_agent.remainingDistance < _agent.stoppingDistance)
+			{
+				state = State.AttackPlayer;
+			}
 
-            if (timer >= 5)
-            {
-                state = State.Wander;
-            }
-            else
-            {
-                timer += Time.deltaTime;
-            }
-
-            yield return 0;
-        }
-        NextState();
-    }
+			yield return 0;
+		}
+		NextState();
+	}
 
     // State where the enemy has found the player and is following them
     IEnumerator AttackPlayerState()
     {
-        _anim.SetBool("moving", true);
+        _anim.SetBool("moving", false);
+		_anim.SetBool("attacking", true);
         _playerSoundHeard = false;
+		_soundHeard = false;
         while (state == State.AttackPlayer)
         {
-
-            if (_soundHeard && _playerSoundHeard)
+            if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f) // animation has ended
             {
-                _soundHeard = false;
-                _agent.destination = _soundLocation;
-            }
-
-            if (_agent.remainingDistance < _agent.stoppingDistance && !_attacking)
-            {
-                // Stop movement if needed
-
-                // Enable Attacking
-                _anim.SetBool("attacking", true);
-                _attacking = true;
-                // Check in OnTrigger if hit (This is now in a separate script)
-            }
-
-            if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f && _attacking) // animation has ended and _attacking == true
-            {
-                if (_agent.remainingDistance < _agent.stoppingDistance && _playerHit) // player was hit and player still should be in range
+                if (_playerHit) // player was hit and player still should be in range
                 {
                     _anim.SetBool("attackingAgain", true);
                     // hit again maybe the other animation here
@@ -265,14 +252,8 @@ public class Enemy : MonoBehaviour
                     _anim.SetBool("attacking", false);
                     _anim.SetBool("attackingAgain", false);
                     _attacking = false;
+					state = State.Investigate;
                 }
-            }
-
-            // Change state to investigate if at player's last known location and player can't be seen.
-
-            if (_agent.remainingDistance < _agent.stoppingDistance)
-            {
-                state = State.LookAround;
             }
 
             yield return 0;

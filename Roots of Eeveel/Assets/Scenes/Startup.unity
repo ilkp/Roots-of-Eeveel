@@ -631,7 +631,7 @@ PrefabInstance:
     - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
         type: 3}
       propertyPath: enemyHearingRanges.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
         type: 3}
@@ -656,6 +656,11 @@ PrefabInstance:
     - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
         type: 3}
       propertyPath: enemyHearingRanges.Array.data[4]
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 7888838374359668318, guid: 5bb517020a74d734986ce4c886a364db,
+        type: 3}
+      propertyPath: enemyHearingRanges.Array.data[5]
       value: 40
       objectReference: {fileID: 0}
     m_RemovedComponents: []
