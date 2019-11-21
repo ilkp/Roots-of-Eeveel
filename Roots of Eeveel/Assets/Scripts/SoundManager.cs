@@ -42,7 +42,7 @@ public class SoundManager : MonoBehaviour
             distance = Mathf.Clamp((float)(distance / Instance.enemyHearingRanges[(int)enemyAI.state]), 0, 1);
             double oomph = Mathf.Clamp(amplitude / 600, 0f, 1f);
             double alertness = 1 - (1 - distance);
-            //Debug.Log("Oomph: " + oomph + "\nValppaus: " + alertness + "\nDistance to enemy: " + distance + "\nAmplitude: " + amplitude);
+            // Debug.Log("Oomph: " + oomph + "\nValppaus: " + alertness + "\nDistance to enemy: " + distance + "\nAmplitude: " + amplitude);
 
             if (alertness < oomph)
             {
