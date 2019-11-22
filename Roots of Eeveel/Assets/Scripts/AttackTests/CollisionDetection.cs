@@ -5,22 +5,16 @@ using UnityEngine;
 public class CollisionDetection : MonoBehaviour
 {
 
-    private BoxCollider hand;
     public PlayerMovement player;
     public Enemy enemy;
 
-    void Awake()
-    {
-        hand = GetComponent<BoxCollider>();
-        hand.enabled = false;
-    }
-
     void OnTriggerEnter(Collider collider)
     {
+        Debug.Log("Trigger");
         if (collider.CompareTag("Player"))
         {
-            hand.enabled = false;
             enemy._playerHit = true;
+            enemy._hand.enabled = false;
             player.GetHurt();
         }
     }
