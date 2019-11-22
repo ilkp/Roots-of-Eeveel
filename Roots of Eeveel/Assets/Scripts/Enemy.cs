@@ -259,7 +259,7 @@ public class Enemy : MonoBehaviour
                     _hand.enabled = true;
                 }
                 // Check if the attack animation has ended
-                if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1.0f)
+                if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.55f)
                 {
                     // Hit again if player should still be close enough.
                     if (_playerHit && _agent.remainingDistance <= _agent.stoppingDistance) // player was hit and player still should be in range
