@@ -19,6 +19,9 @@ public class GameManager : MonoBehaviour
 
 	[SerializeField] private Image loadingScreenBackground;
 	[SerializeField] private Image loadingScreenLogo;
+	[SerializeField] private Image fillImage;
+	private const float fillFull = 0.75f;
+	private const float fillChange = 0.5f;
 
 	private void OnEnable()
 	{
@@ -102,13 +105,17 @@ public class GameManager : MonoBehaviour
 	{
 		loadingScreenBackground.enabled = true;
 		loadingScreenLogo.enabled = true;
+		fillImage.enabled = true;
+		fillImage.transform.localScale = new Vector3(1, fillFull, 1);
 		AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 		while (!operation.isDone)
 		{
+			fillImage.transform.localScale = new Vector3(1, fillFull - fillChange * operation.progress, 1);
 			yield return null;
 		}
 		loadingScreenBackground.enabled = false;
 		loadingScreenLogo.enabled = false;
+		fillImage.enabled = false;
 	}
 
 	private void loadGameSettings()
