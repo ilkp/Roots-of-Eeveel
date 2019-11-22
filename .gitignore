@@ -16,6 +16,8 @@
 # Test scene for local use
 /Roots of Eeveel/Assets/Scenes/TestScene.unity
 /Roots of Eeveel/Assets/Scenes/TestScene.unity.meta
+/Roots of Eeveel/Assets/Scenes/TestScene.meta
+/Roots of Eeveel/Assets/Scenes/TestScene/
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /Roots of Eeveel/[Aa]ssets/AssetStoreTools*
@@ -64,3 +66,4 @@ crashlytics-build.properties
 Roots of Eeveel/fmod_editor.log
 *.log
 *.log
+Roots of Eeveel/fmod_editor.log
