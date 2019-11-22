@@ -33,7 +33,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	private void Awake()
 	{
 		player = FindObjectOfType<PlayerMovement>().gameObject;
-		head = player.transform.GetChild(0).transform;
+		head = player.GetComponentInChildren<Camera>().transform;//player.transform.GetChild(0).transform;
 		rb = GetComponent<Rigidbody>();
 		gameObject.tag = "Interactable";
 	}

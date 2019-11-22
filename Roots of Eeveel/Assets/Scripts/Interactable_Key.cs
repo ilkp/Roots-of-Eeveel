@@ -42,7 +42,7 @@ public class Interactable_Key : MonoBehaviour, IInteractable
 		gameObject.tag = "Interactable";
 		rb = GetComponent<Rigidbody>();
 		pm = FindObjectOfType<PlayerMovement>();
-		head = pm.transform.GetChild(0).transform;
+		head = pm.GetComponentInChildren<Camera>().transform;//pm.transform.GetChild(0).transform;
 		audioSettings = FindObjectOfType<GameManager>().audioSettings;
 	}
 
