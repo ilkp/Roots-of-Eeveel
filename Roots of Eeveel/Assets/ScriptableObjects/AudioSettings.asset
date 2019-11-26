@@ -18,7 +18,7 @@ MonoBehaviour:
   tensionMusic: event:/AT/Roomtones/at_room_tone_hallway
   tensionParameterName: progress
   enemyFootStep: event:/SX/Player/sx_player_movement_rock
-  enemyIdle: event:/SX/Npc/Monster/sx_npc_monster_attack_slash
+  enemyIdle: event:/SX/Npc/Monster/sx_npc_monster_attack_lunge
   metalSound: event:/SX/Int/Clutter/sx_int_throw_metal
   woodSound: event:/SX/Int/Clutter/sx_int_throw_wood
   ceramicSound: event:/SX/Int/Clutter/sx_int_throw_ceramic
