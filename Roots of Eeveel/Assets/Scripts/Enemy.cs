@@ -73,10 +73,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _attacking;
     public bool _playerHit;
 
+	[Tooltip("Puzzle condition which when solved wakes up the enemy. Requires component with IPuzzleCondition")]
+	[SerializeField] private PuzzleLock wakeUpTrigger;
+
     /// <summary>
     /// Aggro number effects the movement speed and hearing sensitivity of the enemy.
     /// </summary>
     private int _aggro = 0;
+
+	private const float seeRange = 3f;
 
     // Define possible enemy behaviour states
     public enum State
@@ -100,11 +105,13 @@ public class Enemy : MonoBehaviour
     // Start state where the enemy is not yet active. Waits for the first lock to be solved.
     IEnumerator DormantState()
     {
+		wakeUpTrigger.ConditionMet += WakeUp;
         while (state == State.Dormant)
         {
-            state = State.Patrol;
-            yield return 0;
+			yield return 0;
         }
+		_playerSoundHeard = false;
+		_soundHeard = false;
         NextState();
     }
 
@@ -200,7 +207,7 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-            if (_playerSoundHeard)
+            if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude < seeRange)
             {
                 state = State.Chase;
             }
@@ -219,7 +226,11 @@ public class Enemy : MonoBehaviour
         _agent.destination = _soundLocation;
         while (state == State.Chase)
         {
-            if (_playerSoundHeard)
+			if ((_player.position - transform.position).magnitude < seeRange)
+			{
+				_agent.destination = _player.position;
+			}
+			else if (_playerSoundHeard)
             {
                 _agent.destination = _soundLocation;
             }
@@ -243,8 +254,8 @@ public class Enemy : MonoBehaviour
         _soundHeard = false;
         while (state == State.AttackPlayer)
         {
-            // Check if the current animation playing is an attack
-            if (_anim.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
+			// Check if the current animation playing is an attack
+			if (_anim.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
             {
                 if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.1f)
                 {
@@ -272,7 +283,9 @@ public class Enemy : MonoBehaviour
                         _anim.SetBool("attacking", false);
                         _anim.SetBool("attackingAgain", false);
                         _hand.enabled = false;
-                        state = State.Investigate;
+
+						// Go to chase if player is in seeRange, otherwise to investigate
+                        state = (_player.position - gameObject.transform.position).magnitude < seeRange ? State.Chase : State.Investigate;
                     }
                 }
             }
@@ -309,4 +322,16 @@ public class Enemy : MonoBehaviour
         _soundLocation = source;
         _playerSoundHeard = isPlayer;
     }
+
+	// Used to wake enemy from dormant state
+	public void WakeUp(object sender, System.EventArgs args)
+	{
+		// Maybe some scary sound?
+
+		// Change state
+		state = State.Patrol;
+
+		// Unsubscribe from lock
+		wakeUpTrigger.ConditionMet -= WakeUp;
+	}
 }
