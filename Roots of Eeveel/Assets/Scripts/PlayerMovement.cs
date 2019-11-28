@@ -260,7 +260,14 @@ public class PlayerMovement : MonoBehaviour
                 // Call 'Interact' on the target
                 interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
                 holdingItem = true;
-				holdSpeedModifier = Mathf.Clamp(1f / Mathf.Pow(interactable.GetComponent<Rigidbody>().mass, 0.33f), 0.5f, 1f);
+				if (interactable.GetComponent<Rigidbody>() != null)
+				{
+					holdSpeedModifier = Mathf.Clamp(1f / Mathf.Pow(interactable.GetComponent<Rigidbody>().mass, 0.33f), 0.5f, 1f);
+				}
+				else
+				{
+					holdSpeedModifier = 1f;
+				}
             }
         }
         else
