@@ -82,6 +82,7 @@ public class Enemy : MonoBehaviour
     private int _aggro = 0;
 
 	private const float seeRange = 3f;
+	private const float seeRangePatrol = 5f;
 
     // Define possible enemy behaviour states
     public enum State
@@ -130,6 +131,14 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
+			// If the player comes too close and is infront of enemy, start chasing
+			Vector3 enemyToPlayer = _player.position - transform.position;
+			if (enemyToPlayer.magnitude < seeRangePatrol &&
+				Vector3.Angle(transform.forward, enemyToPlayer) < 45)
+			{
+				state = State.Chase;
+			}
+
             // Tick timer and go to patrol if it expires
             waitTime -= Time.deltaTime;
             if (waitTime <= 0)
@@ -174,14 +183,22 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-            // When in light, stop for a moment
-            // if (_route.Length <= 0)
-            // {
-            //     _agent.destination = _route[0].position;
-            //     state = State.StayStill;
-            // }
+			// If the player comes too close and is infront of enemy, start chasing
+			Vector3 enemyToPlayer = _player.position - transform.position;
+			if (enemyToPlayer.magnitude < seeRangePatrol &&
+				Vector3.Angle(transform.forward, enemyToPlayer) < 45)
+			{
+				state = State.Chase;
+			}
 
-            yield return 0;
+			// When in light, stop for a moment
+			// if (_route.Length <= 0)
+			// {
+			//     _agent.destination = _route[0].position;
+			//     state = State.StayStill;
+			// }
+
+			yield return 0;
         }
         NextState();
     }
