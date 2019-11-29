@@ -15,6 +15,7 @@ public class TutorialTrigger : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             tutorialManager.tutorials[(int)tutorialIndex].Active = true;
+            gameObject.SetActive(false);
         }
     }
 }

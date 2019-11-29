@@ -946,7 +946,7 @@ MonoBehaviour:
   _attacking: 0
   _playerHit: 0
   wakeUpTrigger: {fileID: 0}
-  state: 1
+  state: 0
 --- !u!136 &1471542625
 CapsuleCollider:
   m_ObjectHideFlags: 0
