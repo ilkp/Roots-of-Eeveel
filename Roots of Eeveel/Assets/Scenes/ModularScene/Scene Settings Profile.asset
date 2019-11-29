@@ -146,7 +146,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 1.5
     min: 0
     max: 4
   stepCount:
@@ -603,7 +603,7 @@ MonoBehaviour:
   m_AdvancedMode: 0
   rotation:
     m_OverrideState: 1
-    m_Value: 49
+    m_Value: 101
     min: 0
     max: 360
   skyIntensityMode:
@@ -614,7 +614,7 @@ MonoBehaviour:
     m_Value: -10
   multiplier:
     m_OverrideState: 1
-    m_Value: 1.2
+    m_Value: 1
     min: 0
   upperHemisphereLuxValue:
     m_OverrideState: 0
