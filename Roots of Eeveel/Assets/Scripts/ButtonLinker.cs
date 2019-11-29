@@ -95,7 +95,7 @@ public class ButtonLinker : MonoBehaviour
     {
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
-        Time.timeScale = 1.0f;
+        Time.timeScale = 0.0f;
         GameManager.Instance.Paused = true;
         mainMenuGroup.SetActive(true);
         optionsGroup.SetActive(false);

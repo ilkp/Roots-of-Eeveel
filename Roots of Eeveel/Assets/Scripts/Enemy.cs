@@ -73,16 +73,16 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool _attacking;
     public bool _playerHit;
 
-	[Tooltip("Puzzle condition which when solved wakes up the enemy. Requires component with IPuzzleCondition")]
-	[SerializeField] private PuzzleLock wakeUpTrigger;
+    [Tooltip("Puzzle condition which when solved wakes up the enemy. Requires component with IPuzzleCondition")]
+    [SerializeField] private PuzzleLock wakeUpTrigger;
 
     /// <summary>
     /// Aggro number effects the movement speed and hearing sensitivity of the enemy.
     /// </summary>
     private int _aggro = 0;
 
-	private const float seeRange = 3f;
-	private const float seeRangePatrol = 5f;
+    private const float seeRange = 3f;
+    private const float seeRangePatrol = 5f;
 
     // Define possible enemy behaviour states
     public enum State
@@ -106,13 +106,13 @@ public class Enemy : MonoBehaviour
     // Start state where the enemy is not yet active. Waits for the first lock to be solved.
     IEnumerator DormantState()
     {
-		wakeUpTrigger.ConditionMet += WakeUp;
-        while (state == State.Dormant)
+        wakeUpTrigger.ConditionMet += WakeUp;
+        do
         {
-			yield return 0;
-        }
-		_playerSoundHeard = false;
-		_soundHeard = false;
+            yield return 0;
+        } while (state == State.Dormant);
+        _playerSoundHeard = false;
+        _soundHeard = false;
         NextState();
     }
 
@@ -122,7 +122,7 @@ public class Enemy : MonoBehaviour
         audioSettings.PlayEnemyIdle(gameObject);
         _anim.SetFloat("forward", _agent.speed);
         float waitTime = 5f;
-        while (state == State.StayStill)
+        do
         {
             // Change state to Investigate if sound is heard
             if (_soundHeard)
@@ -131,13 +131,13 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-			// If the player comes too close and is infront of enemy, start chasing
-			Vector3 enemyToPlayer = _player.position - transform.position;
-			if (enemyToPlayer.magnitude < seeRangePatrol &&
-				Vector3.Angle(transform.forward, enemyToPlayer) < 45)
-			{
-				state = State.Chase;
-			}
+            // If the player comes too close and is infront of enemy, start chasing
+            Vector3 enemyToPlayer = _player.position - transform.position;
+            if (enemyToPlayer.magnitude < seeRangePatrol &&
+                Vector3.Angle(transform.forward, enemyToPlayer) < 45)
+            {
+                state = State.Chase;
+            }
 
             // Tick timer and go to patrol if it expires
             waitTime -= Time.deltaTime;
@@ -147,7 +147,7 @@ public class Enemy : MonoBehaviour
             }
 
             yield return 0;
-        }
+        } while (state == State.StayStill);
         NextState();
     }
 
@@ -157,7 +157,7 @@ public class Enemy : MonoBehaviour
         audioSettings.PlayEnemyFootStep(gameObject);
         _anim.SetFloat("forward", _agent.speed);
         _agent.destination = _route[_destination].position;
-        while (state == State.Patrol)
+        do
         {
             // Change destination if at current destination
             if (_agent.remainingDistance < _agent.stoppingDistance)
@@ -183,23 +183,23 @@ public class Enemy : MonoBehaviour
                 state = State.Investigate;
             }
 
-			// If the player comes too close and is infront of enemy, start chasing
-			Vector3 enemyToPlayer = _player.position - transform.position;
-			if (enemyToPlayer.magnitude < seeRangePatrol &&
-				Vector3.Angle(transform.forward, enemyToPlayer) < 45)
-			{
-				state = State.Chase;
-			}
+            // If the player comes too close and is infront of enemy, start chasing
+            Vector3 enemyToPlayer = _player.position - transform.position;
+            if (enemyToPlayer.magnitude < seeRangePatrol &&
+                Vector3.Angle(transform.forward, enemyToPlayer) < 45)
+            {
+                state = State.Chase;
+            }
 
-			// When in light, stop for a moment
-			// if (_route.Length <= 0)
-			// {
-			//     _agent.destination = _route[0].position;
-			//     state = State.StayStill;
-			// }
+            // When in light, stop for a moment
+            // if (_route.Length <= 0)
+            // {
+            //     _agent.destination = _route[0].position;
+            //     state = State.StayStill;
+            // }
 
-			yield return 0;
-        }
+            yield return 0;
+        } while (state == State.Patrol);
         NextState();
     }
 
@@ -209,7 +209,7 @@ public class Enemy : MonoBehaviour
         audioSettings.PlayEnemyFootStep(gameObject);
         _agent.destination = _soundLocation;
         _anim.SetFloat("forward", _agent.speed);
-        while (state == State.Investigate)
+        do
         {
 
             if (_agent.remainingDistance < _agent.stoppingDistance)
@@ -231,7 +231,7 @@ public class Enemy : MonoBehaviour
 
 
             yield return 0;
-        }
+        } while (state == State.Investigate);
         NextState();
     }
 
@@ -241,24 +241,33 @@ public class Enemy : MonoBehaviour
         _anim.SetFloat("forward", _agent.speed);
         _playerSoundHeard = false;
         _agent.destination = _soundLocation;
-        while (state == State.Chase)
+        float playerRange;
+        do
         {
-			if ((_player.position - transform.position).magnitude < seeRange)
-			{
-				_agent.destination = _player.position;
-			}
-			else if (_playerSoundHeard)
+            playerRange = (_player.position - transform.position).magnitude;
+            if (playerRange < seeRange)
+            {
+                _agent.destination = _player.position;
+            }
+            else if (_playerSoundHeard)
             {
                 _agent.destination = _soundLocation;
             }
 
             if (_agent.remainingDistance < _agent.stoppingDistance)
             {
-                state = State.AttackPlayer;
+                if (playerRange < seeRange)
+                {
+                    state = State.AttackPlayer;
+                }
+                else
+                {
+                    state = State.Investigate;
+                }
             }
 
             yield return 0;
-        }
+        } while (state == State.Chase);
         NextState();
     }
 
@@ -267,12 +276,14 @@ public class Enemy : MonoBehaviour
     {
         _anim.SetFloat("forward", 0f);
         _anim.SetBool("attacking", true);
+        _anim.speed = 1.5f;
         _playerSoundHeard = false;
         _soundHeard = false;
-        while (state == State.AttackPlayer)
+        _agent.isStopped = true;
+        do
         {
-			// Check if the current animation playing is an attack
-			if (_anim.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
+            // Check if the current animation playing is an attack
+            if (_anim.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
             {
                 if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.1f)
                 {
@@ -301,14 +312,16 @@ public class Enemy : MonoBehaviour
                         _anim.SetBool("attackingAgain", false);
                         _hand.enabled = false;
 
-						// Go to chase if player is in seeRange, otherwise to investigate
+                        // Go to chase if player is in seeRange, otherwise to investigate
                         state = (_player.position - gameObject.transform.position).magnitude < seeRange ? State.Chase : State.Investigate;
                     }
                 }
             }
 
             yield return 0;
-        }
+        } while (state == State.AttackPlayer);
+        _anim.speed = 1.0f;
+        _agent.isStopped = false;
         NextState();
     }
 
@@ -340,15 +353,15 @@ public class Enemy : MonoBehaviour
         _playerSoundHeard = isPlayer;
     }
 
-	// Used to wake enemy from dormant state
-	public void WakeUp(object sender, System.EventArgs args)
-	{
-		// Maybe some scary sound?
+    // Used to wake enemy from dormant state
+    public void WakeUp(object sender, System.EventArgs args)
+    {
+        // Maybe some scary sound?
 
-		// Change state
-		state = State.Patrol;
+        // Change state
+        state = State.Patrol;
 
-		// Unsubscribe from lock
-		wakeUpTrigger.ConditionMet -= WakeUp;
-	}
+        // Unsubscribe from lock
+        wakeUpTrigger.ConditionMet -= WakeUp;
+    }
 }
