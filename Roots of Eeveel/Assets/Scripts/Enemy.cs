@@ -285,12 +285,12 @@ public class Enemy : MonoBehaviour
             // Check if the current animation playing is an attack
             if (_anim.GetCurrentAnimatorStateInfo(0).IsTag("attack"))
             {
-                if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.1f)
+                if (!_playerHit && _anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.2f)
                 {
                     _playerHit = false;
                 }
                 // Enable the hand collider if the hand is raised.
-                if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.25f &&
+                if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f &&
                     _anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.3f &&
                     !_hand.enabled)
                 {
