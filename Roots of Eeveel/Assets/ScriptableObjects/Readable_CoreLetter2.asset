@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cea776df463bf9e438406e64251f932f, type: 3}
+  m_Name: Readable_CoreLetter2
+  m_EditorClassIdentifier: 
+  font: {fileID: 11400000, guid: 5ff9be7d8e68a2c4dae00bfe1774fe75, type: 2}
+  fontSize: 28
+  fontColor: {r: 0, g: 0, b: 0, a: 1}
+  UISprite: {fileID: 21300000, guid: f14d67473fe53534291b7f724ac8d559, type: 3}
+  UIText: 'Our newest followers,\n\nWe as a community serve our loved Iugis to uplift
+    her to raise above the god of injustice Panton, slay him and claim her throne
+    as the true goddess of nature.\n\nWe pray together and enter the temple as the
+    one true community. As the first steps in front of the door, so does one by their
+    side. But the first one is no greater than the last who will listen to the prayers
+    before them and ending the prayer. As the last walks the longest, they will hold
+    the power of Ignis in them and as last to enter the room, they will close the
+    doors to protect the holy ritual from the outsiders.\n\nFollow our rules and with
+    these Iugis will ground her roots on you, '
+  TAnchorMinX: 0.1
+  TAnchorMaxX: 0.9
+  TAnchorMinY: 0.1
+  TAnchorMaxY: 0.95
