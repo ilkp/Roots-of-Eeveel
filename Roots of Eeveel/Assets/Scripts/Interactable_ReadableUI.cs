@@ -6,15 +6,16 @@ using System.Collections;
 
 public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 {
-	public TMP_FontAsset Font;
-	public int FontSize;
-	public Color FontColor;
-	public Sprite UISprite;
-	public string Text;
-	public float TAnchorMinX;
-	public float TAnchorMaxX;
-	public float TAnchorMinY;
-	public float TAnchorMaxY;
+	public ReadableData readableData;
+	//public TMP_FontAsset Font;
+	//public int FontSize;
+	//public Color FontColor;
+	//public Sprite UISprite;
+	//public string Text;
+	//public float TAnchorMinX;
+	//public float TAnchorMaxX;
+	//public float TAnchorMinY;
+	//public float TAnchorMaxY;
 
 
 	private Image uiImage;
@@ -42,15 +43,15 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 		}
 		uiImage.enabled = true;
 		uiText.enabled = true;
-		float widthMultiplier = imageHeight / UISprite.rect.height;
-		uiText.rectTransform.anchorMin = new Vector2(TAnchorMinX, TAnchorMinY);
-		uiText.rectTransform.anchorMax = new Vector2(TAnchorMaxX, TAnchorMaxY);
-		uiText.font = Font;
-		uiText.fontSize = FontSize;
-		uiText.color = FontColor;
-		uiImage.rectTransform.sizeDelta = new Vector2(UISprite.rect.width * widthMultiplier, imageHeight);
-		uiImage.sprite = UISprite;
-		uiText.text = Text;
+		float widthMultiplier = imageHeight / readableData.UISprite.rect.height;
+		uiText.rectTransform.anchorMin = new Vector2(readableData.TAnchorMinX, readableData.TAnchorMinY);
+		uiText.rectTransform.anchorMax = new Vector2(readableData.TAnchorMaxX, readableData.TAnchorMaxY);
+		uiText.font = readableData.font;
+		uiText.fontSize = readableData.fontSize;
+		uiText.color = readableData.fontColor;
+		uiImage.rectTransform.sizeDelta = new Vector2(readableData.UISprite.rect.width * widthMultiplier, imageHeight);
+		uiImage.sprite = readableData.UISprite;
+		uiText.text = readableData.UIText.Replace("\\n", "\n");
 
 		StartCoroutine(hold());
 	}
