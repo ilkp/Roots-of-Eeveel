@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 {
-	[SerializeField] private ReadableLock readableData;
+	[SerializeField] private Sprite lockEmpty;
+	[SerializeField] private Sprite lockSolved;
 	[SerializeField] private string identifier;
 	public DemoPuzzleDoor door;
 	private AudioSettings audioSettings;
@@ -26,16 +27,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 
 	private void Start()
 	{
-		Interactable_ReadableUI r = GetComponent<Interactable_ReadableUI>();
-		r.Font = readableData.font;
-		r.FontSize = readableData.fontSize;
-		r.FontColor = readableData.fontColor;
-		r.UISprite = readableData.UISprite;
-		r.Text = readableData.UIText;
-		r.TAnchorMinX = readableData.TAnchorMinX;
-		r.TAnchorMaxX = readableData.TAnchorMaxX;
-		r.TAnchorMinY = readableData.TAnchorMinY;
-		r.TAnchorMaxY = readableData.TAnchorMaxY;
+
 	}
 
 	public void OnConditionMet()
@@ -60,7 +52,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 		Solved = true;
 		_keySubscriber = keySubscriber;
 		ConditionUnmet += keySubscriber.OnConditionUnmet;
-		GetComponent<Interactable_ReadableUI>().UISprite = readableData.UISpriteSolved;
+		GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockSolved;
 		OnConditionMet();
 	}
 
@@ -69,7 +61,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 		Solved = false;
 		OnConditionUnmet();
 		ConditionUnmet -= _keySubscriber.OnConditionUnmet;
-		GetComponent<Interactable_ReadableUI>().UISprite = readableData.UISprite;
+		GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockEmpty;
 		_keySubscriber = null;
 	}
 }
