@@ -11,7 +11,10 @@ TagManager:
   - GameOverWin
   - DemoPuzzle
   - UIReadableImage
-  - UIReadableText
+  - ArrowLeft
+  - ArrowRight
+  - UIReadableTextLeft
+  - UIReadableTextRight
   layers:
   - Default
   - TransparentFX

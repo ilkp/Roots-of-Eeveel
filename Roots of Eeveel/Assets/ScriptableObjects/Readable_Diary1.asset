@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Readable_Diary1
   m_EditorClassIdentifier: 
   font: {fileID: 11400000, guid: 5ff9be7d8e68a2c4dae00bfe1774fe75, type: 2}
-  fontSize: 32
+  fontSize: 25
   fontColor: {r: 0, g: 0, b: 0, a: 1}
   UISprite: {fileID: 21300000, guid: f14d67473fe53534291b7f724ac8d559, type: 3}
   UIText: "May 29th\\n\\nFor years now our Sire has had a peculiar interest in the
@@ -31,4 +31,4 @@ MonoBehaviour:
   TAnchorMinX: 0.1
   TAnchorMaxX: 0.9
   TAnchorMinY: 0.1
-  TAnchorMaxY: 0.9
+  TAnchorMaxY: 0.95

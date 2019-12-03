@@ -31,7 +31,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 	{
 		gameObject.tag = "Interactable";
 		uiImage = GameObject.FindGameObjectWithTag("UIReadableImage").GetComponent<Image>();
-		uiText = GameObject.FindGameObjectWithTag("UIReadableText").GetComponent<TextMeshProUGUI>();
+		uiText = GameObject.FindGameObjectWithTag("UIReadableTextLeft").GetComponent<TextMeshProUGUI>();
 		maxViewDist = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().getGrabDistance();
 	}
 
