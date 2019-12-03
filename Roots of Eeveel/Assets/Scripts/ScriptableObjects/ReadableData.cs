@@ -8,6 +8,7 @@ public class ReadableData : ScriptableObject
 	public TMP_FontAsset font;
 	public int fontSize;
 	public Color fontColor;
+	public TextAlignmentOptions alignment;
 	public Sprite UISprite;
 	public string UIText;
 	public float TAnchorMinX;

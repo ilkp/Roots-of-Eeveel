@@ -31,7 +31,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 	{
 		gameObject.tag = "Interactable";
 		uiImage = GameObject.FindGameObjectWithTag("UIReadableImage").GetComponent<Image>();
-		uiText = GameObject.FindGameObjectWithTag("UIReadableText").GetComponent<TextMeshProUGUI>();
+		uiText = GameObject.FindGameObjectWithTag("UIReadableTextLeft").GetComponent<TextMeshProUGUI>();
 		maxViewDist = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().getGrabDistance();
 	}
 
@@ -48,6 +48,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 		uiText.rectTransform.anchorMax = new Vector2(readableData.TAnchorMaxX, readableData.TAnchorMaxY);
 		uiText.font = readableData.font;
 		uiText.fontSize = readableData.fontSize;
+		uiText.alignment = readableData.alignment;
 		uiText.color = readableData.fontColor;
 		uiImage.rectTransform.sizeDelta = new Vector2(readableData.UISprite.rect.width * widthMultiplier, imageHeight);
 		uiImage.sprite = readableData.UISprite;
