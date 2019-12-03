@@ -50,12 +50,14 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 		setArrowColors();
 		float widthMultiplier = imageHeight / readableData.UISprite.rect.height;
 
+		
 		uiTextLeft.rectTransform.anchorMin = new Vector2(readableData.TAnchorLeftMinX, readableData.TAnchorMinY);
 		uiTextLeft.rectTransform.anchorMax = new Vector2(0.5f - readableData.TAnchorLeftMaxX, readableData.TAnchorMaxY);
 		uiTextLeft.font = readableData.font;
 		uiTextLeft.fontSize = readableData.fontSize;
 		uiTextLeft.color = readableData.fontColor;
 
+		
 		uiTextRight.rectTransform.anchorMin = new Vector2(0.5f + readableData.TAnchorRightMinX, readableData.TAnchorMinY);
 		uiTextRight.rectTransform.anchorMax = new Vector2(readableData.TAnchorRightMaxX, readableData.TAnchorMaxY);
 		uiTextRight.font = readableData.font;
@@ -67,6 +69,8 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 
 		uiTextLeft.text = readableData.UIText[currentPage].Replace("\\n", "\n");
 		uiTextRight.text = readableData.UIText[currentPage + 1].Replace("\\n", "\n");
+		uiTextLeft.alignment = readableData.alignment;
+		uiTextRight.alignment = readableData.alignment;
 
 		StartCoroutine(hold());
 	}

@@ -48,6 +48,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 		uiText.rectTransform.anchorMax = new Vector2(readableData.TAnchorMaxX, readableData.TAnchorMaxY);
 		uiText.font = readableData.font;
 		uiText.fontSize = readableData.fontSize;
+		uiText.alignment = readableData.alignment;
 		uiText.color = readableData.fontColor;
 		uiImage.rectTransform.sizeDelta = new Vector2(readableData.UISprite.rect.width * widthMultiplier, imageHeight);
 		uiImage.sprite = readableData.UISprite;
