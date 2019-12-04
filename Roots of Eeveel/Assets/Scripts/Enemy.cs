@@ -55,6 +55,30 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float[] _moveSpeeds;
 
     /// <summary>
+    /// Color of enemy emission
+    /// </summary>
+    [Tooltip("Color of enemy emission")]
+    [SerializeField] private Color _emissionColor;
+
+    /// <summary>
+    /// The intensity of emission depending on state
+    /// </summary>
+    [Tooltip("The intensity of emission depending on state")]
+    [SerializeField] private float[] _emissionIntensities;
+
+    /// <summary>
+    /// Enemy Body Renderer
+    /// </summary>
+    [Tooltip("Enemy body renderer")]
+    [SerializeField] private Renderer _bodyRend;
+
+    /// <summary>
+    /// Enemy Root Renderer
+    /// </summary>
+    [Tooltip("Enemy root renderer")]
+    [SerializeField] private Renderer _rootRend;
+
+    /// <summary>
     /// Animation Controller
     /// </summary>
     [Tooltip("Animation controller of the enemy")]
@@ -107,10 +131,12 @@ public class Enemy : MonoBehaviour
     IEnumerator DormantState()
     {
         wakeUpTrigger.ConditionMet += WakeUp;
+        _anim.speed = 0.01f;
         do
         {
             yield return 0;
         } while (state == State.Dormant);
+        _anim.speed = 1f;
         _playerSoundHeard = false;
         _soundHeard = false;
         NextState();
@@ -238,9 +264,9 @@ public class Enemy : MonoBehaviour
     // State where the enemy has heard the player
     IEnumerator ChaseState()
     {
-		StartCoroutine(audioSettings.PlayEnemyNoticeSound());
-		audioSettings.AddEnemyToChase(this.gameObject);
-		_anim.SetFloat("forward", _agent.speed);
+        StartCoroutine(audioSettings.PlayEnemyNoticeSound());
+        audioSettings.AddEnemyToChase(this.gameObject);
+        _anim.SetFloat("forward", _agent.speed);
         _playerSoundHeard = false;
         _agent.destination = _soundLocation;
         float playerRange;
@@ -270,15 +296,15 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         } while (state == State.Chase);
-		audioSettings.RemoveEnemyFromChase(this.gameObject);
-		NextState();
+        audioSettings.RemoveEnemyFromChase(this.gameObject);
+        NextState();
     }
 
     // A state for hitting the player (Or the air)
     IEnumerator AttackPlayerState()
     {
-		audioSettings.AddEnemyToChase(this.gameObject);
-		_anim.SetFloat("forward", 0f);
+        audioSettings.AddEnemyToChase(this.gameObject);
+        _anim.SetFloat("forward", 0f);
         _anim.SetBool("attacking", true);
         _anim.speed = 1.5f;
         _playerSoundHeard = false;
@@ -327,8 +353,8 @@ public class Enemy : MonoBehaviour
         } while (state == State.AttackPlayer);
         _anim.speed = 1.0f;
         _agent.isStopped = false;
-		audioSettings.RemoveEnemyFromChase(this.gameObject);
-		NextState();
+        audioSettings.RemoveEnemyFromChase(this.gameObject);
+        NextState();
     }
 
 
@@ -343,6 +369,9 @@ public class Enemy : MonoBehaviour
     {
         _agent.speed = _moveSpeeds[(int)state];
         audioSettings.StopEnemySound(gameObject);
+        Color newColor = Color.red;
+        _bodyRend.material.SetVector("_EmissiveColor", _emissionColor * _emissionIntensities[(int)state]);
+        _rootRend.material.SetVector("_EmissiveColor", _emissionColor * _emissionIntensities[(int)state]);
         string methodName = state.ToString() + "State";
         System.Reflection.MethodInfo info =
             GetType().GetMethod(methodName,

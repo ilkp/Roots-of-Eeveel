@@ -941,13 +941,14 @@ MonoBehaviour:
   - 2
   - 4
   - 0
+  _emissionColor: {r: 0.011764706, g: 0.7490196, b: 0.60784316, a: 1}
   _emissionIntensities:
+  - 1
   - 2
-  - 10
-  - 20
-  - 30
-  - 40
-  - 50
+  - 3
+  - 4
+  - 5
+  - 6
   _bodyRend: {fileID: 2994336122161784125}
   _rootRend: {fileID: 6384945576650240507}
   _anim: {fileID: 3857222658518061506}
