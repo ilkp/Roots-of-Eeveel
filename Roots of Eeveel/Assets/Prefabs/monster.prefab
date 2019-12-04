@@ -155,7 +155,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7216390960718992207}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &1630150978534171956
 SkinnedMeshRenderer:
@@ -423,9 +423,9 @@ Transform:
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 811557691990278807}
   - {fileID: 7743022296815149147}
   - {fileID: 2217431195352847152}
+  - {fileID: 811557691990278807}
   m_Father: {fileID: 6561067718200147128}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -609,7 +609,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7216390960718992207}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &6384945576650240507
 SkinnedMeshRenderer:
@@ -938,9 +938,18 @@ MonoBehaviour:
   - 0
   - 0
   - 0.5
-  - 1
-  - 1.5
+  - 2
+  - 4
   - 0
+  _emissionIntensities:
+  - 2
+  - 10
+  - 20
+  - 30
+  - 40
+  - 50
+  _bodyRend: {fileID: 2994336122161784125}
+  _rootRend: {fileID: 6384945576650240507}
   _anim: {fileID: 3857222658518061506}
   _hand: {fileID: 6403666334389300383}
   _attacking: 0
@@ -1128,7 +1137,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7216390960718992207}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &2994336122161784125
 SkinnedMeshRenderer:
