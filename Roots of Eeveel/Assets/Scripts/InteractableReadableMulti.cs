@@ -42,6 +42,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 		{
 			return;
 		}
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowMovement = false;
 		uiImage.enabled = true;
 		uiTextLeft.enabled = true;
 		uiTextRight.enabled = true;
@@ -86,6 +87,10 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 		Transform player = GameObject.FindGameObjectWithTag("Player").transform;
 		while ((transform.position - player.position).magnitude < maxViewDist)
 		{
+			if (Input.GetButtonDown("Horizontal"))
+			{
+				NextPage((int)Input.GetAxisRaw("Horizontal"));
+			}
 			if (Input.GetButtonDown("Fire1"))
 			{
 				break;
@@ -100,6 +105,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 		uiTextRight.enabled = false;
 		arrowRight.enabled = false;
 		arrowLeft.enabled = false;
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowMovement = true;
 	}
 
 	public void NextPage(int direction)
@@ -116,18 +122,6 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 		setArrowColors();
 		uiTextLeft.text = readableData.UIText[currentPage].Replace("\\n", "\n");
 		uiTextRight.text = readableData.UIText[currentPage + 1].Replace("\\n", "\n");
-	}
-
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.LeftArrow))
-		{
-			NextPage(-1);
-		}
-		if (Input.GetKeyDown(KeyCode.RightArrow))
-		{
-			NextPage(1);
-		}
 	}
 
 	private void setArrowColors()

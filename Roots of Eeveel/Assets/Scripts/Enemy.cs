@@ -304,8 +304,9 @@ public class Enemy : MonoBehaviour
                 // Check if the attack animation has ended
                 if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.55f)
                 {
+                    float playerDistance = (_player.position - gameObject.transform.position).magnitude;
                     // Hit again if player should still be close enough.
-                    if (_playerHit && _agent.remainingDistance <= _agent.stoppingDistance) // player was hit and player still should be in range
+                    if (_playerHit && playerDistance <= _agent.stoppingDistance) // player was hit and player still should be in range
                     {
                         _anim.SetBool("attackingAgain", true);
                     }
@@ -317,7 +318,7 @@ public class Enemy : MonoBehaviour
                         _hand.enabled = false;
 
                         // Go to chase if player is in seeRange, otherwise to investigate
-                        state = (_player.position - gameObject.transform.position).magnitude < seeRange ? State.Chase : State.Investigate;
+                        state = playerDistance < seeRange ? State.Chase : State.Investigate;
                     }
                 }
             }
