@@ -7,17 +7,6 @@ using System.Collections;
 public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 {
 	public ReadableData readableData;
-	//public TMP_FontAsset Font;
-	//public int FontSize;
-	//public Color FontColor;
-	//public Sprite UISprite;
-	//public string Text;
-	//public float TAnchorMinX;
-	//public float TAnchorMaxX;
-	//public float TAnchorMinY;
-	//public float TAnchorMaxY;
-
-
 	private Image uiImage;
 	private TextMeshProUGUI uiText;
 	private float imageHeight = 800f;
@@ -41,6 +30,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 		{
 			return;
 		}
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowMovement = false;
 		uiImage.enabled = true;
 		uiText.enabled = true;
 		float widthMultiplier = imageHeight / readableData.UISprite.rect.height;
@@ -79,5 +69,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
 		}
 		uiImage.enabled = false;
 		uiText.enabled = false;
+
+		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowMovement = true;
 	}
 }

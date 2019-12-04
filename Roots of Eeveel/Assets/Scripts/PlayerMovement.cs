@@ -26,11 +26,13 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Parent object of the camera")]
     [SerializeField] private Transform head;
 
-    /// <summary>
-    /// Image to be drawn as reticle
-    /// </summary>
-    [Tooltip("Image to be drawn as reticle")]
-    [SerializeField] private Image reticule;
+	[SerializeField] private Image reticuleImage;
+	/// <summary>
+	/// Image to be drawn as reticle
+	/// </summary>
+	[Tooltip("Image to be drawn as reticle")]
+	[SerializeField] private Sprite reticuleDefault;
+	[SerializeField] private Sprite reticuleRead;
 
     /// <summary>
     /// Color of the reticle when not on interactable object
@@ -123,6 +125,7 @@ public class PlayerMovement : MonoBehaviour
 
 	private Vector3 cameraSneakDisplacement = new Vector3(0, -0.2f, 0);
 
+
     enum HealthState
     {
         Healthy,
@@ -142,6 +145,7 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX;
     private float rotationY;
     public bool allowRotation = true;
+	public bool allowMovement = true;
     private bool sneaking;
     private bool running;
     private float footstepSoundTimer = 0.0f;
@@ -182,7 +186,7 @@ public class PlayerMovement : MonoBehaviour
         #region Movement
         // Viewpoint rotation
 
-        if (allowRotation)
+        if (allowRotation && allowMovement)
         {
             // Calculate horizontal rotation
             rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
@@ -250,6 +254,14 @@ public class PlayerMovement : MonoBehaviour
             hit.collider.GetComponent<Renderer>().material.SetFloat("_OnOff", 1f);
             lastHit = hit.collider;
 
+			// Change reticule
+			if (hit.collider.GetComponent<Interactable_ReadableUI>() != null ||
+				hit.collider.GetComponent<InteractableReadableMulti>() != null)
+			{
+				reticuleImage.sprite = reticuleRead;
+				reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
+			}
+
             GetComponent<ToolTip>().showPopup(true);
 
             // Check if player pressed the interaction button
@@ -279,6 +291,10 @@ public class PlayerMovement : MonoBehaviour
                 lastHit = null;
             }
 
+			// Reset reticule
+			reticuleImage.sprite = reticuleDefault;
+			reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleDefault.rect.width, reticuleDefault.rect.height);
+
             // Reset whatever is being done
             if (interactable && !Input.GetKey(interaction))
             {
@@ -296,13 +312,16 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Move player accrding to the inputs
-        float speedModifier = (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
-        Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
-        playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speed * speedModifier));
-        if (direction.magnitude > 0)
-        {
-            footstepSoundTimer += speedModifier;
-        }
+		if (allowMovement)
+		{
+			float speedModifier = (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
+			Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
+			playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speed * speedModifier));
+			if (direction.magnitude > 0)
+			{
+				footstepSoundTimer += speedModifier;
+			}
+		}
         if (hp > HealthState.Healthy)
         {
             if (regenCounter <= 0)
