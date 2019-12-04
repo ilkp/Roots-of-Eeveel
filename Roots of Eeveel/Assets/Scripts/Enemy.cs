@@ -159,7 +159,7 @@ public class Enemy : MonoBehaviour
 
             // If the player comes too close and is infront of enemy, start chasing
             Vector3 enemyToPlayer = _player.position - transform.position;
-            if (enemyToPlayer.magnitude < seeRangePatrol &&
+            if (enemyToPlayer.magnitude <= seeRangePatrol &&
                 Vector3.Angle(transform.forward, enemyToPlayer) < 45)
             {
                 state = State.Chase;
@@ -237,25 +237,19 @@ public class Enemy : MonoBehaviour
         _anim.SetFloat("forward", _agent.speed);
         do
         {
-
-            if (_agent.remainingDistance < _agent.stoppingDistance)
-            {
-                state = State.StayStill;
-            }
-
             if (_soundHeard)
             {
                 _soundHeard = false;
                 _agent.destination = _soundLocation;
-                state = State.Investigate;
+                if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude <= seeRange)
+                {
+                    state = State.Chase;
+                }
             }
-
-            if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude < seeRange)
+            else if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
-                state = State.Chase;
+                state = State.StayStill;
             }
-
-
             yield return 0;
         } while (state == State.Investigate);
         NextState();
@@ -273,27 +267,25 @@ public class Enemy : MonoBehaviour
         do
         {
             playerRange = (_player.position - transform.position).magnitude;
-            if (playerRange < seeRange)
+            if (playerRange <= seeRange)
             {
-                _agent.destination = _player.position;
-            }
-            else if (_playerSoundHeard)
-            {
-                _agent.destination = _soundLocation;
-            }
-
-            if (_agent.remainingDistance < _agent.stoppingDistance)
-            {
-                if (playerRange < seeRange)
+                if (playerRange <= _agent.stoppingDistance)
                 {
                     state = State.AttackPlayer;
                 }
                 else
                 {
-                    state = State.Investigate;
+                    _agent.destination = _player.position;
                 }
             }
-
+            else if (_playerSoundHeard)
+            {
+                _agent.destination = _soundLocation;
+            }
+            else if (_agent.remainingDistance <= _agent.stoppingDistance)
+            {
+                state = State.Investigate;
+            }
             yield return 0;
         } while (state == State.Chase);
         audioSettings.RemoveEnemyFromChase(this.gameObject);
@@ -324,11 +316,10 @@ public class Enemy : MonoBehaviour
                     _anim.GetCurrentAnimatorStateInfo(0).normalizedTime <= 0.3f &&
                     !_hand.enabled)
                 {
-                    Debug.Log("Enable the hand");
                     _hand.enabled = true;
                 }
                 // Check if the attack animation has ended
-                if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.55f)
+                if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
                     float playerDistance = (_player.position - gameObject.transform.position).magnitude;
                     // Hit again if player should still be close enough.
@@ -344,7 +335,7 @@ public class Enemy : MonoBehaviour
                         _hand.enabled = false;
 
                         // Go to chase if player is in seeRange, otherwise to investigate
-                        state = playerDistance < seeRange ? State.Chase : State.Investigate;
+                        state = playerDistance <= seeRange ? State.Chase : State.Investigate;
                     }
                 }
             }
