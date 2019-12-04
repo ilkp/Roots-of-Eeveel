@@ -50,6 +50,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 	public void Solve(Interactable_Key keySubscriber)
 	{
 		Solved = true;
+		audioSettings.IncreaseRisingTensionProgress();
 		_keySubscriber = keySubscriber;
 		ConditionUnmet += keySubscriber.OnConditionUnmet;
 		GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockSolved;
@@ -59,6 +60,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 	public void Unsolve()
 	{
 		Solved = false;
+		audioSettings.DecreaseRisingTensionProgress();
 		OnConditionUnmet();
 		ConditionUnmet -= _keySubscriber.OnConditionUnmet;
 		GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockEmpty;
