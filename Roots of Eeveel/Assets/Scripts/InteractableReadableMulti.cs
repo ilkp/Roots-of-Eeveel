@@ -7,6 +7,7 @@ using UnityEditor;
 
 public class InteractableReadableMulti : MonoBehaviour, IInteractable
 {
+	[SerializeField] private AudioSettings audioSettings;
 	public ReadableDataMulti readableData;
 	private Image uiImage;
 	private TextMeshProUGUI uiTextLeft;
@@ -26,6 +27,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 
 	private void Start()
 	{
+		audioSettings = FindObjectOfType<GameManager>().audioSettings;
 		gameObject.tag = "Interactable";
 		uiImage = GameObject.FindGameObjectWithTag("UIReadableImage").GetComponent<Image>();
 		uiTextLeft = GameObject.FindGameObjectWithTag("UIReadableTextLeft").GetComponent<TextMeshProUGUI>();
@@ -48,6 +50,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 		uiTextRight.enabled = true;
 		arrowLeft.enabled = true;
 		arrowRight.enabled = true;
+		StartCoroutine(audioSettings.PlayBookPickup());
 		setArrowColors();
 		float widthMultiplier = imageHeight / readableData.UISprite.rect.height;
 
@@ -106,6 +109,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
 		arrowRight.enabled = false;
 		arrowLeft.enabled = false;
 		GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowMovement = true;
+		StartCoroutine(audioSettings.PlayBookPutdown());
 	}
 
 	public void NextPage(int direction)
