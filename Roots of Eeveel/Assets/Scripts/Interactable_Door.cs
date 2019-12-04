@@ -6,6 +6,8 @@ using UnityEngine;
 [RequireComponent(typeof(ConfigurableJoint))]
 public class Interactable_Door : MonoBehaviour, IInteractable
 {
+	[SerializeField] private AudioSettings audioSettings;
+
 	public int doorType; // 0 = small door, 1 = big door left, 2 = big door right
     public event Action<IInteractable> OnInteract;
     private Rigidbody rb;
@@ -26,6 +28,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 	private void Awake()
 	{
 		hingeSettings();
+		audioSettings = FindObjectOfType<GameManager>().audioSettings;
 	}
 
 	private void Start()
@@ -38,6 +41,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 
 	public void Interact()
     {
+		StartCoroutine(audioSettings.PlayDoorInteract(this.gameObject));
         StartCoroutine(Hold());
     }
 

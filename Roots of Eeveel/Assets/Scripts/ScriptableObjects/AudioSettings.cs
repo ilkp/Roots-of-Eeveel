@@ -176,8 +176,113 @@ public class AudioSettings : ScriptableObject
 	[FMODUnity.EventRef] [SerializeField] private string keyThrowSound;
 	[FMODUnity.EventRef] [SerializeField] private string keyInsertSound;
 	[FMODUnity.EventRef] [SerializeField] private string keyWrongLockSound;
+	[FMODUnity.EventRef] [SerializeField] private string doorInteractSound;
 	private FMOD.Studio.EventInstance keyPickupInstance;
 	private FMOD.Studio.EventInstance keyInsertInstance;
+	[FMODUnity.EventRef] [SerializeField] private string letterPickupSound;
+	[FMODUnity.EventRef] [SerializeField] private string letterPutdownSound;
+	[FMODUnity.EventRef] [SerializeField] private string bookPickupSound;
+	[FMODUnity.EventRef] [SerializeField] private string bookPutdownSound;
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayBookPickup()
+	{
+		FMOD.Studio.EventInstance bookPickupInstance = FMODUnity.RuntimeManager.CreateInstance(bookPickupSound);
+		bookPickupInstance.start();
+
+		while (true)
+		{
+			bookPickupInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				bookPickupInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayBookPutdown()
+	{
+		FMOD.Studio.EventInstance bookPutdownInstance = FMODUnity.RuntimeManager.CreateInstance(bookPutdownSound);
+		bookPutdownInstance.start();
+
+		while (true)
+		{
+			bookPutdownInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				bookPutdownInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayLetterPutdown()
+	{
+		FMOD.Studio.EventInstance letterPutdownInstance = FMODUnity.RuntimeManager.CreateInstance(letterPutdownSound);
+		letterPutdownInstance.start();
+
+		while (true)
+		{
+			letterPutdownInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				letterPutdownInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayLetterPickup()
+	{
+		FMOD.Studio.EventInstance letterPickupInstance = FMODUnity.RuntimeManager.CreateInstance(letterPickupSound);
+		letterPickupInstance.start();
+
+		while (true)
+		{
+			letterPickupInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				letterPickupInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
 
 	/// <summary>
 	/// This is Coroutine
@@ -198,6 +303,32 @@ public class AudioSettings : ScriptableObject
 			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 			{
 				wrongInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
+
+	/// <summary>
+	/// This is Coroutine
+	/// </summary>
+	/// <param name="go"></param>
+	/// <param name="rb"></param>
+	/// <returns></returns>
+	public IEnumerator PlayDoorInteract(GameObject go)
+	{
+		FMOD.Studio.EventInstance doorInteractInstance = FMODUnity.RuntimeManager.CreateInstance(doorInteractSound);
+		doorInteractInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
+		doorInteractInstance.start();
+
+		while (true)
+		{
+			doorInteractInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				doorInteractInstance.release();
 				break;
 			}
 

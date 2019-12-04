@@ -27,6 +27,11 @@ MonoBehaviour:
   keyThrowSound: event:/SX/Int/Key/sx_int_key_throw
   keyInsertSound: event:/SX/Int/Key/sx_int_key_unlock
   keyWrongLockSound: event:/SX/Int/Key/sx_int_key_wrong
+  doorInteractSound: event:/SX/Int/Door/sx_door_interact_main
+  letterPickupSound: event:/SX/Int/Lore/sx_letter_pickup
+  letterPutdownSound: event:/SX/Int/Lore/sx_letter_putdown
+  bookPickupSound: event:/SX/Int/Lore/sx_book_pickup
+  bookPutdownSound: event:/SX/Int/Lore/sx_book_putdown
   menuMusic: event:/MU/Menu/mu main menu_v3
   menuMusicFadeTime: 10
   playerFootStep: event:/SX/Player/sx_player_movement_rock
