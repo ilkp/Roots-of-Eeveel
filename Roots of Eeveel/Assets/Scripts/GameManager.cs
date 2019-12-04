@@ -110,7 +110,7 @@ public class GameManager : MonoBehaviour
 		AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 		while (!operation.isDone)
 		{
-			fillImage.transform.localScale = new Vector3(1, fillFull - fillChange * operation.progress, 1);
+			fillImage.transform.localScale = new Vector3(1, fillFull - fillChange * (operation.progress / 0.9f), 1);
 			yield return null;
 		}
 		loadingScreenBackground.enabled = false;
