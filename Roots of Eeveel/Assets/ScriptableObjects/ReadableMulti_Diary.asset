@@ -15,7 +15,7 @@ MonoBehaviour:
   font: {fileID: 11400000, guid: 5ff9be7d8e68a2c4dae00bfe1774fe75, type: 2}
   fontSize: 24
   fontColor: {r: 0, g: 0, b: 0, a: 1}
-  alignment: 257
+  alignment: 264
   UISprite: {fileID: 21300000, guid: 00e63e6a16b5b7d47bcb57a08d950ee0, type: 3}
   UIText:
   - "May 29th\\n\\nFor years now our Sire has had a peculiar interest in the small
@@ -27,14 +27,13 @@ MonoBehaviour:
     for Iugis. He says she has tried to get her plan started but tiny ant vessels
     can barely hold her being in them and these corpses have been spread around our
     mansion to send us a message. He is dedicated follower and our leader. If anyone
-    should be containing Iugis\u2019 glorious being, it should be him.\\n\\nAnd for
-    that reason I did what he asked. There were no signs yet. We\u2019ll proceed to
-    journal his process."
-  - "June 5th\\n\\nSire\u2019s health seems to have increased. He says he feels like
-    he is back to the health he had when he was young. No signs of fatigue is seen
-    in him, he truly is the greatest vessel to be. The veins on the arm that was injected
-    is starting to turn black. We will inspect this but I am sure the spirit of Iugis
-    will keep him in health."
+    should be containing Iugis\u2019 glorious being, it should be him."
+  - "And for that reason I did what he asked. There were no signs yet. We\u2019ll
+    proceed to journal his process.\\n\\n\\nJune 5th\\n\\nSire\u2019s health seems
+    to have increased. He says he feels like he is back to the health he had when
+    he was young. No signs of fatigue is seen in him, he truly is the greatest vessel
+    to be. The veins on the arm that was injected is starting to turn black. We will
+    inspect this but I am sure the spirit of Iugis will keep him in health."
   - "June 12th\\n\\nThere has been some[...] unexpected changes to Sire. His orders
     and behavior have become irrational. Others have seen him wander around at night
     and he spends the daytime standing in the light. Few days ago he ordered the ceiling
@@ -56,23 +55,23 @@ MonoBehaviour:
     move his fingers in the way humans do.\\n\\nMaiden washed his back today and saw
     an eye there and indeed when I went to look, there was a pupil like cat\u2019s
     staring at me. As it stared at me I could feel that it knew me better than anyone
-    else. It is now true[...]; Iugis has ground her roots on us."
-  - "August 2nd\\n\\nIs it an illness or just the painful process to being closer
-    to our holy form? Sire\u2019s true form has been completed and Iugis has entered
-    the halls and truly[...] the scripts have been proven true.\\n\\nIugis has grounded
-    herself in the temple and laid her roots across the rooms; they seem healthy and
-    growing every day stronger.\\n\\nFollowers have been getting the same symptoms
-    as Sire did and so have I. We have never felt this much energy residing in our
-    bodies. Our goddess blessed us with this power and once we have gone through the
-    process we will assist Iugis in her glorious battle and get to the promised paradise.
-    \ [All the text from now on is unreadable. Pages and pages full of text that makes
-    no sense. (Player\u2019s character: \u201CI can\u2019t read further[...] The text
-    makes no sense anymore[...] They speak about being in pain and not wanting to
-    do this anymore but change their mind in seconds[...]. What happened to these
-    people?\u201D)]"
+    else. It is now true[...]; Iugis has ground her roots on us.\\n\\nAugust 2nd\\n\\nIs
+    it an illness or just the painful process to being closer to our holy form? Sire\u2019s
+    true form has been completed and Iugis has entered the halls and truly[...] the
+    scripts have been proven true."
+  - "Iugis has grounded herself in the temple and laid her roots across the rooms;
+    they seem healthy and growing every day stronger.\\n\\nFollowers have been getting
+    the same symptoms as Sire did and so have I. We have never felt this much energy
+    residing in our bodies. Our goddess blessed us with this power and once we have
+    gone through the process we will assist Iugis in her glorious battle and get to
+    the promised paradise.  [All the text from now on is unreadable. Pages and pages
+    full of text that makes no sense. (Player\u2019s character: \u201CI can\u2019t
+    read further[...] The text makes no sense anymore[...] They speak about being
+    in pain and not wanting to do this anymore but change their mind in seconds[...].
+    What happened to these people?\u201D)]"
   TAnchorLeftMinX: 0.11
   TAnchorLeftMaxX: 0.1
   TAnchorRightMinX: 0.05
-  TAnchorRightMaxX: 0.9
+  TAnchorRightMaxX: 0.88
   TAnchorMinY: 0.1
   TAnchorMaxY: 0.9
