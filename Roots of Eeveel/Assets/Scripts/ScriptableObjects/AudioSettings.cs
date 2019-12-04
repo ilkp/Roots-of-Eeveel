@@ -12,15 +12,24 @@ public class AudioSettings : ScriptableObject
 	[Header("Atmosphere", order = 0)] //----------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string roomTone;
 	private FMOD.Studio.EventInstance roomToneInstance;
-	[FMODUnity.EventRef] [SerializeField] private string tensionMusic;
-	[SerializeField] private string tensionParameterName;
+	[FMODUnity.EventRef] [SerializeField] private string raisingTension;
+	private int raisingTensionProgress = 0;
+	private const string tensionParameter = "Locks open"; // 0/1/2/3/4/5
+	private const string monsterChaseParameter = "monster chase"; //0/1
 	private FMOD.Studio.EventInstance tensionInstance;
 
+	public void StopAll()
+	{
+		StopRoomTone();
+		StopEnemySoundAll();
+		StopMenuMusic();
+		StopPlayerHPHeartbeat();
+		StopRaisingTension();
+	}
 
 	public void PlayRoomTone()
 	{
 		roomToneInstance = FMODUnity.RuntimeManager.CreateInstance(roomTone);
-		roomToneInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(new Vector3(0, 0, 0)));
 		roomToneInstance.start();
 	}
 
@@ -32,9 +41,11 @@ public class AudioSettings : ScriptableObject
 
 	public void PlayRaisingTension(float progress)
 	{
-		tensionInstance = FMODUnity.RuntimeManager.CreateInstance(tensionMusic);
-		tensionInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(new Vector3(0, 0, 0)));
-		tensionInstance.setParameterByName(tensionParameterName, progress);
+		raisingTensionProgress = (int)progress;
+		Debug.Log("RaisingTensionStarted:" + raisingTensionProgress);
+		tensionInstance = FMODUnity.RuntimeManager.CreateInstance(raisingTension);
+		tensionInstance.setParameterByName(tensionParameter, progress);
+		tensionInstance.setParameterByName(monsterChaseParameter, 0);
 		tensionInstance.start();
 	}
 
@@ -44,19 +55,57 @@ public class AudioSettings : ScriptableObject
 		tensionInstance.release();
 	}
 
-	public void SetRisingTensionProgress(float progress)
+	public void IncreaseRisingTensionProgress()
 	{
-		tensionInstance.setParameterByName(tensionParameterName, progress);
+		if (!tensionInstance.isValid()) PlayRaisingTension(0);
+
+		raisingTensionProgress++;
+		Debug.Log("RaisingTension:" + raisingTensionProgress);
+		tensionInstance.setParameterByName(tensionParameter, raisingTensionProgress);
 	}
+
+	public void DecreaseRisingTensionProgress()
+	{
+		--raisingTensionProgress;
+
+		Debug.Log("RaisingTension:" + raisingTensionProgress);
+		tensionInstance.setParameterByName(tensionParameter, raisingTensionProgress);
+	}
+
+	public void SetRisingTensionMonsterChase(bool chase)
+	{
+		tensionInstance.setParameterByName(monsterChaseParameter, (chase ? 1 : 0));
+		Debug.Log("RaisingTensionmonsterChase:" + chase);
+	}
+
 	#endregion
 
 	#region Enemy
 	[Header("Enemy", order = 1)] //---------------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string enemyFootStep;
 	[FMODUnity.EventRef] [SerializeField] private string enemyIdle;
-	private FMOD.Studio.EventInstance enemyIdleInstance;
+	[FMODUnity.EventRef] [SerializeField] private string enemyNoticeSound;
 
 	private Dictionary<GameObject, FMOD.Studio.EventInstance> EnemySounds = new Dictionary<GameObject, FMOD.Studio.EventInstance>();
+
+	public IEnumerator PlayEnemyNoticeSound()
+	{
+		FMOD.Studio.EventInstance enemyNoticeInstance = FMODUnity.RuntimeManager.CreateInstance(enemyNoticeSound);
+		enemyNoticeInstance.start();
+
+		while (true)
+		{
+			enemyNoticeInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				enemyNoticeInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
 
 	public void PlayEnemyFootStep(GameObject go)
 	{
@@ -76,6 +125,26 @@ public class AudioSettings : ScriptableObject
 		EnemySounds.Add(go, enemyIdleInstance);
 	}
 
+	private List<GameObject> ChasingEnemys = new List<GameObject>();
+
+	public void AddEnemyToChase(GameObject go)
+	{
+		ChasingEnemys.Add(go);
+
+		SetRisingTensionMonsterChase(true);
+
+	}
+
+	public void RemoveEnemyFromChase(GameObject go)
+	{
+		ChasingEnemys.Remove(go);
+
+		if (ChasingEnemys.Count == 0)
+		{
+			SetRisingTensionMonsterChase(false);
+		}
+	}
+
 	public void StopEnemySound(GameObject go)
 	{
 		if (!EnemySounds.ContainsKey(go))
@@ -84,6 +153,17 @@ public class AudioSettings : ScriptableObject
 		EnemySounds[go].release();
 		EnemySounds.Remove(go);
 	}
+
+	public void StopEnemySoundAll()
+	{
+		foreach(GameObject go in EnemySounds.Keys)
+		{
+			EnemySounds[go].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+			EnemySounds[go].release();
+			EnemySounds.Remove(go);
+		}
+	}
+
 	#endregion
 
 	#region Interactables

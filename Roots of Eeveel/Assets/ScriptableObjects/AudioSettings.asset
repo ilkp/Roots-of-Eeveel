@@ -15,10 +15,10 @@ MonoBehaviour:
   musicVolume: 0
   soundsVolume: 0
   roomTone: event:/AT/Roomtones/at_room_tone_hallway
-  tensionMusic: event:/AT/Roomtones/at_room_tone_hallway
-  tensionParameterName: progress
+  raisingTension: event:/MU/Gameplay/mu_raising_tension
   enemyFootStep: event:/SX/Player/sx_player_movement_rock
   enemyIdle: event:/SX/Npc/Monster/sx_npc_monster_attack_lunge
+  enemyNoticeSound: event:/MU/Gameplay/mu_stinger_enemy_alert
   metalSound: event:/SX/Int/Clutter/sx_int_throw_metal
   woodSound: event:/SX/Int/Clutter/sx_int_throw_wood
   ceramicSound: event:/SX/Int/Clutter/sx_int_throw_ceramic
@@ -27,7 +27,7 @@ MonoBehaviour:
   keyThrowSound: event:/SX/Int/Key/sx_int_key_throw
   keyInsertSound: event:/SX/Int/Key/sx_int_key_unlock
   keyWrongLockSound: event:/SX/Int/Key/sx_int_key_wrong
-  menuMusic: event:/MU/Menu/mu_main_menu
+  menuMusic: event:/MU/Menu/mu main menu_v3
   menuMusicFadeTime: 10
   playerFootStep: event:/SX/Player/sx_player_movement_rock
   playerTakeDamageLow: event:/SX/Player/sx_player_take_damage_low

@@ -238,7 +238,9 @@ public class Enemy : MonoBehaviour
     // State where the enemy has heard the player
     IEnumerator ChaseState()
     {
-        _anim.SetFloat("forward", _agent.speed);
+		StartCoroutine(audioSettings.PlayEnemyNoticeSound());
+		audioSettings.AddEnemyToChase(this.gameObject);
+		_anim.SetFloat("forward", _agent.speed);
         _playerSoundHeard = false;
         _agent.destination = _soundLocation;
         float playerRange;
@@ -268,13 +270,15 @@ public class Enemy : MonoBehaviour
 
             yield return 0;
         } while (state == State.Chase);
-        NextState();
+		audioSettings.RemoveEnemyFromChase(this.gameObject);
+		NextState();
     }
 
     // A state for hitting the player (Or the air)
     IEnumerator AttackPlayerState()
     {
-        _anim.SetFloat("forward", 0f);
+		audioSettings.AddEnemyToChase(this.gameObject);
+		_anim.SetFloat("forward", 0f);
         _anim.SetBool("attacking", true);
         _anim.speed = 1.5f;
         _playerSoundHeard = false;
@@ -322,7 +326,8 @@ public class Enemy : MonoBehaviour
         } while (state == State.AttackPlayer);
         _anim.speed = 1.0f;
         _agent.isStopped = false;
-        NextState();
+		audioSettings.RemoveEnemyFromChase(this.gameObject);
+		NextState();
     }
 
 
