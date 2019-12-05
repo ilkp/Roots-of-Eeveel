@@ -125,7 +125,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Lore/sx_letter_putdown
   guid: 46459ff723d937419d2da2b31cfbed72
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -204,7 +205,8 @@ MonoBehaviour:
   Path: snapshot:/sneak_ducking
   guid: 4fc8a7787e6211499968acc82fd46c13
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -244,7 +246,8 @@ MonoBehaviour:
   Path: event:/VO/Lore/vo_lore_extra_letter_2
   guid: 7e31a08be666bb4d97f1fb9f45e9b1a9
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -267,13 +270,14 @@ MonoBehaviour:
   Path: event:/SX/Player/sx_player_movement_rock
   guid: 58d2400d586b7945b49abe294c6d224a
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -7766843414343487855}
-  - {fileID: 7370389595852637800}
+  - {fileID: -6481437899557246145}
+  - {fileID: 7708379255344205892}
   MinDistance: 0
   MaxDistance: 0
   Length: 545
@@ -330,6 +334,23 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 62848
+  Exists: 1
+--- !u!114 &-8336559233285792636
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_main_menu_v1_and_2/test audio 1 or 2
+  m_EditorClassIdentifier: 
+  Name: test audio 1 or 2
+  Min: 1
+  Max: 3
+  Default: 1
   Exists: 1
 --- !u!114 &-8313489472112793744
 MonoBehaviour:
@@ -389,7 +410,8 @@ MonoBehaviour:
   Path: snapshot:/lore_ducking
   guid: 90f20d265364f140ad1154a38317212b
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -458,7 +480,8 @@ MonoBehaviour:
   Path: event:/AT/Enviromental/at_env_wall_mechanics
   guid: ba707036047fdf49833d4600b88d43b9
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -515,7 +538,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Lore/sx_scroll_putdown
   guid: d2b0fb4eafd1044c935284c6f48b0a81
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -582,6 +606,46 @@ MonoBehaviour:
   Min: 0
   Max: 2
   Default: 0
+  Exists: 1
+--- !u!114 &-7746534513062299419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
+  SubDir: 
+  lastModified: 637110508824919815
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 5134
+  Exists: 1
+--- !u!114 &-7675659267336478207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.strings.bank
+  m_EditorClassIdentifier: 
+  Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
+  SubDir: 
+  lastModified: 637110508824919815
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 5134
   Exists: 1
 --- !u!114 &-7666882223283209813
 MonoBehaviour:
@@ -657,6 +721,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/sx_int_key_throw/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &-7500065474914373990
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_metal/impact_strenght
   m_EditorClassIdentifier: 
   Name: impact_strenght
   Min: 0
@@ -932,7 +1013,8 @@ MonoBehaviour:
   Path: event:/VO/Player/vo_player_take_damage_high
   guid: 2a811b94d2e89a4a90be7bc862e7a313
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1112,6 +1194,40 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 874
+--- !u!114 &-6485845768535454172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_sneak
+  m_EditorClassIdentifier: 
+  Name: player_sneak
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &-6481437899557246145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_run
+  m_EditorClassIdentifier: 
+  Name: player_run
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &-6442141462123440274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1251,7 +1367,8 @@ MonoBehaviour:
   Path: event:/MU/Menu/mu_credits
   guid: 679284d612229445a261d5594e69ca44
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -1274,7 +1391,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Key/sx_int_key_unlock
   guid: 915e10141f14be438ddf996b2d8c8287
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -1297,12 +1415,13 @@ MonoBehaviour:
   Path: event:/VO/Npc/Monster/vo_npc_monster_state
   guid: 4c5ddcc0a035c94fa615b8e2febc746f
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: 4157731025137553263}
+  - {fileID: -2107630266384466206}
   MinDistance: 1
   MaxDistance: 20
   Length: 13481
@@ -1338,7 +1457,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Lore/sx_book_putdown
   guid: da4df71ffa71f6459773481d3ac5c32a
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1346,6 +1466,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 514
+--- !u!114 &-5848140103596240239
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_metal/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &-5770792562004265411
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1361,7 +1498,8 @@ MonoBehaviour:
   Path: snapshot:/rev_teaser
   guid: 870767071e294f4a887c1d1a098c235d
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -1448,6 +1586,26 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 565
+--- !u!114 &-5550800381060397836
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.bank
+  SubDir: 
+  lastModified: 637110508723986770
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 33778912
+  Exists: 1
 --- !u!114 &-5526506693374769682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1634,7 +1792,8 @@ MonoBehaviour:
   Path: event:/MU/Gameplay/mu_stinger_enemy_alert
   guid: 83826b8be7980a438cac52cf4f509531
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -1821,12 +1980,13 @@ MonoBehaviour:
   Path: event:/SX/Int/Clutter/sx_int_throw_wood
   guid: 8fe4af0ea8cce7488440b98d22f931c4
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -699924509790236488}
+  - {fileID: 7004644158383123568}
   MinDistance: 1
   MaxDistance: 20
   Length: 888
@@ -1884,7 +2044,8 @@ MonoBehaviour:
   Path: event:/VO/Npc/Monster/vo_npc_monster_take_damage
   guid: 8a34234df846a54d9b771d2c01280b04
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2159,7 +2320,8 @@ MonoBehaviour:
   Path: event:/AT/Roomtones/at_room_tone_hallway
   guid: a6519ccf4879734987d6048719ba0f6b
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -2373,7 +2535,8 @@ MonoBehaviour:
   Path: snapshot:/rev_main
   guid: 4a78f8bac98e404bba2b87ad938c5092
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -2480,6 +2643,23 @@ MonoBehaviour:
   - Name: 
     Value: 22032064
   Exists: 1
+--- !u!114 &-3135082874378949846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_ceramic/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &-3129871922780055602
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2522,6 +2702,23 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 1
+--- !u!114 &-2872663418837276648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_raising_tension/Locks open
+  m_EditorClassIdentifier: 
+  Name: Locks open
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
 --- !u!114 &-2855955429654428366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2537,12 +2734,13 @@ MonoBehaviour:
   Path: event:/SX/Int/Clutter/sx_int_throw_glass
   guid: c9a9417428b62442afca7c18767763c9
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -7967212401657278581}
+  - {fileID: 1631864438031285669}
   MinDistance: 1
   MaxDistance: 20
   Length: 800
@@ -2638,7 +2836,8 @@ MonoBehaviour:
   Path: event:/SX/Npc/Monster/sx_npc_monster_movement_rock
   guid: 3e7d2799446f3b4288a852367415b37c
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2661,7 +2860,8 @@ MonoBehaviour:
   Path: event:/VO/Npc/Monster/vo_npc_monster_attack_lunge
   guid: 7bad33793ddbdd45af837d06005373c1
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -2783,6 +2983,23 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 0
+--- !u!114 &-2107630266384466206
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/vo_npc_monster_state/Monster state
+  m_EditorClassIdentifier: 
+  Name: Monster state
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
 --- !u!114 &-2054971063996063418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2837,7 +3054,8 @@ MonoBehaviour:
   Path: event:/MU/Menu/mu main menu_v3
   guid: d778b62748ce834cb6958de500f94fe1
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -2845,6 +3063,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 193043
+--- !u!114 &-1861967498649941943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/at_env_door_draft/Door_open
+  m_EditorClassIdentifier: 
+  Name: Door_open
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &-1830086686346123456
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2979,7 +3214,8 @@ MonoBehaviour:
   Path: event:/SX/UI/sx_ui_player_hp_roots
   guid: ef813be0acd07e4c976ffb7328218eed
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3068,6 +3304,23 @@ MonoBehaviour:
   - Name: 
     Value: 956
   Exists: 1
+--- !u!114 &-1535675309014168713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_demo_end_impact/test audio 1 or 2
+  m_EditorClassIdentifier: 
+  Name: test audio 1 or 2
+  Min: 1
+  Max: 3
+  Default: 1
+  Exists: 1
 --- !u!114 &-1520475799660060692
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3143,6 +3396,23 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 0
+--- !u!114 &-1234939571398453934
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_key_throw/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &-1182099812999054783
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3253,15 +3523,33 @@ MonoBehaviour:
   Path: event:/AT/Enviromental/at_env_door_draft
   guid: a1da43618b9c504cb73307252f7b04c7
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -6442141462123440274}
+  - {fileID: -1861967498649941943}
   MinDistance: 1
   MaxDistance: 20
   Length: 74000
+--- !u!114 &-972909147721297711
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_ui_player_hp_heartbeat/Player HP
+  m_EditorClassIdentifier: 
+  Name: Player HP
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 1
 --- !u!114 &-953812284698060337
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3300,7 +3588,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Door/sx_door_wrong key
   guid: 959bfb394c524c469076864357367e0c
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3424,12 +3713,13 @@ MonoBehaviour:
   Path: event:/SX/UI/sx_ui_player_hp_heartbeat
   guid: 475a45b67d949e42846d5164769448ac
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 623519995132353561}
+  - {fileID: 6453005942077420102}
   MinDistance: 0
   MaxDistance: 0
   Length: 11370
@@ -3448,7 +3738,8 @@ MonoBehaviour:
   Path: event:/SX/UI/sx_ui_start_game
   guid: 3e64da0d7398dc408b7c84cd07dc7b56
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3471,6 +3762,23 @@ MonoBehaviour:
   Name: impact_strenght
   Min: 0
   Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &-444457032870743071
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_demo_end_impact/test audio 1 or 2
+  m_EditorClassIdentifier: 
+  Name: test audio 1 or 2
+  Min: 1
+  Max: 3
   Default: 1
   Exists: 1
 --- !u!114 &-394174059773614734
@@ -3522,7 +3830,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Lore/sx_scroll_pickup
   guid: e860b6276266a349802e23dd7aa76b95
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3545,7 +3854,8 @@ MonoBehaviour:
   Path: snapshot:/rev_tutorial
   guid: 26b09df536af7641b5abad6b4a6cabe4
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -3622,7 +3932,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Door/sx_door_interact_main
   guid: e9097317c836ba43bd3f05f05d9675ca
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -3645,7 +3956,8 @@ MonoBehaviour:
   Path: event:/VO/Player/vo_player_take_damage_low
   guid: ff989179f61e8344a19e041278e76028
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -3689,8 +4001,8 @@ MonoBehaviour:
   m_Name: FMODStudioCache
   m_EditorClassIdentifier: 
   EditorBanks:
-  - {fileID: 3356539207775737605}
-  - {fileID: 5360530305605201879}
+  - {fileID: -7746534513062299419}
+  - {fileID: -5550800381060397836}
   EditorEvents:
   - {fileID: 6955445776672049146}
   - {fileID: 5157597893141395409}
@@ -3751,10 +4063,10 @@ MonoBehaviour:
   - {fileID: -1910166676129834096}
   EditorParameters: []
   MasterBanks:
-  - {fileID: 5360530305605201879}
+  - {fileID: -5550800381060397836}
   StringsBanks:
-  - {fileID: 3356539207775737605}
-  stringsBankWriteTime: 637110597221948023
+  - {fileID: -7746534513062299419}
+  stringsBankWriteTime: 637110508824919815
   cacheVersion: 3
 --- !u!114 &36383913248451605
 MonoBehaviour:
@@ -3817,6 +4129,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1660
+--- !u!114 &294297152931430397
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_run
+  m_EditorClassIdentifier: 
+  Name: player_run
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &308891625782440665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4053,7 +4382,8 @@ MonoBehaviour:
   Path: event:/AT/Enviromental/at_env_window_roots
   guid: ca5e0c92475cb842abf1f835cf826215
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -4061,6 +4391,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 7174
+--- !u!114 &948325611911534865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_ceramic/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &962611911151868827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4245,6 +4592,26 @@ MonoBehaviour:
   - Name: 
     Value: 3265536
   Exists: 1
+--- !u!114 &1546620231882140440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.bank
+  SubDir: 
+  lastModified: 637110508723986770
+  LoadResult: 0
+  FileSizes:
+  - Name: 
+    Value: 33778912
+  Exists: 1
 --- !u!114 &1604209555158887504
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4260,7 +4627,8 @@ MonoBehaviour:
   Path: event:/SX/Player/sx_player_take_damage_high
   guid: 6d044adc79199d498e081fa3005b1440
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -4287,6 +4655,23 @@ MonoBehaviour:
   FileSizes:
   - Name: 
     Value: 956
+  Exists: 1
+--- !u!114 &1631864438031285669
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_glass/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
   Exists: 1
 --- !u!114 &1633221939221794061
 MonoBehaviour:
@@ -4446,6 +4831,23 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 14850
+--- !u!114 &2024272792625058118
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_raising_tension/monster chase
+  m_EditorClassIdentifier: 
+  Name: monster chase
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &2035916182915559127
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4502,12 +4904,13 @@ MonoBehaviour:
   Path: event:/SX/Int/Clutter/sx_int_throw_metal
   guid: 786c6f38959d6c468ba94604ff39979a
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -7009507930960083801}
+  - {fileID: -5848140103596240239}
   MinDistance: 1
   MaxDistance: 20
   Length: 1094
@@ -4560,7 +4963,8 @@ MonoBehaviour:
   Path: event:/SX/Npc/Monster/sx_npc_monster_attack_lunge
   guid: 31c6d0fff8377445a2ca5f2f9129bc59
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -4692,6 +5096,23 @@ MonoBehaviour:
   Default: 0
   Exists: 0
 --- !u!114 &2510157987514955634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_key_throw/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &2573927260680869335
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4960,13 +5381,14 @@ MonoBehaviour:
   Path: event:/MU/Gameplay/mu_raising_tension
   guid: 27c8c2b1204beb4eab8f7c53f522ff3e
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 3688167912879521575}
-  - {fileID: 5036820297532568248}
+  - {fileID: -2872663418837276648}
+  - {fileID: 9041675967358776302}
   MinDistance: 0
   MaxDistance: 0
   Length: 57600
@@ -4985,7 +5407,8 @@ MonoBehaviour:
   Path: event:/SX/UI/sx_ui_button_hover-over
   guid: 98b382814b82b34fbc3421f015351edb
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5036,6 +5459,23 @@ MonoBehaviour:
   Max: 1
   Default: 1
   Exists: 1
+--- !u!114 &3251433739439528167
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_raising_tension/Locks open
+  m_EditorClassIdentifier: 
+  Name: Locks open
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
 --- !u!114 &3300770270300327759
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5071,7 +5511,8 @@ MonoBehaviour:
   Path: event:/SX/Player/sx_player_take_damage_low
   guid: cb7c74ecd21b0948af32362c33725fdd
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5092,12 +5533,29 @@ MonoBehaviour:
   m_Name: bank:/Master.strings.bank
   m_EditorClassIdentifier: 
   Path: C:/Users/mikkosir/Downloads/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
-  SubDir: 
+  SubDir: C:/Users/mikkosir/Downloads/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks
   lastModified: 637110597221948023
   LoadResult: 0
   FileSizes:
   - Name: 
     Value: 5134
+  Exists: 1
+--- !u!114 &3424433152486296263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/vo_npc_monster_state/Monster state
+  m_EditorClassIdentifier: 
+  Name: Monster state
+  Min: 0
+  Max: 6
+  Default: 0
   Exists: 1
 --- !u!114 &3451696538474444333
 MonoBehaviour:
@@ -5131,7 +5589,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Door/sx_door_tutorial_unlock
   guid: 5322aaecc039bb40ab7eb0d17fac839b
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5176,7 +5635,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Key/sx_int_key_pickup
   guid: 8adb9b9f71be4643b4eb9323140e8bee
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -5199,7 +5659,8 @@ MonoBehaviour:
   Path: event:/VO/Npc/Monster/vo_npc_monster_attack_slash
   guid: 8f6fe68b053c3a45acfccf481f77cb5a
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5301,7 +5762,8 @@ MonoBehaviour:
   Path: event:/AT/Enviromental/at_env_wall_mechanics 2
   guid: e5d8e23355a2b341b5ee217d6256a23f
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -5569,7 +6031,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Door/sx_door_main_unlock
   guid: 959a8841af03594d8f3f5d7d987b7968
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6022,12 +6485,13 @@ MonoBehaviour:
   Path: event:/SX/Int/Clutter/sx_int_throw_ceramic
   guid: c453ed1cc60f6145b5f05b396d194b8f
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 3921407761569511879}
+  - {fileID: 948325611911534865}
   MinDistance: 1
   MaxDistance: 20
   Length: 1194
@@ -6233,12 +6697,13 @@ MonoBehaviour:
   Path: event:/SX/Int/Key/sx_int_key_throw
   guid: 184b692b3d7792439af9b3538151fa97
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -1126654039388827866}
+  - {fileID: -1234939571398453934}
   MinDistance: 1
   MaxDistance: 20
   Length: 340
@@ -6320,6 +6785,23 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 100
+  Exists: 1
+--- !u!114 &5301859303790544036
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_main_menu_v1_and_2/test audio 1 or 2
+  m_EditorClassIdentifier: 
+  Name: test audio 1 or 2
+  Min: 1
+  Max: 3
+  Default: 1
   Exists: 1
 --- !u!114 &5328623571034345773
 MonoBehaviour:
@@ -6520,7 +7002,8 @@ MonoBehaviour:
   Path: event:/SX/Npc/Monster/sx_npc_monster_attack_slash
   guid: d7ff285022d6444a8f680ae0c00dc5e3
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6715,7 +7198,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Lore/sx_letter_pickup
   guid: 3e493bc0a9710b47a7b6d2e27265f70e
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -6816,7 +7300,8 @@ MonoBehaviour:
   Path: event:/AT/Enviromental/at_env_wall_mechanics 3
   guid: e334eb4bbc49a64cb2b3bf36c5a227aa
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -6841,6 +7326,23 @@ MonoBehaviour:
   Max: 1
   Default: 1
   Exists: 1
+--- !u!114 &6453005942077420102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_ui_player_hp_heartbeat/Player HP
+  m_EditorClassIdentifier: 
+  Name: Player HP
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 1
 --- !u!114 &6456938148110063347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6856,7 +7358,8 @@ MonoBehaviour:
   Path: snapshot:/rev_hallway
   guid: 76c156849479f84880fd8f52a4363eb3
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 0
@@ -6924,7 +7427,8 @@ MonoBehaviour:
   Path: event:/VO/Lore/vo_lore_core_letter_1
   guid: 9229b5d127e1d94da193b69b60ee13df
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -6947,7 +7451,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Lore/sx_book_pickup
   guid: 84a45015117dbb4190f2a5c250a403a1
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -7004,7 +7509,8 @@ MonoBehaviour:
   Path: event:/SX/Int/Key/sx_int_key_wrong
   guid: 92108948d6e5274e81c1693bcdf4f3b1
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -7115,7 +7621,8 @@ MonoBehaviour:
   Path: event:/AT/Enviromental/at_env_window_crows
   guid: 02198abfa434a7489a0ec989fa20c236
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -7123,6 +7630,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 180024
+--- !u!114 &7004644158383123568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_wood/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &7018880370061026584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7160,12 +7684,13 @@ MonoBehaviour:
   Path: event:/MU/Menu/mu_demo_end_impact
   guid: 7f08e57a2357364985d21fa09986a934
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: 4142167509771313667}
+  - {fileID: -1535675309014168713}
   MinDistance: 0
   MaxDistance: 0
   Length: 9600
@@ -7411,6 +7936,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 270
+--- !u!114 &7708379255344205892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_sneak
+  m_EditorClassIdentifier: 
+  Name: player_sneak
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &7731307663007012667
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7443,7 +7985,8 @@ MonoBehaviour:
   Path: event:/VO/Lore/vo_lore_start
   guid: 5930090fbdef3c408d334ca8aeadf109
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -7451,7 +7994,41 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 14850
+--- !u!114 &7788323008483560075
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/at_env_door_draft/Door_open
+  m_EditorClassIdentifier: 
+  Name: Door_open
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &7802601676655645447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_glass/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &7809598167603857891
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7483,12 +8060,13 @@ MonoBehaviour:
   Path: event:/MU/Menu/mu_main_menu_v1_and_2
   guid: 7a9e979cdd0d544993f231a942466811
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -6128455114548105844}
+  - {fileID: -8336559233285792636}
   MinDistance: 0
   MaxDistance: 0
   Length: 118702
@@ -7907,6 +8485,23 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 1
+--- !u!114 &9041675967358776302
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_raising_tension/monster chase
+  m_EditorClassIdentifier: 
+  Name: monster chase
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &9047264004549411787
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7922,7 +8517,8 @@ MonoBehaviour:
   Path: event:/AT/Enviromental/at_env_window_wind
   guid: 87e4d524fbd3174b8fd921823e5a923d
   Banks:
-  - {fileID: 5360530305605201879}
+  - {fileID: 1546620231882140440}
+  - {fileID: -5550800381060397836}
   IsStream: 1
   Is3D: 1
   IsOneShot: 0
@@ -8034,3 +8630,20 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 14149
+--- !u!114 &9172137150363905808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_wood/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
