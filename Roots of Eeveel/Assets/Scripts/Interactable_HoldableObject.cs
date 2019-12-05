@@ -31,7 +31,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	private void Awake()
 	{
 		player = FindObjectOfType<PlayerMovement>().gameObject;
-		head = player.GetComponentInChildren<Camera>().transform;//player.transform.GetChild(0).transform;
+		head = player.GetComponentInChildren<Camera>().transform;
 		rb = GetComponent<Rigidbody>();
 		gameObject.tag = "Interactable";
 	}
@@ -53,11 +53,19 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 		float holdDistance = Vector3.Distance(head.transform.position, transform.position);
 		Vector3 offSet = transform.position - (head.position + head.forward * holdDistance);
 
-
 		while (true)
 		{
 			float zoom = Input.GetAxis("Mouse ScrollWheel");
 			holdDistance = Mathf.Clamp(holdDistance + zoom, 1f, 4f);
+
+			if (Input.GetKeyDown(KeyCode.Mouse1))
+			{
+				rb.AddForce(head.forward * throwForce, ForceMode.Impulse);
+				rb.useGravity = true;
+
+				break;
+			}
+
 			destination = head.position + offSet + head.forward * holdDistance;
 			rb.velocity = ((destination - transform.position) * pullForce / rb.mass);
 			rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;
