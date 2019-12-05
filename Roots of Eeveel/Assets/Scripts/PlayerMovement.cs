@@ -344,8 +344,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Die()
-    {
-        GameManager.Instance.SetGameOver(false);
+	{
+		audioSettings.StopPlayerHPHeartbeat();
+		GameManager.Instance.SetGameOver(false);
     }
 
     public void GetHurt()
@@ -384,13 +385,13 @@ public class PlayerMovement : MonoBehaviour
 				audioSettings.StopPlayerHPHeartbeat();
 				break;
 			case HealthState.Low:
-				audioSettings.PlayPlayerHPHeartbeat(75f);
+				audioSettings.PlayPlayerHPHeartbeat(39f);
 				break;
 			case HealthState.Lower:
-				audioSettings.PlayPlayerHPHeartbeat(50f);
+				audioSettings.PlayPlayerHPHeartbeat(21f);
 				break;
 			case HealthState.Lowest:
-				audioSettings.PlayPlayerHPHeartbeat(25f);
+				audioSettings.PlayPlayerHPHeartbeat(2f);
 				break;
 			default:
 				Debug.Log("UpdateHealtAudio - HP out of bounds!");

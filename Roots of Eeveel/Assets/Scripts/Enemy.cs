@@ -146,6 +146,7 @@ public class Enemy : MonoBehaviour
     IEnumerator StayStillState()
     {
         audioSettings.PlayEnemyIdle(gameObject);
+		audioSettings.SetEnemyState(gameObject, 0);
         _anim.SetFloat("forward", _agent.speed);
         float waitTime = 5f;
         do
@@ -181,7 +182,8 @@ public class Enemy : MonoBehaviour
     IEnumerator PatrolState()
     {
         audioSettings.PlayEnemyFootStep(gameObject);
-        _anim.SetFloat("forward", _agent.speed);
+		audioSettings.SetEnemyState(gameObject, 0);
+		_anim.SetFloat("forward", _agent.speed);
         _agent.destination = _route[_destination].position;
         do
         {
@@ -233,7 +235,8 @@ public class Enemy : MonoBehaviour
     IEnumerator InvestigateState()
     {
         audioSettings.PlayEnemyFootStep(gameObject);
-        _agent.destination = _soundLocation;
+		audioSettings.SetEnemyState(gameObject, 1);
+		_agent.destination = _soundLocation;
         _anim.SetFloat("forward", _agent.speed);
         do
         {
@@ -259,7 +262,8 @@ public class Enemy : MonoBehaviour
     IEnumerator ChaseState()
     {
         StartCoroutine(audioSettings.PlayEnemyNoticeSound());
-        audioSettings.AddEnemyToChase(this.gameObject);
+		audioSettings.SetEnemyState(gameObject, 2);
+		audioSettings.AddEnemyToChase(this.gameObject);
         _anim.SetFloat("forward", _agent.speed);
         _playerSoundHeard = false;
         _agent.destination = _soundLocation;
@@ -296,7 +300,9 @@ public class Enemy : MonoBehaviour
     IEnumerator AttackPlayerState()
     {
         audioSettings.AddEnemyToChase(this.gameObject);
-        _anim.SetFloat("forward", 0f);
+		audioSettings.SetEnemyState(gameObject, 2);
+		StartCoroutine(audioSettings.PlayEnemyAttackSound(gameObject));
+		_anim.SetFloat("forward", 0f);
         _anim.SetBool("attacking", true);
         _anim.speed = 1.5f;
         _playerSoundHeard = false;
@@ -353,6 +359,7 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         NextState();
+		audioSettings.PlayEnemyState(gameObject);
     }
 
     // Method to change the behaviour state

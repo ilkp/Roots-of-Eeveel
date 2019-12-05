@@ -15,10 +15,17 @@ MonoBehaviour:
   musicVolume: 0
   soundsVolume: 0
   roomTone: event:/AT/Roomtones/at_room_tone_hallway
+  roomMechanics: event:/AT/Enviromental/at_env_wall_mechanics
+  roomMechanics1: event:/AT/Enviromental/at_env_wall_mechanics 2
+  roomMechanics2: event:/AT/Enviromental/at_env_wall_mechanics 3
   raisingTension: event:/MU/Gameplay/mu_raising_tension
-  enemyFootStep: event:/SX/Player/sx_player_movement_rock
+  enemyFootStep: event:/SX/Npc/Monster/sx_npc_monster_movement_rock
   enemyIdle: event:/SX/Npc/Monster/sx_npc_monster_attack_lunge
   enemyNoticeSound: event:/MU/Gameplay/mu_stinger_enemy_alert
+  enemyStateSound: event:/VO/Npc/Monster/vo_npc_monster_state
+  enemyAttackLungeSound: event:/VO/Npc/Monster/vo_npc_monster_attack_lunge
+  enemyAttachSlashSound: event:/VO/Npc/Monster/vo_npc_monster_attack_slash
+  enemySXAttachSlashSound: event:/SX/Npc/Monster/sx_npc_monster_attack_slash
   metalSound: event:/SX/Int/Clutter/sx_int_throw_metal
   woodSound: event:/SX/Int/Clutter/sx_int_throw_wood
   ceramicSound: event:/SX/Int/Clutter/sx_int_throw_ceramic
@@ -35,8 +42,10 @@ MonoBehaviour:
   menuMusic: event:/MU/Menu/mu main menu_v3
   menuMusicFadeTime: 10
   playerFootStep: event:/SX/Player/sx_player_movement_rock
-  playerTakeDamageLow: event:/SX/Player/sx_player_take_damage_low
-  playerTakeDamageHigh: event:/SX/Player/sx_player_take_damage_high
+  playerTakeDamageLow: event:/VO/Player/vo_player_take_damage_low
+  playerTakeDamageHigh: event:/VO/Player/vo_player_take_damage_high
+  playerSXTakeDamageLow: event:/SX/Player/sx_player_take_damage_low
+  playerSXTakeDamageHigh: event:/SX/Player/sx_player_take_damage_high
   playerHPHeartbeat: event:/SX/UI/sx_ui_player_hp_heartbeat
   playerHPRoots: event:/SX/UI/sx_ui_player_hp_roots
   button: event:/SX/UI/sx_ui_button_hover-over

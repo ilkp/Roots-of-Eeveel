@@ -8,9 +8,22 @@ public class AudioSettings : ScriptableObject
 	public float musicVolume;
 	public float soundsVolume;
 
+	public void SetMusicVolume(float volume)
+	{
+
+	}
+
+	public void SetSoundVolume(float volume)
+	{
+
+	}
+
 	#region Atmosphere
 	[Header("Atmosphere", order = 0)] //----------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string roomTone;
+	[FMODUnity.EventRef] [SerializeField] public string roomMechanics;
+	[FMODUnity.EventRef] [SerializeField] public string roomMechanics1;
+	[FMODUnity.EventRef] [SerializeField] public string roomMechanics2;
 	private FMOD.Studio.EventInstance roomToneInstance;
 	[FMODUnity.EventRef] [SerializeField] private string raisingTension;
 	private int raisingTensionProgress = 0;
@@ -30,6 +43,7 @@ public class AudioSettings : ScriptableObject
 	public void PlayRoomTone()
 	{
 		roomToneInstance = FMODUnity.RuntimeManager.CreateInstance(roomTone);
+		roomToneInstance.setVolume(0.5f);
 		roomToneInstance.start();
 	}
 
@@ -85,12 +99,58 @@ public class AudioSettings : ScriptableObject
 	[FMODUnity.EventRef] [SerializeField] private string enemyFootStep;
 	[FMODUnity.EventRef] [SerializeField] private string enemyIdle;
 	[FMODUnity.EventRef] [SerializeField] private string enemyNoticeSound;
+	[FMODUnity.EventRef] [SerializeField] private string enemyStateSound;
+	[FMODUnity.EventRef] [SerializeField] private string enemyAttackLungeSound;
+	[FMODUnity.EventRef] [SerializeField] private string enemyAttachSlashSound;
+	[FMODUnity.EventRef] [SerializeField] private string enemySXAttachSlashSound;
+	private string enemyStateParameter = "Monster state";
 
 	private Dictionary<GameObject, FMOD.Studio.EventInstance> EnemySounds = new Dictionary<GameObject, FMOD.Studio.EventInstance>();
+
+	private Dictionary<GameObject, FMOD.Studio.EventInstance> EnemyStateSounds = new Dictionary<GameObject, FMOD.Studio.EventInstance>();
+
+	public void PlayEnemyState(GameObject go)
+	{
+		FMOD.Studio.EventInstance enemyStateInstance = FMODUnity.RuntimeManager.CreateInstance(enemyStateSound);
+		EnemyStateSounds.Add(go, enemyStateInstance);
+		enemyStateInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
+		enemyStateInstance.setParameterByName(enemyStateParameter, 0);
+		enemyStateInstance.start();
+	}
+
+	public void SetEnemyState(GameObject go, int value)
+	{
+		EnemyStateSounds[go].setParameterByName(enemyStateParameter, value);
+	}
+
+	public IEnumerator PlayEnemyAttackSound(GameObject go)
+	{
+		FMOD.Studio.EventInstance enemyAttackInstance = FMODUnity.RuntimeManager.CreateInstance((Random.value > 0.5f) ? enemyAttackLungeSound : enemyAttachSlashSound);
+		FMOD.Studio.EventInstance enemySXAttackInstance = FMODUnity.RuntimeManager.CreateInstance(enemySXAttachSlashSound);
+		enemySXAttackInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
+		enemyAttackInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
+		enemySXAttackInstance.start();
+		enemyAttackInstance.start();
+		Debug.Log("EnemyAttackSoundPlayed");
+		while (true)
+		{
+			enemyAttackInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				enemyAttackInstance.release();
+				enemySXAttackInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
+	}
 
 	public IEnumerator PlayEnemyNoticeSound()
 	{
 		FMOD.Studio.EventInstance enemyNoticeInstance = FMODUnity.RuntimeManager.CreateInstance(enemyNoticeSound);
+		enemyNoticeInstance.setVolume(0.5f);
 		enemyNoticeInstance.start();
 
 		while (true)
@@ -107,13 +167,24 @@ public class AudioSettings : ScriptableObject
 		}
 	}
 
-	public void PlayEnemyFootStep(GameObject go)
+	public IEnumerator PlayEnemyFootStep(GameObject go)
 	{
 		FMOD.Studio.EventInstance enemyFootStepInstance = FMODUnity.RuntimeManager.CreateInstance(enemyFootStep);
 		enemyFootStepInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
 		enemyFootStepInstance.start();
 
-		EnemySounds.Add(go, enemyFootStepInstance);
+		while (true)
+		{
+			enemyFootStepInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
+
+			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
+			{
+				enemyFootStepInstance.release();
+				break;
+			}
+
+			yield return null;
+		}
 	}
 
 	public void PlayEnemyIdle(GameObject go)
@@ -346,7 +417,7 @@ public class AudioSettings : ScriptableObject
 		{
 			keyPickupInstance = FMODUnity.RuntimeManager.CreateInstance(keyPickupSound);
 		}
-
+		keyPickupInstance.setVolume(0.8f);
 		keyPickupInstance.start();
 	}
 
@@ -358,6 +429,7 @@ public class AudioSettings : ScriptableObject
 		}
 
 		keyInsertInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
+		keyInsertInstance.setVolume(0.8f);
 		keyInsertInstance.start();
 	}
 
@@ -552,11 +624,15 @@ public class AudioSettings : ScriptableObject
 	[FMODUnity.EventRef] [SerializeField] private string playerFootStep;
 	[FMODUnity.EventRef] [SerializeField] private string playerTakeDamageLow;
 	[FMODUnity.EventRef] [SerializeField] private string playerTakeDamageHigh;
+	[FMODUnity.EventRef] [SerializeField] private string playerSXTakeDamageLow;
+	[FMODUnity.EventRef] [SerializeField] private string playerSXTakeDamageHigh;
 	[FMODUnity.EventRef] [SerializeField] private string playerHPHeartbeat;
 	[FMODUnity.EventRef] [SerializeField] private string playerHPRoots;
 	private FMOD.Studio.EventInstance playerFootStepInstance;
 	private FMOD.Studio.EventInstance playerDamageLowInstance;
 	private FMOD.Studio.EventInstance playerDamageHighInstance;
+	private FMOD.Studio.EventInstance playerSXDamageLowInstance;
+	private FMOD.Studio.EventInstance playerSXDamageHighInstance;
 	private FMOD.Studio.EventInstance playerHPHeartbeatInstance;
 	private FMOD.Studio.EventInstance playerHPRootsInstance;
 
@@ -583,6 +659,13 @@ public class AudioSettings : ScriptableObject
 		}
 
 		playerDamageLowInstance.start();
+
+		if (!playerSXDamageLowInstance.isValid())
+		{
+			playerSXDamageLowInstance = FMODUnity.RuntimeManager.CreateInstance(playerSXTakeDamageLow);
+		}
+
+		playerSXDamageLowInstance.start();
 	}
 
 	public void PlayPlayerDamageHigh()
@@ -592,7 +675,14 @@ public class AudioSettings : ScriptableObject
 			playerDamageHighInstance = FMODUnity.RuntimeManager.CreateInstance(playerTakeDamageHigh);
 		}
 
-		playerDamageHighInstance.start();
+		playerSXDamageHighInstance.start();
+
+		if (!playerSXDamageHighInstance.isValid())
+		{
+			playerSXDamageHighInstance = FMODUnity.RuntimeManager.CreateInstance(playerSXTakeDamageHigh);
+		}
+
+		playerSXDamageHighInstance.start();
 	}
 
 	public void PlayPlayerHPRoots()

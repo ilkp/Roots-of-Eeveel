@@ -299,7 +299,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3714625422137665997}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -2.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0.01, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4407278121351992477}
@@ -319,14 +319,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CollisionTag: 
   Event: event:/AT/Enviromental/at_env_door_draft
-  PlayEvent: 1
-  StopEvent: 2
+  PlayEvent: 11
+  StopEvent: 12
   AllowFadeout: 1
   TriggerOnce: 0
   Preload: 0
   Params: []
   OverrideAttenuation: 1
-  OverrideMinDistance: 3
+  OverrideMinDistance: 1
   OverrideMaxDistance: 10
 --- !u!1 &4426126181238797590
 GameObject:
