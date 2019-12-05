@@ -689,7 +689,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 1
+  m_CollisionDetection: 2
 --- !u!114 &9050823437087878791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,7 +706,10 @@ MonoBehaviour:
   interaction: 323
   secondaryInteraction: 324
   head: {fileID: 9050823436124745448}
-  reticule: {fileID: 0}
+  reticuleImage: {fileID: 0}
+  reticuleDefault: {fileID: 21300000, guid: c0f8c033a146cee4faba3e02b299979c, type: 3}
+  reticuleRead: {fileID: 21300000, guid: 33aca4f012c08b54480c88ade2fd1411, type: 3}
+  reticuleHold: {fileID: 21300000, guid: b09cba3377af43d438dfb5c8399f8617, type: 3}
   colorReticleInactive: {r: 1, g: 1, b: 1, a: 1}
   colorReticleActive: {r: 1, g: 0, b: 0, a: 1}
   interactable: {fileID: 0}
@@ -728,6 +731,7 @@ MonoBehaviour:
   viewlength: 3
   hp: 0
   allowRotation: 1
+  allowMovement: 1
 --- !u!114 &2734701285760636566
 MonoBehaviour:
   m_ObjectHideFlags: 0

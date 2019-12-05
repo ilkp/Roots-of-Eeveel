@@ -22,10 +22,7 @@ public class TutorialPickup : ITutorial
     {
         if (player.interactable)
         {
-            if (player.interactable.name == "Key")
-            {
-                return true;
-            }
+            return true;
         }
         return false;
     }

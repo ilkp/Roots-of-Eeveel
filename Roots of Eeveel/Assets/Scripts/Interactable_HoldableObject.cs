@@ -26,8 +26,6 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	private Rigidbody rb;
 	[SerializeField] private float pullForce = 10;
 	[SerializeField] private float throwForce = 10;
-	//private Vector3 velocity;
-	//private Vector3 lastFramePosition;
 	private Vector3 destination;
 
 	private void Awake()
@@ -41,7 +39,6 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 	public void Interact()
 	{
 		rb.useGravity = false;
-		//lastFramePosition = transform.position;
 		StartCoroutine(Hold());
 	}
 
@@ -60,41 +57,9 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 		while (true)
 		{
 			float zoom = Input.GetAxis("Mouse ScrollWheel");
-			holdDistance = Mathf.Clamp(holdDistance + zoom, 1.5f, 4);
-
-			if (Input.GetKeyDown(KeyCode.Mouse1))
-			{
-				rb.AddForce(head.forward * throwForce, ForceMode.Impulse);
-				rb.useGravity = true;
-
-				break;
-			}
-			
-			//velocity = (transform.position - lastFramePosition) / (Time.deltaTime * 2);
-			//lastFramePosition = transform.position;
-
-			Ray ray = new Ray(transform.position, head.position - transform.position);
-			RaycastHit[] hits = Physics.RaycastAll(ray, Vector3.Distance(transform.position, head.position));
-
-			for (int i = 0; i < hits.Length; i++)
-			{
-				if (hits[i].transform != null)
-				{
-					if (hits[i].transform != transform)
-					{
-						//destination = hits[i].point;
-						break;
-					}
-				}
-				else
-				{
-					//destination = player.transform.position + player.transform.forward * 10;
-					break;
-				}
-			}
+			holdDistance = Mathf.Clamp(holdDistance + zoom, 1f, 4f);
 			destination = head.position + offSet + head.forward * holdDistance;
-
-			rb.velocity = ((destination - transform.position) * pullForce);
+			rb.velocity = ((destination - transform.position) * pullForce / rb.mass);
 			rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;
 
 			yield return null;

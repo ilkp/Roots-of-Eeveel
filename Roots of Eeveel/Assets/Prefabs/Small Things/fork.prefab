@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 791503396783421149}
   - component: {fileID: 7352181957665241744}
   m_Layer: 0
-  m_Name: Fork_lo
+  m_Name: fork
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2274072163947781881}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2958051408706472816}
   - component: {fileID: 2958051408706472817}
   m_Layer: 0
-  m_Name: Book_big_02_lo
+  m_Name: book_big2
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -90,7 +90,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1160525677326490215}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.9
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1

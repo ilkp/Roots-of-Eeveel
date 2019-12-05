@@ -267,13 +267,13 @@ public class Enemy : MonoBehaviour
         _anim.SetFloat("forward", _agent.speed);
         _playerSoundHeard = false;
         _agent.destination = _soundLocation;
-        float playerRange;
+        float playerDistance;
         do
         {
-            playerRange = (_player.position - transform.position).magnitude;
-            if (playerRange <= seeRange)
+            playerDistance = PlayerHorizontalDistance();
+            if (playerDistance <= seeRange)
             {
-                if (playerRange <= _agent.stoppingDistance)
+                if (playerDistance <= _agent.stoppingDistance)
                 {
                     state = State.AttackPlayer;
                 }
@@ -308,6 +308,7 @@ public class Enemy : MonoBehaviour
         _playerSoundHeard = false;
         _soundHeard = false;
         _agent.isStopped = true;
+        float playerDistance;
         do
         {
             // Check if the current animation playing is an attack
@@ -327,7 +328,7 @@ public class Enemy : MonoBehaviour
                 // Check if the attack animation has ended
                 if (_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
                 {
-                    float playerDistance = (_player.position - gameObject.transform.position).magnitude;
+                    playerDistance = PlayerHorizontalDistance();
                     // Hit again if player should still be close enough.
                     if (_playerHit && playerDistance <= _agent.stoppingDistance) // player was hit and player still should be in range
                     {
@@ -396,5 +397,11 @@ public class Enemy : MonoBehaviour
 
         // Unsubscribe from lock
         wakeUpTrigger.ConditionMet -= WakeUp;
+    }
+
+    private float PlayerHorizontalDistance()
+    {
+        return Vector3.Distance(new Vector3(_player.transform.position.x, 0f, _player.transform.position.z),
+            new Vector3(transform.position.x, 0, transform.position.z));
     }
 }

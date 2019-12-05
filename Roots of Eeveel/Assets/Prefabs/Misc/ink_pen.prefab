@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5460173379325789595}
   - component: {fileID: 5460173379325789592}
   m_Layer: 0
-  m_Name: inkpen_lo
+  m_Name: ink_pen
   m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -103,7 +103,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5460173379325789593}
   serializedVersion: 2
-  m_Mass: 1
+  m_Mass: 0.4
   m_Drag: 0
   m_AngularDrag: 0.05
   m_UseGravity: 1

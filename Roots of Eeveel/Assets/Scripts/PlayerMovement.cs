@@ -33,6 +33,7 @@ public class PlayerMovement : MonoBehaviour
 	[Tooltip("Image to be drawn as reticle")]
 	[SerializeField] private Sprite reticuleDefault;
 	[SerializeField] private Sprite reticuleRead;
+    [SerializeField] private Sprite reticuleHold;
 
     /// <summary>
     /// Color of the reticle when not on interactable object
@@ -263,6 +264,21 @@ public class PlayerMovement : MonoBehaviour
 				reticuleImage.sprite = reticuleRead;
 				reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
 			}
+            else if (hit.collider.GetComponent<Interactable_HoldableObject>() != null ||
+                    hit.collider.GetComponent<Interactable_Key>() != null)
+            {
+                reticuleImage.sprite = reticuleHold;
+				reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
+            }
+
+            if (Input.GetKey(interaction))
+            {
+                reticuleImage.enabled = false;
+            }
+            else
+            {
+                reticuleImage.enabled = true;
+            }
 
             GetComponent<ToolTip>().showPopup(true);
 
