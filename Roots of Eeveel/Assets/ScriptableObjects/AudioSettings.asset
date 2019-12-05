@@ -41,3 +41,5 @@ MonoBehaviour:
   playerHPRoots: event:/SX/UI/sx_ui_player_hp_roots
   button: event:/SX/UI/sx_ui_button_hover-over
   startButton: event:/SX/UI/sx_ui_start_game
+  loreReverb: snapshot:/lore_ducking
+  sneakReverb: snapshot:/sneak_ducking

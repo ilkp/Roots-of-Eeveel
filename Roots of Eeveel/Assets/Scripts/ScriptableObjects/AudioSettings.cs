@@ -202,6 +202,7 @@ public class AudioSettings : ScriptableObject
 			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 			{
 				bookPickupInstance.release();
+				PlayLoreReverb();
 				break;
 			}
 
@@ -218,6 +219,7 @@ public class AudioSettings : ScriptableObject
 	public IEnumerator PlayBookPutdown()
 	{
 		FMOD.Studio.EventInstance bookPutdownInstance = FMODUnity.RuntimeManager.CreateInstance(bookPutdownSound);
+		StopLoreReverb();
 		bookPutdownInstance.start();
 
 		while (true)
@@ -252,6 +254,7 @@ public class AudioSettings : ScriptableObject
 			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
 			{
 				letterPutdownInstance.release();
+				PlayLoreReverb();
 				break;
 			}
 
@@ -268,6 +271,7 @@ public class AudioSettings : ScriptableObject
 	public IEnumerator PlayLetterPickup()
 	{
 		FMOD.Studio.EventInstance letterPickupInstance = FMODUnity.RuntimeManager.CreateInstance(letterPickupSound);
+		StopLoreReverb();
 		letterPickupInstance.start();
 
 		while (true)
@@ -660,6 +664,58 @@ public class AudioSettings : ScriptableObject
 		FMOD.Studio.EventInstance startButtonInstance = FMODUnity.RuntimeManager.CreateInstance(startButton);
 
 		startButtonInstance.start();
+	}
+
+	#endregion
+
+	#region Reverb
+	[Header("Reverb", order = 6)] //------------------------------------------------------------------------------------
+	[FMODUnity.EventRef] [SerializeField] private string loreReverb;
+	[FMODUnity.EventRef] [SerializeField] private string sneakReverb;
+
+	private bool isLore = false;
+	private bool isSneak = false;
+
+	FMOD.Studio.EventInstance LoreInstance;
+	FMOD.Studio.EventInstance SneakInstance;
+
+
+	public void PlayLoreReverb()
+	{
+		if(!LoreInstance.isValid()) LoreInstance = FMODUnity.RuntimeManager.CreateInstance(loreReverb);
+		if (!isLore)
+		{
+			isLore = true;
+			LoreInstance.start();
+		}
+	}
+
+	public void StopLoreReverb()
+	{
+		if(isLore)
+		{
+			isLore = false;
+			LoreInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		}
+	}
+
+	public void PlaySneakReverb()
+	{
+		if (!SneakInstance.isValid()) SneakInstance = FMODUnity.RuntimeManager.CreateInstance(sneakReverb);
+		if (!isSneak)
+		{
+			isSneak = true;
+			SneakInstance.start();
+		}
+	}
+
+	public void StopSneakReverb()
+	{
+		if (isSneak)
+		{
+			isSneak = false;
+			SneakInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		}
 	}
 
 	#endregion

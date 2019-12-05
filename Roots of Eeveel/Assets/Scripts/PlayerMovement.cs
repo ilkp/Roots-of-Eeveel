@@ -208,10 +208,12 @@ public class PlayerMovement : MonoBehaviour
 
 		if (sneaking)
 		{
+			audioSettings.PlaySneakReverb();
 			cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position + cameraSneakDisplacement, 0.3f);
 		}
 		else
 		{
+			audioSettings.StopSneakReverb();
 			cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position, 0.3f);
 		}
 
@@ -244,7 +246,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check if object is visible to the character and close enough
-        if (Physics.Raycast(head.transform.position, head.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
+        if (Physics.Raycast(cam.transform.position, cam.transform.forward, out RaycastHit hit, grabDistance) && hit.collider.CompareTag("Interactable"))
         {
             // Highlight the object
             if (lastHit != null && lastHit != hit.collider)

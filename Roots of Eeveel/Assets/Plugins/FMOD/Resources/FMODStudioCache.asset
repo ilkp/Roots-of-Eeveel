@@ -76,6 +76,29 @@ MonoBehaviour:
   Max: 10
   Default: 0
   Exists: 1
+--- !u!114 &-8898839899379774918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VO/Lore/vo_lore_extra_letter_1
+  m_EditorClassIdentifier: 
+  Path: event:/VO/Lore/vo_lore_extra_letter_1
+  guid: 0c23b14033340144a84a2a0c9183aed3
+  Banks:
+  - {fileID: -5550800381060397836}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 58588
 --- !u!114 &-8815778435146308289
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -254,7 +277,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 14850
+  Length: 16988
 --- !u!114 &-8401648818706298005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,8 +299,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -6481437899557246145}
-  - {fileID: 7708379255344205892}
+  - {fileID: 1767850798201528865}
+  - {fileID: 6654867255234435280}
   MinDistance: 0
   MaxDistance: 0
   Length: 545
@@ -489,6 +512,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2058
+--- !u!114 &-7972697300166786917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_raising_tension/monster chase
+  m_EditorClassIdentifier: 
+  Name: monster chase
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &-7967212401657278581
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -621,11 +661,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.strings.bank
   SubDir: 
-  lastModified: 637110508824919815
+  lastModified: 637111397536949688
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 5134
+    Value: 5222
   Exists: 1
 --- !u!114 &-7675659267336478207
 MonoBehaviour:
@@ -1421,7 +1461,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -2107630266384466206}
+  - {fileID: 8635267206455396739}
   MinDistance: 1
   MaxDistance: 20
   Length: 13481
@@ -1600,11 +1640,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: D:/Programs/Unity/Projects/Roots-of-Eeveel/Roots of Eeveel/Assets/FmodBanks/Master.bank
   SubDir: 
-  lastModified: 637110508723986770
+  lastModified: 637111397456599232
   LoadResult: 0
   FileSizes:
   - Name: 
-    Value: 33778912
+    Value: 34714624
   Exists: 1
 --- !u!114 &-5526506693374769682
 MonoBehaviour:
@@ -1986,7 +2026,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 7004644158383123568}
+  - {fileID: -3855675131532968337}
   MinDistance: 1
   MaxDistance: 20
   Length: 888
@@ -2283,6 +2323,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 600
+--- !u!114 &-3855675131532968337
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_wood/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &-3855558965175520644
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2740,7 +2797,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 1631864438031285669}
+  - {fileID: 9177663034380784462}
   MinDistance: 1
   MaxDistance: 20
   Length: 800
@@ -2966,6 +3023,29 @@ MonoBehaviour:
   Max: 1
   Default: 1
   Exists: 1
+--- !u!114 &-2228704412095640284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/VO/Lore/vo_lore_core_letter_2
+  m_EditorClassIdentifier: 
+  Path: event:/VO/Lore/vo_lore_core_letter_2
+  guid: 27db3651db724545a8c22dce342d112e
+  Banks:
+  - {fileID: -5550800381060397836}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 57779
 --- !u!114 &-2126412639608918503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3379,6 +3459,40 @@ MonoBehaviour:
   Max: 2
   Default: 0
   Exists: 1
+--- !u!114 &-1333161748697976361
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_main_menu_v1_and_2/test audio 1 or 2
+  m_EditorClassIdentifier: 
+  Name: test audio 1 or 2
+  Min: 1
+  Max: 3
+  Default: 1
+  Exists: 1
+--- !u!114 &-1311473883384068411
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_ui_player_hp_heartbeat/Player HP
+  m_EditorClassIdentifier: 
+  Name: Player HP
+  Min: 0
+  Max: 100
+  Default: 100
+  Exists: 1
 --- !u!114 &-1285225947955041986
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3529,7 +3643,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 0
   Parameters:
-  - {fileID: -1861967498649941943}
+  - {fileID: 1075681107580427224}
   MinDistance: 1
   MaxDistance: 20
   Length: 74000
@@ -3719,7 +3833,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: 6453005942077420102}
+  - {fileID: -1311473883384068411}
   MinDistance: 0
   MaxDistance: 0
   Length: 11370
@@ -4066,7 +4180,7 @@ MonoBehaviour:
   - {fileID: -5550800381060397836}
   StringsBanks:
   - {fileID: -7746534513062299419}
-  stringsBankWriteTime: 637110508824919815
+  stringsBankWriteTime: 637111397536949688
   cacheVersion: 3
 --- !u!114 &36383913248451605
 MonoBehaviour:
@@ -4325,6 +4439,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 26377
+--- !u!114 &784340216682894253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_metal/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &823548790549296365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4478,6 +4609,23 @@ MonoBehaviour:
   m_Name: parameter:/sx_player_movement_rock/player_sneak
   m_EditorClassIdentifier: 
   Name: player_sneak
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
+--- !u!114 &1075681107580427224
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/at_env_door_draft/Door_open
+  m_EditorClassIdentifier: 
+  Name: Door_open
   Min: 0
   Max: 2
   Default: 0
@@ -4757,6 +4905,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 230
+--- !u!114 &1767850798201528865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_run
+  m_EditorClassIdentifier: 
+  Name: player_run
+  Min: 0
+  Max: 2
+  Default: 0
+  Exists: 1
 --- !u!114 &1912285163008228855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4807,6 +4972,23 @@ MonoBehaviour:
   Min: 0
   Max: 2
   Default: 0
+  Exists: 1
+--- !u!114 &1963000964676779507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_ceramic/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
   Exists: 1
 --- !u!114 &2014011728306001466
 MonoBehaviour:
@@ -4910,7 +5092,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -5848140103596240239}
+  - {fileID: 784340216682894253}
   MinDistance: 1
   MaxDistance: 20
   Length: 1094
@@ -5387,8 +5569,8 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 0
   Parameters:
-  - {fileID: -2872663418837276648}
-  - {fileID: 9041675967358776302}
+  - {fileID: 6271494246206549320}
+  - {fileID: -7972697300166786917}
   MinDistance: 0
   MaxDistance: 0
   Length: 57600
@@ -6324,6 +6506,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 888
+--- !u!114 &4483698643422019713
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_demo_end_impact/test audio 1 or 2
+  m_EditorClassIdentifier: 
+  Name: test audio 1 or 2
+  Min: 1
+  Max: 3
+  Default: 1
+  Exists: 1
 --- !u!114 &4612909985150768088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6491,7 +6690,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: 948325611911534865}
+  - {fileID: 1963000964676779507}
   MinDistance: 1
   MaxDistance: 20
   Length: 1194
@@ -6703,7 +6902,7 @@ MonoBehaviour:
   Is3D: 1
   IsOneShot: 1
   Parameters:
-  - {fileID: -1234939571398453934}
+  - {fileID: 5755214104468310555}
   MinDistance: 1
   MaxDistance: 20
   Length: 340
@@ -7011,6 +7210,23 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 560
+--- !u!114 &5755214104468310555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_key_throw/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
 --- !u!114 &5758687025109795172
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7285,6 +7501,23 @@ MonoBehaviour:
   Max: 1
   Default: 0
   Exists: 1
+--- !u!114 &6271494246206549320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/mu_raising_tension/Locks open
+  m_EditorClassIdentifier: 
+  Name: Locks open
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
 --- !u!114 &6422282891927638125
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7435,7 +7668,7 @@ MonoBehaviour:
   Parameters: []
   MinDistance: 0
   MaxDistance: 0
-  Length: 14850
+  Length: 18073
 --- !u!114 &6627980065885390867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7476,6 +7709,23 @@ MonoBehaviour:
   Min: 0
   Max: 100
   Default: 100
+  Exists: 1
+--- !u!114 &6654867255234435280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_player_movement_rock/player_sneak
+  m_EditorClassIdentifier: 
+  Name: player_sneak
+  Min: 0
+  Max: 2
+  Default: 0
   Exists: 1
 --- !u!114 &6704158108214725836
 MonoBehaviour:
@@ -7690,7 +7940,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -1535675309014168713}
+  - {fileID: 4483698643422019713}
   MinDistance: 0
   MaxDistance: 0
   Length: 9600
@@ -8066,7 +8316,7 @@ MonoBehaviour:
   Is3D: 0
   IsOneShot: 1
   Parameters:
-  - {fileID: -8336559233285792636}
+  - {fileID: -1333161748697976361}
   MinDistance: 0
   MaxDistance: 0
   Length: 118702
@@ -8364,6 +8614,23 @@ MonoBehaviour:
   Max: 10
   Default: 0
   Exists: 1
+--- !u!114 &8635267206455396739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/vo_npc_monster_state/Monster state
+  m_EditorClassIdentifier: 
+  Name: Monster state
+  Min: 0
+  Max: 6
+  Default: 0
+  Exists: 1
 --- !u!114 &8767200262803687175
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8641,6 +8908,23 @@ MonoBehaviour:
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
   m_Name: parameter:/sx_int_throw_wood/impact_strenght
+  m_EditorClassIdentifier: 
+  Name: impact_strenght
+  Min: 0
+  Max: 1
+  Default: 1
+  Exists: 1
+--- !u!114 &9177663034380784462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fecb8ef7f94ca804a8ab72049b86782e, type: 3}
+  m_Name: parameter:/sx_int_throw_glass/impact_strenght
   m_EditorClassIdentifier: 
   Name: impact_strenght
   Min: 0
