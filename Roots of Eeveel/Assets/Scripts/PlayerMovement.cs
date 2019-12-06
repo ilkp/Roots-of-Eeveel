@@ -26,13 +26,13 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Parent object of the camera")]
     [SerializeField] private Transform head;
 
-	[SerializeField] private Image reticuleImage;
-	/// <summary>
-	/// Image to be drawn as reticle
-	/// </summary>
-	[Tooltip("Image to be drawn as reticle")]
-	[SerializeField] private Sprite reticuleDefault;
-	[SerializeField] private Sprite reticuleRead;
+    [SerializeField] private Image reticuleImage;
+    /// <summary>
+    /// Image to be drawn as reticle
+    /// </summary>
+    [Tooltip("Image to be drawn as reticle")]
+    [SerializeField] private Sprite reticuleDefault;
+    [SerializeField] private Sprite reticuleRead;
     [SerializeField] private Sprite reticuleHold;
 
     /// <summary>
@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
 
     private Collider lastHit = null; // for turning off the highlight from GameObject that is no longer in focus
 
-	private Vector3 cameraSneakDisplacement = new Vector3(0, -0.2f, 0);
+    private Vector3 cameraSneakDisplacement = new Vector3(0, -0.2f, 0);
 
 
     enum HealthState
@@ -146,16 +146,16 @@ public class PlayerMovement : MonoBehaviour
     private float rotationX;
     private float rotationY;
     public bool allowRotation = true;
-	public bool allowMovement = true;
+    public bool allowMovement = true;
     private bool sneaking;
     private bool running;
     private float footstepSoundTimer = 0.0f;
     private const float footStepMaxTime = 0.5f;
 
-	public float getGrabDistance()
-	{
-		return grabDistance;
-	}
+    public float getGrabDistance()
+    {
+        return grabDistance;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -203,20 +203,21 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Check sneaking condition
-        sneaking = Input.GetKey(KeyCode.LeftControl);
+        sneaking = Input.GetKey(Keybindings.Instance.crouch) || Input.GetKey(Keybindings.Instance.altCrouch);
         // Check sneaking condition
+        //  DELETE THIS WHENEVER CONVENIENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
         running = Input.GetKey(KeyCode.LeftShift) && !sneaking;
 
-		if (sneaking)
-		{
-			audioSettings.PlaySneakReverb();
-			cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position + cameraSneakDisplacement, 0.3f);
-		}
-		else
-		{
-			audioSettings.StopSneakReverb();
-			cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position, 0.3f);
-		}
+        if (sneaking)
+        {
+            audioSettings.PlaySneakReverb();
+            cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position + cameraSneakDisplacement, 0.3f);
+        }
+        else
+        {
+            audioSettings.StopSneakReverb();
+            cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position, 0.3f);
+        }
 
         if (footstepSoundTimer > footStepMaxTime)
         {
@@ -231,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Gives objects a chance to reset stuff if needed
         // Checks if left mouse button is released
-        if (interactable && Input.GetKeyUp(interaction))
+        if (interactable && Input.GetKeyUp(Keybindings.Instance.interaction) || Input.GetKeyUp(Keybindings.Instance.altInteraction))
         {
             // Tells interactable object to run funtion 'Reset'
             interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
@@ -241,7 +242,7 @@ public class PlayerMovement : MonoBehaviour
         }
 
         // Secondary interact for secondary needs
-        if (interactable && Input.GetKeyDown(secondaryInteraction))
+        if (interactable && Input.GetKeyDown(Keybindings.Instance.secondaryInteraction) || Input.GetKeyDown(Keybindings.Instance.altSecondaryInteraction))
         {
             interactable.SendMessage("SecondInteract", SendMessageOptions.DontRequireReceiver);
         }
@@ -257,21 +258,21 @@ public class PlayerMovement : MonoBehaviour
             hit.collider.GetComponent<Renderer>().material.SetFloat("_OnOff", 1f);
             lastHit = hit.collider;
 
-			// Change reticule
-			if (hit.collider.GetComponent<Interactable_ReadableUI>() != null ||
-				hit.collider.GetComponent<InteractableReadableMulti>() != null)
-			{
-				reticuleImage.sprite = reticuleRead;
-				reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
-			}
+            // Change reticule
+            if (hit.collider.GetComponent<Interactable_ReadableUI>() != null ||
+                hit.collider.GetComponent<InteractableReadableMulti>() != null)
+            {
+                reticuleImage.sprite = reticuleRead;
+                reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
+            }
             else if (hit.collider.GetComponent<Interactable_HoldableObject>() != null ||
                     hit.collider.GetComponent<Interactable_Key>() != null)
             {
                 reticuleImage.sprite = reticuleHold;
-				reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
+                reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
             }
 
-            if (Input.GetKey(interaction))
+            if (Input.GetKey(Keybindings.Instance.interaction) || Input.GetKey(Keybindings.Instance.altInteraction))
             {
                 reticuleImage.enabled = false;
             }
@@ -283,21 +284,21 @@ public class PlayerMovement : MonoBehaviour
             GetComponent<ToolTip>().showPopup(true);
 
             // Check if player pressed the interaction button
-            if (Input.GetKeyDown(interaction))
+            if (Input.GetKeyDown(Keybindings.Instance.interaction) || Input.GetKeyDown(Keybindings.Instance.altInteraction))
             {
                 // Store hit object
                 interactable = hit.transform.gameObject;
                 // Call 'Interact' on the target
                 interactable.SendMessage("Interact", SendMessageOptions.DontRequireReceiver);
                 holdingItem = true;
-				if (interactable.GetComponent<Rigidbody>() != null)
-				{
-					holdSpeedModifier = Mathf.Clamp(1f / Mathf.Pow(interactable.GetComponent<Rigidbody>().mass, 0.33f), 0.5f, 1f);
-				}
-				else
-				{
-					holdSpeedModifier = 1f;
-				}
+                if (interactable.GetComponent<Rigidbody>() != null)
+                {
+                    holdSpeedModifier = Mathf.Clamp(1f / Mathf.Pow(interactable.GetComponent<Rigidbody>().mass, 0.33f), 0.5f, 1f);
+                }
+                else
+                {
+                    holdSpeedModifier = 1f;
+                }
             }
         }
         else
@@ -309,12 +310,12 @@ public class PlayerMovement : MonoBehaviour
                 lastHit = null;
             }
 
-			// Reset reticule
-			reticuleImage.sprite = reticuleDefault;
-			reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleDefault.rect.width, reticuleDefault.rect.height);
+            // Reset reticule
+            reticuleImage.sprite = reticuleDefault;
+            reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleDefault.rect.width, reticuleDefault.rect.height);
 
             // Reset whatever is being done
-            if (interactable && !Input.GetKey(interaction))
+            if (interactable && !(Input.GetKey(Keybindings.Instance.interaction) || Input.GetKey(Keybindings.Instance.altInteraction)))
             {
                 interactable.SendMessage("Reset", SendMessageOptions.DontRequireReceiver);
                 holdingItem = false;
@@ -330,27 +331,27 @@ public class PlayerMovement : MonoBehaviour
     private void FixedUpdate()
     {
         // Move player accrding to the inputs
-		if (allowMovement)
-		{
-			float speedModifier = (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
-			Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
-			playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speed * speedModifier));
-			if (direction.magnitude > 0)
-			{
-				footstepSoundTimer += speedModifier;
-			}
-		}
+        if (allowMovement)
+        {
+            float speedModifier = (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
+            Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
+            playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speed * speedModifier));
+            if (direction.magnitude > 0)
+            {
+                footstepSoundTimer += speedModifier;
+            }
+        }
         if (hp > HealthState.Healthy)
         {
             if (regenCounter <= 0)
             {
                 hp--;
                 hpIndicator.sprite = hpIndicators[(int)hp];
-				UpdateHealthAudio();
-				if (hp > HealthState.Healthy)
+                UpdateHealthAudio();
+                if (hp > HealthState.Healthy)
                 {
                     regenCounter = hpRegen;
-				}
+                }
             }
             else
             {
@@ -360,9 +361,9 @@ public class PlayerMovement : MonoBehaviour
     }
 
     public void Die()
-	{
-		audioSettings.StopPlayerHPHeartbeat();
-		GameManager.Instance.SetGameOver(false);
+    {
+        audioSettings.StopPlayerHPHeartbeat();
+        GameManager.Instance.SetGameOver(false);
     }
 
     public void GetHurt()
@@ -372,48 +373,48 @@ public class PlayerMovement : MonoBehaviour
             hp++;
             hpIndicator.sprite = hpIndicators[(int)hp];
             regenCounter = hpRegen;
-			//sound things
-			if (Random.value < 0.5f)
-			{		
-				audioSettings.PlayPlayerDamageLow();
-			}
-			else
-			{
-				audioSettings.PlayPlayerDamageHigh();
-			}
+            //sound things
+            if (Random.value < 0.5f)
+            {
+                audioSettings.PlayPlayerDamageLow();
+            }
+            else
+            {
+                audioSettings.PlayPlayerDamageHigh();
+            }
 
-			UpdateHealthAudio();
+            UpdateHealthAudio();
 
-		}
+        }
         else
         {
             Die();
         }
     }
 
-	private void UpdateHealthAudio()
-	{
-		audioSettings.PlayPlayerHPRoots();
+    private void UpdateHealthAudio()
+    {
+        audioSettings.PlayPlayerHPRoots();
 
-		switch (hp)
-		{
-			case HealthState.Healthy:
-				audioSettings.StopPlayerHPHeartbeat();
-				break;
-			case HealthState.Low:
-				audioSettings.PlayPlayerHPHeartbeat(39f);
-				break;
-			case HealthState.Lower:
-				audioSettings.PlayPlayerHPHeartbeat(21f);
-				break;
-			case HealthState.Lowest:
-				audioSettings.PlayPlayerHPHeartbeat(2f);
-				break;
-			default:
-				Debug.Log("UpdateHealtAudio - HP out of bounds!");
-				break;
-		}
-	}
+        switch (hp)
+        {
+            case HealthState.Healthy:
+                audioSettings.StopPlayerHPHeartbeat();
+                break;
+            case HealthState.Low:
+                audioSettings.PlayPlayerHPHeartbeat(39f);
+                break;
+            case HealthState.Lower:
+                audioSettings.PlayPlayerHPHeartbeat(21f);
+                break;
+            case HealthState.Lowest:
+                audioSettings.PlayPlayerHPHeartbeat(2f);
+                break;
+            default:
+                Debug.Log("UpdateHealtAudio - HP out of bounds!");
+                break;
+        }
+    }
 
     /*
     public void playFootstep()
