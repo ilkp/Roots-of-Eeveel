@@ -334,7 +334,7 @@ public class PlayerMovement : MonoBehaviour
         if (allowMovement)
         {
             float speedModifier = (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
-            Vector3 direction = transform.forward * Input.GetAxisRaw("Vertical") + transform.right * Input.GetAxisRaw("Horizontal");
+            Vector3 direction = transform.forward * Keybindings.Instance.vertical.GetAxis() + transform.right * Keybindings.Instance.horizontal.GetAxis();
             playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speed * speedModifier));
             if (direction.magnitude > 0)
             {

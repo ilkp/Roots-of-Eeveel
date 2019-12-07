@@ -15,6 +15,14 @@ public class Keybindings : MonoBehaviour
     public KeyCode altCrouch;
     public KeyCode flashLight;
 
+    public KeyCode forward;
+    public KeyCode backward;
+    public KeyCode left;
+    public KeyCode right;
+
+    public Axis vertical;
+    public Axis horizontal;
+
     private void Awake()
     {
         Time.timeScale = 1;
@@ -24,5 +32,11 @@ public class Keybindings : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        vertical = new Axis(forward, backward);
+        horizontal = new Axis(right, left);
     }
 }
