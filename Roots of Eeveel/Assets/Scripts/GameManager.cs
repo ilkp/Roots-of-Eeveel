@@ -63,7 +63,6 @@ public class GameManager : MonoBehaviour
 				break;
 			case 2: // game scene
 				applyBrightness();
-				StartCoroutine(audioSettings.FadeMenuMusic());
 				SoundManager.Instance.LoadEnemies();
 				ButtonLinker.Instance.ToGame();
 				endingScreenWin = GameObject.FindGameObjectWithTag("GameOverWin");
@@ -108,8 +107,34 @@ public class GameManager : MonoBehaviour
 		fillImage.enabled = true;
 		fillImage.transform.localScale = new Vector3(1, fillFull, 1);
 		AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
+		operation.allowSceneActivation = false;
+		float cutSceneTimer = 0f;
+		const float cutSceneMaxTime = 1f;
+
+		switch (scene)
+		{
+			case 2:
+				StartCoroutine(audioSettings.FadeMenuMusic());
+				break;
+			default:
+				break;
+		}
+
 		while (!operation.isDone)
 		{
+			if (scene == 2)
+			{
+				cutSceneTimer += Time.deltaTime;
+				if ((cutSceneTimer > cutSceneMaxTime || Input.anyKey) && operation.progress >= 0.9f)
+				{
+					operation.allowSceneActivation = true;
+				}
+				Debug.Log("CUT SCENE");
+			}
+			else if (operation.progress >= 0.9f)
+			{
+				operation.allowSceneActivation = true;
+			}
 			fillImage.transform.localScale = new Vector3(1, fillFull - fillChange * (operation.progress / 0.9f), 1);
 			yield return null;
 		}

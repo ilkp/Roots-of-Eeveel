@@ -577,7 +577,7 @@ public class AudioSettings : ScriptableObject
 	#region Music
 	[Header("Music", order = 3)] //---------------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string menuMusic;
-	[SerializeField] private float menuMusicFadeTime = 5f;
+	[SerializeField] private float menuMusicFadeTime = 1f;
 	private FMOD.Studio.EventInstance musicInstance;
 
 	public void PlayMenuMusic()
