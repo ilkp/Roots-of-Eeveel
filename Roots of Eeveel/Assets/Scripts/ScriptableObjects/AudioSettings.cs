@@ -35,11 +35,11 @@ public class AudioSettings : ScriptableObject
 		soundBus.setVolume(volume);
 	}
 
-	public void SetAtmospeheVolume(float volume)
+	public void SetAtmosphereVolume(float volume)
 	{
 		if (!atmosphereBus.isValid())
 		{
-			atmosphereBus = FMODUnity.RuntimeManager.GetBus("bus:/SU");
+			atmosphereBus = FMODUnity.RuntimeManager.GetBus("bus:/AT");
 		}
 
 		atmosphereBus.setVolume(volume);
