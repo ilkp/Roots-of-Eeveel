@@ -68,5 +68,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSettings: {fileID: 11400000, guid: 577839f6d6b6c5b4c978bef572259566, type: 2}
-  Interval: 2
-  IntervalSpread: 1
+  Interval: 13
+  IntervalSpread: 5

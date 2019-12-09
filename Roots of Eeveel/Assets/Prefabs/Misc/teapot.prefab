@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2996205262867269428}
   - component: {fileID: 907267813527023101}
   - component: {fileID: 1827650437823006914}
-  - component: {fileID: 2726322667119829802}
   - component: {fileID: 2726322667119829800}
   - component: {fileID: 2726322667119829801}
+  - component: {fileID: 4388715023767191}
   m_Layer: 0
   m_Name: teapot
   m_TagString: Interactable
@@ -81,19 +81,6 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &2726322667119829802
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2726322667119829803}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.31569982, y: 0.47489974, z: 0.25651807}
-  m_Center: {x: -0.028623223, y: 0, z: 0}
 --- !u!54 &2726322667119829800
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -127,3 +114,17 @@ MonoBehaviour:
     RightMouseButton to throw the object.'
   pullForce: 10
   throwForce: 10
+--- !u!64 &4388715023767191
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2726322667119829803}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 1
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 473659186752541762, guid: 4d38ed674bebbec46a77d5c2bd844687, type: 3}
