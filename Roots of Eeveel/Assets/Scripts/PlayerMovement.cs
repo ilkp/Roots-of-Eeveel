@@ -210,12 +210,12 @@ public class PlayerMovement : MonoBehaviour
 
         if (sneaking)
         {
-            audioSettings.PlaySneakReverb();
+            //audioSettings.PlaySneakReverb();
             cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position + cameraSneakDisplacement, 0.3f);
         }
         else
         {
-            audioSettings.StopSneakReverb();
+            //audioSettings.StopSneakReverb();
             cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position, 0.3f);
         }
 
