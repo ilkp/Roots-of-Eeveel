@@ -130,7 +130,6 @@ public class GameManager : MonoBehaviour
 				{
 					operation.allowSceneActivation = true;
 				}
-				Debug.Log("CUT SCENE");
 			}
 			else if (operation.progress >= 0.9f)
 			{

@@ -9,11 +9,13 @@ public class ReadableData : ScriptableObject
 	public int fontSize;
 	public Color fontColor;
 	public TextAlignmentOptions alignment;
+	public int letterSound;
 	public Sprite UISprite;
 	public string UIText;
 	public float TAnchorMinX;
 	public float TAnchorMaxX;
 	public float TAnchorMinY;
 	public float TAnchorMaxY;
+
 }
 

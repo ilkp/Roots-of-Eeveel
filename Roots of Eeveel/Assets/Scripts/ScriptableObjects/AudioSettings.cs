@@ -824,6 +824,29 @@ public class AudioSettings : ScriptableObject
 	private FMOD.Studio.EventInstance extraLetter1Instance;
 	private FMOD.Studio.EventInstance extraLetter2Instance;
 
+	public void PlayLetter(int readable)
+	{
+		switch (readable)
+		{
+			case 0:
+				break;
+			case 1:
+				PlayCoreLetter1();
+				break;
+			case 2:
+				PlayCoreLetter2();
+				break;
+			case 3:
+				PlayerExtraLetter1();
+				break;
+			case 4:
+				PlayerExtraLetter2();
+				break;
+			default:
+				break;
+		}
+	}
+
 	public IEnumerator PlayLoreStart()
 	{
 		yield return new WaitForSecondsRealtime(2);
