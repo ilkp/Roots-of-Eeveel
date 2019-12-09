@@ -601,20 +601,21 @@ public class AudioSettings : ScriptableObject
 	/// <returns></returns>
 	public IEnumerator FadeMenuMusic()
 	{
+		PlayRoomTone();
 		float counter = 0f;
 		musicInstance.getVolume(out float startVolume);
 
 		while (counter < menuMusicFadeTime)
 		{
 			counter += Time.deltaTime;
-			musicInstance.setVolume(Mathf.Lerp(startVolume, 0f, (counter / menuMusicFadeTime)));
+			musicInstance.setVolume(Mathf.Lerp(startVolume, 0f, 2 * (counter / menuMusicFadeTime)));
 
 			yield return null;
 		}
 
 		musicInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 
-		PlayRoomTone();
+		
 	}
 
 	#endregion
@@ -806,6 +807,82 @@ public class AudioSettings : ScriptableObject
 			isSneak = false;
 			SneakInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
 		}
+	}
+
+	#endregion
+
+	#region VoiceOver
+	[Header("UI", order = 7)] //------------------------------------------------------------------------------------
+	[FMODUnity.EventRef] [SerializeField] private string startLore;
+	[FMODUnity.EventRef] [SerializeField] private string coreLetter1;
+	[FMODUnity.EventRef] [SerializeField] private string coreLetter2;
+	[FMODUnity.EventRef] [SerializeField] private string extraLetter1;
+	[FMODUnity.EventRef] [SerializeField] private string extraLetter2;
+	private FMOD.Studio.EventInstance startLoreInstance;
+	private FMOD.Studio.EventInstance coreLetter1Instance;
+	private FMOD.Studio.EventInstance coreLetter2Instance;
+	private FMOD.Studio.EventInstance extraLetter1Instance;
+	private FMOD.Studio.EventInstance extraLetter2Instance;
+
+	public IEnumerator PlayLoreStart()
+	{
+		yield return new WaitForSecondsRealtime(2);
+		startLoreInstance = FMODUnity.RuntimeManager.CreateInstance(startLore);
+		startLoreInstance.start();
+	}
+
+	public void StopLoreStart()
+	{
+		startLoreInstance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		startLoreInstance.release();
+	}
+
+	public void PlayCoreLetter1()
+	{
+		coreLetter1Instance = FMODUnity.RuntimeManager.CreateInstance(coreLetter1);
+		coreLetter1Instance.start();
+	}
+
+	public void StopCoreLetter1()
+	{
+		coreLetter1Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		coreLetter1Instance.release();
+	}
+
+	public void PlayCoreLetter2()
+	{
+		coreLetter2Instance = FMODUnity.RuntimeManager.CreateInstance(coreLetter2);
+		coreLetter2Instance.start();
+	}
+
+	public void StopCoreLetter2()
+	{
+		coreLetter2Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		coreLetter2Instance.release();
+	}
+
+	public void PlayerExtraLetter1()
+	{
+		coreLetter1Instance = FMODUnity.RuntimeManager.CreateInstance(extraLetter1);
+		coreLetter1Instance.start();
+	}
+
+	public void StopExtraLetter1()
+	{
+		extraLetter1Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		extraLetter1Instance.release();
+	}
+
+	public void PlayerExtraLetter2()
+	{
+		coreLetter2Instance = FMODUnity.RuntimeManager.CreateInstance(extraLetter2);
+		coreLetter2Instance.start();
+	}
+
+	public void StopExtraLetter2()
+	{
+		extraLetter2Instance.stop(FMOD.Studio.STOP_MODE.IMMEDIATE);
+		extraLetter2Instance.release();
 	}
 
 	#endregion

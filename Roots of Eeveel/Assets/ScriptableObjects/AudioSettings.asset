@@ -52,3 +52,8 @@ MonoBehaviour:
   startButton: event:/SX/UI/sx_ui_start_game
   loreReverb: snapshot:/lore_ducking
   sneakReverb: snapshot:/sneak_ducking
+  startLore: event:/VO/Lore/vo_lore_start
+  coreLetter1: event:/VO/Lore/vo_lore_core_letter_1
+  coreLetter2: event:/VO/Lore/vo_lore_core_letter_2
+  extraLetter1: event:/VO/Lore/vo_lore_extra_letter_1
+  extraLetter2: event:/VO/Lore/vo_lore_extra_letter_2
