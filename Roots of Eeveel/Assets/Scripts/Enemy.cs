@@ -298,7 +298,7 @@ public class Enemy : MonoBehaviour
         do
         {
             playerDistance = PlayerHorizontalDistance();
-            if (playerDistance <= seeRange)
+			if (playerDistance <= seeRange)
             {
                 if (playerDistance <= _agent.stoppingDistance)
                 {
@@ -315,6 +315,7 @@ public class Enemy : MonoBehaviour
             }
             else if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
+				_soundHeard = false;
                 state = State.Investigate;
             }
             yield return 0;
