@@ -10,7 +10,7 @@ public class AudioSettings : ScriptableObject
 
 	public void SetMusicVolume(float volume)
 	{
-
+		
 	}
 
 	public void SetSoundVolume(float volume)
@@ -172,7 +172,7 @@ public class AudioSettings : ScriptableObject
 		FMOD.Studio.EventInstance enemyFootStepInstance = FMODUnity.RuntimeManager.CreateInstance(enemyFootStep);
 		enemyFootStepInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
 		enemyFootStepInstance.start();
-
+		//Debug.Log("EnemyFootStepPlay");
 		while (true)
 		{
 			enemyFootStepInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
@@ -823,6 +823,29 @@ public class AudioSettings : ScriptableObject
 	private FMOD.Studio.EventInstance coreLetter2Instance;
 	private FMOD.Studio.EventInstance extraLetter1Instance;
 	private FMOD.Studio.EventInstance extraLetter2Instance;
+
+	public void PlayLetter(int readable)
+	{
+		switch (readable)
+		{
+			case 0:
+				break;
+			case 1:
+				PlayCoreLetter1();
+				break;
+			case 2:
+				PlayCoreLetter2();
+				break;
+			case 3:
+				PlayerExtraLetter1();
+				break;
+			case 4:
+				PlayerExtraLetter2();
+				break;
+			default:
+				break;
+		}
+	}
 
 	public IEnumerator PlayLoreStart()
 	{

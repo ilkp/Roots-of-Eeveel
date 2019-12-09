@@ -105,6 +105,9 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private int _aggro = 0;
 
+	[Tooltip("How long steps the enemy takes. Sound related.")]
+	[SerializeField] private float stepLength = 1;
+
     private const float seeRange = 3f;
     private const float seeRangePatrol = 5f;
 
@@ -141,6 +144,30 @@ public class Enemy : MonoBehaviour
         _soundHeard = false;
         NextState();
     }
+
+	IEnumerator WalkSound()
+	{
+		Vector3 lastPosition = transform.position;
+		float distanceFromLastSound = 0;
+		//Debug.Log("EnemyWalkSoundStart");
+
+		while (true)
+		{
+			distanceFromLastSound += Vector3.Distance(lastPosition, transform.position);
+			lastPosition = transform.position;
+
+			//Debug.Log("EnemyWalkSoundLoop");
+
+			if(distanceFromLastSound >= stepLength)
+			{
+				//Debug.Log("EnemyWalkSoundLoop if:" + distanceFromLastSound);
+				distanceFromLastSound = 0;
+				StartCoroutine(audioSettings.PlayEnemyFootStep(this.gameObject));
+			}
+
+			yield return null;
+		}
+	}
 
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
@@ -261,7 +288,7 @@ public class Enemy : MonoBehaviour
     // State where the enemy has heard the player
     IEnumerator ChaseState()
     {
-        StartCoroutine(audioSettings.PlayEnemyNoticeSound());
+        //StartCoroutine(audioSettings.PlayEnemyNoticeSound());
 		audioSettings.SetEnemyState(gameObject, 2);
 		audioSettings.AddEnemyToChase(this.gameObject);
         _anim.SetFloat("forward", _agent.speed);
@@ -271,7 +298,7 @@ public class Enemy : MonoBehaviour
         do
         {
             playerDistance = PlayerHorizontalDistance();
-            if (playerDistance <= seeRange)
+			if (playerDistance <= seeRange)
             {
                 if (playerDistance <= _agent.stoppingDistance)
                 {
@@ -288,6 +315,7 @@ public class Enemy : MonoBehaviour
             }
             else if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
+				_soundHeard = false;
                 state = State.Investigate;
             }
             yield return 0;
@@ -361,6 +389,7 @@ public class Enemy : MonoBehaviour
     {
         NextState();
 		audioSettings.PlayEnemyState(gameObject);
+		StartCoroutine(WalkSound());
     }
 
     // Method to change the behaviour state
