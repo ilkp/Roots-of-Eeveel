@@ -6,9 +6,10 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
 {
     public float minAngle;
     public float maxAngle;
-    public float currentAngle;
     public float grabDistance;
     private Transform playerCam;
+    private Vector3 grabPosition;
+    private Vector3 pivotPosition;
 
     public event Action<IInteractable> OnInteract;
     private string toolTip = "Hold down leftMouseButton to interact.";
@@ -33,28 +34,52 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        RaycastHit hit;
-        Physics.Raycast(playerCam.position, playerCam.forward, out hit, 4f);
-        grabDistance = Vector3.Distance(hit.transform.position, playerCam.position);
+        int n = Vector3.Dot(playerCam.position, transform.forward) > 0 ? 1 : -1;
+        grabDistance = Vector3.Dot((transform.position - playerCam.position), transform.forward * n)
+                        / Vector3.Dot(playerCam.forward, transform.forward * n);
         StartCoroutine(Hold());
     }
 
     public void StopInteraction()
     {
+        Debug.Log("Boop");
         StopAllCoroutines();
     }
 
     private IEnumerator Hold()
     {
         Vector3 axis = Vector3.up;
-        while ((Input.GetKey(Keybindings.Instance.interaction) || Input.GetKey(Keybindings.Instance.altInteraction)) && Input.GetAxisRaw("Vertical") == 0 && Input.GetAxisRaw("Horizontal") == 0)
+        int multiplier;
+        float angle = 0;
+        while ((Input.GetKey(Keybindings.Instance.interaction) || Input.GetKey(Keybindings.Instance.altInteraction)))
         {
-            transform.localEulerAngles = new Vector3(
+            grabPosition = playerCam.position + (playerCam.forward * grabDistance);
+            pivotPosition = transform.position;
+            grabPosition.y = 0;
+            pivotPosition.y = 0;
+
+            multiplier = Vector3.Dot(transform.right, grabPosition - pivotPosition) > 0 ? 1 : -1; 
+
+            angle = Vector3.Angle(
+                transform.right * multiplier,
+                grabPosition - pivotPosition);
+
+            if (Vector3.Dot(transform.forward * multiplier, grabPosition - pivotPosition) > 0)
+            {
+                angle *= -1;
+            }
+
+            float newAngle = (transform.localEulerAngles.y > 180 ? transform.localEulerAngles.y - 360 : transform.localEulerAngles.y) + angle;
+            Debug.Log(newAngle);
+            if (newAngle >= minAngle && newAngle <= maxAngle)
+            {
+                transform.localEulerAngles = new Vector3(
                 0,
-                transform.localEulerAngles.y +
-                    Vector3.Angle(transform.right,
-                        new Vector3(playerCam.position.x + (playerCam.forward.x * grabDistance), 0, playerCam.position.z + (playerCam.forward.z * grabDistance))),
+                newAngle,
                 0);
+            }
+            
+           
             yield return null;
         }
         StopInteraction();
