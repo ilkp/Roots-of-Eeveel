@@ -288,7 +288,7 @@ public class Enemy : MonoBehaviour
     // State where the enemy has heard the player
     IEnumerator ChaseState()
     {
-        StartCoroutine(audioSettings.PlayEnemyNoticeSound());
+        //StartCoroutine(audioSettings.PlayEnemyNoticeSound());
 		audioSettings.SetEnemyState(gameObject, 2);
 		audioSettings.AddEnemyToChase(this.gameObject);
         _anim.SetFloat("forward", _agent.speed);

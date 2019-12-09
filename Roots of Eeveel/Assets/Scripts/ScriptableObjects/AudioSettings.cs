@@ -10,7 +10,7 @@ public class AudioSettings : ScriptableObject
 
 	public void SetMusicVolume(float volume)
 	{
-
+		
 	}
 
 	public void SetSoundVolume(float volume)
