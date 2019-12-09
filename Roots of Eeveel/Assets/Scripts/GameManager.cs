@@ -109,12 +109,13 @@ public class GameManager : MonoBehaviour
 		AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 		operation.allowSceneActivation = false;
 		float cutSceneTimer = 0f;
-		const float cutSceneMaxTime = 1f;
+		const float cutSceneMaxTime = 12f;
 
 		switch (scene)
 		{
 			case 2:
 				StartCoroutine(audioSettings.FadeMenuMusic());
+				StartCoroutine(audioSettings.PlayLoreStart());
 				break;
 			default:
 				break;
