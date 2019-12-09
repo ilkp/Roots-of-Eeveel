@@ -6,16 +6,52 @@ using UnityEngine;
 public class AudioSettings : ScriptableObject
 {
 	public float musicVolume;
+	private FMOD.Studio.Bus musicBus;
 	public float soundsVolume;
+	private FMOD.Studio.Bus soundBus;
+	public float atmosphereVolume;
+	private FMOD.Studio.Bus atmosphereBus;
+	public float voiceVolume;
+	private FMOD.Studio.Bus voiceBus;
 
 	public void SetMusicVolume(float volume)
 	{
-		
+		if (!musicBus.isValid())
+		{
+			musicBus = FMODUnity.RuntimeManager.GetBus("bus:/MU");
+		}
+
+		musicBus.setVolume(volume);
 	}
 
 	public void SetSoundVolume(float volume)
 	{
+		if (!soundBus.isValid())
+		{
+			soundBus = FMODUnity.RuntimeManager.GetBus("bus:/SX");
+		}
 
+		soundBus.setVolume(volume);
+	}
+
+	public void SetAtmospeheVolume(float volume)
+	{
+		if (!atmosphereBus.isValid())
+		{
+			atmosphereBus = FMODUnity.RuntimeManager.GetBus("bus:/SU");
+		}
+
+		atmosphereBus.setVolume(volume);
+	}
+
+	public void SetVoiceVolume(float volume)
+	{
+		if (!voiceBus.isValid())
+		{
+			voiceBus = FMODUnity.RuntimeManager.GetBus("bus:/VO");
+		}
+
+		voiceBus.setVolume(volume);
 	}
 
 	#region Atmosphere
