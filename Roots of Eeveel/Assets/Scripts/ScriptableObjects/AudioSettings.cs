@@ -172,7 +172,7 @@ public class AudioSettings : ScriptableObject
 		FMOD.Studio.EventInstance enemyFootStepInstance = FMODUnity.RuntimeManager.CreateInstance(enemyFootStep);
 		enemyFootStepInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
 		enemyFootStepInstance.start();
-
+		//Debug.Log("EnemyFootStepPlay");
 		while (true)
 		{
 			enemyFootStepInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
