@@ -67,7 +67,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
             }
 
             destination = head.position + offSet + head.forward * holdDistance;
-            rb.velocity = ((destination - transform.position) * pullForce / rb.mass);
+            rb.velocity = ((destination - transform.position) * pullForce / (rb.mass < 1 ? rb.mass : rb.mass / 2));
             rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;
 
             yield return null;
