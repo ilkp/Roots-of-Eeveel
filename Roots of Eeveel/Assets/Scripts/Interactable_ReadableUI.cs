@@ -43,6 +43,7 @@ public class Interactable_ReadableUI : MonoBehaviour, IInteractable
         uiImage.rectTransform.sizeDelta = new Vector2(readableData.UISprite.rect.width * widthMultiplier, imageHeight);
         uiImage.sprite = readableData.UISprite;
         uiText.text = readableData.UIText.Replace("\\n", "\n");
+		GameManager.Instance.audioSettings.PlayLetter(readableData.letterSound);
 
         StartCoroutine(hold());
     }

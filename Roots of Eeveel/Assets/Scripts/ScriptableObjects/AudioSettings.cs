@@ -826,10 +826,18 @@ public class AudioSettings : ScriptableObject
 
 	public void PlayLetter(int readable)
 	{
+		if (readable == 0)
+		{
+			return;
+		}
+		startLoreInstance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		coreLetter1Instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		coreLetter2Instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		extraLetter1Instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+		extraLetter2Instance.stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+
 		switch (readable)
 		{
-			case 0:
-				break;
 			case 1:
 				PlayCoreLetter1();
 				break;
