@@ -266,7 +266,9 @@ public class PlayerMovement : MonoBehaviour
                 reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
             }
             else if (hit.collider.GetComponent<Interactable_HoldableObject>() != null ||
-                    hit.collider.GetComponent<Interactable_Key>() != null)
+                    hit.collider.GetComponent<Interactable_Key>() != null ||
+                    hit.collider.GetComponent<Interactable_Door>() != null ||
+                    hit.collider.GetComponent<Interactable_Door2>() != null)
             {
                 reticuleImage.sprite = reticuleHold;
                 reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
