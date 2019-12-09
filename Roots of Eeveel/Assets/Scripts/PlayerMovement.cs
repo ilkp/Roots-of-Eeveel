@@ -313,6 +313,10 @@ public class PlayerMovement : MonoBehaviour
             // Reset reticule
             reticuleImage.sprite = reticuleDefault;
             reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleDefault.rect.width, reticuleDefault.rect.height);
+            if (!reticuleImage.enabled)
+            {
+                reticuleImage.enabled = true;
+            }
 
             // Reset whatever is being done
             if (interactable && !(Input.GetKey(Keybindings.Instance.interaction) || Input.GetKey(Keybindings.Instance.altInteraction)))

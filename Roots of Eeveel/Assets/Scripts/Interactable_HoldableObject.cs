@@ -6,71 +6,71 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 {
-	[SerializeField] private string toolTip = "Hold down leftMouseButton to hold the object in hand.\nRightMouseButton to throw the object.";
-	public string ToolTip
-	{
-		get
-		{
-			return toolTip;
-		}
-		set
-		{
-			toolTip = value;
-		}
-	}
+    [SerializeField] private string toolTip = "Hold down leftMouseButton to hold the object in hand.\nRightMouseButton to throw the object.";
+    public string ToolTip
+    {
+        get
+        {
+            return toolTip;
+        }
+        set
+        {
+            toolTip = value;
+        }
+    }
 
-	public event Action<IInteractable> OnInteract;
+    public event Action<IInteractable> OnInteract;
 
-	private GameObject player;
-	private Transform head;
-	private Rigidbody rb;
-	[SerializeField] private float pullForce = 10;
-	[SerializeField] private float throwForce = 10;
-	private Vector3 destination;
+    private GameObject player;
+    private Transform head;
+    private Rigidbody rb;
+    [SerializeField] private float pullForce = 10;
+    [SerializeField] private float throwForce = 10;
+    private Vector3 destination;
 
-	private void Awake()
-	{
-		player = FindObjectOfType<PlayerMovement>().gameObject;
-		head = player.GetComponentInChildren<Camera>().transform;
-		rb = GetComponent<Rigidbody>();
-		gameObject.tag = "Interactable";
-	}
+    private void Awake()
+    {
+        player = FindObjectOfType<PlayerMovement>().gameObject;
+        head = player.GetComponentInChildren<Camera>().transform;
+        rb = GetComponent<Rigidbody>();
+        gameObject.tag = "Interactable";
+    }
 
-	public void Interact()
-	{
-		rb.useGravity = false;
-		StartCoroutine(Hold());
-	}
+    public void Interact()
+    {
+        rb.useGravity = false;
+        StartCoroutine(Hold());
+    }
 
-	public void StopInteraction()
-	{
-		rb.useGravity = true;
-		StopAllCoroutines();
-	}
+    public void StopInteraction()
+    {
+        rb.useGravity = true;
+        StopAllCoroutines();
+    }
 
-	IEnumerator Hold()
-	{
-		float holdDistance = Vector3.Distance(head.transform.position, transform.position);
-		Vector3 offSet = transform.position - (head.position + head.forward * holdDistance);
+    IEnumerator Hold()
+    {
+        float holdDistance = Vector3.Distance(head.transform.position, transform.position);
+        Vector3 offSet = transform.position - (head.position + head.forward * holdDistance);
 
-		while (true)
-		{
-			float zoom = Input.GetAxis("Mouse ScrollWheel");
-			holdDistance = Mathf.Clamp(holdDistance + zoom, 1f, 4f);
+        while (true)
+        {
+            float zoom = Input.GetAxis("Mouse ScrollWheel");
+            holdDistance = Mathf.Clamp(holdDistance + zoom, 1f, 4f);
 
-			if (Input.GetKeyDown(KeyCode.Mouse1))
-			{
-				rb.AddForce(head.forward * throwForce, ForceMode.Impulse);
-				rb.useGravity = true;
+            if (Input.GetKeyDown(KeyCode.Mouse1))
+            {
+                rb.AddForce(head.forward * throwForce, ForceMode.Impulse);
+                rb.useGravity = true;
 
-				break;
-			}
+                break;
+            }
 
-			destination = head.position + offSet + head.forward * holdDistance;
-			rb.velocity = ((destination - transform.position) * pullForce / rb.mass);
-			rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;
+            destination = head.position + offSet + head.forward * holdDistance;
+            rb.velocity = ((destination - transform.position) * pullForce / rb.mass);
+            rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;
 
-			yield return null;
-		}
-	}
+            yield return null;
+        }
+    }
 }
