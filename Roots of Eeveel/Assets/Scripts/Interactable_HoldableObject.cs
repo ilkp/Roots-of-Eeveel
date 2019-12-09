@@ -34,6 +34,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
         head = player.GetComponentInChildren<Camera>().transform;
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "Interactable";
+		rb.Sleep();
     }
 
     public void Interact()

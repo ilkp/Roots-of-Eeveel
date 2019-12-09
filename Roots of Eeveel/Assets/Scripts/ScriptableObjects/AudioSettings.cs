@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "AudioSettings", menuName = "AudioSettings")]
 public class AudioSettings : ScriptableObject
 {
+
+	#region VolumeControls
 	public float musicVolume;
 	private FMOD.Studio.Bus musicBus;
 	public float soundsVolume;
@@ -54,6 +56,7 @@ public class AudioSettings : ScriptableObject
 
 		voiceBus.setVolume(volume);
 	}
+	#endregion
 
 	#region Atmosphere
 	[Header("Atmosphere", order = 0)] //----------------------------------------------------------------------------
