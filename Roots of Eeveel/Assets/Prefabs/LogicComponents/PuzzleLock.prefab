@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 8250368750260224551}
   - component: {fileID: 8250368750260224550}
   m_Layer: 0
-  m_Name: DemoPuzzleLock
+  m_Name: PuzzleLock
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61,7 +61,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: ee5c75e1fdeb9184093388dd18770e34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
