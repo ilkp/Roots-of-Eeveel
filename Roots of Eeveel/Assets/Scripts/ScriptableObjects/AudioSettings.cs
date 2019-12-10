@@ -268,8 +268,18 @@ public class AudioSettings : ScriptableObject
 
 	public void StopEnemySoundAll()
 	{
-		foreach(GameObject go in EnemySounds.Keys)
+		GameObject[] enemyGOs = new GameObject[EnemySounds.Keys.Count];
+		int j = 0;
+
+		foreach (GameObject enemy in EnemySounds.Keys)
 		{
+			enemyGOs[j] = enemy;
+			++j;
+		}
+
+		for ( int i = enemyGOs.Length - 1; i >= 0; --i)
+		{
+			GameObject go = enemyGOs[i];
 			EnemySounds[go].stop(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
 			EnemySounds[go].release();
 			EnemySounds.Remove(go);
