@@ -50,7 +50,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
         uiTextRight.enabled = true;
         arrowLeft.enabled = true;
         arrowRight.enabled = true;
-        StartCoroutine(audioSettings.PlayBookPickup());
+        audioSettings.PlayBookPickup();
         setArrowColors();
         float widthMultiplier = imageHeight / readableData.UISprite.rect.height;
 
@@ -113,7 +113,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
         arrowRight.enabled = false;
         arrowLeft.enabled = false;
         GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>().allowMovement = true;
-        StartCoroutine(audioSettings.PlayBookPutdown());
+        audioSettings.PlayBookPutdown();
     }
 
     public void NextPage(int direction)

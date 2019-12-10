@@ -306,321 +306,101 @@ public class AudioSettings : ScriptableObject
 	[FMODUnity.EventRef] [SerializeField] private string bookPickupSound;
 	[FMODUnity.EventRef] [SerializeField] private string bookPutdownSound;
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayBookPickup()
+	
+	public void PlayBookPickup()
 	{
-		FMOD.Studio.EventInstance bookPickupInstance = FMODUnity.RuntimeManager.CreateInstance(bookPickupSound);
-		bookPickupInstance.start();
-
-		while (true)
-		{
-			bookPickupInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				bookPickupInstance.release();
-				PlayLoreReverb();
-				break;
-			}
-
-			yield return null;
-		}
+		FMODUnity.RuntimeManager.PlayOneShot(bookPickupSound);
+		PlayLoreReverb();
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayBookPutdown()
+	public void PlayBookPutdown()
 	{
-		FMOD.Studio.EventInstance bookPutdownInstance = FMODUnity.RuntimeManager.CreateInstance(bookPutdownSound);
 		StopLoreReverb();
-		bookPutdownInstance.start();
-
-		while (true)
-		{
-			bookPutdownInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				bookPutdownInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		FMODUnity.RuntimeManager.PlayOneShot(bookPutdownSound);
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayLetterPutdown()
+	public void PlayLetterPutdown()
 	{
-		FMOD.Studio.EventInstance letterPutdownInstance = FMODUnity.RuntimeManager.CreateInstance(letterPutdownSound);
-		letterPutdownInstance.start();
-
-		while (true)
-		{
-			letterPutdownInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				letterPutdownInstance.release();
-				PlayLoreReverb();
-				break;
-			}
-
-			yield return null;
-		}
+		FMODUnity.RuntimeManager.PlayOneShot(letterPutdownSound);
+		PlayLoreReverb();
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayLetterPickup()
+	public void PlayLetterPickup()
 	{
-		FMOD.Studio.EventInstance letterPickupInstance = FMODUnity.RuntimeManager.CreateInstance(letterPickupSound);
+		FMODUnity.RuntimeManager.PlayOneShot(letterPickupSound);
 		StopLoreReverb();
-		letterPickupInstance.start();
-
-		while (true)
-		{
-			letterPickupInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				letterPickupInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayWrongKey(GameObject go)
+	public void PlayWrongKey(GameObject go)
 	{
-		FMOD.Studio.EventInstance wrongInstance = FMODUnity.RuntimeManager.CreateInstance(keyWrongLockSound);
-		wrongInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
-		wrongInstance.start();
-
-		while (true)
-		{
-			wrongInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				wrongInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		FMODUnity.RuntimeManager.PlayOneShot(keyWrongLockSound, go.transform.position);
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayDoorInteract(GameObject go)
+	public void PlayDoorInteract(GameObject go)
 	{
-		FMOD.Studio.EventInstance doorInteractInstance = FMODUnity.RuntimeManager.CreateInstance(doorInteractSound);
-		doorInteractInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
-		doorInteractInstance.start();
-
-		while (true)
-		{
-			doorInteractInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				doorInteractInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		FMODUnity.RuntimeManager.PlayOneShot(doorInteractSound, go.transform.position);
 	}
 
 	public void PlayKeyPickup()
 	{
-		if (!keyPickupInstance.isValid())
-		{
-			keyPickupInstance = FMODUnity.RuntimeManager.CreateInstance(keyPickupSound);
-		}
+		keyPickupInstance = FMODUnity.RuntimeManager.CreateInstance(keyPickupSound);
 		keyPickupInstance.setVolume(0.8f);
 		keyPickupInstance.start();
+		keyPickupInstance.release();
 	}
 
 	public void PlayKeyInsert(GameObject go)
 	{
-		if (!keyInsertInstance.isValid())
-		{
-			keyInsertInstance = FMODUnity.RuntimeManager.CreateInstance(keyInsertSound);
-		}
-
+		keyInsertInstance = FMODUnity.RuntimeManager.CreateInstance(keyInsertSound);
 		keyInsertInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go));
 		keyInsertInstance.setVolume(0.8f);
 		keyInsertInstance.start();
+		keyInsertInstance.release();
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayThrowableWood(GameObject go, Rigidbody rb, float amplitude)
+	public void PlayThrowableWood(GameObject go, Rigidbody rb, float amplitude)
 	{
-		//Debug.Log("PlayThrowableWood");
 		FMOD.Studio.EventInstance woodInstance = FMODUnity.RuntimeManager.CreateInstance(woodSound);
 		woodInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
-		woodInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
+		woodInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 0.8f));
 		woodInstance.start();
-
-		while (true)
-		{
-			woodInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				woodInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		woodInstance.release();
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayThrowableKey(GameObject go, Rigidbody rb, float amplitude)
+	public void PlayThrowableKey(GameObject go, Rigidbody rb, float amplitude)
 	{
-		//Debug.Log("PlayThrowableWood");
 		FMOD.Studio.EventInstance keyThrowInstance = FMODUnity.RuntimeManager.CreateInstance(keyThrowSound);
 		keyThrowInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
 		keyThrowInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
 		keyThrowInstance.start();
-
-		while (true)
-		{
-			keyThrowInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				keyThrowInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		keyThrowInstance.release();
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayThrowableMetal(GameObject go, Rigidbody rb, float amplitude)
+	public void PlayThrowableMetal(GameObject go, Rigidbody rb, float amplitude)
 	{
 		FMOD.Studio.EventInstance metalInstance = FMODUnity.RuntimeManager.CreateInstance(metalSound);
 		metalInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
 		metalInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
 		metalInstance.start();
-
-		while (true)
-		{
-			metalInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				metalInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		metalInstance.release();
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayThrowableCeramic(GameObject go, Rigidbody rb, float amplitude)
+	public void PlayThrowableCeramic(GameObject go, Rigidbody rb, float amplitude)
 	{
-		//Debug.Log("PlayThrowableWood");
 		FMOD.Studio.EventInstance ceramicInstance = FMODUnity.RuntimeManager.CreateInstance(ceramicSound);
 		ceramicInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
 		ceramicInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
 		ceramicInstance.start();
-
-		while (true)
-		{
-			ceramicInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				ceramicInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		ceramicInstance.release();
 	}
 
-	/// <summary>
-	/// This is Coroutine
-	/// </summary>
-	/// <param name="go"></param>
-	/// <param name="rb"></param>
-	/// <returns></returns>
-	public IEnumerator PlayThrowableGlass(GameObject go, Rigidbody rb, float amplitude)
+	public void PlayThrowableGlass(GameObject go, Rigidbody rb, float amplitude)
 	{
-		//Debug.Log("PlayThrowableWood");
 		FMOD.Studio.EventInstance glassInstance = FMODUnity.RuntimeManager.CreateInstance(glassSound);
 		glassInstance.set3DAttributes(FMODUnity.RuntimeUtils.To3DAttributes(go, rb));
 		glassInstance.setParameterByName("impact_strenght", Mathf.Clamp(amplitude / 600, 0f, 1f));
 		glassInstance.start();
-
-		while (true)
-		{
-			glassInstance.getPlaybackState(out FMOD.Studio.PLAYBACK_STATE state);
-
-			if (state != FMOD.Studio.PLAYBACK_STATE.PLAYING)
-			{
-				glassInstance.release();
-				break;
-			}
-
-			yield return null;
-		}
+		glassInstance.release();
 	}
 
 	#endregion
