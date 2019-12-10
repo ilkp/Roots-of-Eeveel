@@ -515,6 +515,16 @@ PrefabInstance:
       propertyPath: loadingScreen
       value: 
       objectReference: {fileID: 113138358}
+    - target: {fileID: 446574041255029154, guid: 98ef479d439265f41b573f6e88b3ce1c,
+        type: 3}
+      propertyPath: atmosphereVolumeSlider
+      value: 
+      objectReference: {fileID: 1886029513}
+    - target: {fileID: 446574041255029154, guid: 98ef479d439265f41b573f6e88b3ce1c,
+        type: 3}
+      propertyPath: voiceVolumeSlider
+      value: 
+      objectReference: {fileID: 2017623007}
     - target: {fileID: 59905943632672023, guid: 98ef479d439265f41b573f6e88b3ce1c,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -1403,6 +1413,30 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 527017465}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1886029513 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 59905942147046558, guid: d868f08db106a224e89346215d5ef265,
+    type: 3}
+  m_PrefabInstance: {fileID: 937157120}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2017623007 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 59905942147046558, guid: d868f08db106a224e89346215d5ef265,
+    type: 3}
+  m_PrefabInstance: {fileID: 2055563662}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2055563662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1818,7 +1852,12 @@ PrefabInstance:
     - target: {fileID: 49359531654781175, guid: a8455f7b667d66a43ba14d56a12db6c2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 359
+      value: 384.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 49359531654781175, guid: a8455f7b667d66a43ba14d56a12db6c2,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 211.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a8455f7b667d66a43ba14d56a12db6c2, type: 3}
