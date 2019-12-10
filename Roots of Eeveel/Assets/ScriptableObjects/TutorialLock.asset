@@ -17,7 +17,7 @@ MonoBehaviour:
   fontColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 1}
   alignment: 258
   letterSound: 0
-  UISprite: {fileID: 21300000, guid: 309a08802140ae043bfff0def8d8c4fa, type: 3}
+  UISprite: {fileID: 21300000, guid: 2c03791457b7b2e42807815dd03e5e11, type: 3}
   UIText: Iugis, Goddess of the nature, born from the intestines of Panton, suffered
     under God of All, fled and was punished for eternal starvation, consumed until
     there was nothing but herself, was put under ground by Panton, rose as trees back
@@ -29,4 +29,4 @@ MonoBehaviour:
   TAnchorMaxX: 0.9
   TAnchorMinY: 0.5
   TAnchorMaxY: 0.9
-  UISpriteSolved: {fileID: 21300000, guid: 309a08802140ae043bfff0def8d8c4fa, type: 3}
+  UISpriteSolved: {fileID: 21300000, guid: ed6a7400423611c46aac1c5c952d34e6, type: 3}
