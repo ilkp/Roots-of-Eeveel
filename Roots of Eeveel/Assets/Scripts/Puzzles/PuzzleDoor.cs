@@ -53,7 +53,7 @@ public class PuzzleDoor : MonoBehaviour
 
     private void unlock()
     {
-        studioEventEmitter.Play();
+        //studioEventEmitter.Play();
         foreach (Interactable_Door2 door in doors)
         {
             door.Unlock();

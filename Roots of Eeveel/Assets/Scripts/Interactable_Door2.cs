@@ -92,6 +92,14 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
         StopInteraction();
     }
 
+    void OnCollisionStay(Collider collider)
+    {
+        if (collider.CompareTag("Player"))
+        {
+
+        }
+    }
+
     public void Unlock()
     {
         locked = false;
