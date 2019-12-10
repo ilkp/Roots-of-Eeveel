@@ -4,66 +4,66 @@ using UnityEngine;
 
 public class PuzzleLock : MonoBehaviour, IPuzzleCondition
 {
-	[SerializeField] private Sprite lockEmpty;
-	[SerializeField] private Sprite lockSolved;
-	[SerializeField] private string identifier;
-	public DemoPuzzleDoor door;
-	private AudioSettings audioSettings;
+    [SerializeField] private Sprite lockEmpty;
+    [SerializeField] private Sprite lockSolved;
+    [SerializeField] private string identifier;
+    public PuzzleDoor door;
+    private AudioSettings audioSettings;
 
-	public string Identifier { get { return identifier; } set { identifier = value; } }
-	public bool Solved { get; set; }
-	
-	public Transform keyPosition;
-	private Interactable_Key _keySubscriber;
+    public string Identifier { get { return identifier; } set { identifier = value; } }
+    public bool Solved { get; set; }
 
-	public event ConditionMetEventHandler ConditionMet;
-	public event ConditionUnmetEventHandler ConditionUnmet;
+    public Transform keyPosition;
+    private Interactable_Key _keySubscriber;
 
-	private void Awake()
-	{
-		Solved = false;
-		audioSettings = FindObjectOfType<GameManager>().audioSettings;
-	}
+    public event ConditionMetEventHandler ConditionMet;
+    public event ConditionUnmetEventHandler ConditionUnmet;
 
-	private void Start()
-	{
+    private void Awake()
+    {
+        Solved = false;
+        audioSettings = FindObjectOfType<GameManager>().audioSettings;
+    }
 
-	}
+    private void Start()
+    {
 
-	public void OnConditionMet()
-	{
-		if (ConditionMet != null)
-		{
-			ConditionMet(this, EventArgs.Empty);
-		}
-	}
+    }
 
-	public void OnConditionUnmet()
-	{
-		if (ConditionUnmet != null)
-		{
-			ConditionUnmet(this, EventArgs.Empty);
-			audioSettings.PlayWrongKey(gameObject);
-		}
-	}
+    public void OnConditionMet()
+    {
+        if (ConditionMet != null)
+        {
+            ConditionMet(this, EventArgs.Empty);
+        }
+    }
 
-	public void Solve(Interactable_Key keySubscriber)
-	{
-		Solved = true;
-		audioSettings.IncreaseRisingTensionProgress();
-		_keySubscriber = keySubscriber;
-		ConditionUnmet += keySubscriber.OnConditionUnmet;
-		GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockSolved;
-		OnConditionMet();
-	}
+    public void OnConditionUnmet()
+    {
+        if (ConditionUnmet != null)
+        {
+            ConditionUnmet(this, EventArgs.Empty);
+            audioSettings.PlayWrongKey(gameObject);
+        }
+    }
 
-	public void Unsolve()
-	{
-		Solved = false;
-		audioSettings.DecreaseRisingTensionProgress();
-		OnConditionUnmet();
-		ConditionUnmet -= _keySubscriber.OnConditionUnmet;
-		GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockEmpty;
-		_keySubscriber = null;
-	}
+    public void Solve(Interactable_Key keySubscriber)
+    {
+        Solved = true;
+        audioSettings.IncreaseRisingTensionProgress();
+        _keySubscriber = keySubscriber;
+        ConditionUnmet += keySubscriber.OnConditionUnmet;
+        GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockSolved;
+        OnConditionMet();
+    }
+
+    public void Unsolve()
+    {
+        Solved = false;
+        audioSettings.DecreaseRisingTensionProgress();
+        OnConditionUnmet();
+        ConditionUnmet -= _keySubscriber.OnConditionUnmet;
+        GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockEmpty;
+        _keySubscriber = null;
+    }
 }
