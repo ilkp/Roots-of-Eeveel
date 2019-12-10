@@ -26,19 +26,19 @@ public class DynamicSoundObject : MonoBehaviour
 		switch (soundType)
 		{
 			case SoundType.Metal:
-				StartCoroutine(audioSettings.PlayThrowableMetal(gameObject, rb, collisionForce.magnitude));
+				audioSettings.PlayThrowableMetal(gameObject, rb, collisionForce.magnitude);
 				break;
 			case SoundType.Wood:
-				StartCoroutine(audioSettings.PlayThrowableWood(gameObject, rb, collisionForce.magnitude));
+				audioSettings.PlayThrowableWood(gameObject, rb, collisionForce.magnitude);
 				break;
 			case SoundType.Glass:
-				StartCoroutine(audioSettings.PlayThrowableGlass(gameObject, rb, collisionForce.magnitude));
+				audioSettings.PlayThrowableGlass(gameObject, rb, collisionForce.magnitude);
 				break;
 			case SoundType.Ceramic:
-				StartCoroutine(audioSettings.PlayThrowableCeramic(gameObject, rb, collisionForce.magnitude));
+				audioSettings.PlayThrowableCeramic(gameObject, rb, collisionForce.magnitude);
 				break;
 			case SoundType.Key:
-				StartCoroutine(audioSettings.PlayThrowableKey(gameObject, rb, collisionForce.magnitude));
+				audioSettings.PlayThrowableKey(gameObject, rb, collisionForce.magnitude);
 				break;
 			default:
 				Debug.Log("SoundType not found: " + soundType);

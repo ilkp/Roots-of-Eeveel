@@ -41,7 +41,7 @@ public class Interactable_Door : MonoBehaviour, IInteractable
 
     public void Interact()
     {
-        StartCoroutine(audioSettings.PlayDoorInteract(this.gameObject));
+        audioSettings.PlayDoorInteract(this.gameObject);
         StartCoroutine(Hold());
     }
 
