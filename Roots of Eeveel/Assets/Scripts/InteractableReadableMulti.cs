@@ -7,7 +7,7 @@ using UnityEditor;
 
 public class InteractableReadableMulti : MonoBehaviour, IInteractable
 {
-    [SerializeField] private AudioSettings audioSettings;
+    private AudioSettings audioSettings;
     public ReadableDataMulti readableData;
     private Image uiImage;
     private TextMeshProUGUI uiTextLeft;
@@ -88,12 +88,15 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
     {
         yield return new WaitForSeconds(0.25f);
         Transform player = GameObject.FindGameObjectWithTag("Player").transform;
+		float axis;
+		float lastAxis = 0f;
         while ((transform.position - player.position).magnitude < maxViewDist)
         {
-            if (Keybindings.Instance.horizontal.GetAxis() != 0)
+			axis = Keybindings.Instance.horizontal.GetAxis();
+			if (axis != 0 && axis != lastAxis)
             {
                 NextPage((int)Keybindings.Instance.horizontal.GetAxis());
-            }
+			}
             if (Input.GetKeyDown(Keybindings.Instance.interaction) || Input.GetKeyDown(Keybindings.Instance.altInteraction))
             {
                 break;
@@ -102,6 +105,7 @@ public class InteractableReadableMulti : MonoBehaviour, IInteractable
             {
                 yield return null;
             }
+			lastAxis = axis;
         }
         uiImage.enabled = false;
         uiTextLeft.enabled = false;
