@@ -10,8 +10,19 @@ public class GameSettingsWrapper
 	public float Brightness;
 	public float MusicVolume;
 	public float SoundsVolume;
+	public float AtmosphereVolume;
+	public float VoiceVolume;
 
-	public void setValues(int resolutionX, int resolutionY, int refreshRate, int fullscreenMode, float brightness, float musicVolume, float soundsVolume)
+	public void setValues(
+		int resolutionX,
+		int resolutionY,
+		int refreshRate,
+		int fullscreenMode,
+		float brightness,
+		float musicVolume,
+		float soundsVolume,
+		float atmosphereVolume,
+		float voiceVolume)
 	{
 		ResolutionX = resolutionX;
 		ResolutionY = resolutionY;
@@ -20,5 +31,7 @@ public class GameSettingsWrapper
 		Brightness = brightness;
 		MusicVolume = musicVolume;
 		SoundsVolume = soundsVolume;
+		AtmosphereVolume = atmosphereVolume;
+		VoiceVolume = voiceVolume;
 	}
 }

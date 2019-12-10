@@ -109,7 +109,7 @@ public class GameManager : MonoBehaviour
 		AsyncOperation operation = SceneManager.LoadSceneAsync(scene);
 		operation.allowSceneActivation = false;
 		float cutSceneTimer = 0f;
-		const float cutSceneMaxTime = 12f;
+		const float cutSceneMaxTime = 9f;
 
 		switch (scene)
 		{
@@ -126,7 +126,7 @@ public class GameManager : MonoBehaviour
 			if (scene == 2)
 			{
 				cutSceneTimer += Time.deltaTime;
-				if ((cutSceneTimer > cutSceneMaxTime || Input.anyKey) && operation.progress >= 0.9f)
+				if (cutSceneTimer > cutSceneMaxTime && operation.progress >= 0.9f)
 				{
 					operation.allowSceneActivation = true;
 				}
@@ -165,16 +165,42 @@ public class GameManager : MonoBehaviour
 		if (wrapper == null)
 		{
 			wrapper = new GameSettingsWrapper();
-			wrapper.setValues(Screen.width, Screen.height, Screen.currentResolution.refreshRate, (int)FullScreenMode.ExclusiveFullScreen, 0.5f, 0.3f, 0.3f);
+			wrapper.setValues(
+				Screen.width,
+				Screen.height,
+				Screen.currentResolution.refreshRate,
+				(int)FullScreenMode.ExclusiveFullScreen,
+				0.3f,
+				0.3f,
+				0.3f,
+				0.3f,
+				0.3f);
 		}
 		gameSettings = wrapper;
+		ButtonLinker.Instance.initSliders(gameSettings);
 	}
 
-	public void saveGameSettings(Resolution resolution, FullScreenMode fullscreenMode, float brightness, float musicVolume, float soundsVolume)
+	public void saveGameSettings(
+		Resolution resolution,
+		FullScreenMode fullscreenMode,
+		float brightness,
+		float musicVolume,
+		float soundsVolume,
+		float atmosphereVolume,
+		float voiceVolume)
 	{
 		string path = Path.Combine(Application.dataPath, "settings.txt");
 		GameSettingsWrapper wrapper = new GameSettingsWrapper();
-		wrapper.setValues(resolution.width, resolution.height, resolution.refreshRate, (int)fullscreenMode, brightness, musicVolume, soundsVolume);
+		wrapper.setValues(
+			resolution.width,
+			resolution.height,
+			resolution.refreshRate,
+			(int)fullscreenMode,
+			brightness,
+			musicVolume,
+			soundsVolume,
+			atmosphereVolume,
+			voiceVolume);
 		string file = JsonUtility.ToJson(wrapper);
 		File.WriteAllText(path, file);
 		gameSettings = wrapper;

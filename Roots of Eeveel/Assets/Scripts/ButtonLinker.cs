@@ -17,9 +17,11 @@ public class ButtonLinker : MonoBehaviour
     [SerializeField] private Slider brightnessSlider;
     [SerializeField] private Slider musicVolumeSlider;
     [SerializeField] private Slider soundVolumeSlider;
+	[SerializeField] private Slider atmosphereVolumeSlider;
+	[SerializeField] private Slider voiceVolumeSlider;
 
 
-    private void Awake()
+	private void Awake()
     {
         if (Instance != null)
         {
@@ -123,7 +125,18 @@ public class ButtonLinker : MonoBehaviour
             Screen.fullScreenMode,
             brightnessSlider.value,
             musicVolumeSlider.value,
-            soundVolumeSlider.value);
+            soundVolumeSlider.value,
+			atmosphereVolumeSlider.value,
+			voiceVolumeSlider.value);
         GameManager.Instance.applyGameSettings();
     }
+
+	public void initSliders(GameSettingsWrapper settings)
+	{
+		brightnessSlider.value = settings.Brightness;
+		musicVolumeSlider.value = settings.MusicVolume;
+		soundVolumeSlider.value = settings.SoundsVolume;
+		atmosphereVolumeSlider.value = settings.AtmosphereVolume;
+		voiceVolumeSlider.value = settings.VoiceVolume;
+	}
 }

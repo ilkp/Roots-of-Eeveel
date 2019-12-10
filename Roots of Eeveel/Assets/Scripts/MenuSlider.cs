@@ -24,6 +24,7 @@ public class MenuSlider : MonoBehaviour
 
 	public void sliderValueChanged()
 	{
+		slider.value = Mathf.Round(slider.value * 100f) / 100f;
 		inputField.text = slider.value.ToString();
 	}
 
