@@ -138,5 +138,20 @@ public class ButtonLinker : MonoBehaviour
 		soundVolumeSlider.value = settings.SoundsVolume;
 		atmosphereVolumeSlider.value = settings.AtmosphereVolume;
 		voiceVolumeSlider.value = settings.VoiceVolume;
+
+		string res = settings.ResolutionX + " x " + settings.ResolutionY + " @ " + settings.RefreshRate + "Hz";
+		int i;
+		for (i = 0; i < resolutionDropDown.options.Count; ++i)
+		{
+			if (resolutionDropDown.options[i].text.Equals(res))
+			{
+				resolutionDropDown.value = i;
+				break;
+			}
+		}
+		if (i == resolutionDropDown.options.Count)
+		{
+			resolutionDropDown.value = 0;
+		}
 	}
 }
