@@ -10,74 +10,74 @@ using UnityEngine;
 
 public class DemoPuzzleDoor : MonoBehaviour
 {
-	private float doorOpeningForce = 7f;
+    private float doorOpeningForce = 7f;
 
-	FMODUnity.StudioEventEmitter studioEventEmitter;
+    FMODUnity.StudioEventEmitter studioEventEmitter;
 
-	[SerializeField] private PuzzleLock[] locks;
-	private ConfigurableJoint[] joints;
+    [SerializeField] private PuzzleLock[] locks;
+    private ConfigurableJoint[] joints;
 
-	private void Start()
-	{
-		studioEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
+    private void Start()
+    {
+        studioEventEmitter = GetComponent<FMODUnity.StudioEventEmitter>();
 
-		foreach (PuzzleLock pLock in locks)
-		{
-			pLock.door = this;
-		}
-		
+        foreach (PuzzleLock pLock in locks)
+        {
+            //pLock.door = this;
+        }
 
-		joints = GetComponentsInChildren<ConfigurableJoint>();
-		foreach (ConfigurableJoint joint in joints)
-		{
-			joint.angularXMotion = ConfigurableJointMotion.Locked;
-			joint.anchor = new Vector3(0, -0.5f, 0);
-		}
-	}
 
-	public void checkLocks()
-	{
-		bool puzzleFailed = false;
-		bool puzzleCompleted = true;
-		for (int i = 0; i < locks.Length; i++)
-		{
-			// there is uncompleted lock before a solved one -> locks not solved in order
-			if (!puzzleCompleted && locks[i].Solved)
-			{
-				puzzleFailed = true;
-				break;
-			}
-			if (!locks[i].Solved)
-			{
-				puzzleCompleted = false;
-			}
-		}
-		if (puzzleFailed)
-		{
-			foreach (PuzzleLock pLock in locks)
-			{
-				if (pLock.Solved)
-				{
-					pLock.Unsolve();
-				}
-			}
-		}
-		else if (puzzleCompleted)
-		{
-			unlock();
-		}
-	}
+        joints = GetComponentsInChildren<ConfigurableJoint>();
+        foreach (ConfigurableJoint joint in joints)
+        {
+            joint.angularXMotion = ConfigurableJointMotion.Locked;
+            joint.anchor = new Vector3(0, -0.5f, 0);
+        }
+    }
 
-	private void unlock()
-	{
-		studioEventEmitter.Play();
-		foreach (ConfigurableJoint joint in joints)
-		{
-			joint.angularXMotion = ConfigurableJointMotion.Limited;
-			if (joint.GetComponent<Interactable_Door>().doorType < 2)
-			{
-				joint.gameObject.GetComponent<Rigidbody>().AddForce(joint.gameObject.transform.forward * doorOpeningForce, ForceMode.Impulse);
-			}
-		}
-	}
+    public void checkLocks()
+    {
+        bool puzzleFailed = false;
+        bool puzzleCompleted = true;
+        for (int i = 0; i < locks.Length; i++)
+        {
+            // there is uncompleted lock before a solved one -> locks not solved in order
+            if (!puzzleCompleted && locks[i].Solved)
+            {
+                puzzleFailed = true;
+                break;
+            }
+            if (!locks[i].Solved)
+            {
+                puzzleCompleted = false;
+            }
+        }
+        if (puzzleFailed)
+        {
+            foreach (PuzzleLock pLock in locks)
+            {
+                if (pLock.Solved)
+                {
+                    pLock.Unsolve();
+                }
+            }
+        }
+        else if (puzzleCompleted)
+        {
+            unlock();
+        }
+    }
+
+    private void unlock()
+    {
+        studioEventEmitter.Play();
+        foreach (ConfigurableJoint joint in joints)
+        {
+            joint.angularXMotion = ConfigurableJointMotion.Limited;
+            if (joint.GetComponent<Interactable_Door>().doorType < 2)
+            {
+                joint.gameObject.GetComponent<Rigidbody>().AddForce(joint.gameObject.transform.forward * doorOpeningForce, ForceMode.Impulse);
+            }
+        }
+    }
 }

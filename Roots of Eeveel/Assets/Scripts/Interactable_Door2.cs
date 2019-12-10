@@ -4,9 +4,12 @@ using UnityEngine;
 
 public class Interactable_Door2 : MonoBehaviour, IInteractable
 {
-    public float minAngle;
-    public float maxAngle;
-    public float grabDistance;
+    public bool locked;
+    public float unlockMinAngle;
+    public float unlockMaxAngle;
+    private float minAngle;
+    private float maxAngle;
+    private float grabDistance;
     private Transform playerCam;
     private Vector3 grabPosition;
     private Vector3 pivotPosition;
@@ -28,6 +31,10 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
     // Start is called before the first frame update
     void Start()
     {
+        if (!locked)
+        {
+            Unlock();
+        }
         gameObject.tag = "Interactable";
         playerCam = GameObject.Find("Main Camera").GetComponent<Transform>();
     }
@@ -58,7 +65,7 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
             grabPosition.y = 0;
             pivotPosition.y = 0;
 
-            multiplier = Vector3.Dot(transform.right, grabPosition - pivotPosition) > 0 ? 1 : -1; 
+            multiplier = Vector3.Dot(transform.right, grabPosition - pivotPosition) > 0 ? 1 : -1;
 
             angle = Vector3.Angle(
                 transform.right * multiplier,
@@ -78,10 +85,17 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
                 newAngle,
                 0);
             }
-            
-           
+
+
             yield return null;
         }
         StopInteraction();
+    }
+
+    public void Unlock()
+    {
+        locked = false;
+        minAngle = unlockMinAngle;
+        maxAngle = unlockMaxAngle;
     }
 }
