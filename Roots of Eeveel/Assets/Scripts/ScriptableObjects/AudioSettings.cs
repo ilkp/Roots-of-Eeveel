@@ -6,6 +6,16 @@ using UnityEngine;
 public class AudioSettings : ScriptableObject
 {
 
+	public void StopAllSounds()
+	{
+		StopRoomTone();
+		StopEnemySoundAll();
+		StopMenuMusic();
+		StopPlayerHPHeartbeat();
+		StopRaisingTension();
+		FMODUnity.RuntimeManager.GetBus("bus:/").stopAllEvents(FMOD.Studio.STOP_MODE.ALLOWFADEOUT);
+	}
+
 	#region VolumeControls
 	public float musicVolume;
 	private FMOD.Studio.Bus musicBus;
@@ -70,15 +80,6 @@ public class AudioSettings : ScriptableObject
 	private const string tensionParameter = "Locks open"; // 0/1/2/3/4/5
 	private const string monsterChaseParameter = "monster chase"; //0/1
 	private FMOD.Studio.EventInstance tensionInstance;
-
-	public void StopAll()
-	{
-		StopRoomTone();
-		StopEnemySoundAll();
-		StopMenuMusic();
-		StopPlayerHPHeartbeat();
-		StopRaisingTension();
-	}
 
 	public void PlayRoomTone()
 	{
