@@ -7,6 +7,7 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
     public bool locked;
     public float unlockMinAngle;
     public float unlockMaxAngle;
+    public float unlockAngle;
     private float minAngle;
     private float maxAngle;
     private float grabDistance;
@@ -77,7 +78,6 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
             }
 
             float newAngle = (transform.localEulerAngles.y > 180 ? transform.localEulerAngles.y - 360 : transform.localEulerAngles.y) + angle;
-            Debug.Log(newAngle);
             if (newAngle >= minAngle && newAngle <= maxAngle)
             {
                 transform.localEulerAngles = new Vector3(
@@ -92,18 +92,15 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
         StopInteraction();
     }
 
-    void OnCollisionStay(Collider collider)
-    {
-        if (collider.CompareTag("Player"))
-        {
-
-        }
-    }
-
     public void Unlock()
     {
+        Debug.Log("Boop");
         locked = false;
         minAngle = unlockMinAngle;
         maxAngle = unlockMaxAngle;
+        transform.localEulerAngles = new Vector3(
+                0,
+                unlockAngle,
+                0);
     }
 }
