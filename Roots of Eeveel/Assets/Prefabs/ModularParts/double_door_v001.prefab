@@ -251,7 +251,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3626187168953689331}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1
@@ -420,6 +420,7 @@ GameObject:
   - component: {fileID: 4723799994950672155}
   - component: {fileID: 6752062655608503262}
   - component: {fileID: 600786928119208312}
+  - component: {fileID: 266574537680542392}
   m_Layer: 0
   m_Name: double_door_frame1
   m_TagString: Untagged
@@ -487,6 +488,20 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!64 &266574537680542392
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5104500878703728274}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 2175338225163948210, guid: 29ef64ff44358ed42b264900a762827d, type: 3}
 --- !u!1 &8612324190336982963
 GameObject:
   m_ObjectHideFlags: 0
@@ -535,7 +550,7 @@ MeshRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8612324190336982963}
   m_Enabled: 1
-  m_CastShadows: 1
+  m_CastShadows: 0
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
   m_MotionVectors: 1

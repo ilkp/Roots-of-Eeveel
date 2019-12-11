@@ -20,6 +20,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
     }
 
     public event Action<IInteractable> OnInteract;
+    private bool insidePlayer;
 
     private GameObject player;
     private Transform head;
@@ -34,7 +35,8 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
         head = player.GetComponentInChildren<Camera>().transform;
         rb = GetComponent<Rigidbody>();
         gameObject.tag = "Interactable";
-		rb.Sleep();
+        rb.Sleep();
+        insidePlayer = false;
     }
 
     public void Interact()
@@ -45,6 +47,10 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
 
     public void StopInteraction()
     {
+        if (!insidePlayer)
+        {
+            gameObject.layer = 0;
+        }
         rb.useGravity = true;
         StopAllCoroutines();
     }
@@ -53,6 +59,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
     {
         float holdDistance = Vector3.Distance(head.transform.position, transform.position);
         Vector3 offSet = transform.position - (head.position + head.forward * holdDistance);
+        gameObject.layer = 11;
 
         while (true)
         {
@@ -72,6 +79,24 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
             rb.angularVelocity *= 0.9f * Time.fixedDeltaTime;
 
             yield return null;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            insidePlayer = true;
+            gameObject.layer = 11;
+        }
+    }
+
+    void OnCollisionExit(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            insidePlayer = false;
+            gameObject.layer = 0;
         }
     }
 }
