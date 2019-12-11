@@ -16,7 +16,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4329623494948002160
 Transform:
@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 8331290027912188850}
   - component: {fileID: 5938518961000607002}
   - component: {fileID: 3035824678295574353}
+  - component: {fileID: 2949416687283967376}
   m_Layer: 0
   m_Name: double_door1
   m_TagString: Untagged
@@ -182,10 +183,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b4d966396ebe84cb06121a69b07ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAngle: 0
-  maxAngle: 0
-  currentAngle: 0
-  grabDistance: 0
+  locked: 0
+  unlockMinAngle: 0
+  unlockMaxAngle: 0
+  unlockAngle: 0
+--- !u!208 &2949416687283967376
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948098544277806367}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.75500005, y: 2.0530002, z: 0.23400001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0.711, y: 0.65300006, z: -0.18200001}
+  m_TimeToStationary: 0.5
 --- !u!1 &3626187168953689331
 GameObject:
   m_ObjectHideFlags: 0
@@ -277,6 +294,7 @@ GameObject:
   - component: {fileID: 8824279334531260927}
   - component: {fileID: 720014749732361134}
   - component: {fileID: 2002437590266986402}
+  - component: {fileID: 7286766094990131333}
   m_Layer: 0
   m_Name: double_door2
   m_TagString: Untagged
@@ -371,10 +389,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b4d966396ebe84cb06121a69b07ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minAngle: 0
-  maxAngle: 0
-  currentAngle: 0
-  grabDistance: 0
+  locked: 0
+  unlockMinAngle: 0
+  unlockMaxAngle: 0
+  unlockAngle: 0
+--- !u!208 &7286766094990131333
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3945505505656642846}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.75500005, y: 2.0530002, z: 0.23400001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.711, y: 0.65300006, z: -0.18200001}
+  m_TimeToStationary: 0.5
 --- !u!1 &5104500878703728274
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +425,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &4723799994950672155
 Transform:
