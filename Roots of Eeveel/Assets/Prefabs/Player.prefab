@@ -713,7 +713,7 @@ MonoBehaviour:
   colorReticleInactive: {r: 1, g: 1, b: 1, a: 1}
   colorReticleActive: {r: 1, g: 0, b: 0, a: 1}
   interactable: {fileID: 0}
-  sensitivity: 15
+  sensitivity: 60
   speed: 5
   maxY: 80
   minY: -80
