@@ -381,6 +381,10 @@ public class PlayerMovement : MonoBehaviour
     {
         audioSettings.StopPlayerHPHeartbeat();
         GameManager.Instance.SetGameOver(false);
+		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+		{
+			enemy.GetComponent<Enemy>().state = Enemy.State.Dormant;
+		}
     }
 
     public void GetHurt()
