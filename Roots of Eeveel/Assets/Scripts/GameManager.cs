@@ -90,6 +90,7 @@ public class GameManager : MonoBehaviour
 		if (winStatus)
 		{
 			gameOverText.text = "Thank you for playing!";
+			audioSettings.PlayCredits();
 		}
 		else
 		{

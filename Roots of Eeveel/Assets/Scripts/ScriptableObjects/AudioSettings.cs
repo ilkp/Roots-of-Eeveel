@@ -408,8 +408,14 @@ public class AudioSettings : ScriptableObject
 	#region Music
 	[Header("Music", order = 3)] //---------------------------------------------------------------------------------
 	[FMODUnity.EventRef] [SerializeField] private string menuMusic;
+	[FMODUnity.EventRef] [SerializeField] private string creditsMusic;
 	[SerializeField] private float menuMusicFadeTime = 1f;
 	private FMOD.Studio.EventInstance musicInstance;
+
+	public void PlayCredits()
+	{
+		FMODUnity.RuntimeManager.PlayOneShot(creditsMusic);
+	}
 
 	public void PlayMenuMusic()
 	{
