@@ -10,7 +10,6 @@ public class ButtonLinker : MonoBehaviour
     public static ButtonLinker Instance;
     [SerializeField] private GameObject mainMenuGroup;
     [SerializeField] private GameObject optionsGroup;
-    [SerializeField] private GameObject creditsGroup;
     [SerializeField] private GameObject backgroud;
 
     [SerializeField] private TMP_Dropdown resolutionDropDown;
@@ -108,14 +107,12 @@ public class ButtonLinker : MonoBehaviour
     {
         mainMenuGroup.SetActive(false);
         optionsGroup.SetActive(true);
-        creditsGroup.SetActive(false);
     }
 
     public void ToCredits()
     {
         mainMenuGroup.SetActive(false);
         optionsGroup.SetActive(false);
-        creditsGroup.SetActive(true);
     }
 
     public void saveSettings()
