@@ -1,1 +1,1 @@
-{"ResolutionX":320,"ResolutionY":200,"RefreshRate":60,"FullscreenMode":3,"Brightness":59.0,"MusicVolume":0.2800000011920929,"SoundsVolume":0.3499999940395355,"AtmosphereVolume":0.1599999964237213,"VoiceVolume":0.3799999952316284}
+{"ResolutionX":1920,"ResolutionY":1080,"RefreshRate":60,"FullscreenMode":3,"Brightness":59.0,"MusicVolume":0.4300000071525574,"SoundsVolume":1.0,"AtmosphereVolume":1.0,"VoiceVolume":1.0}
