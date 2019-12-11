@@ -114,8 +114,8 @@ public class Enemy : MonoBehaviour
 	[Tooltip("How long steps the enemy takes. Sound related.")]
 	[SerializeField] private float stepLength = 1;
 
-    private const float seeRange = 3f;
-    private const float seeRangePatrol = 5f;
+    private const float seeRangeShort = 3f;
+	private const float seeRangeLong = seeRangeShort * 2f;
 
     // Define possible enemy behaviour states
     public enum State
@@ -197,7 +197,7 @@ public class Enemy : MonoBehaviour
 
             // If the player comes too close and is infront of enemy, start chasing
             Vector3 enemyToPlayer = _player.position - transform.position;
-            if (enemyToPlayer.magnitude <= seeRangePatrol &&
+            if (enemyToPlayer.magnitude <= seeRangeShort &&
                 Vector3.Angle(transform.forward, enemyToPlayer) < 45)
             {
                 state = State.Chase;
@@ -250,7 +250,7 @@ public class Enemy : MonoBehaviour
 
             // If the player comes too close and is infront of enemy, start chasing
             Vector3 enemyToPlayer = _player.position - transform.position;
-            if (enemyToPlayer.magnitude < seeRangePatrol &&
+            if (enemyToPlayer.magnitude < seeRangeShort &&
                 Vector3.Angle(transform.forward, enemyToPlayer) < 45)
             {
                 state = State.Chase;
@@ -277,7 +277,7 @@ public class Enemy : MonoBehaviour
         _anim.SetFloat("forward", _agent.speed);
         do
         {
-			if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude <= seeRange)
+			if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude <= seeRangeLong)
 			{
 				state = State.Chase;
 			}
@@ -285,6 +285,7 @@ public class Enemy : MonoBehaviour
             {
                 _soundHeard = false;
                 _agent.destination = _soundLocation;
+				Debug.Log(_agent.remainingDistance);
             }
             else if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
@@ -308,7 +309,7 @@ public class Enemy : MonoBehaviour
         do
         {
             playerDistance = PlayerHorizontalDistance();
-			if (playerDistance <= seeRange)
+			if (playerDistance <= seeRangeLong)
             {
                 if (playerDistance <= _agent.stoppingDistance)
                 {
@@ -382,7 +383,7 @@ public class Enemy : MonoBehaviour
                         _hand.enabled = false;
 
                         // Go to chase if player is in seeRange, otherwise to investigate
-                        state = playerDistance <= seeRange ? State.Chase : State.Investigate;
+                        state = playerDistance <= seeRangeLong ? State.Chase : State.Investigate;
                     }
                 }
             }
