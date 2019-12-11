@@ -48,16 +48,16 @@ public class Enemy : MonoBehaviour
 	[Tooltip("Location of heard sound")]
     [SerializeField] private Vector3 _soundLocation;
 
-	/// <summary>
-	/// Location of last heard sound
-	/// </summary>
-	[Tooltip("Location of heard sound")]
-	[SerializeField] private Vector3 _lastSoundLocation;
+    /// <summary>
+    /// Location of last heard sound
+    /// </summary>
+    [Tooltip("Location of heard sound")]
+    [SerializeField] private Vector3 _lastSoundLocation;
 
-	/// <summary>
-	/// Minimum movement speed of the enemy
-	/// </summary>
-	[Tooltip("Minimum movement speed of the enemy")]
+    /// <summary>
+    /// Minimum movement speed of the enemy
+    /// </summary>
+    [Tooltip("Minimum movement speed of the enemy")]
     [SerializeField] private float[] _moveSpeeds;
 
     /// <summary>
@@ -111,11 +111,11 @@ public class Enemy : MonoBehaviour
     /// </summary>
     private int _aggro = 0;
 
-	[Tooltip("How long steps the enemy takes. Sound related.")]
-	[SerializeField] private float stepLength = 1;
+    [Tooltip("How long steps the enemy takes. Sound related.")]
+    [SerializeField] private float stepLength = 1;
 
     private const float seeRangeShort = 3f;
-	private const float seeRangeLong = seeRangeShort * 2f;
+    private const float seeRangeLong = seeRangeShort * 2f;
 
     // Define possible enemy behaviour states
     public enum State
@@ -151,35 +151,35 @@ public class Enemy : MonoBehaviour
         NextState();
     }
 
-	IEnumerator WalkSound()
-	{
-		Vector3 lastPosition = transform.position;
-		float distanceFromLastSound = 0;
-		//Debug.Log("EnemyWalkSoundStart");
+    IEnumerator WalkSound()
+    {
+        Vector3 lastPosition = transform.position;
+        float distanceFromLastSound = 0;
+        //Debug.Log("EnemyWalkSoundStart");
 
-		while (true)
-		{
-			distanceFromLastSound += Vector3.Distance(lastPosition, transform.position);
-			lastPosition = transform.position;
+        while (true)
+        {
+            distanceFromLastSound += Vector3.Distance(lastPosition, transform.position);
+            lastPosition = transform.position;
 
-			//Debug.Log("EnemyWalkSoundLoop");
+            //Debug.Log("EnemyWalkSoundLoop");
 
-			if(distanceFromLastSound >= stepLength)
-			{
-				//Debug.Log("EnemyWalkSoundLoop if:" + distanceFromLastSound);
-				distanceFromLastSound = 0;
-				StartCoroutine(audioSettings.PlayEnemyFootStep(this.gameObject));
-			}
+            if (distanceFromLastSound >= stepLength)
+            {
+                //Debug.Log("EnemyWalkSoundLoop if:" + distanceFromLastSound);
+                distanceFromLastSound = 0;
+                StartCoroutine(audioSettings.PlayEnemyFootStep(this.gameObject));
+            }
 
-			yield return null;
-		}
-	}
+            yield return null;
+        }
+    }
 
     // State where the enemy stays still and listens to the environment
     IEnumerator StayStillState()
     {
         audioSettings.PlayEnemyIdle(gameObject);
-		audioSettings.SetEnemyState(gameObject, 0);
+        audioSettings.SetEnemyState(gameObject, 0);
         _anim.SetFloat("forward", _agent.speed);
         float waitTime = 5f;
         do
@@ -187,12 +187,12 @@ public class Enemy : MonoBehaviour
             // Change state to Investigate if sound is heard
             if (_soundHeard)
             {
-				Debug.Log((_lastSoundLocation - _soundLocation).magnitude);
+                Debug.Log((_lastSoundLocation - _soundLocation).magnitude);
                 _soundHeard = false;
-				if ((_lastSoundLocation - _soundLocation).magnitude > 2)
-				{
-					state = State.Investigate;
-				}
+                if ((_lastSoundLocation - _soundLocation).magnitude > 2)
+                {
+                    state = State.Investigate;
+                }
             }
 
             // If the player comes too close and is infront of enemy, start chasing
@@ -219,8 +219,8 @@ public class Enemy : MonoBehaviour
     IEnumerator PatrolState()
     {
         audioSettings.PlayEnemyFootStep(gameObject);
-		audioSettings.SetEnemyState(gameObject, 0);
-		_anim.SetFloat("forward", _agent.speed);
+        audioSettings.SetEnemyState(gameObject, 0);
+        _anim.SetFloat("forward", _agent.speed);
         _agent.destination = _route[_destination].position;
         do
         {
@@ -272,20 +272,20 @@ public class Enemy : MonoBehaviour
     IEnumerator InvestigateState()
     {
         audioSettings.PlayEnemyFootStep(gameObject);
-		audioSettings.SetEnemyState(gameObject, 1);
-		_agent.destination = _soundLocation;
+        audioSettings.SetEnemyState(gameObject, 1);
+        _agent.destination = _soundLocation;
         _anim.SetFloat("forward", _agent.speed);
         do
         {
-			if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude <= seeRangeLong)
-			{
-				state = State.Chase;
-			}
-			else if (_soundHeard)
+            if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude <= seeRangeLong)
+            {
+                state = State.Chase;
+            }
+            else if (_soundHeard)
             {
                 _soundHeard = false;
                 _agent.destination = _soundLocation;
-				Debug.Log(_agent.remainingDistance);
+                Debug.Log(_agent.remainingDistance);
             }
             else if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
@@ -300,8 +300,8 @@ public class Enemy : MonoBehaviour
     IEnumerator ChaseState()
     {
         //StartCoroutine(audioSettings.PlayEnemyNoticeSound());
-		audioSettings.SetEnemyState(gameObject, 2);
-		audioSettings.AddEnemyToChase(this.gameObject);
+        audioSettings.SetEnemyState(gameObject, 2);
+        audioSettings.AddEnemyToChase(this.gameObject);
         _anim.SetFloat("forward", _agent.speed);
         _playerSoundHeard = false;
         _agent.destination = _soundLocation;
@@ -309,7 +309,7 @@ public class Enemy : MonoBehaviour
         do
         {
             playerDistance = PlayerHorizontalDistance();
-			if (playerDistance <= seeRangeLong)
+            if (playerDistance <= seeRangeLong)
             {
                 if (playerDistance <= _agent.stoppingDistance)
                 {
@@ -323,12 +323,12 @@ public class Enemy : MonoBehaviour
             else if (_playerSoundHeard)
             {
                 _agent.destination = _soundLocation;
-				_playerSoundHeard = false;
+                _playerSoundHeard = false;
             }
             else if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
-				_playerSoundHeard = false;
-				_soundHeard = false;
+                _playerSoundHeard = false;
+                _soundHeard = false;
                 state = State.Investigate;
             }
             yield return 0;
@@ -341,9 +341,9 @@ public class Enemy : MonoBehaviour
     IEnumerator AttackPlayerState()
     {
         audioSettings.AddEnemyToChase(this.gameObject);
-		audioSettings.SetEnemyState(gameObject, 2);
-		StartCoroutine(audioSettings.PlayEnemyAttackSound(gameObject));
-		_anim.SetFloat("forward", 0f);
+        audioSettings.SetEnemyState(gameObject, 2);
+        StartCoroutine(audioSettings.PlayEnemyAttackSound(gameObject));
+        _anim.SetFloat("forward", 0f);
         _anim.SetBool("attacking", true);
         _anim.speed = 1.5f;
         _playerSoundHeard = false;
@@ -401,8 +401,9 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         NextState();
-		audioSettings.PlayEnemyState(gameObject);
-		StartCoroutine(WalkSound());
+        audioSettings.PlayEnemyState(gameObject);
+        StartCoroutine(WalkSound());
+        _agent.autoRepath = true;
     }
 
     // Method to change the behaviour state
@@ -425,7 +426,7 @@ public class Enemy : MonoBehaviour
     public void alert(Vector3 source, bool isPlayer)
     {
         _soundHeard = true;
-		_lastSoundLocation = _soundLocation;
+        _lastSoundLocation = _soundLocation;
         _soundLocation = source;
         _playerSoundHeard = isPlayer;
     }
@@ -448,12 +449,12 @@ public class Enemy : MonoBehaviour
             new Vector3(transform.position.x, 0, transform.position.z));
     }
 
-	private void OnCollisionEnter(Collision collision)
-	{
-		if (state == State.Dormant)
-		{
-			wakeUpTrigger.ConditionMet -= WakeUp;
-			state = State.Patrol;
-		}
-	}
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (state == State.Dormant)
+        {
+            wakeUpTrigger.ConditionMet -= WakeUp;
+            state = State.Patrol;
+        }
+    }
 }
