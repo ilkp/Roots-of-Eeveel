@@ -82,14 +82,6 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	private void Update()
-	{
-		if (Input.GetKeyDown(KeyCode.K))
-		{
-			SetGameOver(true);
-		}
-	}
-
 	public void SetGameOver(bool winStatus)
     {
 		audioSettings.StopAllSounds();
