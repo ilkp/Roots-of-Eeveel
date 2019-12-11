@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8854530976932651417}
   - component: {fileID: 8854530976932651416}
   - component: {fileID: 8854530976932651431}
+  - component: {fileID: -2750335710313548052}
   m_Layer: 0
   m_Name: ink_bottle
   m_TagString: Interactable
@@ -127,3 +128,16 @@ MonoBehaviour:
     RightMouseButton to throw the object.'
   pullForce: 10
   throwForce: 10
+--- !u!114 &-2750335710313548052
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8854530976932651430}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ce0480e77ffc24449bd8bdff377a594, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  soundType: 2
