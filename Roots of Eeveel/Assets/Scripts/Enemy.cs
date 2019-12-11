@@ -48,10 +48,16 @@ public class Enemy : MonoBehaviour
 	[Tooltip("Location of heard sound")]
     [SerializeField] private Vector3 _soundLocation;
 
-    /// <summary>
-    /// Minimum movement speed of the enemy
-    /// </summary>
-    [Tooltip("Minimum movement speed of the enemy")]
+	/// <summary>
+	/// Location of last heard sound
+	/// </summary>
+	[Tooltip("Location of heard sound")]
+	[SerializeField] private Vector3 _lastSoundLocation;
+
+	/// <summary>
+	/// Minimum movement speed of the enemy
+	/// </summary>
+	[Tooltip("Minimum movement speed of the enemy")]
     [SerializeField] private float[] _moveSpeeds;
 
     /// <summary>
@@ -181,8 +187,12 @@ public class Enemy : MonoBehaviour
             // Change state to Investigate if sound is heard
             if (_soundHeard)
             {
+				Debug.Log((_lastSoundLocation - _soundLocation).magnitude);
                 _soundHeard = false;
-                state = State.Investigate;
+				if ((_lastSoundLocation - _soundLocation).magnitude > 2)
+				{
+					state = State.Investigate;
+				}
             }
 
             // If the player comes too close and is infront of enemy, start chasing
@@ -267,14 +277,14 @@ public class Enemy : MonoBehaviour
         _anim.SetFloat("forward", _agent.speed);
         do
         {
-            if (_soundHeard)
+			if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude <= seeRange)
+			{
+				state = State.Chase;
+			}
+			else if (_soundHeard)
             {
                 _soundHeard = false;
                 _agent.destination = _soundLocation;
-                if (_playerSoundHeard || (_player.position - gameObject.transform.position).magnitude <= seeRange)
-                {
-                    state = State.Chase;
-                }
             }
             else if (_agent.remainingDistance <= _agent.stoppingDistance)
             {
@@ -298,7 +308,6 @@ public class Enemy : MonoBehaviour
         do
         {
             playerDistance = PlayerHorizontalDistance();
-			Debug.Log(_agent.remainingDistance + "       " + _agent.stoppingDistance + "      " + (_agent.remainingDistance <= _agent.stoppingDistance));
 			if (playerDistance <= seeRange)
             {
                 if (playerDistance <= _agent.stoppingDistance)
@@ -415,6 +424,7 @@ public class Enemy : MonoBehaviour
     public void alert(Vector3 source, bool isPlayer)
     {
         _soundHeard = true;
+		_lastSoundLocation = _soundLocation;
         _soundLocation = source;
         _playerSoundHeard = isPlayer;
     }
@@ -436,4 +446,13 @@ public class Enemy : MonoBehaviour
         return Vector3.Distance(new Vector3(_player.transform.position.x, 0f, _player.transform.position.z),
             new Vector3(transform.position.x, 0, transform.position.z));
     }
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (state == State.Dormant)
+		{
+			wakeUpTrigger.ConditionMet -= WakeUp;
+			state = State.Patrol;
+		}
+	}
 }
