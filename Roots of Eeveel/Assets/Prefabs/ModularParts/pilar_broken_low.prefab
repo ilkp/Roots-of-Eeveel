@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9036469224136656381}
   - component: {fileID: 3675593204468281488}
   - component: {fileID: 9143349174864988396}
+  - component: {fileID: 2885277220601451735}
   m_Layer: 0
   m_Name: pilar_broken_low
   m_TagString: Untagged
@@ -90,5 +91,18 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.2991378, y: 10.72067, z: 2.3708615}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.2991378, y: 3.2977333, z: 2.3708615}
+  m_Center: {x: 0, y: -3.7114682, z: 0}
+--- !u!65 &2885277220601451735
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4831278741192032635}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.2991378, y: 2.697896, z: 2.3708615}
+  m_Center: {x: 0, y: 4.011387, z: 0}

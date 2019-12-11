@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 5972524708115734221}
   - component: {fileID: 8114993193831404461}
   - component: {fileID: 8164166402344214959}
-  - component: {fileID: 8164166402344214958}
   - component: {fileID: 8164166402344214957}
   - component: {fileID: 8164166402344214956}
+  - component: {fileID: 4692501918327733758}
   m_Layer: 0
   m_Name: snake_statue
   m_TagString: Untagged
@@ -98,20 +98,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!64 &8164166402344214958
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2972486465186120862}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 1
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 5651503206482557397, guid: 3611fbfefb2f2074e9f90c4b9b1fbbf4, type: 3}
 --- !u!114 &8164166402344214957
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +128,16 @@ MonoBehaviour:
     RightMouseButton to throw the object.'
   pullForce: 5
   throwForce: 5
+--- !u!65 &4692501918327733758
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2972486465186120862}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15252206, y: 0.9409199, z: 0.069887415}
+  m_Center: {x: 0.000118002295, y: 1.62216, z: -0.012418538}
