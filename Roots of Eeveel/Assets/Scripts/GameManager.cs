@@ -6,6 +6,7 @@ using System;
 using UnityEngine.Rendering;
 using UnityEngine.Experimental.Rendering.HDPipeline;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,8 +14,6 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 	public GameSettingsWrapper gameSettings { get; private set; }
-    public GameObject endingScreenWin;
-	public GameObject endingScreenLose;
 	public bool Paused = true;
 
 	[SerializeField] private Image loadingScreenBackground;
@@ -22,6 +21,12 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Image fillImage;
 	private const float fillFull = 0.75f;
 	private const float fillChange = 0.5f;
+
+	private Image gameOverImage;
+	private TMP_Text gameOverText;
+	private TMP_Text creditsTextLeft;
+	private TMP_Text creditsTextCenter;
+	private TMP_Text creditsTextRight;
 
 	private void OnEnable()
 	{
@@ -62,13 +67,14 @@ public class GameManager : MonoBehaviour
 				ButtonLinker.Instance.ToMain();
 				break;
 			case 2: // game scene
+				gameOverImage = GameObject.FindGameObjectWithTag("GameOverImage").GetComponent<Image>();
+				gameOverText = GameObject.FindGameObjectWithTag("GameOverText").GetComponent<TMP_Text>();
+				creditsTextLeft = GameObject.FindGameObjectWithTag("Credits").GetComponent<TMP_Text>();
+				creditsTextCenter = GameObject.FindGameObjectWithTag("CreditsCenter").GetComponent<TMP_Text>();
+				creditsTextRight = GameObject.FindGameObjectWithTag("CreditsRight").GetComponent<TMP_Text>();
 				applyBrightness();
 				SoundManager.Instance.LoadEnemies();
 				ButtonLinker.Instance.ToGame();
-				endingScreenWin = GameObject.FindGameObjectWithTag("GameOverWin");
-				endingScreenWin.gameObject.SetActive(false);
-				endingScreenLose = GameObject.FindGameObjectWithTag("GameOverLose");
-				endingScreenLose.gameObject.SetActive(false);
 				break;
 			default:
 				break;
@@ -76,22 +82,78 @@ public class GameManager : MonoBehaviour
 		}
 	}
 
-	public void SetGameOver(bool winStatus)
-    {
-		GameObject gameOverGroup = winStatus ? endingScreenWin : endingScreenLose;
-		gameOverGroup.SetActive(true);
-        Time.timeScale = 0;
-        StartCoroutine(GameOverFadeIn(gameOverGroup.GetComponent<CanvasGroup>()));
+	private void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.K))
+		{
+			SetGameOver(true);
+		}
 	}
 
-    private IEnumerator GameOverFadeIn(CanvasGroup gameOverGroup)
+	public void SetGameOver(bool winStatus)
     {
-        while (gameOverGroup.alpha < 1f)
+		audioSettings.StopAllSounds();
+		gameOverImage.enabled = true;
+		gameOverText.enabled = true;
+		if (winStatus)
+		{
+			gameOverText.text = "Thank you for playing!";
+		}
+		else
+		{
+			gameOverText.text = "Game over\nYou Lose!";
+		}
+		StartCoroutine(GameOverFadeIn(winStatus));
+
+	}
+
+    private IEnumerator GameOverFadeIn(bool winStatus)
+    {
+		float fadeTime = 3f;
+		float timer = 0f;
+		float creditsTimer = 20f;
+        while (timer < fadeTime)
         {
-            gameOverGroup.alpha += 0.01f;
+			gameOverImage.color = new Color(0f, 0f, 0f, timer / fadeTime);
+			gameOverText.alpha = Mathf.Pow(timer / fadeTime, 3);
+			timer += Time.deltaTime;
             yield return 0;
         }
-        yield return new WaitForSecondsRealtime(2);
+		gameOverImage.color = new Color(0f, 0f, 0f, 1f);
+		gameOverText.alpha = 1f;
+		yield return new WaitForSecondsRealtime(2);
+		if (winStatus)
+		{
+			creditsTextLeft.enabled = true;
+			creditsTextRight.enabled = true;
+			creditsTextCenter.enabled = true;
+			timer = 0f;
+			float fadeAmount;
+			while (timer < fadeTime)
+			{
+				fadeAmount = Mathf.Pow(timer / fadeTime, 3);
+				gameOverText.alpha = Mathf.Pow(1 - timer / fadeTime, 3);
+				creditsTextLeft.alpha = fadeAmount;
+				creditsTextRight.alpha = fadeAmount;
+				creditsTextCenter.alpha = fadeAmount;
+				timer += Time.deltaTime;
+				yield return 0;
+			}
+			creditsTextLeft.alpha = 1f;
+			creditsTextRight.alpha = 1f;
+			creditsTextCenter.alpha = 1f;
+			timer = 0f;
+			while (timer < creditsTimer)
+			{
+				Debug.Log(timer);
+				timer += Time.deltaTime;
+				if (Input.anyKeyDown)
+				{
+					break;
+				}
+				yield return null;
+			}
+		}
 		LoadScene(1);
 	}
 
