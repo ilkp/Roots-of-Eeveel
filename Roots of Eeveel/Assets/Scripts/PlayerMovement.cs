@@ -192,10 +192,10 @@ public class PlayerMovement : MonoBehaviour
         if (allowRotation && allowMovement)
         {
             // Calculate horizontal rotation
-            rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
+            rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
 
             // Calculate vertical rotation
-            rotationY += Input.GetAxis("Mouse Y") * sensitivity;
+            rotationY += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
             rotationY = Mathf.Clamp(rotationY, minY, maxY);
 
             // Rotate character for the horizontal rotation (camera is following the character)
@@ -381,10 +381,10 @@ public class PlayerMovement : MonoBehaviour
     {
         audioSettings.StopPlayerHPHeartbeat();
         GameManager.Instance.SetGameOver(false);
-		foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
-		{
-			enemy.GetComponent<Enemy>().state = Enemy.State.Dormant;
-		}
+        foreach (GameObject enemy in GameObject.FindGameObjectsWithTag("Enemy"))
+        {
+            enemy.GetComponent<Enemy>().state = Enemy.State.Dormant;
+        }
     }
 
     public void GetHurt()
