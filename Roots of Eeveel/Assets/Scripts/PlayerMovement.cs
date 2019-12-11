@@ -119,6 +119,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float hpRegen;
     private float regenCounter;
 
+    private ToolTip toolTip;
     private GameObject[] highlightables;
     [SerializeField] private float viewlength = 3f;
 
@@ -160,6 +161,7 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        toolTip = GetComponent<ToolTip>();
         holdingItem = false;
         // Get players rigidbody
         playerRB = GetComponent<Rigidbody>();
@@ -230,21 +232,24 @@ public class PlayerMovement : MonoBehaviour
 
         #region Interaction
 
-        // Gives objects a chance to reset stuff if needed
-        // Checks if left mouse button is released
-        if (interactable && Input.GetKeyUp(Keybindings.Instance.interaction) || Input.GetKeyUp(Keybindings.Instance.altInteraction))
+        if (interactable)
         {
-            // Tells interactable object to run funtion 'Reset'
-            interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
-
-            // Clear any previous hit objects
-            //interactable = null;
-        }
-
-        // Secondary interact for secondary needs
-        if (interactable && Input.GetKeyDown(Keybindings.Instance.secondaryInteraction) || Input.GetKeyDown(Keybindings.Instance.altSecondaryInteraction))
-        {
-            interactable.SendMessage("SecondInteract", SendMessageOptions.DontRequireReceiver);
+            // Gives objects a chance to reset stuff if needed
+            // Checks if left mouse button is released
+            if (Input.GetKeyUp(Keybindings.Instance.interaction) || Input.GetKeyUp(Keybindings.Instance.altInteraction))
+            {
+                // Tells interactable object to run funtion 'Reset'
+                interactable.SendMessage("StopInteraction", SendMessageOptions.DontRequireReceiver);
+            }
+            // Secondary interact for secondary needs
+            if (Input.GetKeyDown(Keybindings.Instance.secondaryInteraction) || Input.GetKeyDown(Keybindings.Instance.altSecondaryInteraction))
+            {
+                interactable.SendMessage("SecondInteract", SendMessageOptions.DontRequireReceiver);
+                if (interactable.GetComponent<Interactable_HoldableObject>() != null)
+                {
+                    interactable = null;
+                }
+            }
         }
 
         // Check if object is visible to the character and close enough
@@ -262,6 +267,7 @@ public class PlayerMovement : MonoBehaviour
             if (hit.collider.GetComponent<Interactable_ReadableUI>() != null ||
                 hit.collider.GetComponent<InteractableReadableMulti>() != null)
             {
+                toolTip.showPopup(true, null, toolTip._leftClick);
                 reticuleImage.sprite = reticuleRead;
                 reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
             }
@@ -270,6 +276,7 @@ public class PlayerMovement : MonoBehaviour
                     hit.collider.GetComponent<Interactable_Door>() != null ||
                     hit.collider.GetComponent<Interactable_Door2>() != null)
             {
+                toolTip.showPopup(true, "Hold", toolTip._leftClick);
                 reticuleImage.sprite = reticuleHold;
                 reticuleImage.rectTransform.sizeDelta = new Vector2(reticuleRead.rect.width, reticuleRead.rect.height);
             }
@@ -282,8 +289,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 reticuleImage.enabled = true;
             }
-
-            GetComponent<ToolTip>().showPopup(true);
+            if (interactable && interactable.GetComponent<Interactable_HoldableObject>() != null)
+            {
+                toolTip.showPopup(true, "Throw", toolTip._rightClick);
+            }
 
             // Check if player pressed the interaction button
             if (Input.GetKeyDown(Keybindings.Instance.interaction) || Input.GetKeyDown(Keybindings.Instance.altInteraction))
@@ -327,8 +336,10 @@ public class PlayerMovement : MonoBehaviour
                 holdingItem = false;
                 interactable = null;
             }
-            // Disable reticule
-            GetComponent<ToolTip>().showPopup(false);
+            if (!interactable)
+            {
+                toolTip.showPopup(false);
+            }
         }
         #endregion
 
