@@ -1610,9 +1610,9 @@ MonoBehaviour:
       m_Calls: []
   m_text: "Producer:\r\nHeikki Rajam\xE4ki\r\nAri Mesiranta\r\n\nGame Design:\r\nAri
     Mesiranta\r\nHeikki Rajam\xE4ki\r\nDiana Lindvall\r\n\nLead Designer:\r\nAri Mesiranta\r\n\nGame
-    Engine / Development System:\r\nMikko Siren\r\nIlkka Pokkinen\r\nSam Hemming\r\n\n3D
-    / Graphics Programming:\r\nMikko Siren\r\nIlkka Pokkinen\r\nSam Hemming\r\n\nAI
-    Programming:\r\nIlkka Pokkinen\r\nMikko Siren"
+    Engine / Development System:\r\nMikko Sir\xE9n\r\nIlkka Pokkinen\r\nSam Hemming\r\n\n3D
+    / Graphics Programming:\r\nMikko Sir\xE9n\r\nIlkka Pokkinen\r\nSam Hemming\r\n\nAI
+    Programming:\r\nIlkka Pokkinen\r\nMikko Sir\xE9n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ff9be7d8e68a2c4dae00bfe1774fe75, type: 2}
   m_sharedMaterial: {fileID: 5447278208358862082, guid: 5ff9be7d8e68a2c4dae00bfe1774fe75,
