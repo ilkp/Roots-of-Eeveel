@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c2415da343554647beba80ad47c6778, type: 3}
   m_Name: AudioSettings
   m_EditorClassIdentifier: 
-  musicVolume: 0
-  soundsVolume: 0
+  musicVolume: 0.43
+  soundsVolume: 1
+  atmosphereVolume: 0
+  voiceVolume: 0
   roomTone: event:/AT/Roomtones/at_room_tone_hallway
   roomMechanics: event:/AT/Enviromental/at_env_wall_mechanics
   roomMechanics1: event:/AT/Enviromental/at_env_wall_mechanics 2
@@ -40,6 +42,7 @@ MonoBehaviour:
   bookPickupSound: event:/SX/Int/Lore/sx_book_pickup
   bookPutdownSound: event:/SX/Int/Lore/sx_book_putdown
   menuMusic: event:/MU/Menu/mu main menu_v3
+  creditsMusic: event:/MU/Menu/mu_credits
   menuMusicFadeTime: 10
   playerFootStep: event:/SX/Player/sx_player_movement_rock
   playerTakeDamageLow: event:/VO/Player/vo_player_take_damage_low

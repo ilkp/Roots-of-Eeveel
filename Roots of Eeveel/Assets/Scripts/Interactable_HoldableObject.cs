@@ -26,7 +26,7 @@ public class Interactable_HoldableObject : MonoBehaviour, IInteractable
     private Transform head;
     private Rigidbody rb;
     [SerializeField] private float pullForce = 10;
-    [SerializeField] private float throwForce = 10;
+    [SerializeField] private float throwForce = 20;
     private Vector3 destination;
 
     private void Awake()

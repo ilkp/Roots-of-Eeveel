@@ -34,7 +34,6 @@ public class AudioSettings : ScriptableObject
 		}
 
 		musicBus.setVolume(volume);
-		Debug.Log("Music Volume Changed: " + volume);
 	}
 
 	public void SetSoundVolume(float volume)

@@ -21,12 +21,14 @@ public class GameManager : MonoBehaviour
 	[SerializeField] private Image fillImage;
 	private const float fillFull = 0.75f;
 	private const float fillChange = 0.5f;
-
 	private Image gameOverImage;
 	private TMP_Text gameOverText;
 	private TMP_Text creditsTextLeft;
 	private TMP_Text creditsTextCenter;
 	private TMP_Text creditsTextRight;
+	
+	private PlayerMovement player;
+	private float mouseSensitivity = 50f;
 
 	private void OnEnable()
 	{
@@ -75,6 +77,8 @@ public class GameManager : MonoBehaviour
 				applyBrightness();
 				SoundManager.Instance.LoadEnemies();
 				ButtonLinker.Instance.ToGame();
+				player = GameObject.Find("Player").GetComponent<PlayerMovement>();
+				player.sensitivity = mouseSensitivity;
 				break;
 			default:
 				break;
@@ -138,7 +142,6 @@ public class GameManager : MonoBehaviour
 			timer = 0f;
 			while (timer < creditsTimer)
 			{
-				Debug.Log(timer);
 				timer += Time.deltaTime;
 				if (Input.anyKeyDown)
 				{
@@ -279,6 +282,15 @@ public class GameManager : MonoBehaviour
 		IndirectLightingController ilc;
 		renderSettings.profile.TryGet<IndirectLightingController>(out ilc);
 		ilc.indirectDiffuseIntensity.value = gameSettings.Brightness;
+	}
+
+	public void SetMouseSensitivity(float sens)
+	{
+		mouseSensitivity = (float)sens;
+		if (player != null)
+		{
+			player.sensitivity = (float)sens;
+		}
 	}
 
 	public void QuitGame()

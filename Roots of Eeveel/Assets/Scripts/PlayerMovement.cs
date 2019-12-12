@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     /// Float that determins how sensitive the camera movement is
     /// </summary>
     [Tooltip("Float that determins how sensitive the camera movement is")]
-    [SerializeField] private float sensitivity;
+    public float sensitivity;
     /// <summary>
     /// The movement speed of the player
     /// </summary>
@@ -248,6 +248,7 @@ public class PlayerMovement : MonoBehaviour
                 if (interactable.GetComponent<Interactable_HoldableObject>() != null)
                 {
                     interactable = null;
+                    holdingItem = false;
                 }
             }
         }
@@ -436,10 +437,4 @@ public class PlayerMovement : MonoBehaviour
                 break;
         }
     }
-
-    /*
-    public void playFootstep()
-    {
-        footStepSource.Play();
-    }*/
 }
