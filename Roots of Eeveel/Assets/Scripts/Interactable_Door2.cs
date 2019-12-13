@@ -94,7 +94,6 @@ public class Interactable_Door2 : MonoBehaviour, IInteractable
 
     public void Unlock()
     {
-        Debug.Log("Boop");
         locked = false;
         minAngle = unlockMinAngle;
         maxAngle = unlockMaxAngle;

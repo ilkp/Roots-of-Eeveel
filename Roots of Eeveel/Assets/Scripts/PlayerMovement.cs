@@ -186,49 +186,7 @@ public class PlayerMovement : MonoBehaviour
             return;
         }
 
-        #region Movement
-        // Viewpoint rotation
 
-        if (allowRotation && allowMovement)
-        {
-            // Calculate horizontal rotation
-            rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity * Time.deltaTime;
-
-            // Calculate vertical rotation
-            rotationY += Input.GetAxis("Mouse Y") * sensitivity * Time.deltaTime;
-            rotationY = Mathf.Clamp(rotationY, minY, maxY);
-
-            // Rotate character for the horizontal rotation (camera is following the character)
-            transform.localEulerAngles = new Vector3(0, rotationX, transform.rotation.eulerAngles.z);
-            // Rotate only the camera in vertical rotation (so that the character model doesn't tilt)
-            head.transform.localEulerAngles = (new Vector3(-rotationY, head.transform.localEulerAngles.y, 0));
-        }
-
-        // Check sneaking condition
-        sneaking = Input.GetKey(Keybindings.Instance.crouch) || Input.GetKey(Keybindings.Instance.altCrouch);
-        // Check sneaking condition
-        //  DELETE THIS WHENEVER CONVENIENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        running = Input.GetKey(KeyCode.LeftShift) && !sneaking;
-
-        if (sneaking)
-        {
-            //audioSettings.PlaySneakReverb();
-            cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position + cameraSneakDisplacement, 0.3f);
-        }
-        else
-        {
-            //audioSettings.StopSneakReverb();
-            cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position, 0.3f);
-        }
-
-        if (footstepSoundTimer > footStepMaxTime)
-        {
-            audioSettings.PlayPlayerFootStep(running, sneaking);
-
-            footstepSoundTimer = 0.0f;
-            SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f, true);
-        }
-        #endregion
 
         #region Interaction
 
@@ -351,6 +309,50 @@ public class PlayerMovement : MonoBehaviour
         // Move player accrding to the inputs
         if (allowMovement)
         {
+            #region Movement
+            // Viewpoint rotation
+
+            if (allowRotation && allowMovement)
+            {
+                // Calculate horizontal rotation
+                rotationX = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime;
+
+                // Calculate vertical rotation
+                rotationY += Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime;
+                rotationY = Mathf.Clamp(rotationY, minY, maxY);
+
+                // Rotate character for the horizontal rotation (camera is following the character)
+                transform.localEulerAngles = new Vector3(0, rotationX, transform.rotation.eulerAngles.z);
+                // Rotate only the camera in vertical rotation (so that the character model doesn't tilt)
+                head.transform.localEulerAngles = (new Vector3(-rotationY, head.transform.localEulerAngles.y, 0));
+            }
+
+            // Check sneaking condition
+            sneaking = Input.GetKey(Keybindings.Instance.crouch) || Input.GetKey(Keybindings.Instance.altCrouch);
+            // Check sneaking condition
+            //  DELETE THIS WHENEVER CONVENIENT !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+            running = Input.GetKey(KeyCode.LeftShift) && !sneaking;
+
+            if (sneaking)
+            {
+                //audioSettings.PlaySneakReverb();
+                cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position + cameraSneakDisplacement, 0.3f);
+            }
+            else
+            {
+                //audioSettings.StopSneakReverb();
+                cam.transform.position = Vector3.Lerp(cam.transform.position, head.transform.position, 0.3f);
+            }
+
+            if (footstepSoundTimer > footStepMaxTime)
+            {
+                audioSettings.PlayPlayerFootStep(running, sneaking);
+
+                footstepSoundTimer = 0.0f;
+                SoundManager.makeSound(gameObject.transform.position, sneaking ? 75.0f : 175.0f, true);
+            }
+
+            // Actual movement
             float speedModifier = (sneaking ? sneakSpeedModifier : 1.0f) * (running ? runSpeedModifier : 1.0f) * (holdingItem ? holdSpeedModifier : 1.0f) * Time.deltaTime;
             Vector3 direction = transform.forward * Keybindings.Instance.vertical.GetAxis() + transform.right * Keybindings.Instance.horizontal.GetAxis();
             playerRB.MovePosition(transform.position + (Vector3.Normalize(direction) * speed * speedModifier));
@@ -359,6 +361,8 @@ public class PlayerMovement : MonoBehaviour
                 footstepSoundTimer += speedModifier;
             }
         }
+        #endregion
+
         if (hp > HealthState.Healthy)
         {
             if (regenCounter <= 0)
