@@ -309,28 +309,32 @@ public class Enemy : MonoBehaviour
         do
         {
             playerDistance = PlayerHorizontalDistance();
-            if (playerDistance <= seeRangeLong)
-            {
-                if (playerDistance <= _agent.stoppingDistance)
-                {
-                    state = State.AttackPlayer;
-                }
-                else
-                {
-                    _agent.destination = _player.position;
-                }
-            }
-            else if (_playerSoundHeard)
-            {
-                _agent.destination = _soundLocation;
-                _playerSoundHeard = false;
-            }
-            else if (_agent.remainingDistance <= _agent.stoppingDistance)
-            {
-                _playerSoundHeard = false;
-                _soundHeard = false;
-                state = State.Investigate;
-            }
+			if (playerDistance <= _agent.stoppingDistance)
+			{
+				state = State.AttackPlayer;
+			}
+			else if (playerDistance <= seeRangeLong)
+			{
+				_agent.destination = _player.position;
+			}
+			else if (_playerSoundHeard)
+			{
+				_agent.destination = _soundLocation;
+				_playerSoundHeard = false;
+			}
+			else if (_agent.remainingDistance <= _agent.stoppingDistance)
+			{
+				_playerSoundHeard = false;
+				_soundHeard = false;
+				state = State.StayStill;
+			}
+
+			// Check if the path is valid
+			if (_agent.path.status != NavMeshPathStatus.PathComplete)
+			{
+				state = State.StayStill;
+			}
+
             yield return 0;
         } while (state == State.Chase);
         audioSettings.RemoveEnemyFromChase(this.gameObject);
@@ -457,4 +461,22 @@ public class Enemy : MonoBehaviour
             state = State.Patrol;
         }
     }
+
+	float PathLength(NavMeshPath path)
+	{
+		if (path.corners.Length < 2)
+			return 0;
+
+		Vector3 previousCorner = path.corners[0];
+		float lengthSoFar = 0.0F;
+		int i = 1;
+		while (i < path.corners.Length)
+		{
+			Vector3 currentCorner = path.corners[i];
+			lengthSoFar += Vector3.Distance(previousCorner, currentCorner);
+			previousCorner = currentCorner;
+			i++;
+		}
+		return lengthSoFar;
+	}
 }
