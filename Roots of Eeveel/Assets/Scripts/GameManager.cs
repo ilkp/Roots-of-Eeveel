@@ -184,7 +184,7 @@ public class GameManager : MonoBehaviour
 			if (scene == 2)
 			{
 				cutSceneTimer += Time.deltaTime;
-				if (cutSceneTimer > cutSceneMaxTime && operation.progress >= 0.9f)
+				if ((Input.anyKeyDown || cutSceneTimer > cutSceneMaxTime) && operation.progress >= 0.9f)
 				{
 					operation.allowSceneActivation = true;
 				}
