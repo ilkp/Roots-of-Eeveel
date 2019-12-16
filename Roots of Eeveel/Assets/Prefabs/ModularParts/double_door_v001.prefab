@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4329623494948002160}
   - component: {fileID: 8750315334912062057}
-  - component: {fileID: 8750315334912062062}
   m_Layer: 0
   m_Name: double_door_v001
   m_TagString: Untagged
@@ -58,23 +57,6 @@ MonoBehaviour:
   OverrideAttenuation: 1
   OverrideMinDistance: 21.6
   OverrideMaxDistance: 42.18
---- !u!114 &8750315334912062062
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 742725026395548515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2f745421091dc8409f7a10f423ef040, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locks:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
 --- !u!1 &948098544277806367
 GameObject:
   m_ObjectHideFlags: 0
@@ -183,10 +165,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b4d966396ebe84cb06121a69b07ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 0
-  unlockMinAngle: 0
+  locked: 1
+  unlockMinAngle: -100
   unlockMaxAngle: 0
-  unlockAngle: 0
+  unlockAngle: -20
 --- !u!208 &2949416687283967376
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -389,10 +371,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5b4d966396ebe84cb06121a69b07ad6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  locked: 0
+  locked: 1
   unlockMinAngle: 0
-  unlockMaxAngle: 0
-  unlockAngle: 0
+  unlockMaxAngle: 100
+  unlockAngle: 20
 --- !u!208 &7286766094990131333
 NavMeshObstacle:
   m_ObjectHideFlags: 0
@@ -474,7 +456,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
+  m_ScaleInLightmap: 0.91
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
