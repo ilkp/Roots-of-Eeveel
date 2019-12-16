@@ -53,7 +53,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
         audioSettings.IncreaseRisingTensionProgress();
         _keySubscriber = keySubscriber;
         ConditionUnmet += keySubscriber.OnConditionUnmet;
-        GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockSolved;
+        //GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockSolved;
         OnConditionMet();
     }
 
@@ -63,7 +63,7 @@ public class PuzzleLock : MonoBehaviour, IPuzzleCondition
         audioSettings.DecreaseRisingTensionProgress();
         OnConditionUnmet();
         ConditionUnmet -= _keySubscriber.OnConditionUnmet;
-        GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockEmpty;
+        //GetComponent<Interactable_ReadableUI>().readableData.UISprite = lockEmpty;
         _keySubscriber = null;
     }
 }

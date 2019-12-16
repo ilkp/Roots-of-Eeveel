@@ -23,7 +23,7 @@ PrefabInstance:
     - target: {fileID: -927199367670048503, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_Name
-      value: stonefloor_Flat
+      value: stonefloor_v001 Variant (193)
       objectReference: {fileID: 0}
     - target: {fileID: -927199367670048503, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
@@ -48,7 +48,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -14.300001
+      value: 29.46
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
@@ -58,17 +58,17 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.7
+      value: -49.89
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: -0.70710665
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
@@ -78,7 +78,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.70710695
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
@@ -93,7 +93,7 @@ PrefabInstance:
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -90.00001
       objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: ccead80ac66dd9b419315913cb79fd65,
         type: 3}
@@ -116,6 +116,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 12f57707da784ce49bc4da09d54a8233, type: 2}
+    - target: {fileID: -6961098870438597457, guid: ccead80ac66dd9b419315913cb79fd65,
+        type: 3}
+      propertyPath: m_ScaleInLightmap
+      value: 0.61
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccead80ac66dd9b419315913cb79fd65, type: 3}
 --- !u!1 &1749574048799780534 stripped

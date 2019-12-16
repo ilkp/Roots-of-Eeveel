@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1272327389015113115}
   - component: {fileID: 1272327389015113112}
   m_Layer: 0
-  m_Name: Leaf01 (2)
+  m_Name: Leaf01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -64,7 +64,7 @@ MeshRenderer:
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 0
+  m_ScaleInLightmap: 0.68
   m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
